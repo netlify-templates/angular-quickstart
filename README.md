@@ -38,7 +38,7 @@ There are a few ways to deploy this template:
 Here are some resources to help you on your Angular + Netlify coding fun!
 
 - [A video walkthrough of the Angular Quick Start Template](https://youtu.be/rNAiN94bBUs)
-- [A blog post on the Angular Quick Start Template](coming soon!)
+- [A blog post on the Angular Quick Start Template](https://www.netlify.com/blog/get-started-with-angular-on-netlify-quickly)
 
 - [Angular on Netlify Configuration Docs](https://docs.netlify.com/configure-builds/common-configurations/angular/)
 - [Angular posts via the Netlify Blog](https://www.netlify.com/tags/angular/)
