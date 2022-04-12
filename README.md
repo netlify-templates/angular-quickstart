@@ -44,7 +44,7 @@ Here are some resources to help you on your Angular + Netlify coding fun!
 - [Angular posts via the Netlify Blog](https://www.netlify.com/tags/angular/)
 - [Angular in the Jamstack Tutorials](https://explorers.netlify.com/learn/angular-in-the-jamstack)
 
-Hope this template helps :) Happy coding 👩🏻‍💻!
+Hope this template helps :) Happy coding 👩🏻‍💻!!!!!!
 
 ---
 
