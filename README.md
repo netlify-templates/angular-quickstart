@@ -15,7 +15,7 @@ Click this button and it will help you create a new repo, create a new Netlify p
   - [Included Default Testing](#included-default-testing)
   - [Removing Renovate](#removing-renovate)
   - [Removing Cypress](#removing-cypress)
-- [Angular + Netlify Resources](#angular-+-netlify-resources)
+- [Angular + Netlify Resources](#angular--netlify-resources)
 
 ## Setup
 
