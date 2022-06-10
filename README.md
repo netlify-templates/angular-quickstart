@@ -15,7 +15,7 @@ Click this button and it will help you create a new repo, create a new Netlify p
   - [Included Default Testing](#included-default-testing)
   - [Removing Renovate](#removing-renovate)
   - [Removing Cypress](#removing-cypress)
-- [Angular 💙 Netlify Resources](#angular--netlify-resources)
+- [Angular + Netlify Resources](#angular-+-netlify-resources)
 
 ## Setup
 
@@ -85,7 +85,7 @@ And lastly if you’d like to remove Cypress entirely, delete the entire `cypres
 npm uninstall cypress
 ```
 
-## Angular 💙 Netlify Resources
+## Angular + Netlify Resources
 
 Here are some resources to help you on your Angular + Netlify coding fun!
 
