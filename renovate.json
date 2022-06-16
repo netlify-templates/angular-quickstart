@@ -3,3 +3,4 @@
   "extends": [
     "local>netlify-templates/renovate-config"
   ]
+}
