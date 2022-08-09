@@ -11,6 +11,9 @@ Click this button and it will help you create a new repo, create a new Netlify p
 
 - [Setup](#setup)
 - [Deploying](#deploying)
+- [Styling](#styling)
+  - [Notes on Styling](#notes-on-styling)
+  - [Remove Styling](#remove-styling)
 - [Testing](#testing)
   - [Included Default Testing](#included-default-testing)
   - [Removing Renovate](#removing-renovate)
@@ -42,6 +45,28 @@ There are a few ways to deploy this template:
 - Use the `netlify deploy` command
 - Head to the [Netlify UI](https://app.netlify.com/) to deploy via GitHub or [drag and drop](https://app.netlify.com/drop) the project folder
 - Use the Netlify CLI's create from template command `netlify sites:create-template angular-quickstart` which will create a repo, Netlify project, and deploy it
+
+## Styling
+
+We've added some modern styling to this template using css within an external stylesheet, this will allow you to easily remove our styling and add in your own. 
+
+If you decide that you want to keep our styling you can review our style notes below. 
+
+### Notes on Styling
+
+The variables below give you the ability to change the gradient colors of the blobs and are interpolated into the URL string of the background-img within the body. 
+
+```css
+// Controls the blob blur gradient colors within the main tag's svg
+--top-right-blur-1: #20C6B7;
+--top-right-blur-2: #4D9ABF;
+--bttm-left-blur-1: #de3641;
+--bttm-left-blur-2: #e46b73;
+```
+
+## Remove Styling
+
+If you decide that our styling is not for you, all you'll need to do is remove the [demo-styling.css](https://github.com/netlify-templates/angular-quickstart/blob/tn/designUpdates/src/demo-styling.css) file. 
 
 ## Testing
 
