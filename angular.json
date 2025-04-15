@@ -103,5 +103,7 @@
       }
     }
   },
-  "defaultProject": "angular-quickstart"
+  "cli": {
+    "analytics": "6a2392ab-7487-4dbe-ae87-f0df128e77a4"
+  }
 }
