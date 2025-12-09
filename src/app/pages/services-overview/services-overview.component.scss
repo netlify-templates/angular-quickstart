@@ -1,0 +1,165 @@
+.our-services {
+  padding: 3rem 1.5rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__header {
+    text-align: center;
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  &__chips {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  &__footer {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: rgba(0, 0, 0, 0.72);
+
+    span {
+      font-weight: 600;
+    }
+  }
+}
+
+.chip {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fafafa;
+
+  &--legend {
+    opacity: 0.9;
+  }
+
+  &--commercial {
+    border-color: #ff9800;
+  }
+
+  &--both {
+    border-color: #1976d2;
+  }
+}
+
+.service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+
+  .mat-mdc-card-header {
+    align-items: center;
+    padding-bottom: 0.5rem;
+  }
+
+  &__icon {
+    background: #212121;
+    color: #ffc107;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+
+    mat-icon {
+      font-size: 22px;
+    }
+  }
+
+  &__description {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  mat-divider {
+    margin: 0.25rem 0 0.75rem;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      font-size: 0.88rem;
+    }
+  }
+
+  &__bullet-icon {
+    font-size: 18px;
+    margin-right: 0.4rem;
+    opacity: 0.9;
+  }
+
+  .mat-mdc-card-actions {
+    padding: 0.5rem 1rem 1rem;
+  }
+
+  &--residential {
+    border-top: 4px solid #4caf50;
+  }
+
+  &--commercial {
+    border-top: 4px solid #ff9800;
+  }
+
+  &--both {
+    border-top: 4px solid #1976d2;
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 599px) {
+  .our-services {
+    padding-inline: 1rem;
+
+    &__header h1 {
+      font-size: 1.8rem;
+    }
+  }
+
+  .service-card .mat-mdc-card-header {
+    align-items: flex-start;
+  }
+}

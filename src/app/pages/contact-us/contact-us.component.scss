@@ -1,0 +1,183 @@
+.contact-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+.contact-hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+
+  &__eyebrow {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+    color: #7c7c7c;
+  }
+
+  &__title {
+    font-size: clamp(1.9rem, 3vw, 2.4rem);
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+
+    span {
+      color: #ffb300; // accent for "electrician"
+    }
+  }
+
+  &__subtitle {
+    max-width: 650px;
+    margin: 0 auto;
+    color: #5a5a5a;
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.1fr);
+  gap: 1.75rem;
+  align-items: flex-start;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-card {
+  &--info {
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  }
+
+  &--form {
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  mat-card-header {
+    margin-bottom: 0.75rem;
+  }
+
+  mat-card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  mat-card-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+.contact-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+
+  mat-icon {
+    font-size: 1.6rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    color: #ffb300;
+    margin-top: 0.1rem;
+  }
+
+  .contact-info-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #7c7c7c;
+    margin-bottom: 0.1rem;
+  }
+
+  .contact-info-value {
+    font-size: 0.98rem;
+    color: #2f2f2f;
+
+    &a {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.contact-divider {
+  margin: 1.5rem 0 1.25rem;
+}
+
+.contact-service-areas {
+  &__label {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #7c7c7c;
+    margin-bottom: 0.4rem;
+  }
+
+  mat-chip-set {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  mat-chip {
+    font-size: 0.78rem;
+  }
+}
+
+/* Form styles */
+
+.form-row {
+  margin-top: 1rem;
+
+  &--two-cols {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 1rem;
+
+    @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.form-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  button {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-inline: 1.5rem;
+    border-radius: 999px;
+
+    mat-icon {
+      font-size: 1.1rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+  }
+
+  .form-note {
+    font-size: 0.78rem;
+    color: #7c7c7c;
+    max-width: 420px;
+  }
+}

@@ -1,0 +1,233 @@
+.careers {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* HERO */
+.careers__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.careers__hero-text h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.careers__hero-text p {
+  max-width: 640px;
+  margin-bottom: 1.25rem;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.78);
+}
+
+.careers__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+
+  mat-chip-row {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+
+    mat-icon {
+      margin-right: 0.25rem;
+      font-size: 18px;
+    }
+  }
+}
+
+.careers__hero-text button {
+  margin-top: 0.5rem;
+}
+
+.careers__hero-card {
+  align-self: stretch;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
+}
+
+.careers__hero-icon {
+  background: #212121;
+  color: #ffc107;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+
+  mat-icon {
+    font-size: 22px;
+  }
+}
+
+/* SECTIONS */
+.careers__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+}
+
+.careers__section-intro {
+  max-width: 720px;
+  font-size: 0.96rem;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+/* BENEFITS GRID */
+.careers__benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.benefit {
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+  &__icon {
+    background: #1e293b;
+    color: #ffb300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+
+    mat-icon {
+      font-size: 22px;
+    }
+  }
+
+  p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+/* ROLES */
+.careers__roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.job {
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  &__icon {
+    background: #0f172a;
+    color: #4ade80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+
+    mat-icon {
+      font-size: 22px;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  &__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.78rem;
+    padding: 0.1rem 0.6rem;
+    border-radius: 999px;
+    background: #f1f5f9;
+
+    mat-icon {
+      font-size: 18px;
+    }
+  }
+
+  &__summary {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  mat-divider {
+    margin: 0.25rem 0 0.75rem;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      font-size: 0.88rem;
+    }
+  }
+
+  &__bullet-icon {
+    font-size: 18px;
+    margin-right: 0.4rem;
+    color: #22c55e;
+  }
+
+  .mat-mdc-card-actions {
+    padding: 0.5rem 1rem 1rem;
+  }
+}
+
+/* FOOTER */
+.careers__footer {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .careers__hero {
+    grid-template-columns: 1fr;
+  }
+
+  .careers {
+    padding-inline: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .careers__hero-text h1 {
+    font-size: 2rem;
+  }
+}

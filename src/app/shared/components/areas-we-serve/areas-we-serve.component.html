@@ -1,0 +1,30 @@
+<section class="aws-root">
+  <!-- Section title -->
+  <h2 class="aws-title">Areas We Serve</h2>
+
+  <!-- Pill-style card -->
+  <mat-card class="aws-card">
+    <div class="aws-card-inner">
+      <!-- Intro text -->
+      <div class="aws-card-header">
+        <mat-icon class="aws-header-icon" aria-hidden="true"
+          >location_on</mat-icon
+        >
+        <p class="aws-intro">
+          We proudly serve Wayne, NJ as our native service area. We also serve
+          surrounding communities across New Jersey, including:
+        </p>
+      </div>
+
+      <!-- Locations grid -->
+      <div class="aws-locations">
+        <div class="aws-location" *ngFor="let location of locations">
+          <mat-icon class="aws-location-icon" aria-hidden="true"
+            >place</mat-icon
+          >
+          <span class="aws-location-text">{{ location }}</span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</section>

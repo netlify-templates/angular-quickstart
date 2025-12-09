@@ -1,0 +1,115 @@
+<div class="projects-page">
+  <!-- HERO SECTION -->
+  <section class="projects-hero">
+    <p class="projects-hero__eyebrow">Recent work in the Texas Hill Country</p>
+    <h1 class="projects-hero__title">
+      Real projects. <span>Reliable</span> electrical work.
+    </h1>
+    <p class="projects-hero__subtitle">
+      See how ProVolt Electrical Services helps Hill Country homeowners,
+      businesses, and ranch owners with safe, code-compliant electrical
+      upgrades, repairs, and new installations.
+    </p>
+  </section>
+
+  <!-- FILTER BAR -->
+  <section class="projects-filter">
+    <p class="projects-filter__label">Filter by project type</p>
+    <mat-chip-set aria-label="Filter projects by category">
+      <mat-chip
+        *ngFor="let category of categories"
+        [highlighted]="selectedCategory() === category.key"
+        (click)="changeCategory(category.key)"
+        class="projects-filter__chip"
+      >
+        {{ category.label }}
+      </mat-chip>
+    </mat-chip-set>
+  </section>
+
+  <!-- PROJECT CARDS GRID -->
+  <section class="projects-grid" aria-label="Recent electrical projects">
+    <mat-card
+      class="project-card"
+      *ngFor="let project of filteredProjects(); trackBy: trackByProjectId"
+    >
+      <div class="project-card__badge" *ngIf="project.featured">
+        <mat-icon>star</mat-icon>
+        <span>Featured project</span>
+      </div>
+
+      <mat-card-header>
+        <mat-card-title>{{ project.title }}</mat-card-title>
+        <mat-card-subtitle>
+          <span class="project-card__location">
+            <mat-icon aria-hidden="true">place</mat-icon>
+            {{ project.location }}
+          </span>
+          <span class="project-card__category">
+            <mat-icon aria-hidden="true">bolt</mat-icon>
+            {{ project.category | titlecase }}
+          </span>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="project-card__summary">
+          {{ project.summary }}
+        </p>
+
+        <div class="project-card__meta">
+          <div class="project-card__meta-item">
+            <mat-icon aria-hidden="true">construction</mat-icon>
+            <div>
+              <div class="project-card__meta-label">Scope</div>
+              <div class="project-card__meta-value">
+                {{ project.scopeLabel }}
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card__meta-item">
+            <mat-icon aria-hidden="true">schedule</mat-icon>
+            <div>
+              <div class="project-card__meta-label">Timeline</div>
+              <div class="project-card__meta-value">
+                {{ project.durationLabel }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <mat-divider class="project-card__divider"></mat-divider>
+
+        <div class="project-card__highlights">
+          <div class="project-card__highlights-label">Key results</div>
+          <ul>
+            <li *ngFor="let highlight of project.highlights">
+              <mat-icon aria-hidden="true">check_circle</mat-icon>
+              <span>{{ highlight }}</span>
+            </li>
+          </ul>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="projects-cta">
+    <div class="projects-cta__content">
+      <h2>Have a project in mind?</h2>
+      <p>
+        Whether you need a panel upgrade, lighting design, ranch wiring, or
+        emergency repair, ProVolt Electrical Services can help plan and complete
+        your next electrical project safely and on schedule.
+      </p>
+      <div class="projects-cta__actions">
+        <a mat-raised-button color="primary" routerLink="/contact">
+          <mat-icon aria-hidden="true">phone</mat-icon>
+          <span>Request a quote</span>
+        </a>
+        <a mat-button routerLink="/services"> View all services </a>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,169 @@
+<div class="wcu-page">
+  <!-- HERO / INTRO -->
+  <section class="wcu-hero">
+    <div class="wcu-hero-text">
+      <p class="wcu-badge">
+        <mat-icon>location_on</mat-icon>
+        Electrician Serving the {{ regionLabel }}
+      </p>
+
+      <h1 class="wcu-title">
+        Why Choose ProVolt Electrical Services
+        <span>in the Texas Hill Country</span>
+      </h1>
+
+      <p class="wcu-subtitle">
+        We’re a licensed, insured master electrical contractor serving homes,
+        ranches, and businesses across the {{ regionLabel }}. From Kerrville and
+        Fredericksburg to Boerne, Comfort, and surrounding communities, we
+        deliver practical, code-compliant electrical solutions built for real
+        Hill Country conditions.
+      </p>
+
+      <ul class="wcu-list">
+        <li>
+          <mat-icon>check_circle</mat-icon>
+          <span
+            >Experienced with residential, commercial, and ranch
+            properties.</span
+          >
+        </li>
+        <li>
+          <mat-icon>check_circle</mat-icon>
+          <span
+            >Honest, upfront pricing and clear communication from start to
+            finish.</span
+          >
+        </li>
+        <li>
+          <mat-icon>check_circle</mat-icon>
+          <span
+            >Master electrician committed to safety, reliability, and NEC
+            compliance.</span
+          >
+        </li>
+        <li>
+          <mat-icon>check_circle</mat-icon>
+          <span
+            >Local to the Hill Country — we know the terrain, the loads, and the
+            needs.</span
+          >
+        </li>
+      </ul>
+
+      <div class="wcu-hero-actions">
+        <button mat-raised-button color="primary">
+          <mat-icon>call</mat-icon>
+          Call to Schedule Service
+        </button>
+        <button mat-stroked-button color="primary">
+          <mat-icon>assignment</mat-icon>
+          Request a Quote
+        </button>
+      </div>
+    </div>
+
+    <div class="wcu-hero-card-wrapper">
+      <mat-card class="wcu-hero-card">
+        <mat-card-header class="summary-card">
+          <div mat-card-avatar class="wcu-hero-avatar">
+            <mat-icon>engineering</mat-icon>
+          </div>
+          <mat-card-title>Hill Country Focused. Code Compliant.</mat-card-title>
+          <mat-card-subtitle
+            >Residential • Commercial • Ranch Properties</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            ProVolt Electrical Services designs and maintains electrical systems
+            that match the realities of the Hill Country — long runs,
+            outbuildings, water wells, shop spaces, and growing neighborhoods.
+          </p>
+          <div class="wcu-chip-row">
+            <mat-chip-listbox aria-label="Why customers choose us">
+              <mat-chip>Licensed & Insured</mat-chip>
+              <mat-chip>Master Electrician</mat-chip>
+              <mat-chip>Local Hill Country</mat-chip>
+              <mat-chip>Residential & Commercial</mat-chip>
+            </mat-chip-listbox>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- SERVICE AREA GRID -->
+  <section class="wcu-section">
+    <div class="wcu-section-header">
+      <h2>Our Texas Hill Country Service Area</h2>
+      <p>
+        We proudly serve a wide range of communities across the
+        {{ regionLabel }}. Select your town below to view detailed electrical
+        services available in your area.
+      </p>
+    </div>
+
+    <div class="wcu-town-grid">
+      <mat-card
+        class="wcu-town-card"
+        *ngFor="let town of towns"
+        (click)="onTownClick(town)"
+        tabindex="0"
+      >
+        <mat-card-header>
+          <div mat-card-avatar class="wcu-town-avatar">
+            <mat-icon>location_city</mat-icon>
+          </div>
+          <mat-card-title>{{ town.label }}</mat-card-title>
+          <mat-card-subtitle *ngIf="town.primaryAreas.length">
+            Also serving
+            {{ town.primaryAreas.join(", ") }}
+            <span *ngIf="town.primaryAreas.length === 3">and nearby areas</span>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="town-card-body">
+            Full-service electrical work for homes, small businesses, and ranch
+            properties in and around {{ town.name }}.
+          </p>
+          <button
+            mat-stroked-button
+            color="primary"
+            class="wcu-town-btn"
+            type="button"
+            [routerLink]="town.urlSlug"
+          >
+            <mat-icon>arrow_forward</mat-icon>
+            View {{ town.name }} Services
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- SUMMARY / CTA -->
+  <section class="wcu-section wcu-summary">
+    <div class="wcu-summary-inner">
+      <div class="wcu-summary-text">
+        <h2>One Hill Country Electrician. Many Towns Served.</h2>
+        <p>
+          Whether you’re in Kerrville, Ingram, Hunt, Comfort, Fredericksburg,
+          Boerne, Bandera, Center Point, or Helotes, you get the same level of
+          care: detailed workmanship, honest recommendations, and an electrician
+          who treats your property like their own.
+        </p>
+      </div>
+      <div class="wcu-summary-actions">
+        <button mat-raised-button color="primary">
+          <mat-icon>call</mat-icon>
+          Call to Book Service
+        </button>
+        <button mat-stroked-button color="primary">
+          <mat-icon>mail</mat-icon>
+          Send a Service Request
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

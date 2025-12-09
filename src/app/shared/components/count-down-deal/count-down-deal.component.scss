@@ -1,0 +1,164 @@
+:host {
+  display: block;
+}
+
+.deal-wrapper {
+  padding: 32px 16px;
+  background-color: #f2f2f5;
+}
+
+.deal-card {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: flex;
+  gap: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #f7f7f9;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+}
+
+/* Left image */
+
+.deal-image {
+  flex: 1 1 45%;
+  min-height: 340px;
+}
+
+.deal-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Right content */
+
+.deal-content {
+  flex: 1 1 55%;
+  padding: 48px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+}
+
+.deal-title {
+  margin: 0 0 12px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.deal-subtitle {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: #6b7280;
+}
+
+/* Countdown styling */
+
+.deal-countdown {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.count-segment {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.count-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #111827;
+}
+
+.count-label {
+  font-size: 0.85rem;
+  text-transform: lowercase;
+  color: #4b5563;
+}
+
+.count-separator {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Button */
+
+.deal-cta {
+  margin-top: 12px;
+}
+
+.deal-button {
+  min-width: 190px;
+  min-height: 72px;
+  padding: 14px 40px;
+  border-radius: 999px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #d9b524;
+  color: #111827;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    filter: brightness(1.05);
+  }
+}
+
+/* Fine print */
+
+.deal-fine-print {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Responsive */
+
+@media (max-width: 960px) {
+  .deal-card {
+    flex-direction: column;
+  }
+
+  .deal-content {
+    padding: 32px 24px 40px;
+  }
+
+  .deal-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .deal-wrapper {
+    padding: 24px 12px;
+  }
+
+  .deal-content {
+    padding: 24px 20px 28px;
+    gap: 20px;
+  }
+
+  .deal-countdown {
+    flex-wrap: wrap;
+  }
+
+  .deal-button {
+    min-width: 170px;
+    min-height: 64px;
+  }
+}

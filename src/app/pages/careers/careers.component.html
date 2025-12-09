@@ -1,0 +1,136 @@
+<section class="careers">
+  <header class="careers__hero">
+    <div class="careers__hero-text">
+      <h1>Careers at ProVolt</h1>
+      <p>
+        Join a master electrician team that values craftsmanship, safety, and
+        integrity. If you take pride in doing the job right the first time,
+        you’ll fit in here.
+      </p>
+
+      <div class="careers__chips">
+        <mat-chip-row selected color="primary">
+          <mat-icon>bolt</mat-icon>
+          Skilled Trades
+        </mat-chip-row>
+        <mat-chip-row>
+          <mat-icon>location_on</mat-icon>
+          Texas Hill Country
+        </mat-chip-row>
+        <mat-chip-row>
+          <mat-icon>workspace_premium</mat-icon>
+          Licensed & Apprenticeship Roles
+        </mat-chip-row>
+      </div>
+
+      <button mat-raised-button color="primary">Email Your Resume</button>
+    </div>
+
+    <mat-card class="careers__hero-card">
+      <mat-card-header>
+        <div mat-card-avatar class="careers__hero-icon">
+          <mat-icon>engineering</mat-icon>
+        </div>
+        <div>
+          <mat-card-title>Build a Career, Not Just a Job</mat-card-title>
+          <mat-card-subtitle
+            >Master-level electrical work, local impact.</mat-card-subtitle
+          >
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          ProVolt Electrical Services is growing, and we’re looking for people
+          who care about quality, communication, and taking care of our
+          neighbors. We invest in training, licensing, and long-term careers—not
+          quick turnover.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </header>
+
+  <!-- Benefits -->
+  <section class="careers__section">
+    <h2>Why Work With ProVolt?</h2>
+    <p class="careers__section-intro">
+      We’re a small, professional team that treats our employees like people—not
+      numbers on a sheet. Here’s what you can expect when you join us.
+    </p>
+
+    <div class="careers__benefits-grid">
+      <mat-card class="benefit" *ngFor="let benefit of benefits">
+        <mat-card-header>
+          <div mat-card-avatar class="benefit__icon">
+            <mat-icon>{{ benefit.icon }}</mat-icon>
+          </div>
+          <mat-card-title>{{ benefit.label }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ benefit.description }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- Open roles -->
+  <section class="careers__section careers__section--roles">
+    <h2>Open Positions</h2>
+    <p class="careers__section-intro">
+      Don’t see your exact role listed? We’re always open to meeting great
+      electricians and support staff. Send us your resume and a quick note about
+      what you’re looking for.
+    </p>
+
+    <div class="careers__roles-grid">
+      <mat-card class="job" *ngFor="let job of jobs">
+        <mat-card-header>
+          <div mat-card-avatar class="job__icon">
+            <mat-icon>work</mat-icon>
+          </div>
+          <div>
+            <mat-card-title>{{ job.title }}</mat-card-title>
+            <mat-card-subtitle>{{ job.location }}</mat-card-subtitle>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="job__tags">
+            <span class="job__chip">
+              <mat-icon>schedule</mat-icon>
+              {{ job.type }}
+            </span>
+            <span class="job__chip">
+              <mat-icon>nightlight</mat-icon>
+              {{ job.shift }}
+            </span>
+          </div>
+
+          <p class="job__summary">
+            {{ job.summary }}
+          </p>
+
+          <mat-divider></mat-divider>
+
+          <ul class="job__list">
+            <li *ngFor="let bullet of job.bullets">
+              <mat-icon class="job__bullet-icon">check_circle</mat-icon>
+              <span>{{ bullet }}</span>
+            </li>
+          </ul>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+          <button mat-stroked-button color="primary">Apply / Inquire</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+
+  <footer class="careers__footer">
+    <p>
+      ProVolt Electrical Services is an equal opportunity employer. We consider
+      all qualified applicants without regard to race, color, religion, sex,
+      national origin, disability, or veteran status.
+    </p>
+  </footer>
+</section>

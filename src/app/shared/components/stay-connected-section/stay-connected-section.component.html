@@ -1,0 +1,65 @@
+<section class="stay-section">
+  <div class="stay-inner">
+    <!-- Header -->
+    <header class="stay-header">
+      <h2 class="stay-title">Stay Connected</h2>
+      <p class="stay-subtitle">
+        Subscribe for monthly electrical tips, safety updates, exclusive offers,
+        and local news. Get a free home safety checklist with your first issue.
+      </p>
+    </header>
+
+    <!-- Subscribe form -->
+    <form
+      class="stay-form"
+      [formGroup]="subscribeForm"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
+      <div class="email-input-row">
+        <mat-form-field class="email-field" appearance="outline">
+          <input
+            matInput
+            formControlName="email"
+            type="email"
+            placeholder="Enter your email"
+          />
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          class="send-button"
+          type="submit"
+        >
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+
+      <div class="checkbox-row">
+        <mat-checkbox formControlName="agree">
+          I agree to the Privacy Policy and Terms.
+        </mat-checkbox>
+      </div>
+    </form>
+
+    <hr class="stay-divider" />
+
+    <!-- Perks cards -->
+    <div class="perks-grid">
+      <mat-card class="perk-card" *ngFor="let perk of perks">
+        <div class="perk-icon-wrapper">
+          <div class="perk-icon-circle">
+            <mat-icon>{{ perk.icon }}</mat-icon>
+          </div>
+        </div>
+        <mat-card-title class="perk-title">
+          {{ perk.title }}
+        </mat-card-title>
+        <mat-card-content class="perk-description">
+          {{ perk.description }}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>

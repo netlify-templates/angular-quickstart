@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+  /* Brand Colors */
+  --brand-red: #C62828;
+  --brand-yellow: #F9C300;
+  --brand-black: #1A1A1A;
+
+  --background: #fafafa;
+  --background-alt: #ffffff;
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #424242;
+  --text-muted: #757575;
+
+  /* Headers */
+  --header-primary: #1a1a1a;
+  --header-secondary: var(--brand-red);
+
+  /* Buttons */
+  --btn-primary-bg: var(--brand-red);
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: #a02020;
+
+  --btn-secondary-bg: var(--brand-yellow);
+  --btn-secondary-text: #1a1a1a;
+  --btn-secondary-hover: #e0ae00;
+}

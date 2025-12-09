@@ -1,0 +1,32 @@
+<section class="cta-section">
+  <div class="cta-inner">
+    <header class="cta-header">
+      <h1 class="cta-title">Trusted Electricians in</h1>
+      <h1 class="cta-title cta-title--highlight">Fredericksburg</h1>
+
+      <p class="cta-subtitle">
+        Fast, safe electrical repairs and panel upgrades for your home or
+        business.
+      </p>
+
+      <button mat-stroked-button class="cta-button" (click)="onCallNow()">
+        Call Now
+      </button>
+    </header>
+
+    <p>
+      Nathaniel do we want this to say Residential, Commercial, or Specialty
+      instead?
+    </p>
+    <div class="cta-cards">
+      <mat-card class="cta-card" *ngFor="let card of cards">
+        <mat-card-title class="cta-card-title">
+          {{ card.title }}
+        </mat-card-title>
+        <mat-card-content class="cta-card-content">
+          {{ card.description }}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>

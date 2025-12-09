@@ -1,0 +1,177 @@
+<div class="contact-page">
+  <section class="contact-hero">
+    <div class="contact-hero__eyebrow">Contact ProVolt Electrical Services</div>
+    <h1 class="contact-hero__title">
+      Need a trusted Hill Country <span>electrician</span>?
+    </h1>
+    <p class="contact-hero__subtitle">
+      Get in touch for fast, code-compliant residential and commercial
+      electrical service in Fredericksburg, Kerrville, Boerne, Bandera, and the
+      surrounding Texas Hill Country.
+    </p>
+  </section>
+
+  <section class="contact-grid">
+    <!-- Left: Contact Info -->
+    <mat-card class="contact-card contact-card--info">
+      <mat-card-header>
+        <mat-card-title>Talk to a licensed electrician</mat-card-title>
+        <mat-card-subtitle
+          >Fully licensed, insured, and local to the Hill
+          Country</mat-card-subtitle
+        >
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="contact-info-row">
+          <mat-icon aria-hidden="true">phone</mat-icon>
+          <div>
+            <div class="contact-info-label">Call or text</div>
+            <!-- <a
+              class="contact-info-value"
+              [href]="'tel:' + phoneNumber.replace(/[^0-9]/g, '')"
+            > -->
+            <a>
+              {{ phoneNumber }}
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-info-row">
+          <mat-icon aria-hidden="true">mail</mat-icon>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <a class="contact-info-value" [href]="'mailto:' + emailAddress">
+              {{ emailAddress }}
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-info-row">
+          <mat-icon aria-hidden="true">schedule</mat-icon>
+          <div>
+            <div class="contact-info-label">Hours</div>
+            <div class="contact-info-value">
+              Mon – Fri: 8:00 AM – 5:00 PM<br />
+              24/7 emergency service available
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-info-row">
+          <mat-icon aria-hidden="true">engineering</mat-icon>
+          <div>
+            <div class="contact-info-label">Credentials</div>
+            <div class="contact-info-value">
+              Texas Master Electrician • Licensed & Insured • NEC compliant
+            </div>
+          </div>
+        </div>
+
+        <mat-divider class="contact-divider"></mat-divider>
+
+        <div class="contact-service-areas">
+          <div class="contact-service-areas__label">
+            Hill Country service areas
+          </div>
+          <mat-chip-set aria-label="Service areas">
+            <mat-chip>Fredericksburg</mat-chip>
+            <mat-chip>Kerrville</mat-chip>
+            <mat-chip>Boerne</mat-chip>
+            <mat-chip>Bandera</mat-chip>
+            <mat-chip>Comfort</mat-chip>
+            <mat-chip>Helotes</mat-chip>
+            <mat-chip>Ingram</mat-chip>
+          </mat-chip-set>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Right: Contact Form -->
+    <mat-card class="contact-card contact-card--form">
+      <mat-card-header>
+        <mat-card-title>Request service or a free estimate</mat-card-title>
+        <mat-card-subtitle>
+          Tell us about your project or electrical issue and we’ll respond as
+          soon as possible.
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Full name</mat-label>
+              <input matInput formControlName="fullName" required />
+              <mat-error
+                *ngIf="contactForm.get('fullName')?.hasError('required')"
+              >
+                Your name is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row form-row--two-cols">
+            <mat-form-field appearance="outline">
+              <mat-label>Email address</mat-label>
+              <input matInput type="email" formControlName="email" required />
+              <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
+                Email is required.
+              </mat-error>
+              <mat-error *ngIf="contactForm.get('email')?.hasError('email')">
+                Please enter a valid email address.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Phone (optional)</mat-label>
+              <input matInput type="tel" formControlName="phone" />
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Subject</mat-label>
+              <input matInput formControlName="subject" required />
+              <mat-error
+                *ngIf="contactForm.get('subject')?.hasError('required')"
+              >
+                Please add a short subject for your request.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Tell us what you need help with</mat-label>
+              <textarea
+                matInput
+                rows="5"
+                formControlName="message"
+                required
+                placeholder="Example: breaker keeps tripping in the kitchen, panel upgrade, EV charger, lighting install, etc."
+              ></textarea>
+              <mat-error
+                *ngIf="contactForm.get('message')?.hasError('required')"
+              >
+                A brief description helps us respond quickly.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit">
+              <mat-icon aria-hidden="true">send</mat-icon>
+              <span>Send message</span>
+            </button>
+
+            <p class="form-note">
+              By submitting this form, you agree to be contacted by ProVolt
+              Electrical Services regarding your request.
+            </p>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</div>

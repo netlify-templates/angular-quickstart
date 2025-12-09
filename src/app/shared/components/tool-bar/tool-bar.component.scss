@@ -1,0 +1,166 @@
+@use "@angular/material" as mat;
+
+.page-header {
+  position: relative;
+  background-color: var(--brand-red);
+}
+
+/* Sidenav container just holds the toolbar area */
+.sidenav-container {
+  height: 4rem;
+  background-color: var(--brand-red);
+}
+
+.top-toolbar {
+  background: transparent;
+  box-shadow: none;
+  padding: 0 2.5rem;
+}
+
+.toolbar-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Logo area */
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.logo-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  border: 2px solid #f5c742;
+  box-shadow: 0 0 8px rgba(245, 199, 66, 0.8);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo-title {
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+
+.logo-subtitle {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+}
+
+/* Nav links */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.nav-link {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+
+/* Mobile menu button */
+
+.mobile-menu-button {
+  display: none; /* hidden by default on desktop */
+  margin-left: auto;
+  color: #ffffff;
+}
+
+/* Sidenav styles */
+:root {
+  @include mat.sidenav-overrides(
+    (
+      container-background-color: orange,
+      container-text-color: red,
+    )
+  );
+}
+
+.app-sidenav {
+  width: 260px;
+  background-color: var(--brand-red);
+  color: #ffffff;
+  padding: 0.75rem 0.5rem 1rem;
+  position: fixed;
+}
+
+.sidenav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem 0.5rem;
+}
+
+.sidenav-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+mat-nav-list a[mat-list-item] {
+  font-size: 0.9rem;
+  color: #ffffff !important;
+}
+
+[mat-list-item] {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+[mat-subheader] {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Optional styling for section title in mobile menu */
+.menu-section-title {
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+/* Responsive tweaks */
+
+@media (max-width: 900px) {
+  .top-toolbar {
+    padding: 0 1rem;
+  }
+
+  .toolbar-inner {
+    justify-content: space-between;
+  }
+
+  .desktop-nav {
+    display: none; /* hide full nav on small screens */
+  }
+
+  .mobile-menu-button {
+    display: inline-flex; /* show menu icon on small screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .toolbar-inner {
+    gap: 0.75rem;
+  }
+}

@@ -1,0 +1,392 @@
+.testimonials-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+/* HERO */
+
+.testimonials-hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+
+  &__eyebrow {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+    color: #7c7c7c;
+  }
+
+  &__title {
+    font-size: clamp(1.9rem, 3vw, 2.3rem);
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+
+    span {
+      color: #ffb300; // accent color
+    }
+  }
+
+  &__subtitle {
+    max-width: 680px;
+    margin: 0 auto;
+    color: #555;
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+}
+
+/* RATING SUMMARY */
+
+.rating-summary {
+  margin-bottom: 2rem;
+
+  &__card {
+    border-radius: 18px;
+    padding: 1.5rem 1.4rem;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+
+    @media (min-width: 768px) {
+      padding: 1.9rem 1.8rem;
+    }
+  }
+
+  &__main {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 1.5rem;
+
+    @media (max-width: 800px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__score {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  &__score-value {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  &__stars {
+    display: flex;
+    gap: 0.1rem;
+
+    mat-icon {
+      font-size: 1.2rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      color: #ffb300;
+    }
+  }
+
+  &__label {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  &__details {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.45rem;
+      font-size: 0.92rem;
+      color: #444;
+
+      mat-icon {
+        font-size: 1.15rem;
+        width: 1.15rem;
+        height: 1.15rem;
+        color: #4caf50;
+        margin-top: 0.05rem;
+      }
+    }
+  }
+
+  &__divider {
+    margin: 1.2rem 0;
+  }
+
+  &__cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    align-items: center;
+
+    p {
+      margin: 0;
+      font-size: 0.94rem;
+      color: #444;
+    }
+  }
+
+  &__cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+
+    a[mat-raised-button] {
+      border-radius: 999px;
+      padding-inline: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+
+      mat-icon {
+        font-size: 1.1rem;
+        width: 1.1rem;
+        height: 1.1rem;
+      }
+    }
+  }
+}
+
+/* FILTER BAR */
+
+.testimonials-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+
+  &__label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #7c7c7c;
+  }
+
+  mat-chip-set {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__chip {
+    font-size: 0.82rem;
+  }
+}
+
+/* TESTIMONIAL GRID & CARDS */
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.75rem;
+  margin-bottom: 3rem;
+}
+
+.testimonial-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+  padding-top: 0.8rem;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.09);
+  }
+
+  &__highlight {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(255, 179, 0, 0.14);
+    color: #c98200;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    z-index: 1;
+
+    mat-icon {
+      font-size: 0.95rem;
+      width: 0.95rem;
+      height: 0.95rem;
+    }
+  }
+
+  mat-card-content {
+    padding-top: 0.3rem;
+  }
+
+  &__quote-icon {
+    mat-icon {
+      font-size: 2.1rem;
+      width: 2.1rem;
+      height: 2.1rem;
+      color: rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  &__headline {
+    margin: 0.3rem 0 0.4rem;
+    font-size: 1.02rem;
+    font-weight: 650;
+  }
+
+  &__body {
+    margin: 0 0 0.9rem;
+    font-size: 0.94rem;
+    line-height: 1.6;
+    color: #444;
+  }
+
+  &__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.7rem;
+  }
+
+  &__stars {
+    display: flex;
+    gap: 0.1rem;
+
+    mat-icon {
+      font-size: 1.1rem;
+      width: 1.1rem;
+      height: 1.1rem;
+      color: #ffb300;
+    }
+  }
+
+  &__rating-label {
+    font-size: 0.83rem;
+    color: #666;
+  }
+
+  &__divider {
+    margin: 0.5rem 0 0.7rem;
+  }
+
+  &__footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    align-items: flex-end;
+  }
+
+  &__person {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  &__name {
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+
+  &__location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+    color: #555;
+
+    mat-icon {
+      font-size: 0.95rem;
+      width: 0.95rem;
+      height: 0.95rem;
+      color: #ffb300;
+    }
+  }
+
+  &__date {
+    font-size: 0.8rem;
+    color: #888;
+  }
+
+  &__tags {
+    mat-chip-set {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    mat-chip {
+      font-size: 0.78rem;
+    }
+  }
+}
+
+/* CTA SECTION */
+
+.testimonials-cta {
+  border-radius: 18px;
+  padding: 1.75rem 1.5rem;
+  background: radial-gradient(
+    circle at top left,
+    #ffecb3 0,
+    #fff8e1 36%,
+    #ffffff 100%
+  );
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
+
+  @media (min-width: 768px) {
+    padding: 2rem 2.25rem;
+  }
+
+  &__content {
+    max-width: 640px;
+  }
+
+  h2 {
+    margin: 0 0 0.4rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0 0 1.1rem;
+    font-size: 0.95rem;
+    color: #444;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+
+    a[mat-raised-button] {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding-inline: 1.6rem;
+
+      mat-icon {
+        font-size: 1.1rem;
+        width: 1.1rem;
+        height: 1.1rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+<section class="deal-wrapper">
+  <div class="deal-card">
+    <!-- Left image -->
+    <div class="deal-image">
+      <!-- Replace with your own image path -->
+      <img src="assets/electric-helmets.jpg" alt="Safety helmets in storage" />
+    </div>
+
+    <!-- Right content -->
+    <div class="deal-content">
+      <div class="deal-text-block">
+        <h2 class="deal-title">Fast, Free Quotes</h2>
+        <p class="deal-subtitle">
+          Get a free estimate or schedule service with our licensed
+          electricians. Enjoy quick response times, transparent pricing, and
+          seasonal discounts. Call now or request your quote online for priority
+          service.
+        </p>
+      </div>
+
+      <!-- Countdown -->
+      <div class="deal-countdown">
+        <div class="count-segment">
+          <span class="count-value">{{ timeLeft.days }}</span>
+          <span class="count-label">d</span>
+        </div>
+        <div class="count-separator">:</div>
+
+        <div class="count-segment">
+          <span class="count-value">{{ timeLeft.hours }}</span>
+          <span class="count-label">h</span>
+        </div>
+        <div class="count-separator">:</div>
+
+        <div class="count-segment">
+          <span class="count-value">{{ timeLeft.minutes }}</span>
+          <span class="count-label">m</span>
+        </div>
+        <div class="count-separator">:</div>
+
+        <div class="count-segment">
+          <span class="count-value">{{ timeLeft.seconds }}</span>
+          <span class="count-label">s</span>
+        </div>
+      </div>
+
+      <!-- CTA button -->
+      <div class="deal-cta">
+        <button
+          mat-raised-button
+          class="deal-button"
+          (click)="onRequestQuote()"
+        >
+          <span>Request</span>
+          <span>Quote</span>
+        </button>
+      </div>
+
+      <p class="deal-fine-print">
+        Limited-time offer: Save 10% on all service calls through Dec 31, 2025.
+        Book today and secure your discount!
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,140 @@
+:host {
+  display: block;
+  background-color: var(--background);
+}
+
+/* Overall section */
+
+.cta-section {
+  /* background-color: #151b23; // dark slate */
+  color: #ffffff;
+  padding: 80px 16px 72px;
+}
+
+.cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Header text */
+
+.cta-header {
+  margin-bottom: 64px;
+}
+
+.cta-title {
+  margin: 0;
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+}
+
+.cta-title--highlight {
+  margin-top: 0.25rem;
+}
+
+.cta-subtitle {
+  margin: 24px auto 32px;
+  max-width: 520px;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  /* color: rgba(255, 255, 255, 0.8); */
+  color: var(--text-secondary);
+}
+
+/* Call button */
+
+.cta-button {
+  padding: 10px 40px;
+  border-radius: 999px;
+  border-width: 1.5px;
+  font-size: 0.98rem;
+  font-weight: 600;
+
+  /* // override default theme colors for this dark hero
+  color: #ffffff;
+  border-color: #ffffff; */
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Cards row */
+
+.cta-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0 auto;
+  max-width: 1220px;
+}
+
+.cta-card {
+  flex: 1 1 0;
+  min-width: 260px;
+  background-color: #222832;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 32px 32px 36px;
+  border-right: 1px solid #1a2029;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.cta-card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.cta-card-content {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+}
+
+/* Responsive tweaks */
+
+@media (max-width: 900px) {
+  .cta-section {
+    padding-top: 64px;
+  }
+
+  .cta-title {
+    font-size: 2.2rem;
+  }
+
+  .cta-cards {
+    flex-direction: column;
+  }
+
+  .cta-card {
+    border-right: none;
+    border-top: 1px solid #1a2029;
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .cta-title {
+    font-size: 1.9rem;
+  }
+
+  .cta-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .cta-button {
+    width: auto;
+  }
+}

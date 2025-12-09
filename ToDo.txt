@@ -1,0 +1,24 @@
+I want to make the toolbar sticky 
+I think I want to have two rows to the toolbar with the social media icons on the top
+
+https://business.kerrvillechamber.biz/list/category/electricians-electrical-58
+
+https://www.bluehost.com/in/blog/what-is-schema-markup/?utm_campaign=pmax_PPC&utm_source=googleads&utm_medium=genericsearch&channelid=P61C101S570N0B5578A2D4499E0000V811&gclsrc=aw.ds&gad_source=1&gad_campaignid=22434318211&gbraid=0AAAAADtGWPKh3MIdJHqMusH67wQ9mR5R_&gclid=Cj0KCQiA_8TJBhDNARIsAPX5qxTgOtQsF3dy-bpWIe1IF8deQLhdbm0XvuAucAELRMVg_0vYAqSecKkaAhb7EALw_wcB
+
+https://angular.love/angular-ssr-optimize-seo-with-rendering-meta-tags-og-tags-and-social-media-previews
+
+SEO optimization
+    - for all URL slugs (i.e. services, projects, etc.)
+QR code
+Email List
+
+Finish all the pages
+Server side rendering
+Add the pages in the footer
+
+
+In services
+    - I want a description of what that service includes
+    Services should also include the words "Our Expertise"
+
+Imagine you are an expert angular developer. generate me this website page "WhyChooseUs" div for an angular application using angular materials. Here is an image. Split the component over three files: a typescript file that is a standalone component, a scss file, and an html file.

@@ -1,0 +1,116 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+
+// ⬇️ Update this import path to wherever your SeoService lives
+import { SeoService } from 'src/app/shared/services/seo.service';
+
+@Component({
+  selector: 'app-contact-us',
+  standalone: true,
+  templateUrl: './contact-us.component.html',
+  styleUrls: ['./contact-us.component.scss'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatChipsModule,
+  ],
+})
+export class ContactUsComponent implements OnInit {
+  contactForm: FormGroup;
+
+  readonly phoneNumber = '(830) 555-1234';
+  readonly emailAddress = 'service@provoltelectricalservices.com';
+
+  constructor(private fb: FormBuilder, private seo: SeoService) {
+    this.contactForm = this.fb.group({
+      fullName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: [''],
+      subject: ['', [Validators.required, Validators.minLength(3)]],
+      message: ['', [Validators.required, Validators.minLength(10)]],
+    });
+  }
+
+  ngOnInit(): void {
+    this.seo.setMetaTags({
+      title:
+        'Contact ProVolt Electrical Services | Hill Country Electrician Near You',
+      description:
+        'Need a licensed electrician in the Texas Hill Country? Contact ProVolt Electrical Services for fast, reliable electrical repairs, panel upgrades, lighting, EV chargers, and more in Fredericksburg, Kerrville, Boerne, Bandera, and surrounding areas.',
+      type: 'website',
+      robots: 'index,follow',
+    });
+
+    this.seo.setJsonLd('json-ld-contact', {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: 'Contact ProVolt Electrical Services',
+      description:
+        'Contact page for ProVolt Electrical Services, licensed electrician serving the Texas Hill Country.',
+      url: this.getCurrentUrlSafe(),
+      about: {
+        '@type': 'LocalBusiness',
+        '@id': '#provolt-electrical',
+        name: 'ProVolt Electrical Services',
+        telephone: '+1-830-555-1234',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Texas Hill Country',
+          addressRegion: 'TX',
+          addressCountry: 'US',
+        },
+        areaServed: [
+          'Fredericksburg TX',
+          'Kerrville TX',
+          'Boerne TX',
+          'Bandera TX',
+          'Texas Hill Country',
+        ],
+        url: 'https://provoltelectricalservices.com',
+      },
+      potentialAction: {
+        '@type': 'ContactAction',
+        target: [`tel:+18305551234`, `mailto:${this.emailAddress}`],
+      },
+    });
+  }
+
+  private getCurrentUrlSafe(): string {
+    // Guard for SSR if needed
+    return typeof window !== 'undefined'
+      ? window.location.href
+      : 'https://provoltelectricalservices.com/contact';
+  }
+
+  onSubmit(): void {
+    if (this.contactForm.invalid) {
+      this.contactForm.markAllAsTouched();
+      return;
+    }
+
+    // TODO: Wire this up to your backend / email service (HTTP POST or 3rd-party form service).
+    console.log('Contact form submitted', this.contactForm.value);
+
+    this.contactForm.reset();
+  }
+}

@@ -3,11 +3,15 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-quickstart": {
+    "provolt": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
           "strict": true
+        },
+        "@schematics/angular:component": {
+          "style": "scss",
+          "standalone": true
         }
       },
       "root": "",
@@ -17,18 +21,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-quickstart",
+            "outputPath": "dist/provolt",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.css",
-              "src/demo-styling.css"
+              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -69,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-quickstart:build:production"
+              "browserTarget": "provolt:build:production"
             },
             "development": {
-              "browserTarget": "angular-quickstart:build:development"
+              "browserTarget": "provolt:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-quickstart:build"
+            "browserTarget": "provolt:build"
           }
         },
         "test": {
@@ -90,11 +91,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []

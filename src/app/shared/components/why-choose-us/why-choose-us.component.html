@@ -1,0 +1,30 @@
+<section class="why-section">
+  <div class="why-inner">
+    <header class="why-header">
+      <h2 class="why-title">Why Choose ProVolt Electrical</h2>
+      <p class="why-subtitle">
+        Hill Country homeowners and businesses trust ProVolt for safe,
+        dependable electrical work, transparent communication, and long-term
+        reliability on every project.
+      </p>
+    </header>
+
+    <div class="why-grid">
+      <mat-card class="why-card" *ngFor="let reason of reasons">
+        <div class="why-icon-wrapper">
+          <div class="why-icon-circle">
+            <mat-icon>{{ reason.icon }}</mat-icon>
+          </div>
+        </div>
+
+        <mat-card-title class="why-card-title">
+          {{ reason.title }}
+        </mat-card-title>
+
+        <mat-card-content class="why-card-description">
+          {{ reason.description }}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>

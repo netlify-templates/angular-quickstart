@@ -1,0 +1,103 @@
+:host {
+  display: block;
+}
+
+/* Section background */
+
+.services-section {
+  padding: 56px 16px 72px;
+  background-color: #f3f4f6; // light gray
+}
+
+.services-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* Title */
+
+.services-title {
+  margin: 0 0 32px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Cards grid */
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* Individual card */
+
+.service-card {
+  padding: 32px 32px 28px;
+  text-align: center;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+  background-color: #ffffff;
+}
+
+/* Icon */
+
+.service-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.service-icon-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  background-color: #d9b524;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-icon-circle mat-icon {
+  color: #ffffff;
+  font-size: 26px;
+}
+
+/* Text */
+
+.service-title {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.service-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #4b5563;
+}
+
+/* Responsive */
+
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .services-section {
+    padding: 40px 12px 56px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    padding: 24px 20px 22px;
+  }
+}

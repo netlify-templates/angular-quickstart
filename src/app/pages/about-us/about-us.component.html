@@ -1,0 +1,192 @@
+<section class="about">
+  <!-- HERO -->
+  <header class="about__hero">
+    <div class="about__hero-text">
+      <h1>About ProVolt Electric</h1>
+      <p>
+        ProVolt Electric is a local, family-owned electrical service established
+        in 2010 and proudly serving Kerrville, Fredericksburg, and the
+        surrounding Texas Hill Country. We provide fast, reliable electrical
+        solutions for residential, commercial, and industrial clients—always
+        with safety, quality, and professionalism at the center of every job.
+      </p>
+
+      <div class="about__chips">
+        <mat-chip-row color="primary" selected>
+          <mat-icon>bolt</mat-icon>
+          Residential · Commercial · Industrial
+        </mat-chip-row>
+        <mat-chip-row>
+          <mat-icon>location_on</mat-icon>
+          Kerrville • Fredericksburg • Hill Country
+        </mat-chip-row>
+        <mat-chip-row>
+          <mat-icon>verified</mat-icon>
+          Licensed · Bonded · Insured
+        </mat-chip-row>
+      </div>
+
+      <button mat-raised-button color="primary">Request a Free Estimate</button>
+    </div>
+
+    <mat-card class="about__hero-card">
+      <mat-card-header>
+        <div mat-card-avatar class="about__hero-icon">
+          <mat-icon>engineering</mat-icon>
+        </div>
+        <div>
+          <mat-card-title>Local Expertise Since 2010</mat-card-title>
+          <mat-card-subtitle
+            >Family-Owned · Master Electrician Led</mat-card-subtitle
+          >
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          From fuses and breakers to panel replacements, new circuits, lighting
+          installations, equipment hookups, remodeling, maintenance, new
+          construction, LED lighting retrofits, ceiling fan installs, and EV
+          charger installations—our team handles it all with the experience and
+          care your project deserves.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </header>
+
+  <!-- STATS -->
+  <section class="about__section">
+    <h2>Rooted in the Texas Hill Country</h2>
+    <p class="about__section-intro">
+      Over the years we’ve completed projects for local churches, gas stations,
+      research centers, homeowners, and business owners—earning a reputation for
+      quality workmanship, safety, and dependable service.
+    </p>
+
+    <div class="about__stats-grid">
+      <mat-card class="stat" *ngFor="let stat of stats">
+        <mat-card-header>
+          <div mat-card-avatar class="stat__icon">
+            <mat-icon>{{ stat.icon }}</mat-icon>
+          </div>
+          <mat-card-title>{{ stat.value }}</mat-card-title>
+          <mat-card-subtitle>{{ stat.label }}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="about__section about__section--values">
+    <h2>Our Core Values</h2>
+    <p class="about__section-intro">
+      ProVolt Electric was built on integrity, craftsmanship, and exceptional
+      customer service. These values guide every recommendation we make and
+      every wire we pull.
+    </p>
+
+    <div class="about__values-grid">
+      <mat-card class="value" *ngFor="let value of values">
+        <mat-card-header>
+          <div mat-card-avatar class="value__icon">
+            <mat-icon>{{ value.icon }}</mat-icon>
+          </div>
+          <mat-card-title>{{ value.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ value.description }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- OWNER / BUSINESS OWNER SECTION -->
+  <section class="about__section about__section--owner">
+    <h2>Meet the Owner: Scott Raggo</h2>
+    <div class="about__owner-layout">
+      <mat-card class="about__owner-card">
+        <mat-card-header>
+          <div mat-card-avatar class="about__owner-icon">
+            <mat-icon>person</mat-icon>
+          </div>
+          <div>
+            <mat-card-title>Scott Raggo</mat-card-title>
+            <mat-card-subtitle>Owner, ProVolt Electric</mat-card-subtitle>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Scott Raggo brings over 15 years of hands-on experience in the
+            electrical trade. He founded ProVolt Electric on a commitment to
+            integrity, quality, and exceptional customer service.
+          </p>
+          <p>
+            Scott leads a team of highly skilled electricians whose combined
+            expertise spans decades. He encourages continuous learning to stay
+            on top of the latest technology, equipment, and industry standards,
+            ensuring that every project is safe, reliable, and efficient.
+          </p>
+          <p>
+            Whether the job is a small service call or a large commercial or
+            industrial project, Scott remains actively involved, making sure
+            ProVolt Electric delivers the level of service he would expect in
+            his own home or business.
+          </p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="about__owner-services">
+        <mat-card-header>
+          <mat-card-title>What We Do Best</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <ul>
+            <li>Fuse & breaker replacement and troubleshooting</li>
+            <li>Panel replacements, upgrades, and new circuits</li>
+            <li>Lighting installations & LED retrofit upgrades</li>
+            <li>Equipment hookups for shops, gas stations & facilities</li>
+            <li>Remodeling, maintenance, and new construction wiring</li>
+            <li>Ceiling fan installation and EV charger installation</li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="about__section about__section--timeline">
+    <h2>Our Story</h2>
+    <p class="about__section-intro">
+      From a one-truck operation to a trusted partner for homes, churches, gas
+      stations, and research centers, ProVolt Electric has grown by doing what’s
+      right for our customers and our community.
+    </p>
+
+    <div class="about__timeline">
+      <div class="timeline-item" *ngFor="let item of timeline">
+        <div class="timeline-item__year">
+          <span>{{ item.year }}</span>
+        </div>
+        <div class="timeline-item__card">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <footer class="about__footer">
+    <mat-divider></mat-divider>
+    <div class="about__footer-content">
+      <div>
+        <h2>Need a Dependable Electrician?</h2>
+        <p>
+          Whether it’s a simple repair, a panel upgrade, or a full build-out,
+          ProVolt Electric is ready to help. Contact us today for a free
+          estimate.
+        </p>
+      </div>
+      <button mat-raised-button color="primary">Call or Request Service</button>
+    </div>
+  </footer>
+</section>

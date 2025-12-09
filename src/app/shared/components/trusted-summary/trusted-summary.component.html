@@ -1,0 +1,33 @@
+<section class="trusted-summary">
+  <div class="trusted-inner">
+    <!-- Left text column -->
+    <div class="trusted-left">
+      <div class="trusted-left-icon trusted-left-icon--top">
+        <mat-icon>shield</mat-icon>
+      </div>
+
+      <div class="trusted-copy">
+        <h2 class="trusted-title">
+          ProVolt Electrical Services is your licensed, insured Hill Country
+          electrician.
+        </h2>
+        <!-- <p class="trusted-subtitle">Hours Completed</p> -->
+      </div>
+    </div>
+
+    <!-- Right stats row -->
+    <div class="trusted-right">
+      <div class="trusted-stat" *ngFor="let stat of stats">
+        <div class="trusted-stat-icon">
+          <mat-icon>{{ stat.icon }}</mat-icon>
+        </div>
+        <div class="trusted-stat-value">
+          {{ stat.value }}
+        </div>
+        <div class="trusted-stat-label">
+          {{ stat.label }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

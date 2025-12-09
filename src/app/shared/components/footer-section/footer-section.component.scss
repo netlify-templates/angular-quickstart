@@ -1,0 +1,133 @@
+.footer-section {
+  background-color: #000;
+  color: #ffffff;
+  padding: 3rem 4vw 1rem 4vw;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3.63rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 3rem;
+  row-gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.footer-column {
+  min-width: 0;
+}
+
+.footer-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem;
+  letter-spacing: 0.04em;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.footer-icon {
+  font-size: 1.2rem;
+}
+
+.specialists-column .footer-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 24rem;
+}
+
+.links-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 0.5rem;
+
+  a {
+    border-radius: 50%;
+  }
+
+  mat-icon {
+    font-size: 1.2rem;
+  }
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  a {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.2s ease, transform 0.15s ease;
+
+    &:hover {
+      color: #f5c15b;
+      transform: translateX(2px);
+    }
+
+    &.active-link {
+      color: #f5c15b;
+      font-weight: 500;
+    }
+  }
+}
+
+.copyright-section {
+  max-width: 1200px;
+  margin: 2.5rem auto 0;
+  padding: 0 3.63rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.65rem;
+  color: #9ca3af;
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .specialists-column {
+    grid-column: 1 / -1;
+  }
+
+  .links-header {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-section {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .links-header {
+    justify-content: space-between;
+  }
+}

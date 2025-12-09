@@ -1,0 +1,23 @@
+<section class="services-section">
+  <div class="services-inner">
+    <h2 class="services-title">Expert Electrical Services</h2>
+
+    <div class="services-grid">
+      <mat-card class="service-card" *ngFor="let service of services">
+        <div class="service-icon-wrapper">
+          <div class="service-icon-circle">
+            <mat-icon>{{ service.icon }}</mat-icon>
+          </div>
+        </div>
+
+        <mat-card-title class="service-title">
+          {{ service.title }}
+        </mat-card-title>
+
+        <mat-card-content class="service-description">
+          {{ service.description }}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>

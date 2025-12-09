@@ -1,0 +1,182 @@
+<div class="testimonials-page">
+  <!-- HERO -->
+  <section class="testimonials-hero">
+    <p class="testimonials-hero__eyebrow">
+      Texas Hill Country electrician reviews
+    </p>
+    <h1 class="testimonials-hero__title">
+      Hill Country neighbors <span>trust</span> ProVolt.
+    </h1>
+    <p class="testimonials-hero__subtitle">
+      Read real feedback from homeowners, business owners, and ranchers who
+      chose ProVolt Electrical Services for safe, code-compliant work throughout
+      the Texas Hill Country.
+    </p>
+  </section>
+
+  <!-- RATING SUMMARY -->
+  <section class="rating-summary">
+    <mat-card class="rating-summary__card">
+      <div class="rating-summary__main">
+        <div class="rating-summary__score">
+          <div class="rating-summary__score-value">
+            {{ averageRating() | number : "1.1-1" }}
+          </div>
+          <div class="rating-summary__stars" aria-label="Average rating">
+            <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" aria-hidden="true">
+              {{ star <= averageRating() ? "star" : "star_border" }}
+            </mat-icon>
+          </div>
+          <div class="rating-summary__label">
+            Average rating from recent customers
+          </div>
+        </div>
+
+        <div class="rating-summary__details">
+          <ul>
+            <li>
+              <mat-icon aria-hidden="true">verified</mat-icon>
+              <span>Licensed & insured Texas Master Electrician</span>
+            </li>
+            <li>
+              <mat-icon aria-hidden="true">bolt</mat-icon>
+              <span>Residential, commercial, ranch, and emergency work</span>
+            </li>
+            <li>
+              <mat-icon aria-hidden="true">schedule</mat-icon>
+              <span
+                >On-time arrivals, clear communication, and clean job
+                sites</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <mat-divider class="rating-summary__divider"></mat-divider>
+
+      <div class="rating-summary__cta">
+        <p>
+          Join your neighbors who already trust ProVolt with their electrical
+          projects.
+        </p>
+        <div class="rating-summary__cta-actions">
+          <a mat-raised-button color="primary" routerLink="/contact">
+            <mat-icon aria-hidden="true">phone</mat-icon>
+            <span>Request service</span>
+          </a>
+          <a mat-button routerLink="/projects"> View recent projects </a>
+        </div>
+      </div>
+    </mat-card>
+  </section>
+
+  <!-- FILTER BAR -->
+  <section class="testimonials-filter">
+    <p class="testimonials-filter__label">Filter reviews by service type</p>
+    <mat-chip-set aria-label="Filter testimonials by category">
+      <mat-chip
+        *ngFor="let category of categories"
+        [highlighted]="selectedCategory() === category.key"
+        (click)="changeCategory(category.key)"
+        class="testimonials-filter__chip"
+      >
+        {{ category.label }}
+      </mat-chip>
+    </mat-chip-set>
+  </section>
+
+  <!-- TESTIMONIAL CARDS -->
+  <section
+    class="testimonials-grid"
+    aria-label="Customer testimonials for ProVolt Electrical Services"
+  >
+    <mat-card
+      class="testimonial-card"
+      *ngFor="
+        let testimonial of filteredTestimonials();
+        trackBy: trackByTestimonialId
+      "
+    >
+      <div
+        class="testimonial-card__highlight"
+        *ngIf="testimonial.isHighlighted"
+      >
+        <mat-icon>recommend</mat-icon>
+        <span>Popular with Hill Country customers</span>
+      </div>
+
+      <mat-card-content>
+        <div class="testimonial-card__quote-icon">
+          <mat-icon aria-hidden="true">format_quote</mat-icon>
+        </div>
+
+        <h2 class="testimonial-card__headline">
+          {{ testimonial.headline }}
+        </h2>
+
+        <p class="testimonial-card__body">
+          {{ testimonial.body }}
+        </p>
+
+        <div class="testimonial-card__rating">
+          <div class="testimonial-card__stars" aria-label="Customer rating">
+            <mat-icon
+              *ngFor="let filled of getStars(testimonial.rating); let i = index"
+              aria-hidden="true"
+            >
+              {{ filled ? "star" : "star_border" }}
+            </mat-icon>
+          </div>
+          <span class="testimonial-card__rating-label">
+            {{ testimonial.rating }}.0 out of 5
+          </span>
+        </div>
+
+        <mat-divider class="testimonial-card__divider"></mat-divider>
+
+        <div class="testimonial-card__footer">
+          <div class="testimonial-card__person">
+            <div class="testimonial-card__name">
+              {{ testimonial.name }}
+            </div>
+            <div class="testimonial-card__location">
+              <mat-icon aria-hidden="true">place</mat-icon>
+              <span>{{ testimonial.location }}</span>
+            </div>
+            <div class="testimonial-card__date">
+              {{ testimonial.dateLabel }}
+            </div>
+          </div>
+
+          <div class="testimonial-card__tags">
+            <mat-chip-set aria-label="Services for this testimonial">
+              <mat-chip *ngFor="let tag of testimonial.serviceTags">
+                {{ tag }}
+              </mat-chip>
+            </mat-chip-set>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="testimonials-cta">
+    <div class="testimonials-cta__content">
+      <h2>Ready to be our next 5-star review?</h2>
+      <p>
+        Whether you need a quick repair or a full upgrade, ProVolt Electrical
+        Services is ready to help. Tell us about your project and we’ll get you
+        on the schedule.
+      </p>
+      <div class="testimonials-cta__actions">
+        <a mat-raised-button color="primary" routerLink="/contact">
+          <mat-icon aria-hidden="true">send</mat-icon>
+          <span>Request a quote</span>
+        </a>
+        <a mat-button routerLink="/services"> Explore services </a>
+      </div>
+    </div>
+  </section>
+</div>

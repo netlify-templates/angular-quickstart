@@ -1,0 +1,70 @@
+<footer class="footer-section">
+  <div class="footer-content">
+    <!-- Contact -->
+    <div class="footer-column contact-column">
+      <h3 class="footer-title">Contact ProVolt</h3>
+
+      <div class="footer-contact-item">
+        <mat-icon class="footer-icon">location_on</mat-icon>
+        <span>{{ contactInfo.address }}</span>
+      </div>
+
+      <div class="footer-contact-item">
+        <mat-icon class="footer-icon">phone</mat-icon>
+        <span>{{ contactInfo.phone }}</span>
+      </div>
+
+      <div class="footer-contact-item">
+        <mat-icon class="footer-icon">email</mat-icon>
+        <span>{{ contactInfo.email }}</span>
+      </div>
+    </div>
+
+    <!-- Specialists blurb -->
+    <div class="footer-column specialists-column">
+      <h3 class="footer-title">Our Specialists</h3>
+      <p class="footer-text">
+        Our team of certified electricians brings years of experience and a
+        commitment to safety, quality, and customer satisfaction to every
+        project.
+      </p>
+    </div>
+
+    <!-- Quick links + social -->
+    <div class="footer-column links-column">
+      <div class="links-header">
+        <h3 class="footer-title">Quick Links</h3>
+
+        <div class="social-icons">
+          <a
+            *ngFor="let social of socialLinks"
+            [href]="social.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            mat-icon-button
+            [attr.aria-label]="social.ariaLabel"
+          >
+            <mat-icon>{{ social.icon }}</mat-icon>
+          </a>
+        </div>
+      </div>
+
+      <nav class="footer-links">
+        <a
+          *ngFor="let link of quickLinks"
+          [routerLink]="link.routerLink"
+          routerLinkActive="active-link"
+        >
+          {{ link.label }}
+        </a>
+      </nav>
+    </div>
+  </div>
+  <div class="copyright-section">
+    <p>Copyright &copy; 2025 PROVOLT, All Rights Reserved.</p>
+    <p>
+      ProVolt is <strong>NOT AFFILIATED</strong> with any other electrical
+      contractor and/or company.
+    </p>
+  </div>
+</footer>
