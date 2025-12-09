@@ -6,8 +6,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './commercial.component.html',
-  styleUrls: ['./commercial.component.scss']
+  styleUrls: ['./commercial.component.scss'],
 })
-export class CommercialComponent {
-
-}
+export class CommercialComponent {}
