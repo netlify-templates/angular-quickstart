@@ -91,14 +91,14 @@
 }
 
 /* Sidenav styles */
-:root {
-  @include mat.sidenav-overrides(
-    (
-      container-background-color: orange,
-      container-text-color: red,
-    )
-  );
-}
+// :root {
+//   @include mat.sidenav-overrides(
+//     (
+//       container-background-color: orange,
+//       container-text-color: red,
+//     )
+//   );
+// }
 
 .app-sidenav {
   width: 260px;
