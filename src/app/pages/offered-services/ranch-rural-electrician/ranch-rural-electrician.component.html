@@ -1,54 +1,149 @@
 <section class="our-services">
-  <div class="our-services__header">
-    <h1>Ranch And Rural Electrical Services</h1>
-    <p>
-      Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers
-      master-level electrical work for homes, businesses, and rural properties.
-    </p>
-  </div>
-  <div class="our-services__grid">
-    <mat-card
-      class="service-card"
-      *ngFor="let service of services"
-      [ngClass]="{
-        'service-card--RanchAndRural': service.category === 'RanchAndRural',
-        'service-card--both': service.category === 'Both'
-      }"
-    >
-      <mat-card-header>
-        <div mat-card-avatar class="service-card__icon">
-          <mat-icon>{{ service.icon }}</mat-icon>
-        </div>
-        <div>
-          <mat-card-title>{{ service.title }}</mat-card-title>
-          <mat-card-subtitle *ngIf="service.category !== 'Both'">{{
-            service.category
-          }}</mat-card-subtitle>
-        </div>
-      </mat-card-header>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero__text">
+      <h1>{{ hero.title }}</h1>
+      <p class="hero__subtitle">{{ hero.subtitle }}</p>
 
-      <mat-card-content>
-        <p class="service-card__description">
-          {{ service.description }}
-        </p>
-        <mat-divider></mat-divider>
+      <p class="hero__trust">
+        <mat-icon aria-hidden="true">verified</mat-icon>
+        <span>{{ hero.trustLine }}</span>
+      </p>
 
-        <ul class="service-card__list">
-          <li *ngFor="let bullet of service.bullets">
-            <mat-icon class="service-card__bullet-icon">bolt</mat-icon>
-            <span>{{ bullet }}</span>
-          </li>
-        </ul>
-      </mat-card-content>
-      <mat-card-actions align="start">
-        <button mat-stroked-button (click)="onCallNow()">
-          Schedule Service
+      <div class="hero__cta">
+        <button mat-flat-button class="hero__primary" (click)="onCallNow()">
+          <mat-icon>call</mat-icon>
+          Call Now
         </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
 
+        <a mat-stroked-button [routerLink]="'/contact-us'">
+          <mat-icon>edit</mat-icon>
+          Request a Quote
+        </a>
+
+        <a mat-stroked-button [routerLink]="'/emergency-electrician'">
+          <mat-icon>warning</mat-icon>
+          Emergency Service
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__chips">
+      <div class="section-kicker">Who we help</div>
+      <mat-chip-listbox aria-label="Ranch and rural customers we help">
+        <mat-chip *ngFor="let item of whoWeHelp">{{ item }}</mat-chip>
+      </mat-chip-listbox>
+    </div>
+  </header>
+
+  <!-- POPULAR RANCH/RURAL JOBS -->
+  <section class="section">
+    <h2>Popular Ranch & Rural Electrical Work</h2>
+    <p class="section__subtitle">
+      Rural properties need electrical that’s sized correctly, weather-ready,
+      and built to run reliably over long distances.
+    </p>
+
+    <div class="cards-grid">
+      <mat-card
+        class="link-card"
+        *ngFor="let job of popularRanchRuralJobs; trackBy: trackByTitle"
+      >
+        <mat-card-header>
+          <div mat-card-avatar class="link-card__icon">
+            <mat-icon>{{ job.icon }}</mat-icon>
+          </div>
+          <mat-card-title>{{ job.title }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>{{ job.description }}</p>
+        </mat-card-content>
+
+        <mat-card-actions align="start">
+          <a mat-stroked-button [routerLink]="job.path">Learn More</a>
+          <button mat-button (click)="onCallNow()">Schedule</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- SERVICES GRID (your existing content) -->
+  <section class="section">
+    <h2>Ranch & Rural Service Capabilities</h2>
+
+    <div class="our-services__grid">
+      <mat-card
+        class="service-card"
+        *ngFor="let service of services; trackBy: trackByTitle"
+      >
+        <mat-card-header>
+          <div mat-card-avatar class="service-card__icon">
+            <mat-icon>{{ service.icon }}</mat-icon>
+          </div>
+          <div>
+            <mat-card-title>{{ service.title }}</mat-card-title>
+            <mat-card-subtitle *ngIf="service.category !== 'Both'">
+              Ranch & Rural
+            </mat-card-subtitle>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p class="service-card__description">{{ service.description }}</p>
+          <mat-divider></mat-divider>
+
+          <ul class="service-card__list">
+            <li *ngFor="let bullet of service.bullets">
+              <mat-icon class="service-card__bullet-icon">bolt</mat-icon>
+              <span>{{ bullet }}</span>
+            </li>
+          </ul>
+        </mat-card-content>
+
+        <mat-card-actions align="start">
+          <button mat-stroked-button (click)="onCallNow()">
+            Schedule Service
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section">
+    <h2>How We Work</h2>
+
+    <div class="process">
+      <div
+        class="process__item"
+        *ngFor="let step of processSteps; trackBy: trackByTitle"
+      >
+        <mat-icon class="process__icon">{{ step.icon }}</mat-icon>
+        <div>
+          <div class="process__title">{{ step.title }}</div>
+          <div class="process__desc">{{ step.description }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREAS SERVED -->
   <app-areas-we-serve></app-areas-we-serve>
+
+  <!-- FAQ -->
+  <section class="section">
+    <h2>Ranch & Rural Electrical FAQ</h2>
+
+    <mat-accordion multi>
+      <mat-expansion-panel *ngFor="let faq of faqs">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ faq.question }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <p class="faq-answer">{{ faq.answer }}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
 
   <footer class="our-services__footer">
     <p>

@@ -1,25 +1,73 @@
 <section class="our-services">
+  <!-- HERO HEADER (new) -->
+  <header class="hero">
+    <div class="hero__text">
+      <h1>{{ hero.title }}</h1>
+      <p class="hero__subtitle">{{ hero.subtitle }}</p>
+
+      <p class="hero__trust">
+        <mat-icon aria-hidden="true">verified</mat-icon>
+        <span>{{ hero.trustLine }}</span>
+      </p>
+
+      <div class="hero__cta">
+        <button mat-flat-button class="hero__primary" (click)="onCallNow()">
+          <mat-icon>call</mat-icon>
+          Call Now
+        </button>
+
+        <a mat-stroked-button [routerLink]="'/contact-us'">
+          <mat-icon>edit</mat-icon>
+          Request a Quote
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__chips">
+      <div class="section-kicker">Who we help</div>
+      <mat-chip-listbox aria-label="Customers we help">
+        <mat-chip *ngFor="let item of whoWeHelp">{{ item }}</mat-chip>
+      </mat-chip-listbox>
+    </div>
+  </header>
+
+  <!-- YOUR EXISTING HERO CARDS -->
   <app-electrical-service-cards></app-electrical-service-cards>
 
+  <!-- POPULAR LINKS (new) -->
+  <section class="section">
+    <h2>Start Here</h2>
+    <p class="section__subtitle">
+      Choose the service type that best matches your property—or contact us and
+      we’ll guide you to the safest, most practical next step.
+    </p>
+
+    <div class="cards-grid">
+      <mat-card
+        class="link-card"
+        *ngFor="let link of popularLinks; trackBy: trackByTitle"
+      >
+        <mat-card-header>
+          <div mat-card-avatar class="link-card__icon">
+            <mat-icon>{{ link.icon }}</mat-icon>
+          </div>
+          <mat-card-title>{{ link.title }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>{{ link.description }}</p>
+        </mat-card-content>
+
+        <mat-card-actions align="start">
+          <a mat-stroked-button [routerLink]="link.routerLink">View</a>
+          <button mat-button (click)="onCallNow()">Call</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- FILTER CHIPS (existing) -->
   <div class="our-services__chips">
-    <!-- <span class="chip chip--legend">
-      <mat-checkbox
-        class="chip-checkbox"
-        [checked]="selectedCategory === null"
-        (change)="clearCategoryFilter()"
-      >
-        All
-      </mat-checkbox>
-    </span>
-    <span class="chip chip--legend chip--both">
-      <mat-checkbox
-        class="chip-checkbox"
-        [checked]="selectedCategory === 'Both'"
-        (change)="setCategoryFilter('Both')"
-      >
-        Both
-      </mat-checkbox>
-    </span> -->
     <span class="chip chip--legend chip--residential">
       <mat-checkbox
         class="chip-checkbox"
@@ -29,6 +77,7 @@
         Residential
       </mat-checkbox>
     </span>
+
     <span class="chip chip--legend chip--commercial">
       <mat-checkbox
         class="chip-checkbox"
@@ -38,6 +87,7 @@
         Commercial
       </mat-checkbox>
     </span>
+
     <span class="chip chip--legend chip--ranch-and-rural">
       <mat-checkbox
         class="chip-checkbox"
@@ -49,10 +99,11 @@
     </span>
   </div>
 
+  <!-- SERVICES GRID (existing) -->
   <div class="our-services__grid">
     <mat-card
       class="service-card"
-      *ngFor="let service of filteredServices"
+      *ngFor="let service of filteredServices; trackBy: trackByTitle"
       [ngClass]="{
         'service-card--residential': service.category === 'Residential',
         'service-card--commercial': service.category === 'Commercial',
@@ -65,16 +116,14 @@
         </div>
         <div>
           <mat-card-title>{{ service.title }}</mat-card-title>
-          <mat-card-subtitle *ngIf="service.category !== 'Both'">{{
-            service.category
-          }}</mat-card-subtitle>
+          <mat-card-subtitle *ngIf="service.category !== 'Both'">
+            {{ service.category }}
+          </mat-card-subtitle>
         </div>
       </mat-card-header>
 
       <mat-card-content>
-        <p class="service-card__description">
-          {{ service.description }}
-        </p>
+        <p class="service-card__description">{{ service.description }}</p>
         <mat-divider></mat-divider>
 
         <ul class="service-card__list">
@@ -84,6 +133,7 @@
           </li>
         </ul>
       </mat-card-content>
+
       <mat-card-actions align="start">
         <button mat-stroked-button (click)="onCallNow()">
           Schedule Service
@@ -92,7 +142,38 @@
     </mat-card>
   </div>
 
+  <!-- HOW WE WORK (new) -->
+  <section class="section">
+    <h2>How We Work</h2>
+    <div class="process">
+      <div
+        class="process__item"
+        *ngFor="let step of processSteps; trackBy: trackByTitle"
+      >
+        <mat-icon class="process__icon">{{ step.icon }}</mat-icon>
+        <div>
+          <div class="process__title">{{ step.title }}</div>
+          <div class="process__desc">{{ step.description }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <app-areas-we-serve></app-areas-we-serve>
+
+  <!-- FAQ (new) -->
+  <section class="section">
+    <h2>Electrical Services FAQ</h2>
+
+    <mat-accordion multi>
+      <mat-expansion-panel *ngFor="let faq of faqs">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ faq.question }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <p class="faq-answer">{{ faq.answer }}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
 
   <footer class="our-services__footer">
     <p>

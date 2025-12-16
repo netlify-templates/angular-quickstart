@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 import { SeoService } from 'src/app/shared/services/seo.service';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AreasWeServeComponent } from 'src/app/shared/components/areas-we-serve/areas-we-serve.component';
-import { ElectricalServiceCardsComponent } from 'src/app/shared/components/electrical-service-cards/electrical-service-cards.component';
 
 interface ServiceItem {
   title: string;
@@ -17,28 +20,194 @@ interface ServiceItem {
   bullets: string[];
 }
 
+interface LinkCard {
+  title: string;
+  description: string;
+  icon: string;
+  path: string;
+}
+
+interface ProcessStep {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 @Component({
-  selector: 'app-services-overview',
+  selector: 'app-ranch-rural-electrician',
   standalone: true,
   templateUrl: './ranch-rural-electrician.component.html',
-  styleUrl: './ranch-rural-electrician.component.scss',
+  styleUrls: ['./ranch-rural-electrician.component.scss'],
   imports: [
     CommonModule,
+    RouterModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
     MatDividerModule,
-    MatCheckboxModule,
+    MatChipsModule,
+    MatExpansionModule,
     AreasWeServeComponent,
   ],
 })
 export class RanchRuralElectricianComponent implements OnInit {
   constructor(private seo: SeoService) {}
 
-  onCallNow(): void {
-    const phoneNumber = '8309285046';
-    window.location.href = `tel:${phoneNumber}`;
-  }
+  /**
+   * Standardize this across your site when ready.
+   * Your marketing copy elsewhere uses (830) 955-2909.
+   */
+  private readonly phoneNumber = '8309285046';
+
+  hero = {
+    title: 'Ranch & Rural Electrician Services in the Texas Hill Country',
+    subtitle:
+      'Dependable electrical work for acreage properties—barns, wells, pumps, shops, outdoor power, and long-run circuits. Built for reliability, safety, and real-world Hill Country conditions.',
+    trustLine:
+      'Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers master-level electrical work for homes, businesses, and rural properties.',
+  };
+
+  whoWeHelp: string[] = [
+    'Ranch homes & acreage properties',
+    'Barns, shops, and outbuildings',
+    'Wells, pumps, and water systems',
+    'Gates, driveways, and outdoor power',
+    'Equipment power & dedicated circuits',
+    'Property managers & landowners',
+  ];
+
+  // These are internal-link cards to future (or existing) detail pages.
+  // You can stub these routes now and publish detail pages gradually.
+  popularRanchRuralJobs: LinkCard[] = [
+    {
+      title: 'Well & Pump Circuits',
+      description:
+        'Reliable circuits, controls, protection, and troubleshooting for wells and pumps.',
+      icon: 'water',
+      path: '/services/well-pump-electrical',
+    },
+    {
+      title: 'Barn & Outbuilding Wiring',
+      description:
+        'Panels, lighting, outlets, and safe wiring for barns, sheds, and shops.',
+      icon: 'agriculture',
+      path: '/services/barn-outbuilding-electrical',
+    },
+    {
+      title: 'Outdoor Power & Trenching',
+      description:
+        'Power runs for gates, driveways, remote structures, and outdoor work areas.',
+      icon: 'alt_route',
+      path: '/services/outdoor-power-trenching',
+    },
+    {
+      title: 'Panel & Service Upgrades',
+      description:
+        'Upgrade capacity for shops, equipment loads, and expansion plans.',
+      icon: 'electrical_services',
+      path: '/services/electrical-panel-upgrade',
+    },
+    {
+      title: 'Lighting Design & Installation',
+      description:
+        'Practical, bright lighting for barns, yards, and work zones.',
+      icon: 'lightbulb',
+      path: '/services/lighting-installation',
+    },
+    {
+      title: 'Electrical Troubleshooting & Repairs',
+      description:
+        'Solve intermittent power, tripping breakers, and equipment shutdowns.',
+      icon: 'troubleshoot',
+      path: '/services/electrical-troubleshooting-repair',
+    },
+    {
+      title: 'Surge Protection',
+      description:
+        'Protect motors, pumps, and electronics from lightning and power events.',
+      icon: 'flash_on',
+      path: '/services/whole-home-surge-protection',
+    },
+    {
+      title: 'Emergency Electrical Service',
+      description:
+        'Fast help for outages, burning smells, sparking, or hot panels.',
+      icon: 'warning',
+      path: '/emergency-electrician',
+    },
+  ];
+
+  processSteps: ProcessStep[] = [
+    {
+      title: 'Site details & planning',
+      description:
+        'We confirm distances, access, equipment loads, and what you want powered.',
+      icon: 'map',
+    },
+    {
+      title: 'Safety-first diagnostics',
+      description:
+        'We verify grounding, protection, connections, and load sizing before changes.',
+      icon: 'health_and_safety',
+    },
+    {
+      title: 'Right-sized solutions',
+      description:
+        'We recommend correct wire sizing, breakers, and protection for long runs and motors.',
+      icon: 'tune',
+    },
+    {
+      title: 'Clean, code-compliant work',
+      description:
+        'Professional installation, labeling, weather-rated materials, and durable finishes.',
+      icon: 'verified_user',
+    },
+    {
+      title: 'Testing & walkthrough',
+      description:
+        'We test performance under load and review what was done and how to maintain it.',
+      icon: 'fact_check',
+    },
+  ];
+
+  faqs: FaqItem[] = [
+    {
+      question:
+        'Do you work on long runs to barns, gates, and remote structures?',
+      answer:
+        'Yes. We plan long runs carefully using proper wire sizing, voltage-drop considerations, and protection so your equipment stays reliable.',
+    },
+    {
+      question: 'Can you help with well and pump electrical issues?',
+      answer:
+        'Yes. We troubleshoot pump circuits and controls, verify protection devices, and correct wiring issues that cause nuisance trips or failures.',
+    },
+    {
+      question: 'Do you install outdoor-rated outlets, lighting, and panels?',
+      answer:
+        'Yes. We use weather-rated materials and proper protection so outdoor power stays safe and durable.',
+    },
+    {
+      question: 'What causes breakers to trip on rural properties?',
+      answer:
+        'Common causes include motor start-up loads, undersized wiring, failing breakers, moisture intrusion, loose connections, or equipment faults. We diagnose and fix the root issue.',
+    },
+    {
+      question: 'Can you upgrade my service for a shop or new equipment?',
+      answer:
+        'Yes. We do panel/service upgrades, add subpanels, and install dedicated circuits sized for your current and future loads.',
+    },
+    {
+      question: 'Do you provide safety inspections for rural properties?',
+      answer:
+        'Yes. We can identify hazards, check grounding/bonding, inspect panels, and recommend corrections to improve safety and reliability.',
+    },
+  ];
 
   services: ServiceItem[] = [
     {
@@ -126,133 +295,104 @@ export class RanchRuralElectricianComponent implements OnInit {
     this.setupJsonLd();
   }
 
+  onCallNow(): void {
+    window.location.href = `tel:${this.phoneNumber}`;
+  }
+
+  trackByTitle(_: number, item: { title: string }): string {
+    return item.title;
+  }
+
   private setupSeo(): void {
     this.seo.setMetaTags({
       title:
-        'Electrical Services | Residential, Commercial, Ranch & Rural & Industrial | ProVolt Electric',
+        'Ranch & Rural Electrician | Texas Hill Country | ProVolt Electric',
       description:
-        'Explore ProVolt Electric’s full range of electrical services in Kerrville, Fredericksburg, and the Texas Hill Country, including panel upgrades, lighting design, troubleshooting, safety inspections, maintenance, and 24/7 emergency service for residential, commercial, ranch & rural, and industrial clients.',
-      url: 'https://provoltelectricalservices.com/services',
+        'Ranch and rural electrical services for barns, wells, shops, outdoor power, trenching, and upgrades across the Texas Hill Country. Licensed & insured. Call now.',
+      url: 'https://provoltelectricalservices.com/electrical-services/ranch-rural-electrician',
       type: 'website',
-      // Optional OG image:
-      // image: 'https://provoltelectricalservices.com/assets/og/services.jpg',
       robots: 'index,follow',
     });
   }
 
   private setupJsonLd(): void {
-    const jsonLdObject = {
+    const serviceJsonLd = {
       '@context': 'https://schema.org',
       '@type': 'Service',
-      name: 'Electrical Services',
+      name: 'Ranch & Rural Electrical Services',
       serviceType:
-        'Residential, Commercial, Ranch & Rural & Industrial Electrical Services (Repairs, Upgrades, New Construction)',
+        'Ranch and rural electrical services: barns, wells, pumps, shops, outdoor power, trenching, and repairs',
       provider: {
         '@type': 'Electrician',
         name: 'ProVolt Electric',
         url: 'https://provoltelectricalservices.com',
       },
       areaServed: [
-        'Kerrville TX',
-        'Fredericksburg TX',
-        'Boerne TX',
-        'Bandera TX',
-        'Comfort TX',
-        'Helotes TX',
-        'Ingram TX',
-        'Hunt TX',
-        'Center Point TX',
-        'Texas Hill Country',
+        { '@type': 'Place', name: 'Kerrville TX' },
+        { '@type': 'Place', name: 'Fredericksburg TX' },
+        { '@type': 'Place', name: 'Boerne TX' },
+        { '@type': 'Place', name: 'Bandera TX' },
+        { '@type': 'Place', name: 'Comfort TX' },
+        { '@type': 'Place', name: 'Helotes TX' },
+        { '@type': 'Place', name: 'Ingram TX' },
+        { '@type': 'Place', name: 'Hunt TX' },
+        { '@type': 'Place', name: 'Center Point TX' },
+        { '@type': 'Place', name: 'Texas Hill Country' },
       ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'ProVolt Electric Services',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Residential Electrical Services',
-              description:
-                'Repairs, panel upgrades, lighting, rewiring, and smart home work handled by licensed residential electricians for homes across the Texas Hill Country.',
-            },
+        name: 'Ranch & Rural Electrical Services',
+        itemListElement: this.services.map((s) => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: s.title,
+            description: s.description,
           },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Commercial Electrical Services',
-              description:
-                'Commercial electrical services for shops, offices, and facilities, including troubleshooting, tenant build-outs, code upgrades, and lighting retrofits.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Ranch & Rural Electrical Services',
-              description:
-                'Electrical services for barns, wells, shops, and acreage properties, including trenching, outdoor power, and equipment circuits for Texas Hill Country ranches and rural sites.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Panel & Service Upgrades',
-              description:
-                'Panel upgrades and replacements, new circuits, subpanels, surge protection, and load calculations for homes, businesses, and rural properties.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Lighting Design & Installation',
-              description:
-                'Interior, exterior, landscape, and security lighting design and installation to improve safety, efficiency, and curb appeal.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Electrical Troubleshooting & Repairs',
-              description:
-                'Diagnostics and repairs for tripped breakers, flickering lights, dead outlets, and other electrical problems in residential, commercial, and rural settings.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Safety Inspections & Code Compliance',
-              description:
-                'Electrical safety inspections, code compliance assessments, insurance and safety reports, and pre-purchase electrical evaluations.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Smart Home & Controls',
-              description:
-                'Smart switches, dimmers, thermostats, sensors, and control solutions to add comfort, convenience, and energy savings to modern homes.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: '24/7 Emergency Electrical Service',
-              description:
-                'Emergency response for power loss, overheated panels, storm damage, and other urgent electrical hazards, with make-safe repairs and follow-up service.',
-            },
-          },
-        ],
+        })),
       },
     };
 
-    this.seo.setJsonLd('json-ld-services-provolt', jsonLdObject);
+    const faqJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: this.faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    };
+
+    const breadcrumbJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://provoltelectricalservices.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Electrical Services',
+          item: 'https://provoltelectricalservices.com/electrical-services',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'Ranch & Rural Electrician',
+          item: 'https://provoltelectricalservices.com/electrical-services/ranch-rural-electrician',
+        },
+      ],
+    };
+
+    this.seo.setJsonLd('json-ld-ranch-rural-service-provolt', serviceJsonLd);
+    this.seo.setJsonLd('json-ld-ranch-rural-faq-provolt', faqJsonLd);
+    this.seo.setJsonLd(
+      'json-ld-ranch-rural-breadcrumb-provolt',
+      breadcrumbJsonLd
+    );
   }
 }

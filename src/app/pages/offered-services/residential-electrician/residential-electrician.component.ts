@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 import { SeoService } from 'src/app/shared/services/seo.service';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AreasWeServeComponent } from 'src/app/shared/components/areas-we-serve/areas-we-serve.component';
 import { ElectricalServiceCardsComponent } from 'src/app/shared/components/electrical-service-cards/electrical-service-cards.component';
 
@@ -17,18 +21,38 @@ interface ServiceItem {
   bullets: string[];
 }
 
+interface LinkCard {
+  title: string;
+  description: string;
+  icon: string;
+  path: string;
+}
+
+interface ProcessStep {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 @Component({
-  selector: 'app-services-overview',
+  selector: 'app-residential-electrician',
   standalone: true,
   templateUrl: './residential-electrician.component.html',
-  styleUrl: './residential-electrician.component.scss',
+  styleUrls: ['./residential-electrician.component.scss'],
   imports: [
     CommonModule,
+    RouterModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
     MatDividerModule,
-    MatCheckboxModule,
+    MatChipsModule,
+    MatExpansionModule,
     AreasWeServeComponent,
     ElectricalServiceCardsComponent,
   ],
@@ -36,10 +60,153 @@ interface ServiceItem {
 export class ResidentialElectricianComponent implements OnInit {
   constructor(private seo: SeoService) {}
 
-  onCallNow(): void {
-    const phoneNumber = '8309285046';
-    window.location.href = `tel:${phoneNumber}`;
-  }
+  /**
+   * NOTE: Please standardize this across your site.
+   * Your marketing copy elsewhere uses (830) 955-2909.
+   */
+  private readonly phoneNumber = '8309285046';
+
+  hero = {
+    title: 'Residential Electrician Services in the Texas Hill Country',
+    subtitle:
+      'Safe, clean, code-compliant electrical work for Hill Country homes—repairs, upgrades, lighting, panels, smart home additions, and wiring for remodels and new construction.',
+    trustLine:
+      'Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers master-level electrical work for homes, businesses, and rural properties.',
+  };
+
+  whoWeHelp: string[] = [
+    'Homeowners & families',
+    'Older homes needing upgrades',
+    'New construction & remodels',
+    'Short-term rentals (Airbnb/VRBO)',
+    'Property managers & landlords',
+    'Ranch homes & acreage properties',
+  ];
+
+  popularResidentialJobs: LinkCard[] = [
+    {
+      title: 'Electrical Troubleshooting & Repairs',
+      description:
+        'Fix flickering lights, dead outlets, tripped breakers, and intermittent power issues.',
+      icon: 'troubleshoot',
+      path: '/services/electrical-troubleshooting-repair',
+    },
+    {
+      title: 'Electrical Panel Upgrades',
+      description:
+        'Upgrade old or undersized panels for modern loads and safer operation.',
+      icon: 'electrical_services',
+      path: '/services/electrical-panel-upgrade',
+    },
+    {
+      title: 'Ceiling Fans, Switches & Outlets',
+      description:
+        'Install/replace fans, GFCI outlets, smart switches, dimmers, and more.',
+      icon: 'home',
+      path: '/services/ceiling-fan-switch-outlet-installation',
+    },
+    {
+      title: 'Interior & Exterior Lighting',
+      description:
+        'LED upgrades, recessed lighting, landscape lighting, and security lighting.',
+      icon: 'lightbulb',
+      path: '/services/lighting-installation',
+    },
+    {
+      title: 'Whole-Home Surge Protection',
+      description:
+        'Protect appliances and electronics from lightning and power events.',
+      icon: 'flash_on',
+      path: '/services/whole-home-surge-protection',
+    },
+    {
+      title: 'Safety Inspections',
+      description:
+        'Pre-purchase inspections, hazard identification, and code-compliance guidance.',
+      icon: 'verified',
+      path: '/services/electrical-safety-inspection',
+    },
+    {
+      title: 'Smart Home & Controls',
+      description:
+        'Smart switches, dimmers, sensors, thermostats, and automation-ready wiring.',
+      icon: 'devices',
+      path: '/services/smart-home-controls',
+    },
+    {
+      title: 'Emergency Electrician',
+      description:
+        'Fast response for outages, burning smells, sparking, and overheated panels.',
+      icon: 'warning',
+      path: '/emergency-electrician',
+    },
+  ];
+
+  processSteps: ProcessStep[] = [
+    {
+      title: 'Quick triage & scheduling',
+      description:
+        'We clarify symptoms and urgency so the visit is efficient and prepared.',
+      icon: 'schedule',
+    },
+    {
+      title: 'Safety-first inspection',
+      description:
+        'We check panels, connections, and loads to identify hazards before work begins.',
+      icon: 'health_and_safety',
+    },
+    {
+      title: 'Clear options & recommendations',
+      description:
+        'You get practical choices: what’s required, what’s recommended, and what can wait.',
+      icon: 'receipt_long',
+    },
+    {
+      title: 'Clean, code-compliant work',
+      description:
+        'We protect your home, keep the jobsite clean, label work, and follow NEC best practices.',
+      icon: 'verified_user',
+    },
+    {
+      title: 'Testing & walkthrough',
+      description:
+        'We test everything, confirm proper operation, and explain what we did and why.',
+      icon: 'fact_check',
+    },
+  ];
+
+  faqs: FaqItem[] = [
+    {
+      question: 'Do you work on older homes in the Hill Country?',
+      answer:
+        'Yes. We regularly upgrade older wiring, panels, and outlets to improve safety and support modern electrical demand.',
+    },
+    {
+      question: 'How do I know if I need a panel upgrade?',
+      answer:
+        'Frequent breaker trips, hot panels, buzzing, signs of corrosion, or adding large loads (EV charger, workshop equipment, remodels) are common reasons to upgrade.',
+    },
+    {
+      question: 'Can you install GFCI outlets and modern safety protections?',
+      answer:
+        'Yes. We install and correct GFCI/AFCI protection where appropriate and bring common safety issues up to modern standards.',
+    },
+    {
+      question: 'Do you do lighting upgrades and dimmer/controls installs?',
+      answer:
+        'Yes. We install LED upgrades, dimmers, recessed lights, exterior/security lighting, and control solutions.',
+    },
+    {
+      question: 'Do you handle new construction and remodel wiring?',
+      answer:
+        'Yes. We can wire additions and remodels to code, add dedicated circuits, and plan loads for future needs.',
+    },
+    {
+      question: 'What counts as an electrical emergency?',
+      answer:
+        'Burning smells, sparking, hot outlets/panels, repeated breaker trips, or power loss are all reasons to call immediately.',
+    },
+  ];
 
   services: ServiceItem[] = [
     {
@@ -140,133 +307,106 @@ export class ResidentialElectricianComponent implements OnInit {
     this.setupJsonLd();
   }
 
+  onCallNow(): void {
+    window.location.href = `tel:${this.phoneNumber}`;
+  }
+
+  trackByTitle(_: number, item: { title: string }): string {
+    return item.title;
+  }
+
   private setupSeo(): void {
+    // IMPORTANT: Update this URL to match your real route.
     this.seo.setMetaTags({
-      title:
-        'Electrical Services | Residential, Commercial, Ranch & Rural & Industrial | ProVolt Electric',
+      title: 'Residential Electrician | Texas Hill Country | ProVolt Electric',
       description:
-        'Explore ProVolt Electric’s full range of electrical services in Kerrville, Fredericksburg, and the Texas Hill Country, including panel upgrades, lighting design, troubleshooting, safety inspections, maintenance, and 24/7 emergency service for residential, commercial, ranch & rural, and industrial clients.',
-      url: 'https://provoltelectricalservices.com/services',
+        'Residential electrical repairs, panel upgrades, lighting installs, smart home work, and safety inspections across the Texas Hill Country. Licensed & insured. Call now.',
+      url: 'https://provoltelectricalservices.com/electrical-services/residential-electrician',
       type: 'website',
-      // Optional OG image:
-      // image: 'https://provoltelectricalservices.com/assets/og/services.jpg',
       robots: 'index,follow',
     });
   }
 
   private setupJsonLd(): void {
-    const jsonLdObject = {
+    const serviceJsonLd = {
       '@context': 'https://schema.org',
       '@type': 'Service',
-      name: 'Electrical Services',
+      name: 'Residential Electrical Services',
       serviceType:
-        'Residential, Commercial, Ranch & Rural & Industrial Electrical Services (Repairs, Upgrades, New Construction)',
+        'Residential electrical repairs, upgrades, lighting, panels, smart home, and inspections',
       provider: {
         '@type': 'Electrician',
         name: 'ProVolt Electric',
         url: 'https://provoltelectricalservices.com',
       },
       areaServed: [
-        'Kerrville TX',
-        'Fredericksburg TX',
-        'Boerne TX',
-        'Bandera TX',
-        'Comfort TX',
-        'Helotes TX',
-        'Ingram TX',
-        'Hunt TX',
-        'Center Point TX',
-        'Texas Hill Country',
+        { '@type': 'Place', name: 'Kerrville TX' },
+        { '@type': 'Place', name: 'Fredericksburg TX' },
+        { '@type': 'Place', name: 'Boerne TX' },
+        { '@type': 'Place', name: 'Bandera TX' },
+        { '@type': 'Place', name: 'Comfort TX' },
+        { '@type': 'Place', name: 'Helotes TX' },
+        { '@type': 'Place', name: 'Ingram TX' },
+        { '@type': 'Place', name: 'Hunt TX' },
+        { '@type': 'Place', name: 'Center Point TX' },
+        { '@type': 'Place', name: 'Texas Hill Country' },
       ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'ProVolt Electric Services',
-        itemListElement: [
-          {
+        name: 'Residential Electrical Services',
+        itemListElement: this.services
+          .filter((s) => s.category === 'Residential' || s.category === 'Both')
+          .map((s) => ({
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'Residential Electrical Services',
-              description:
-                'Repairs, panel upgrades, lighting, rewiring, and smart home work handled by licensed residential electricians for homes across the Texas Hill Country.',
+              name: s.title,
+              description: s.description,
             },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Commercial Electrical Services',
-              description:
-                'Commercial electrical services for shops, offices, and facilities, including troubleshooting, tenant build-outs, code upgrades, and lighting retrofits.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Ranch & Rural Electrical Services',
-              description:
-                'Electrical services for barns, wells, shops, and acreage properties, including trenching, outdoor power, and equipment circuits for Texas Hill Country ranches and rural sites.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Panel & Service Upgrades',
-              description:
-                'Panel upgrades and replacements, new circuits, subpanels, surge protection, and load calculations for homes, businesses, and rural properties.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Lighting Design & Installation',
-              description:
-                'Interior, exterior, landscape, and security lighting design and installation to improve safety, efficiency, and curb appeal.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Electrical Troubleshooting & Repairs',
-              description:
-                'Diagnostics and repairs for tripped breakers, flickering lights, dead outlets, and other electrical problems in residential, commercial, and rural settings.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Safety Inspections & Code Compliance',
-              description:
-                'Electrical safety inspections, code compliance assessments, insurance and safety reports, and pre-purchase electrical evaluations.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Smart Home & Controls',
-              description:
-                'Smart switches, dimmers, thermostats, sensors, and control solutions to add comfort, convenience, and energy savings to modern homes.',
-            },
-          },
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: '24/7 Emergency Electrical Service',
-              description:
-                'Emergency response for power loss, overheated panels, storm damage, and other urgent electrical hazards, with make-safe repairs and follow-up service.',
-            },
-          },
-        ],
+          })),
       },
     };
 
-    this.seo.setJsonLd('json-ld-services-provolt', jsonLdObject);
+    const faqJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: this.faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    };
+
+    const breadcrumbJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://provoltelectricalservices.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Services',
+          item: 'https://provoltelectricalservices.com/services',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'Residential Electrician',
+          item: 'https://provoltelectricalservices.com/services/residential-electrician',
+        },
+      ],
+    };
+
+    this.seo.setJsonLd('json-ld-residential-service-provolt', serviceJsonLd);
+    this.seo.setJsonLd('json-ld-residential-faq-provolt', faqJsonLd);
+    this.seo.setJsonLd(
+      'json-ld-residential-breadcrumb-provolt',
+      breadcrumbJsonLd
+    );
   }
 }

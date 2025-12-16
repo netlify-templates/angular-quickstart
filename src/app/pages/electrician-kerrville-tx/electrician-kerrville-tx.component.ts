@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,9 +10,10 @@ import {
   TownPageComponent,
   TownPageConfig,
 } from 'src/app/shared/components/town-page/town-page.component';
-
-// 👇 NEW: import the shared town configs
-import { TOWN_CONFIGS } from 'src/app/shared/configs/town-page.config';
+import {
+  TOWN_CONFIGS,
+  TownSeoConfig,
+} from 'src/app/shared/configs/town-page.config';
 
 @Component({
   selector: 'app-electrician-kerrville-tx',
@@ -28,27 +29,45 @@ import { TOWN_CONFIGS } from 'src/app/shared/configs/town-page.config';
   templateUrl: './electrician-kerrville-tx.component.html',
   styleUrls: ['./electrician-kerrville-tx.component.scss'],
 })
-export class ElectricianKerrvilleTxComponent implements OnInit {
+export class ElectricianKerrvilleTxComponent implements OnInit, OnDestroy {
   config: TownPageConfig = TOWN_CONFIGS['kerrville'];
+
+  // Prefix used to cleanup all JSON-LD from this page
+  private readonly jsonLdPrefix = 'json-ld-town-kerrville-';
 
   constructor(private seo: SeoService) {}
 
   ngOnInit(): void {
-    const seoConfig = this.config.seo;
+    const seoConfig: TownSeoConfig | undefined = this.config.seo;
+    if (!seoConfig) return;
 
-    if (seoConfig) {
-      this.seo.setMetaTags({
-        title: seoConfig.metaTitle,
-        description: seoConfig.metaDescription,
-        url: seoConfig.pageUrl,
-        image: seoConfig.ogImage,
-        type: 'website',
-        robots: seoConfig.robots,
-      });
+    this.seo.setMetaTags({
+      title: seoConfig.metaTitle,
+      description: seoConfig.metaDescription,
+      url: seoConfig.pageUrl, // make sure this matches your router URL
+      image: seoConfig.ogImage,
+      type: 'website',
+      robots: seoConfig.robots,
+    });
 
-      if (seoConfig.jsonLd && seoConfig.jsonLdId) {
-        this.seo.setJsonLd(seoConfig.jsonLdId, seoConfig.jsonLd);
-      }
+    // Preferred: multiple scripts
+    if (seoConfig.jsonLdScripts?.length) {
+      seoConfig.jsonLdScripts.forEach((s) => this.seo.setJsonLd(s.id, s.data));
+      return;
     }
+
+    // Back-compat: single script
+    if (seoConfig.jsonLd && seoConfig.jsonLdId) {
+      this.seo.setJsonLd(seoConfig.jsonLdId, seoConfig.jsonLd);
+    }
+  }
+
+  ngOnDestroy(): void {
+    // If you added removeJsonLdByPrefix() to SeoService, use it:
+    // this.seo.removeJsonLdByPrefix(this.jsonLdPrefix);
+
+    // Otherwise, remove known IDs explicitly:
+    this.seo.removeJsonLd('json-ld-town-kerrville-electrician');
+    this.seo.removeJsonLd('json-ld-town-kerrville-breadcrumb');
   }
 }

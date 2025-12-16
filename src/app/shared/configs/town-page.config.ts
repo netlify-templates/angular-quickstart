@@ -1,6 +1,3 @@
-// src/app/shared/town-page.config.ts
-// Adjust path/namespace to match your project structure.
-
 export interface ServiceItem {
   label: string;
   icon: string;
@@ -14,6 +11,7 @@ export interface TownSeoConfig {
   robots?: string;
   jsonLdId?: string;
   jsonLd?: unknown;
+  jsonLdScripts?: Array<{ id: string; data: unknown }>;
 }
 
 export interface TownPageConfig {
@@ -116,18 +114,18 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Electrician Kerrville TX | Residential & Commercial Electrical',
       metaDescription:
         'Trusted electrician in Kerrville, TX for repairs, upgrades, lighting, panels, ranch wiring & more. Licensed, insured, and local to the Hill Country.',
-      pageUrl: `${BASE_DOMAIN}/electrician-kerrville-tx`,
+      pageUrl: `${BASE_DOMAIN}/service-areas/kerrville-tx-electrician`,
       ogImage: DEFAULT_OG_IMAGE,
       robots: 'index,follow',
-      jsonLdId: 'json-ld-kerrville',
+      jsonLdId: 'json-ld-town-kerrville-electrician',
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/electrician-kerrville-tx#electrician`,
+        '@id': `${BASE_DOMAIN}/service-areas/kerrville-tx-electrician#electrician`,
         name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/electrician-kerrville-tx`,
+        url: `${BASE_DOMAIN}/service-areas/kerrville-tx-electrician`,
         description:
-          'ProVolt Electrical Services provides residential, commercial, and ranch electrical work in Kerrville, TX and the surrounding Texas Hill Country.',
+          'ProVolt Electrical Services provides residential, commercial, and ranch & rural electrical work in Kerrville, TX and the surrounding Texas Hill Country.',
         telephone: PHONE_E164,
         image: DEFAULT_OG_IMAGE,
         priceRange: '$$',
@@ -137,10 +135,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
           addressRegion: 'TX',
           addressCountry: 'US',
         },
-        areaServed: {
-          '@type': 'Place',
-          name: 'Kerrville, TX',
-        },
+        areaServed: { '@type': 'Place', name: 'Kerrville, TX' },
         serviceType: [
           'Residential electrical services',
           'Commercial electrical services',
@@ -148,11 +143,45 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
           'Electrical panel upgrades',
           'Lighting installation',
           'Electrical troubleshooting and repairs',
-          'Generator and backup power systems',
-          'Energy audits and efficiency upgrades',
+          'Energy efficiency upgrades',
           'Electrical consultations for renovations and new builds',
         ],
       },
+      jsonLdScripts: [
+        {
+          id: 'json-ld-town-kerrville-electrician',
+          data: {
+            /* Electrician schema from above */
+          },
+        },
+        {
+          id: 'json-ld-town-kerrville-breadcrumb',
+          data: {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: `${BASE_DOMAIN}/home`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Service Areas',
+                item: `${BASE_DOMAIN}/service-areas/texas-hill-country-electrician`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: 'Kerrville, TX',
+                item: `${BASE_DOMAIN}/service-areas/kerrville-tx-electrician`,
+              },
+            ],
+          },
+        },
+      ],
     },
   },
 

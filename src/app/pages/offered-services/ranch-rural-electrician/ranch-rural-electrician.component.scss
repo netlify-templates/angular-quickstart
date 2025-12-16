@@ -2,91 +2,159 @@
   background-color: var(--background);
   padding: 0 1.5rem 4rem;
   margin: 0 auto;
+  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
 
-  &__header {
-    text-align: center;
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 1.25rem;
+  align-items: start;
 
-    h1 {
-      font-size: 2.25rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      margin-bottom: 0.75rem;
+  padding: 1.25rem;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    margin: 0 0 0.6rem;
+  }
+
+  &__subtitle {
+    margin: 0 0 0.85rem;
+    max-width: 60ch;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: rgba(0, 0, 0, 0.78);
+  }
+
+  &__trust {
+    margin: 0 0 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    font-size: 0.95rem;
+    line-height: 1.55;
+
+    mat-icon {
+      margin-top: 2px;
+      opacity: 0.85;
     }
+  }
 
-    p {
-      max-width: 680px;
-      margin: 0 auto;
-      font-size: 0.98rem;
-      line-height: 1.6;
-    }
+  &__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  &__primary {
+    background-color: var(--brand-red, #d6262b);
+    color: #fff;
   }
 
   &__chips {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
+    border-left: 1px solid rgba(0, 0, 0, 0.06);
+    padding-left: 1rem;
 
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 1.5rem;
-  }
-
-  &__footer {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 0.95rem;
-
-    span {
-      font-weight: 600;
+    mat-chip {
+      margin: 0.25rem 0.35rem 0 0;
     }
   }
 }
 
-.chip {
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  border-color: black;
-  border: 3px solid var(--text-neutral);
-  background: #fafafa;
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 
-  // &--active {
-  //   color: #111;
-  //   background: #fffacd; /* subtle highlight */
-  //   border-color: var(--brand-yellow, #d8b634);
-  //   box-shadow: 0 0 0 2px rgba(216, 182, 52, 0.25);
-  // }
-
-  &--legend {
-    opacity: 0.9;
+  h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
   }
 
-  // &--residential {
-  //   border-color: #4caf50;
-  // }
-
-  // &--commercial {
-  //   border-color: #ff9800;
-  // }
-
-  &--both {
-    border-color: #1976d2;
+  &__subtitle {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.72);
+    max-width: 85ch;
   }
 }
 
+.section-kicker {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.65);
+  margin-bottom: 0.35rem;
+}
+
+/* LINK CARDS */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.link-card {
+  border-radius: 16px;
+  overflow: hidden;
+
+  &__icon {
+    background: #212121;
+    color: var(--brand-yellow, #e6c612);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+
+    mat-icon {
+      font-size: 26px;
+    }
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: rgba(0, 0, 0, 0.75);
+  }
+}
+
+/* SERVICES GRID */
+.our-services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.our-services__footer {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+
+  span {
+    font-weight: 700;
+  }
+}
+
+/* SERVICE CARD */
 .service-card {
   position: relative;
-  // width: 30rem;
   display: flex;
-  // flex-wrap: wrap;
   flex-direction: column;
   border-radius: 16px;
   overflow: hidden;
@@ -100,7 +168,7 @@
 
   &__icon {
     background: #212121;
-    color: #ffc107;
+    color: var(--brand-yellow, #e6c612);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -114,7 +182,8 @@
   &__description {
     margin: 0 0 0.75rem;
     font-size: 0.9rem;
-    line-height: 1.5;
+    line-height: 1.55;
+    color: rgba(0, 0, 0, 0.78);
   }
 
   mat-divider {
@@ -140,43 +209,77 @@
     font-size: 19px;
     margin-right: 0.4rem;
     opacity: 0.9;
-    color: green;
+    color: var(--brand-red, #d6262b);
   }
 
   .mat-mdc-card-actions {
     margin-top: auto;
-    padding: 1rem 1rem 1rem;
+    padding: 1rem;
   }
 
   .mdc-button {
     color: var(--brand-black);
-    background-color: var(--brand-yellow);
+    background-color: var(--brand-yellow, #e6c612);
   }
-
-  // &--residential {
-  //   border-top: 8px solid #4caf50;
-  // }
-
-  // &--commercial {
-  //   border-top: 8px solid #ff9800;
-  // }
-
-  // &--both {
-  //   border-top: 8px solid #1976d2;
-  // }
 }
 
-/* Responsive tweaks */
-@media (max-width: 599px) {
-  .our-services {
-    padding-inline: 1rem;
+/* PROCESS */
+.process {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 0.85rem;
 
-    &__header h1 {
-      font-size: 1.8rem;
+  &__item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.9rem 1rem;
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  &__icon {
+    opacity: 0.85;
+    margin-top: 1px;
+  }
+
+  &__title {
+    font-weight: 800;
+    margin-bottom: 0.2rem;
+  }
+
+  &__desc {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: rgba(0, 0, 0, 0.75);
+  }
+}
+
+.faq-answer {
+  margin: 0.75rem 0 0.25rem;
+  color: rgba(0, 0, 0, 0.78);
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 899px) {
+  .hero {
+    grid-template-columns: 1fr;
+
+    &__chips {
+      border-left: none;
+      padding-left: 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      padding-top: 0.85rem;
+    }
+
+    h1 {
+      font-size: 1.85rem;
     }
   }
 
-  .service-card .mat-mdc-card-header {
-    align-items: flex-start;
+  .our-services {
+    padding-inline: 1rem;
   }
 }
