@@ -2,33 +2,60 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { CtaButtonComponent } from '../cta-button/cta-button.component';
 
+interface HeroServiceCard {
+  title: string;
+  description: string;
+  ctaLabel: string;
+  routerLink: string;
+  icon: string;
+}
 @Component({
   standalone: true,
   selector: 'app-action-banner',
   templateUrl: './action-banner.component.html',
-  styleUrls: ['./action-banner.component.css'],
-  imports: [CommonModule, MatButtonModule, MatCardModule],
+  styleUrls: ['./action-banner.component.scss'],
+  imports: [CommonModule, MatButtonModule, MatCardModule, CtaButtonComponent],
 })
 export class ActionBannerComponent {
-  cards = [
+  heroServiceCards: HeroServiceCard[] = [
     {
-      title: 'Repairs',
-      description: 'Quick fixes to keep your power flowing safely.',
+      title: 'Residential Electrical Services',
+      description:
+        'Repairs, panel upgrades, lighting, and smart home work handled by a licensed residential electrician serving homes across the Texas Hill Country.',
+      ctaLabel: 'View Residential Services',
+      routerLink: '/services/residential',
+      icon: 'home',
     },
     {
-      title: 'Panels',
-      description: 'Expert troubleshooting for all electrical issues.',
+      title: 'Commercial Electrical Services',
+      description:
+        'Tenant build-outs, code upgrades, lighting retrofits, and troubleshooting to keep your shop, office, or facility running safely and efficiently.',
+      ctaLabel: 'View Commercial Services',
+      routerLink: '/services/commercial',
+      icon: 'apartment',
     },
     {
-      title: 'Service',
-      description: 'Reliable service with safety as our top priority.',
+      title: 'Ranch & Rural Electrical Services',
+      description:
+        'Power solutions for barns, wells, shops, and acreage properties—including trenching, outdoor power, and equipment circuits across the Hill Country.',
+      ctaLabel: 'View Ranch & Rural Services',
+      routerLink: '/services/ranch-rural',
+      icon: 'agriculture',
+    },
+    {
+      title: 'Industrial Electrical Services',
+      description:
+        'Industrial wiring, troubleshooting, lighting, and inspections to keep critical electrical systems safe, reliable, and in compliance with code.',
+      ctaLabel: 'View Industrial Services',
+      routerLink: '/services/industrial',
+      icon: 'factory',
     },
   ];
 
   onCallNow(): void {
-    // hook up to tel: link, dialog, or router navigation
-    // window.location.href = 'tel:8300000000';
-    console.log('Call Now clicked');
+    const phoneNumber = '8309285046';
+    window.location.href = `tel:${phoneNumber}`;
   }
 }

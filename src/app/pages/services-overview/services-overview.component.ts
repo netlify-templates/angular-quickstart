@@ -4,13 +4,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
-
-// ⬇️ Update this path to wherever your SeoService is defined
 import { SeoService } from 'src/app/shared/services/seo.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AreasWeServeComponent } from 'src/app/shared/components/areas-we-serve/areas-we-serve.component';
+import { ElectricalServiceCardsComponent } from 'src/app/shared/components/electrical-service-cards/electrical-service-cards.component';
+import { Router, RouterOutlet } from '@angular/router';
 
 interface ServiceItem {
   title: string;
-  category: 'Residential' | 'Commercial' | 'Both';
+  category: 'Residential' | 'Commercial' | 'RanchAndRural' | 'Both';
   icon: string;
   description: string;
   bullets: string[];
@@ -27,99 +29,86 @@ interface ServiceItem {
     MatIconModule,
     MatButtonModule,
     MatDividerModule,
+    MatCheckboxModule,
+    AreasWeServeComponent,
+    ElectricalServiceCardsComponent,
   ],
 })
 export class ServicesOverviewComponent implements OnInit {
+  constructor(private seo: SeoService) {}
+
+  // Current category filter; null means show all
+  selectedCategory:
+    | 'Residential'
+    | 'Commercial'
+    | 'RanchAndRural'
+    | 'Both'
+    | null = 'Residential';
+
+  // Derived list used by the template
+  get filteredServices(): ServiceItem[] {
+    if (!this.selectedCategory) return this.services;
+
+    if (this.selectedCategory === 'Residential') {
+      // Show Residential + Both
+      return this.services.filter(
+        (s) => s.category === 'Residential' || s.category === 'Both'
+      );
+    }
+
+    if (this.selectedCategory === 'RanchAndRural') {
+      // Show RanchAndRural + Both
+      return this.services.filter(
+        (s) => s.category === 'RanchAndRural' || s.category === 'Both'
+      );
+    }
+
+    return this.services.filter(
+      // Show Commercial + Both
+      (s) => s.category === 'Commercial' || s.category === 'Both'
+    );
+  }
+  setCategoryFilter(
+    cat: 'Residential' | 'Commercial' | 'RanchAndRural' | 'Both'
+  ) {
+    this.selectedCategory = cat;
+  }
+
+  clearCategoryFilter() {
+    this.selectedCategory = null; // activates "All"
+  }
+
+  onCallNow(): void {
+    const phoneNumber = '8309285046';
+    window.location.href = `tel:${phoneNumber}`;
+  }
+
   services: ServiceItem[] = [
     {
-      title: 'Home Electrical',
+      title: 'Residential Electrical Services',
       category: 'Residential',
       icon: 'home',
       description:
-        'From panel upgrades and lighting installation to whole-home rewiring, we keep your home safe, efficient, and up to code.',
+        'Full-service residential electrical work—from panel upgrades and lighting installation to whole-home rewiring—done safely, efficiently, and up to code for Texas Hill Country homes.',
       bullets: [
-        'Troubleshooting & diagnostics',
-        'Repairs & safety corrections',
-        'New construction & remodel wiring',
-        'GFCI/AFCI protection & code updates',
+        'Troubleshooting & diagnostics for flickering lights, tripped breakers, and dead outlets',
+        'Repairs & safety corrections by a licensed residential electrician',
+        'New construction & remodel wiring that meets current NEC standards',
+        'Ceiling fans, switches & outlets, smoke detectors, and indoor/outdoor lighting',
       ],
     },
     {
-      title: 'Business Solutions',
+      title: 'Commercial Electrical Services',
       category: 'Commercial',
       icon: 'apartment',
       description:
-        'Reliable electrical services to keep your business running safely and efficiently with minimal downtime.',
+        'Reliable commercial electrical services to keep your shop, office, or facility running safely, efficiently, and in compliance with electrical code.',
       bullets: [
-        'Tenant build-outs & improvements',
-        'Code compliance upgrades',
-        'Lighting retrofits & controls',
-        'Emergency & scheduled repairs',
-      ],
-    },
-    {
-      title: 'Service Upgrades',
-      category: 'Both',
-      icon: 'electrical_services',
-      description:
-        'Modernize your electrical system for today’s loads and tomorrow’s needs, always following NEC standards.',
-      bullets: [
-        'Panel upgrades & replacements',
-        'New circuits & subpanels',
-        'Whole-home surge protection',
-        'Load calculations & capacity planning',
-      ],
-    },
-    {
-      title: 'Lighting Design',
-      category: 'Both',
-      icon: 'lightbulb',
-      description:
-        'Custom lighting solutions that enhance comfort, security, and efficiency—inside and out.',
-      bullets: [
-        'LED upgrades & dimming solutions',
-        'Landscape & architectural lighting',
-        'Security & motion lighting',
-        'Garage, shop, and barn lighting',
-      ],
-    },
-    {
-      title: 'EV Charging Stations',
-      category: 'Both',
-      icon: 'ev_station',
-      description:
-        'Safe, code-compliant EV charging solutions for homes, fleets, and commercial properties.',
-      bullets: [
-        'Level 2 home chargers',
-        'Commercial charging stations',
-        'Panel & load verification',
-        'Permits and inspections handled',
-      ],
-    },
-    {
-      title: 'Generators & Backup Power',
-      category: 'Both',
-      icon: 'power',
-      description:
-        'Keep the lights on during Texas storms and outages with properly sized backup power solutions.',
-      bullets: [
-        'Whole-home standby generators',
-        'Manual & automatic transfer switches',
-        'Portable generator hookups',
-        'Maintenance & testing',
-      ],
-    },
-    {
-      title: 'Safety Inspections',
-      category: 'Both',
-      icon: 'verified',
-      description:
-        'Comprehensive electrical safety inspections to protect your family, property, or business.',
-      bullets: [
-        'Pre-purchase home inspections',
-        'Code compliance assessments',
-        'Insurance & safety reports',
-        'Thermal checks for hot spots',
+        'Troubleshooting & diagnostics for circuits, equipment, and lighting',
+        'Tenant build-outs, improvements, and new commercial circuits',
+        'Code compliance upgrades, inspections, and violation corrections',
+        'Lighting retrofits, controls, and energy-efficient LED upgrades',
+        'Emergency & scheduled repairs to reduce business downtime',
       ],
     },
     {
@@ -127,43 +116,93 @@ export class ServicesOverviewComponent implements OnInit {
       category: 'Residential',
       icon: 'devices',
       description:
-        'Integrate smart technology for comfort, convenience, and energy savings throughout your home.',
+        'Smart home electrical solutions that add comfort, convenience, and energy savings throughout your home.',
       bullets: [
-        'Smart switches & dimmers',
-        'Smart thermostats & sensors',
-        'Wi-Fi/mesh enabled panels',
-        'Whole-home automation prep',
+        'Smart switches, dimmers, and scene-based lighting control',
+        'Smart thermostats, sensors, and linked comfort controls',
+        'Wi-Fi / mesh-enabled panels and smart-ready wiring (where applicable)',
+        'Whole-home automation prep: dedicated circuits, wiring, and power',
       ],
     },
     {
-      title: 'Agricultural & Rural Power',
-      category: 'Commercial',
+      title: 'Ranch & Rural Electrical Services',
+      category: 'RanchAndRural',
       icon: 'agriculture',
       description:
-        'Dependable power solutions for barns, wells, shops, and rural properties across the Hill Country.',
+        'Dependable ranch and rural electrical services for barns, wells, shops, and acreage properties across the Texas Hill Country.',
       bullets: [
-        'Barn & outbuilding wiring',
-        'Well & pump circuits',
-        'Equipment circuits & receptacles',
-        'Outdoor power distribution',
+        'Barn & outbuilding wiring, lighting, and panel work',
+        'Well & pump circuits, controls, protection, and troubleshooting',
+        'Equipment circuits & receptacles for tools, compressors, and ag equipment',
+        'Outdoor power distribution and trenching for gates, driveways, and remote structures',
       ],
     },
     {
-      title: '24/7 Emergency Service',
+      title: 'Electrical Troubleshooting & Repairs',
+      category: 'Both',
+      icon: 'troubleshoot',
+      description:
+        'Fast, thorough troubleshooting for electrical issues in homes, businesses, and rural properties across the Texas Hill Country.',
+      bullets: [
+        'Identify the cause of tripped breakers, hot spots, and nuisance shutdowns',
+        'Track down dead outlets, flickering lights, and intermittent power loss',
+        'Test and verify circuits, loads, and protective devices',
+        'Provide repair options, safety recommendations, and a clear path forward',
+      ],
+    },
+    {
+      title: 'Panel & Service Upgrades',
+      category: 'Both',
+      icon: 'electrical_services',
+      description:
+        'Modernize your electrical system for today’s loads and tomorrow’s needs with code-compliant panel and service upgrades.',
+      bullets: [
+        'Panel upgrades & replacements for added capacity and safety',
+        'New circuits & subpanels for shops, additions, and new equipment',
+        'Whole-home and whole-facility surge protection for sensitive electronics',
+        'Load calculations & capacity planning for future growth',
+      ],
+    },
+    {
+      title: 'Lighting Design & Installation',
+      category: 'Both',
+      icon: 'lightbulb',
+      description:
+        'Custom interior and exterior lighting design and installation that enhances comfort, security, and energy efficiency.',
+      bullets: [
+        'LED upgrades, dimming solutions, and lighting controls',
+        'Landscape & architectural lighting for curb appeal',
+        'Security & motion lighting for homes, shops, and businesses',
+        'Garage, shop, barn, and outdoor work-area lighting',
+      ],
+    },
+    {
+      title: 'Safety Inspections & Code Compliance',
+      category: 'Both',
+      icon: 'verified',
+      description:
+        'Comprehensive electrical safety inspections by a licensed electrician to help protect your family, property, or business.',
+      bullets: [
+        'Pre-purchase home inspections and electrical system reviews',
+        'Code compliance assessments for residential and commercial properties',
+        'Insurance & safety reports and electrical load analysis',
+        'Thermal checks and visual inspections to identify hot spots and hazards',
+      ],
+    },
+    {
+      title: '24/7 Emergency Electrical Service',
       category: 'Both',
       icon: 'warning',
       description:
-        'When something goes wrong, our licensed electricians are ready to respond and restore power safely.',
+        'When something goes wrong, our emergency electricians respond quickly to make things safe and restore power.',
       bullets: [
-        'Power loss & tripped breakers',
-        'Burning smells or sparking outlets',
-        'Storm, flood, or lightning damage',
-        'Make-safe repairs & follow-up service',
+        'Power loss, tripped breakers, and partial outages',
+        'Burning smells, sparking outlets, and overheated panels',
+        'Storm, flood, or lightning-related electrical damage',
+        'Make-safe repairs, temporary solutions, and follow-up service planning',
       ],
     },
   ];
-
-  constructor(private seo: SeoService) {}
 
   ngOnInit(): void {
     this.setupSeo();
@@ -173,9 +212,9 @@ export class ServicesOverviewComponent implements OnInit {
   private setupSeo(): void {
     this.seo.setMetaTags({
       title:
-        'Electrical Services | Residential, Commercial & Industrial | ProVolt Electric',
+        'Electrical Services | Residential, Commercial, Ranch & Rural & Industrial | ProVolt Electric',
       description:
-        'Explore ProVolt Electric’s full range of electrical services in Kerrville, Fredericksburg, and the Texas Hill Country, including panel upgrades, lighting design, EV chargers, generators, safety inspections, and 24/7 emergency service for residential, commercial, and industrial clients.',
+        'Explore ProVolt Electric’s full range of electrical services in Kerrville, Fredericksburg, and the Texas Hill Country, including panel upgrades, lighting design, troubleshooting, safety inspections, maintenance, and 24/7 emergency service for residential, commercial, ranch & rural, and industrial clients.',
       url: 'https://provoltelectricalservices.com/services',
       type: 'website',
       // Optional OG image:
@@ -190,7 +229,7 @@ export class ServicesOverviewComponent implements OnInit {
       '@type': 'Service',
       name: 'Electrical Services',
       serviceType:
-        'Residential, Commercial & Industrial Electrical Services (Repairs, Upgrades, New Construction)',
+        'Residential, Commercial, Ranch & Rural & Industrial Electrical Services (Repairs, Upgrades, New Construction)',
       provider: {
         '@type': 'Electrician',
         name: 'ProVolt Electric',
@@ -216,63 +255,63 @@ export class ServicesOverviewComponent implements OnInit {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'Home Electrical',
+              name: 'Residential Electrical Services',
               description:
-                'Panel upgrades, lighting installation, whole-home rewiring, and troubleshooting for residential customers.',
+                'Repairs, panel upgrades, lighting, rewiring, and smart home work handled by licensed residential electricians for homes across the Texas Hill Country.',
             },
           },
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'Business Electrical Solutions',
+              name: 'Commercial Electrical Services',
               description:
-                'Commercial electrical work, tenant build-outs, code compliance upgrades, and lighting retrofits.',
+                'Commercial electrical services for shops, offices, and facilities, including troubleshooting, tenant build-outs, code upgrades, and lighting retrofits.',
             },
           },
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'Service Upgrades & Panel Replacements',
+              name: 'Ranch & Rural Electrical Services',
               description:
-                'Panel upgrades, new circuits, subpanels, surge protection, and capacity planning.',
+                'Electrical services for barns, wells, shops, and acreage properties, including trenching, outdoor power, and equipment circuits for Texas Hill Country ranches and rural sites.',
             },
           },
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'Lighting Design & LED Retrofits',
+              name: 'Panel & Service Upgrades',
               description:
-                'Interior, exterior, landscape, and security lighting design and installation.',
+                'Panel upgrades and replacements, new circuits, subpanels, surge protection, and load calculations for homes, businesses, and rural properties.',
             },
           },
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'EV Charging Installation',
+              name: 'Lighting Design & Installation',
               description:
-                'Level 2 EV chargers for homes and commercial properties, including panel verification and permits.',
+                'Interior, exterior, landscape, and security lighting design and installation to improve safety, efficiency, and curb appeal.',
             },
           },
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'Generators & Backup Power',
+              name: 'Electrical Troubleshooting & Repairs',
               description:
-                'Standby generators, transfer switches, and backup power solutions for homes and businesses.',
+                'Diagnostics and repairs for tripped breakers, flickering lights, dead outlets, and other electrical problems in residential, commercial, and rural settings.',
             },
           },
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'Electrical Safety Inspections',
+              name: 'Safety Inspections & Code Compliance',
               description:
-                'Code compliance checks, insurance and safety reports, and pre-purchase electrical inspections.',
+                'Electrical safety inspections, code compliance assessments, insurance and safety reports, and pre-purchase electrical evaluations.',
             },
           },
           {
@@ -281,7 +320,16 @@ export class ServicesOverviewComponent implements OnInit {
               '@type': 'Service',
               name: 'Smart Home & Controls',
               description:
-                'Smart switches, dimmers, thermostats, and control systems for connected homes.',
+                'Smart switches, dimmers, thermostats, sensors, and control solutions to add comfort, convenience, and energy savings to modern homes.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: '24/7 Emergency Electrical Service',
+              description:
+                'Emergency response for power loss, overheated panels, storm damage, and other urgent electrical hazards, with make-safe repairs and follow-up service.',
             },
           },
         ],

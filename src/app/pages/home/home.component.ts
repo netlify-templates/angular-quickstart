@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AboutSectionSmallComponent } from 'src/app/shared/components/about-section-small/about-section-small.component';
 import { AreasWeServeComponent } from 'src/app/shared/components/areas-we-serve/areas-we-serve.component';
@@ -6,9 +6,9 @@ import { CountDownDealComponent } from 'src/app/shared/components/count-down-dea
 import { ElectricalServiceCardsComponent } from 'src/app/shared/components/electrical-service-cards/electrical-service-cards.component';
 import { OurServicesProcedureComponent } from 'src/app/shared/components/our-services-procedure/our-services-procedure.component';
 import { StayConnectedSectionComponent } from 'src/app/shared/components/stay-connected-section/stay-connected-section.component';
-import { TrustedSummaryComponent } from 'src/app/shared/components/trusted-summary/trusted-summary.component';
 import { WhyChooseUsComponent } from 'src/app/shared/components/why-choose-us/why-choose-us.component';
 import { ActionBannerComponent } from 'src/app/shared/components/action-banner/action-banner.component';
+import { SeoService } from 'src/app/shared/services/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -16,16 +16,257 @@ import { ActionBannerComponent } from 'src/app/shared/components/action-banner/a
   imports: [
     CommonModule,
     ActionBannerComponent,
-    TrustedSummaryComponent,
-    CountDownDealComponent,
+    // CountDownDealComponent,
     ElectricalServiceCardsComponent,
     WhyChooseUsComponent,
     AboutSectionSmallComponent,
-    StayConnectedSectionComponent,
+    // StayConnectedSectionComponent,
     OurServicesProcedureComponent,
     AreasWeServeComponent,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+  constructor(private seo: SeoService) {}
+
+  ngOnInit(): void {
+    const baseUrl = 'https://provoltelectricalservices.com';
+    const canonicalUrl = `${baseUrl}/`;
+
+    // TODO: replace with your real OG image (1200x630 is ideal)
+    const ogImageUrl = `${baseUrl}/assets/og/provolt-home.jpg`;
+
+    this.seo.setMetaTags({
+      title:
+        'ProVolt Electrical Services | Texas Hill Country Electrician (Licensed & Insured)',
+      description:
+        'Need an electrician in the Texas Hill Country? ProVolt handles electrical repairs, panel upgrades, generators, EV chargers, lighting, and wiring. Serving Kerrville, Fredericksburg, Boerne, Bandera, Comfort, Ingram, Hunt, Center Point & Helotes. Call for a quote.',
+      url: canonicalUrl,
+      image: ogImageUrl,
+      type: 'website',
+      robots: 'index,follow',
+    });
+
+    // JSON-LD (Homepage)
+    // TODO: fill in real phone, logo, and (if applicable) address + geo + opening hours.
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        // WebSite entity
+        {
+          '@type': 'WebSite',
+          '@id': `${baseUrl}/#website`,
+          url: baseUrl,
+          name: 'ProVolt Electrical Services',
+          inLanguage: 'en-US',
+        },
+
+        // Local business entity (Electrician)
+        {
+          '@type': 'Electrician',
+          '@id': `${baseUrl}/#business`,
+          name: 'ProVolt Electrical Services',
+          url: baseUrl,
+          // TODO: add your public business phone
+          telephone: 'TODO_PHONE_NUMBER',
+          // TODO: add your logo (square, clean background)
+          logo: `${baseUrl}/assets/brand/provolt-logo.png`,
+          image: ogImageUrl,
+          priceRange: '$$',
+          areaServed: [
+            {
+              '@type': 'City',
+              name: 'Kerrville',
+              address: {
+                '@type': 'PostalAddress',
+                addressRegion: 'TX',
+                addressCountry: 'US',
+              },
+            },
+            {
+              '@type': 'City',
+              name: 'Fredericksburg',
+              address: {
+                '@type': 'PostalAddress',
+                addressRegion: 'TX',
+                addressCountry: 'US',
+              },
+            },
+            {
+              '@type': 'City',
+              name: 'Boerne',
+              address: {
+                '@type': 'PostalAddress',
+                addressRegion: 'TX',
+                addressCountry: 'US',
+              },
+            },
+            {
+              '@type': 'City',
+              name: 'Bandera',
+              address: {
+                '@type': 'PostalAddress',
+                addressRegion: 'TX',
+                addressCountry: 'US',
+              },
+            },
+            {
+              '@type': 'City',
+              name: 'Comfort',
+              address: {
+                '@type': 'PostalAddress',
+                addressRegion: 'TX',
+                addressCountry: 'US',
+              },
+            },
+            {
+              '@type': 'City',
+              name: 'Ingram',
+              address: {
+                '@type': 'PostalAddress',
+                addressRegion: 'TX',
+                addressCountry: 'US',
+              },
+            },
+            {
+              '@type': 'City',
+              name: 'Hunt',
+              address: {
+                '@type': 'PostalAddress',
+                addressRegion: 'TX',
+                addressCountry: 'US',
+              },
+            },
+            {
+              '@type': 'City',
+              name: 'Center Point',
+              address: {
+                '@type': 'PostalAddress',
+                addressRegion: 'TX',
+                addressCountry: 'US',
+              },
+            },
+            {
+              '@type': 'City',
+              name: 'Helotes',
+              address: {
+                '@type': 'PostalAddress',
+                addressRegion: 'TX',
+                addressCountry: 'US',
+              },
+            },
+          ],
+          // Optional but helpful if you have these pages
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'Electrical Services',
+            itemListElement: [
+              {
+                '@type': 'OfferCatalog',
+                name: 'Home Electrical',
+                itemListElement: [
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Electrical Repair & Troubleshooting',
+                      url: `${baseUrl}/services/electrical-repair-troubleshooting`,
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Electrical Panel Upgrades',
+                      url: `${baseUrl}/services/electrical-panel-upgrades`,
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Whole-Home Rewiring',
+                      url: `${baseUrl}/services/whole-home-rewiring`,
+                    },
+                  },
+                ],
+              },
+              {
+                '@type': 'OfferCatalog',
+                name: 'Business Solutions',
+                itemListElement: [
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Commercial Electrical Services',
+                      url: `${baseUrl}/services/business-electrical`,
+                    },
+                  },
+                ],
+              },
+              {
+                '@type': 'OfferCatalog',
+                name: 'Service Upgrades',
+                itemListElement: [
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Circuit Breaker Replacement',
+                      url: `${baseUrl}/services/circuit-breaker-replacement`,
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'EV Charger Installation',
+                      url: `${baseUrl}/services/ev-charger-installation`,
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Generator Installation & Repair',
+                      url: `${baseUrl}/services/generator-installation-repair`,
+                    },
+                  },
+                ],
+              },
+              {
+                '@type': 'OfferCatalog',
+                name: 'Lighting Design',
+                itemListElement: [
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Lighting Installation & Upgrades',
+                      url: `${baseUrl}/services/lighting-installation-upgrades`,
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+
+        // Optional: tie the homepage to your business
+        // {
+        //   '@type': 'WebPage',
+        //   '@id': `${baseUrl}/#webpage`,
+        //   url: canonicalUrl,
+        //   name: 'ProVolt Electrical Services | Texas Hill Country Electrician',
+        //   isPartOf: { '@id': `${baseUrl}/#website` },
+        //   about: { '@id': `${baseUrl}/#business` },
+        //   inLanguage: 'en-US',
+        // },
+      ],
+    };
+
+    this.seo.setJsonLd('json-ld-home', jsonLd);
+  }
+}

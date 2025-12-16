@@ -1,0 +1,183 @@
+.our-services {
+  background-color: var(--background);
+  padding: 0 1.5rem 4rem;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__header {
+    text-align: center;
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+  }
+
+  &__chips {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+
+  &__footer {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+
+    span {
+      font-weight: 600;
+    }
+  }
+}
+
+.chip {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-color: black;
+  border: 3px solid var(--text-neutral);
+  background: #fafafa;
+
+  // &--active {
+  //   color: #111;
+  //   background: #fffacd; /* subtle highlight */
+  //   border-color: var(--brand-yellow, #d8b634);
+  //   box-shadow: 0 0 0 2px rgba(216, 182, 52, 0.25);
+  // }
+
+  &--legend {
+    opacity: 0.9;
+  }
+
+  // &--residential {
+  //   border-color: #4caf50;
+  // }
+
+  // &--commercial {
+  //   border-color: #ff9800;
+  // }
+
+  &--both {
+    border-color: #1976d2;
+  }
+}
+
+.service-card {
+  position: relative;
+  // width: 30rem;
+  display: flex;
+  // flex-wrap: wrap;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+
+  .mat-mdc-card-header {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    padding-bottom: 0.5rem;
+  }
+
+  &__icon {
+    background: #212121;
+    color: #ffc107;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+
+    mat-icon {
+      font-size: 27px;
+    }
+  }
+
+  &__description {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  mat-divider {
+    margin: 0.25rem 0 0.75rem;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    li {
+      display: flex;
+      align-items: start;
+      font-size: 0.88rem;
+    }
+  }
+
+  &__bullet-icon {
+    font-size: 19px;
+    margin-right: 0.4rem;
+    opacity: 0.9;
+    color: green;
+  }
+
+  .mat-mdc-card-actions {
+    margin-top: auto;
+    padding: 1rem 1rem 1rem;
+  }
+
+  .mdc-button {
+    color: var(--brand-black);
+    background-color: var(--brand-yellow);
+  }
+
+  // &--residential {
+  //   border-top: 8px solid #4caf50;
+  // }
+
+  // &--commercial {
+  //   border-top: 8px solid #ff9800;
+  // }
+
+  // &--both {
+  //   border-top: 8px solid #1976d2;
+  // }
+}
+
+/* Responsive tweaks */
+@media (max-width: 599px) {
+  .our-services {
+    padding-inline: 1rem;
+
+    &__header h1 {
+      font-size: 1.8rem;
+    }
+  }
+
+  .service-card .mat-mdc-card-header {
+    align-items: flex-start;
+  }
+}

@@ -4,7 +4,7 @@
               mat-menu-item
               disabled
               class="menu-section-title"
-              [routerLink]="'/texas-hill-country-electrician'"
+              [routerLink]="'/service-areas/texas-hill-country-electrician'"
             >
               {{ link.label }}
             </button> -->
@@ -18,7 +18,7 @@
 <!-- </ng-container> -->
 <header class="page-header">
   <!-- MOBILE SIDE NAV -->
-  <mat-sidenav-container class="sidenav-container" fullscreen>
+  <mat-sidenav-container class="sidenav-container">
     <mat-sidenav
       #sidenav
       mode="over"
@@ -40,35 +40,9 @@
       <mat-nav-list>
         <ng-container *ngFor="let link of navLinks">
           <!-- Links without children -->
-          <a
-            mat-list-item
-            *ngIf="!link.children"
-            [routerLink]="link.path"
-            (click)="sidenav.close()"
-          >
+          <a mat-list-item [routerLink]="link.path" (click)="sidenav.close()">
             {{ link.label }}
           </a>
-
-          <!-- Links with children (Areas We Serve) -->
-          <ng-container *ngIf="link.children">
-            <div mat-subheader>{{ link.label }}</div>
-
-            <!-- Optional overview link -->
-            <a mat-list-item [routerLink]="link.path" (click)="sidenav.close()">
-              {{ link.label }} Overview
-            </a>
-
-            <a
-              mat-list-item
-              *ngFor="let child of link.children"
-              [routerLink]="child.path"
-              (click)="sidenav.close()"
-            >
-              {{ child.label }}
-            </a>
-
-            <mat-divider></mat-divider>
-          </ng-container>
         </ng-container>
       </mat-nav-list>
     </mat-sidenav>
@@ -101,7 +75,7 @@
 
               <!-- Dropdown menu with Angular Material (desktop only) -->
               <div *ngIf="link.children">
-                <a mat-button [matMenuTriggerFor]="areasMenu">
+                <a mat-button [matMenuTriggerFor]="areasMenu" class="nav-link">
                   {{ link.label }}
                   <mat-icon>arrow_drop_down</mat-icon>
                 </a>

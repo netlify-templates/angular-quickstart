@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { SeoService } from '../../services/seo.service';
+import { CtaButtonComponent } from '../cta-button/cta-button.component';
 
 export interface ServiceItem {
   label: string;
@@ -66,6 +67,7 @@ export interface TownPageConfig {
     MatIconModule,
     MatButtonModule,
     MatChipsModule,
+    CtaButtonComponent,
   ],
   templateUrl: './town-page.component.html',
   styleUrls: ['./town-page.component.scss'],
@@ -161,5 +163,10 @@ export class TownPageComponent implements OnInit, OnChanges {
   onRequestQuote(): void {
     // TODO: hook this into your router or contact form
     // e.g. this.router.navigate(['/contact']);
+    if (!this.townConfig?.phoneNumber) return;
+    const digits = this.townConfig.phoneNumber.replace(/[^0-9]/g, '');
+    if (digits) {
+      window.location.href = `tel:${digits}`;
+    }
   }
 }

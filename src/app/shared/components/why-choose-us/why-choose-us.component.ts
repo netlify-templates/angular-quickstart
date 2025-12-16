@@ -19,9 +19,15 @@ interface Reason {
 export class WhyChooseUsComponent {
   reasons: Reason[] = [
     {
-      title: 'Licensed & Insured',
+      title: 'Local Texas Hill Country Electricians',
       description:
-        'Fully licensed and insured Hill Country electricians who follow NEC standards and local codes on every job.',
+        'Based in the Texas Hill Country and familiar with local codes, utilities, and construction styles—no out-of-town guessing on how your home or business is built.',
+      icon: 'location_on',
+    },
+    {
+      title: 'Licensed, Insured & Code-Compliant',
+      description:
+        'Work performed by a licensed, insured master electrician who follows NEC standards and local inspection requirements on every installation and repair.',
       icon: 'verified',
     },
     {
@@ -31,16 +37,16 @@ export class WhyChooseUsComponent {
       icon: 'schedule',
     },
     {
-      title: 'Upfront, Honest Pricing',
+      title: 'Upfront Estimates & Clear Scope',
       description:
-        'No surprise fees or hidden add-ons. We provide clear estimates and options before any work begins.',
+        'No surprise fees or vague line items. We walk you through options, pricing, and the scope of work before we start so you can make confident decisions.',
       icon: 'attach_money',
     },
     {
-      title: 'Safety-First Workmanship',
+      title: 'Residential, Commercial & Rural Experience',
       description:
-        'We treat your home or business like our own, prioritizing safety, cleanliness, and long-term reliability.',
-      icon: 'health_and_safety',
+        'From homes and small businesses to barns, wells, and shops, we bring real-world experience across residential, commercial, and ranch/rural electrical systems.',
+      icon: 'handyman',
     },
   ];
 }

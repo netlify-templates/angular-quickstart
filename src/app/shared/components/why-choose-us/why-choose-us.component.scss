@@ -5,8 +5,8 @@
 /* Section container */
 
 .why-section {
-  padding: 64px 16px 80px;
-  background-color: #f7f7fa;
+  padding: 32px 16px 32px;
+  background-color: var(--background);
 }
 
 .why-inner {
@@ -60,6 +60,8 @@
   display: flex;
   justify-content: flex-start;
   margin-bottom: 14px;
+  gap: 1rem;
+  align-items: flex-end;
 }
 
 .why-icon-circle {
@@ -81,13 +83,13 @@
 
 .why-card-title {
   margin: 0 0 10px;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: #111827;
 }
 
 .why-card-description {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   line-height: 1.7;
   color: #4b5563;
 }

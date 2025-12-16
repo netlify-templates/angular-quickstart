@@ -15,6 +15,10 @@ Email List
 Finish all the pages
 Server side rendering
 Add the pages in the footer
+I need to update the SEO reload upon page switches
+Rework all the town pages to use the shared component
+Add hours of operation
+Move footer into the index.html file outside of the body portion
 
 
 In services
@@ -22,3 +26,157 @@ In services
     Services should also include the words "Our Expertise"
 
 Imagine you are an expert angular developer. generate me this website page "WhyChooseUs" div for an angular application using angular materials. Here is an image. Split the component over three files: a typescript file that is a standalone component, a scss file, and an html file.
+
+
+
+
+Find a solution that fits.
+You get honest pricing and real options..
+
+We proudly serve Kerrville and surrounding Hill Country. 
+
+ Looking for an electrician for your home or business.
+
+  As a result, you can feel comfortable calling your Kerrville electrician whenever questions come up.
+
+
+
+
+
+
+Our Offered Services
+
+/services
+/services/home-electrical
+/services/business-solutions
+/services/service-upgrades
+/services/lighting-design
+/services/safety-inspections
+/services/smart-home-and-controls 
+/services/agricultural-and-rural-power
+/services/24-7-emergency-service
+
+/services/electrical-repair-troubleshooting
+/services/electrical-panel-upgrades
+    - upgrade, replacement, repair
+/services/circuit-breaker-replacement
+    - replacement
+/services/whole-home-electrical
+    - rewiring, wiring, 
+/services/lighting-installation-upgrades
+    - installation, upgrades
+/services/electrical-troubleshooting
+    - troubleshooting, repair
+/services/new-construction
+    - new construction, remodel electrical
+
+(optional) /services/surge-protection, /services/gfci-outlet-installation, /services/ceiling-fan-installation, /services/smart-home-electrical
+
+
+services: ServiceItem[] = [
+    {
+      title: 'Home Electrical',
+      category: 'Residential',
+      icon: 'home',
+      description:
+        'From panel upgrades and lighting installation to whole-home rewiring, we keep your home safe, efficient, and up to code.',
+      bullets: [
+        'Troubleshooting & diagnostics',
+        'Repairs & safety corrections',
+        'New construction & remodel wiring',
+        'GFCI/AFCI protection & code updates',
+      ],
+    },
+    {
+      title: 'Business Solutions',
+      category: 'Commercial',
+      icon: 'apartment',
+      description:
+        'Reliable electrical services to keep your business running safely and efficiently with minimal downtime.',
+      bullets: [
+        'Troubleshooting & diagnostics',
+        'Tenant build-outs & improvements',
+        'Code compliance upgrades',
+        'Lighting retrofits & controls',
+        'Emergency & scheduled repairs',
+      ],
+    },
+    {
+      title: 'Service Upgrades',
+      category: 'Both',
+      icon: 'electrical_services',
+      description:
+        'Modernize your electrical system for today’s loads and tomorrow’s needs, always following NEC standards.',
+      bullets: [
+        'Panel upgrades & replacements',
+        'New circuits & subpanels',
+        'Whole-home surge protection',
+        'Load calculations & capacity planning',
+      ],
+    },
+    {
+      title: 'Lighting Design',
+      category: 'Both',
+      icon: 'lightbulb',
+      description:
+        'Custom lighting solutions that enhance comfort, security, and efficiency—inside and out.',
+      bullets: [
+        'LED upgrades & dimming solutions',
+        'Landscape & architectural lighting',
+        'Security & motion lighting',
+        'Garage, shop, and barn lighting',
+      ],
+    },
+    {
+      title: 'Safety Inspections',
+      category: 'Both',
+      icon: 'verified',
+      description:
+        'Comprehensive electrical safety inspections to protect your family, property, or business.',
+      bullets: [
+        'Pre-purchase home inspections',
+        'Code compliance assessments',
+        'Insurance & safety reports',
+        'Thermal checks for hot spots',
+      ],
+    },
+    {
+      title: 'Smart Home & Controls',
+      category: 'Residential',
+      icon: 'devices',
+      description:
+        'Integrate smart technology for comfort, convenience, and energy savings throughout your home.',
+      bullets: [
+        'Smart switches & dimmers',
+        'Smart thermostats & sensors',
+        'Wi-Fi/mesh enabled panels',
+        'Whole-home automation prep',
+      ],
+    },
+    {
+      title: 'Agricultural & Rural Power',
+      category: 'Commercial',
+      icon: 'agriculture',
+      description:
+        'Dependable power solutions for barns, wells, shops, and rural properties across the Hill Country.',
+      bullets: [
+        'Barn & outbuilding wiring',
+        'Well & pump circuits',
+        'Equipment circuits & receptacles',
+        'Outdoor power distribution',
+      ],
+    },
+    {
+      title: '24/7 Emergency Service',
+      category: 'Both',
+      icon: 'warning',
+      description:
+        'When something goes wrong, our licensed electricians are ready to respond and restore power safely.',
+      bullets: [
+        'Power loss & tripped breakers',
+        'Burning smells or sparking outlets',
+        'Storm, flood, or lightning damage',
+        'Make-safe repairs & follow-up service',
+      ],
+    },
+  ];

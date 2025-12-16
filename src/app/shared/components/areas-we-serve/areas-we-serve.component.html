@@ -1,30 +1,70 @@
-<section class="aws-root">
-  <!-- Section title -->
-  <h2 class="aws-title">Areas We Serve</h2>
+<section class="areas-served">
+  <div class="areas-served__container">
+    <header class="areas-served__header">
+      <h2 class="areas-served__title">Areas We Proudly Serve</h2>
+      <p class="areas-served__subtitle">
+        Based in
+        <strong>{{ headquarters.city }}, {{ headquarters.state }}</strong
+        >, ProVolt Electric provides fast, professional electrical service
+        throughout the Texas Hill Country for homes, ranches, and businesses.
+      </p>
+    </header>
 
-  <!-- Pill-style card -->
-  <mat-card class="aws-card">
-    <div class="aws-card-inner">
-      <!-- Intro text -->
-      <div class="aws-card-header">
-        <mat-icon class="aws-header-icon" aria-hidden="true"
-          >location_on</mat-icon
-        >
-        <p class="aws-intro">
-          We proudly serve Wayne, NJ as our native service area. We also serve
-          surrounding communities across New Jersey, including:
-        </p>
-      </div>
+    <mat-card class="areas-served__card" appearance="outlined">
+      <div class="areas-served__layout">
+        <!-- Left: copy / primary area -->
+        <div class="areas-served__info">
+          <div class="areas-served__badge">
+            <mat-icon>bolt</mat-icon>
+            <span class="areas-served__badge-text"
+              >Local • Licensed • Insured</span
+            >
+          </div>
 
-      <!-- Locations grid -->
-      <div class="aws-locations">
-        <div class="aws-location" *ngFor="let location of locations">
-          <mat-icon class="aws-location-icon" aria-hidden="true"
-            >place</mat-icon
+          <div class="areas-served__headquarters">
+            <div class="areas-served__headquarters-icon">
+              <mat-icon>place</mat-icon>
+            </div>
+            <div class="areas-served__headquarters-text">
+              <p class="areas-served__headquarters-label">Headquarters</p>
+              <p class="areas-served__headquarters-city">
+                {{ headquarters.city }}, {{ headquarters.state }}
+              </p>
+              <p class="areas-served__headquarters-note">
+                Our native service area with the fastest response times and
+                same-day availability on many calls.
+              </p>
+            </div>
+          </div>
+
+          <mat-divider class="areas-served__divider"></mat-divider>
+
+          <p class="areas-served__body">
+            We also travel across the surrounding Hill Country for panel
+            upgrades, troubleshooting, lighting projects, and new construction.
+          </p>
+          <p class="areas-served__cta">
+            Not sure if you’re in range?
+            <span class="areas-served__cta-highlight">Call (830) 955-2909</span>
+            and we’ll confirm your service area right away.
+          </p>
+        </div>
+
+        <!-- Right: list of areas -->
+        <div class="areas-served__grid" aria-label="Surrounding service areas">
+          <div
+            class="areas-served__pill"
+            *ngFor="let area of surroundingAreas"
+            (click)="onTownClick(area)"
           >
-          <span class="aws-location-text">{{ location }}</span>
+            <mat-icon class="areas-served__pill-icon">location_on</mat-icon>
+            <div class="areas-served__pill-text">
+              <span class="areas-served__pill-city">{{ area.city }}, </span>
+              <span class="areas-served__pill-state">{{ area.state }}</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </mat-card>
+    </mat-card>
+  </div>
 </section>

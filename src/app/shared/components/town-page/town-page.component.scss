@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  padding: 2.5rem 1.5rem 3.5rem;
+  padding: 1.5rem 1.5rem 3.5rem;
   max-width: 1100px;
   margin: 0 auto;
+  background-color: var(--background);
 }
 
 /* HERO */
@@ -22,18 +23,17 @@
   gap: 1rem;
 }
 
-.tp-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.85rem;
-  background: #e3f2fd;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #0d47a1;
-  margin: 0;
-}
+// .tp-badge {
+//   display: inline-flex;
+//   align-items: center;
+//   gap: 0.4rem;
+//   padding: 0.35rem 0.85rem;
+//   background: var(--background);
+//   border-radius: 999px;
+//   font-size: 0.8rem;
+//   font-weight: 500;
+//   margin: 0;
+// }
 
 .tp-badge mat-icon {
   font-size: 18px;
@@ -103,13 +103,12 @@
 .tp-hero-card {
   width: 100%;
   border-radius: 18px;
-  background: linear-gradient(145deg, #0d47a1, #1976d2);
-  color: #ffffff;
-  box-shadow: 0 16px 32px rgba(13, 71, 161, 0.45);
+  background: var(--brand-black);
+  color: var(--text-primary-white);
 }
 
 .tp-hero-avatar {
-  background: rgba(255, 255, 255, 0.16);
+  background: var(--brand-yellow);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -117,16 +116,17 @@
 }
 
 .tp-hero-avatar mat-icon {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .tp-hero-card mat-card-subtitle {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary-white);
 }
 
 .tp-hero-card mat-card-content p {
   font-size: 0.9rem;
   margin-bottom: 1rem;
+  color: var(--text-primary-white) !important;
 }
 
 .tp-chip-row {
@@ -149,10 +149,11 @@
 
 .tp-card {
   border-radius: 18px;
+  background-color: var(--brand-black);
 }
 
 .tp-card-avatar {
-  background: #e3f2fd;
+  background: var(--brand-yellow);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -160,7 +161,7 @@
 }
 
 .tp-card-avatar mat-icon {
-  color: #0d47a1;
+  color: var(--background-alt);
 }
 
 .tp-card-avatar--accent {
@@ -173,16 +174,18 @@
 
 .tp-card mat-card-title {
   font-weight: 600;
+  color: var(--text-primary-white);
 }
 
 .tp-card mat-card-subtitle {
   font-size: 0.85rem;
+  color: var(--text-primary-white);
 }
 
-.tp-section-intro {
+.tp-card .tp-section-intro {
   margin: 0.75rem 0 1.25rem;
   font-size: 0.95rem;
-  color: #455a64;
+  color: var(--text-primary-white) !important;
 }
 
 /* SERVICE GRID */
@@ -198,18 +201,18 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
-  color: #37474f;
+  color: var(--text-primary-white);
 }
 
 .tp-service-icon {
   font-size: 20px;
-  color: #0d47a1;
+  color: var(--brand-yellow);
 }
 
 /* ALT CARD */
 
 .tp-card--alt {
-  background: #f5f7fa;
+  background: var(--brand-black);
 }
 
 /* CHIP ROW */
@@ -229,7 +232,7 @@
 .tp-final-cta-inner {
   border-radius: 18px;
   padding: 1.75rem 1.25rem;
-  background: linear-gradient(135deg, #0d47a1, #1565c0);
+  background: var(--brand-black);
   color: #ffffff;
   display: flex;
   justify-content: space-between;
@@ -244,6 +247,7 @@
 }
 
 .tp-final-text p {
+  color: var(--text-primary-white) !important;
   margin: 0;
   font-size: 0.95rem;
 }

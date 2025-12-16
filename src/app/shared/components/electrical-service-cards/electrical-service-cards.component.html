@@ -1,6 +1,13 @@
 <section class="services-section">
   <div class="services-inner">
-    <h2 class="services-title">Expert Electrical Services</h2>
+    <div class="header">
+      <h1>Our Electrical Services</h1>
+      <p>
+        Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers
+        master-level electrical work for homes, businesses, and rural
+        properties.
+      </p>
+    </div>
 
     <div class="services-grid">
       <mat-card class="service-card" *ngFor="let service of services">
@@ -15,9 +22,33 @@
         </mat-card-title>
 
         <mat-card-content class="service-description">
-          {{ service.description }}
+          <p class="service-body">
+            {{ service.description }}
+          </p>
+
+          <ul class="service-bullets" *ngIf="service?.bullets?.length">
+            <li *ngFor="let bullet of service.bullets">
+              {{ bullet }}
+            </li>
+          </ul>
         </mat-card-content>
+
+        <mat-card-actions align="start" class="card-actions-container">
+          <app-cta-button
+            [label]="service.ctaLabel"
+            [routerLink]="service.routerLink"
+          ></app-cta-button>
+        </mat-card-actions>
       </mat-card>
     </div>
   </div>
+
+  <p>
+    Treat each category as an internal link hub: Each category heading should
+    link to a real page: /services/home-electrical /services/business-electrical
+    /services/service-upgrades /services/lighting-installation-upgrades (or
+    /lighting-design if you truly do design) Under each, list 4–6 bullet links
+    (GFCI, troubleshooting, rewiring, surge protection, etc.). This builds
+    topical relevance and funnels users deeper.
+  </p>
 </section>

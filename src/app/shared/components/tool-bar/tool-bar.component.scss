@@ -1,19 +1,18 @@
 @use "@angular/material" as mat;
 
 .page-header {
-  position: relative;
   background-color: var(--brand-red);
 }
 
 /* Sidenav container just holds the toolbar area */
 .sidenav-container {
-  height: 4rem;
+  height: auto;
   background-color: var(--brand-red);
 }
 
 .top-toolbar {
+  min-height: 4rem;
   background: transparent;
-  box-shadow: none;
   padding: 0 2.5rem;
 }
 
@@ -73,9 +72,12 @@
   font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #ffffff;
   opacity: 0.85;
+  color: #ffffff;
+}
+
+::ng-deep .mdc-list-item__primary-text {
+  color: white;
 }
 
 .nav-link:hover {
@@ -101,9 +103,8 @@
 // }
 
 .app-sidenav {
-  width: 260px;
+  width: 300px;
   background-color: var(--brand-red);
-  color: #ffffff;
   padding: 0.75rem 0.5rem 1rem;
   position: fixed;
 }
@@ -122,7 +123,6 @@
 
 mat-nav-list a[mat-list-item] {
   font-size: 0.9rem;
-  color: #ffffff !important;
 }
 
 [mat-list-item] {
@@ -141,7 +141,7 @@ mat-nav-list a[mat-list-item] {
 
 /* Responsive tweaks */
 
-@media (max-width: 900px) {
+@media (max-width: 1130px) {
   .top-toolbar {
     padding: 0 1rem;
   }

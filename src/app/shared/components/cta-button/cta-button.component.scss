@@ -1,0 +1,26 @@
+/* Button */
+
+.deal-cta {
+  margin-top: 12px;
+}
+
+.deal-button {
+  //   min-width: 190px;
+  //   min-height: 72px;
+  padding: 14px 40px;
+  border-radius: 999px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #e6c612;
+  color: #111827;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(0.98);
+  }
+}

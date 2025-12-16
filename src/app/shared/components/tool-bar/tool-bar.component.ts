@@ -35,24 +35,33 @@ interface NavLink {
 export class ToolBarComponent {
   navLinks: NavLink[] = [
     { label: 'Home', path: '/home' },
-    { label: 'Services', path: '/services-overview' },
+    { label: 'Services', path: '/electrical-services' },
     {
       label: 'Areas We Serve',
-      path: '/texas-hill-country-electrician',
+      path: '/service-areas/texas-hill-country-electrician',
       children: [
         {
           label: 'Texas Hill Country',
-          path: '/texas-hill-country-electrician',
+          path: '/service-areas/texas-hill-country-electrician',
         },
-        { label: 'Bandera, TX', path: '/electrician-bandera-tx' },
-        { label: 'Boerne, TX', path: '/electrician-boerne-tx' },
-        { label: 'Center Point, TX', path: '/electrician-center-point-tx' },
-        { label: 'Comfort, TX', path: '/electrician-comfort-tx' },
-        { label: 'Fredericksburg, TX', path: '/electrician-fredericksburg-tx' },
-        { label: 'Helotes, TX', path: '/electrician-helotes-tx' },
-        { label: 'Hunt, TX', path: '/electrician-hunt-tx' },
-        { label: 'Ingram, TX', path: '/electrician-ingram-tx' },
-        { label: 'Kerrville, TX', path: '/electrician-kerrville-tx' },
+        {
+          label: 'Kerrville, TX',
+          path: '/service-areas/kerrville-tx-electrician',
+        },
+        { label: 'Bandera, TX', path: '/service-areas/bandera-tx-electrician' },
+        { label: 'Boerne, TX', path: '/service-areas/boerne-tx-electrician' },
+        {
+          label: 'Center Point, TX',
+          path: '/service-areas/center-point-tx-electrician',
+        },
+        { label: 'Comfort, TX', path: '/service-areas/comfort-tx-electrician' },
+        {
+          label: 'Fredericksburg, TX',
+          path: '/service-areas/fredericksburg-tx-electrician',
+        },
+        { label: 'Helotes, TX', path: '/service-areas/helotes-tx-electrician' },
+        { label: 'Hunt, TX', path: '/service-areas/hunt-tx-electrician' },
+        { label: 'Ingram, TX', path: '/service-areas/ingram-tx-electrician' },
       ],
     },
     { label: 'Projects', path: '/projects' },

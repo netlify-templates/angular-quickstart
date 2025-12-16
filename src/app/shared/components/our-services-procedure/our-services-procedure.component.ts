@@ -8,6 +8,7 @@ interface ServiceStep {
   shortTitle: string;
   description: string;
   icon: string;
+  cta: string;
 }
 
 @Component({
@@ -20,25 +21,52 @@ interface ServiceStep {
 export class OurServicesProcedureComponent {
   steps: ServiceStep[] = [
     {
-      title: 'Initial Consultation',
-      shortTitle: 'Consultation',
+      title: 'Request a Quote',
+      shortTitle: 'Quote',
       description:
-        'We start with a thorough consultation to assess your property’s electrical needs and provide complete peace of mind.',
-      icon: 'chat', // e.g. material icon name
+        'Share a few details about your home, business, or ranch project and we’ll review your electrical needs and goals.',
+      icon: 'phone_in_talk',
+      cta: 'Call, text, or request a quote online to get started.',
     },
     {
-      title: 'Affordable Solution',
-      shortTitle: 'Solution',
+      title: 'On-Site Assessment',
+      shortTitle: 'Assessment',
       description:
-        'Our licensed electricians perform precise installations, repairs, and replacements, adhering to top safety standards.',
-      icon: 'handyman',
+        'When needed, a licensed electrician visits your property to inspect panels, wiring, loads, and access so nothing is missed.',
+      icon: 'home_repair_service',
+      cta: 'We walk the site with you and answer questions on the spot.',
     },
     {
-      title: 'Final Inspection',
-      shortTitle: 'Inspection',
+      title: 'Clear Estimate & Options',
+      shortTitle: 'Estimate',
       description:
-        'After completing the work, we perform a thorough inspection to ensure your electrical system meets all local codes.',
-      icon: 'verified',
+        'You receive a written estimate with scope, pricing, and options—no vague line items or surprise add-ons.',
+      icon: 'receipt_long',
+      cta: 'Choose the option that fits your budget and timeline.',
+    },
+    {
+      title: 'Code-Compliant Electrical Work',
+      shortTitle: 'Work',
+      description:
+        'Our team completes the installation, repair, or upgrade following NEC standards, local codes, and manufacturer specs.',
+      icon: 'bolt',
+      cta: 'We treat your property like our own and keep the workspace tidy.',
+    },
+    {
+      title: 'Testing & Walkthrough',
+      shortTitle: 'Walkthrough',
+      description:
+        'We test breakers, circuits, devices, and lighting, then walk you through what was done and how everything operates.',
+      icon: 'check_circle',
+      cta: 'Panels are labeled clearly so future work and troubleshooting are easier.',
+    },
+    {
+      title: 'Follow-Up & Support',
+      shortTitle: 'Support',
+      description:
+        'After the job, we’re available for questions, documentation, and future projects as your electrical needs grow.',
+      icon: 'support_agent',
+      cta: 'Need adjustments or have a new project? ProVolt is just a call away.',
     },
   ];
 }

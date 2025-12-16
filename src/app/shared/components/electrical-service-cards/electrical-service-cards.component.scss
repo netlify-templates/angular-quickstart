@@ -5,8 +5,8 @@
 /* Section background */
 
 .services-section {
-  padding: 56px 16px 72px;
-  background-color: #f3f4f6; // light gray
+  padding: 24px 16px 32px;
+  background-color: var(--background);
 }
 
 .services-inner {
@@ -24,11 +24,30 @@
   color: #111827;
 }
 
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+}
+
 /* Cards grid */
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 24px;
 }
 
@@ -65,6 +84,12 @@
   font-size: 26px;
 }
 
+/* Action */
+.card-actions-container {
+  margin-top: auto;
+  justify-content: center;
+}
+
 /* Text */
 
 .service-title {
@@ -78,6 +103,10 @@
   font-size: 0.95rem;
   line-height: 1.7;
   color: #4b5563;
+}
+
+.service-bullets {
+  text-align: left;
 }
 
 /* Responsive */

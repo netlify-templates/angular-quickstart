@@ -1,121 +1,201 @@
-.aws-root {
-  width: 100%;
-  padding: 2.5rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+// ===============================
+// PROVOLT BRANDING COLORS
+// ===============================
+// $primary: #d6262b; // fire-engine electrician red
+// $primary-soft: rgba(214, 38, 43, 0.12);
+$primary: #d9b524; // fire-engine electrician red
+$primary-soft: rgba(230, 198, 18, 0.15);
 
-.aws-title {
-  font-size: 1.9rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin: 0 0 1.5rem;
-  text-align: center;
-  color: #222222;
-}
+$secondary: #d6262b; // warm Hill Country yellow
+$secondary-soft: rgba(214, 38, 43, 0.12);
+// $secondary: #e6c612; // warm Hill Country yellow
+// $secondary-soft: rgba(230, 198, 18, 0.15);
 
-/* Pill card */
+$surface-color: var(--background-alt);
+$background-color: var(--background);
+$text-main: #1f2933;
+$text-muted: #6b7280;
 
-.aws-card {
-  width: 100%;
-  max-width: 1100px;
-  border-radius: 40px;
-  background: #003353;
-  color: #ffffff;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
-  padding: 1.5rem 2rem;
-}
+// $shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.12);
 
-.aws-card-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
+// ===============================
+// SECTION WRAPPER
+// ===============================
+.areas-served {
+  padding: 2rem 1.5rem;
+  background: var(--background);
 
-/* Header / intro */
-
-.aws-card-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-}
-
-.aws-header-icon {
-  font-size: 26px;
-  flex-shrink: 0;
-}
-
-.aws-intro {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-/* Locations grid */
-
-.aws-locations {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.75rem 2rem;
-}
-
-.aws-location {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
-
-.aws-location-icon {
-  font-size: 18px;
-}
-
-.aws-location-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Responsive tweaks */
-
-@media (max-width: 960px) {
-  .aws-card {
-    border-radius: 32px;
-    padding: 1.4rem 1.6rem;
+  &__container {
+    max-width: 1120px;
+    margin: 0 auto;
   }
 
-  .aws-locations {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 0.6rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .aws-root {
-    padding: 2rem 1rem;
+  // ===============================
+  // HEADER
+  // ===============================
+  &__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
   }
 
-  .aws-title {
-    font-size: 1.5rem;
-    margin-bottom: 1.25rem;
+  &__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: $primary; // updated from orange to your red
+    margin-bottom: 0.5rem;
   }
 
-  .aws-card {
-    border-radius: 24px;
-    padding: 1.25rem 1.25rem;
+  &__title {
+    font-size: 2rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: $text-main;
+    margin: 0 0 0.75rem;
   }
 
-  .aws-card-header {
+  &__subtitle {
+    max-width: 640px;
+    margin: 0 auto;
+    color: $text-muted;
+    font-size: 0.95rem;
+    line-height: 1.6;
+
+    strong {
+      color: $primary; // highlight Kerrville with brand red
+      font-weight: 700;
+    }
+  }
+
+  // ===============================
+  // CARD CONTAINER
+  // ===============================
+  &__card {
+    border-radius: 1.5rem;
+    background: $surface-color;
+    // box-shadow: $shadow-soft;
+    padding: 1.75rem 2rem;
+
+    @media (max-width: 599px) {
+      padding: 1.5rem 1.25rem;
+    }
+  }
+
+  &__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr);
+    gap: 2.25rem;
+
+    @media (max-width: 899px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // ===============================
+  // BADGE (Local • Licensed • Insured)
+  // ===============================
+  &__badge {
+    display: flex;
     align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    background: $primary-soft;
+    color: $primary;
+    font-size: 0.75rem;
+    font-weight: 700;
+    gap: 0.4rem;
+    width: fit-content;
   }
 
-  .aws-locations {
-    grid-template-columns: 1fr;
+  // ===============================
+  // HEADQUARTERS BLOCK
+  // ===============================
+  &__headquarters {
+    display: flex;
+    gap: 0.75rem;
   }
 
-  .aws-location {
-    justify-content: flex-start;
+  &__headquarters-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: $primary-soft;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $primary;
+  }
+
+  &__headquarters-city {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: $primary; // Kerrville pops with brand color
+    margin: 0 0 0.15rem;
+  }
+
+  &__headquarters-label {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: $secondary; // nice yellow accent
+    font-weight: 600;
+  }
+
+  // ===============================
+  // MAIN BODY COPY
+  // ===============================
+  &__cta-highlight {
+    color: $primary;
+    font-weight: 700;
+  }
+
+  // ===============================
+  // GRID OF LOCATIONS
+  // ===============================
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+
+    @media (max-width: 599px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__pill {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 999px;
+    background: #fafafa;
+    border: 1px solid rgba(214, 38, 43, 0.25); // faint red border
+    transition: all 150ms ease;
+
+    &:hover {
+      background: $surface-color;
+      border-color: $primary;
+      transform: translateY(-2px);
+      // box-shadow: 0 8px 18px rgba(214, 38, 43, 0.2);
+    }
+  }
+
+  &__pill-icon {
+    color: $primary;
+  }
+
+  &__pill-city {
+    font-weight: 700;
+    color: $text-main;
+  }
+
+  &__pill-state {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $text-muted;
   }
 }

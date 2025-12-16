@@ -1,0 +1,214 @@
+/* These tokens are generated using https://themes.angular-material.dev/ */
+/* Preview: https://themes.angular-material.dev/?bold-font-weight=700&brand-font-family=Roboto&medium-font-weight=500&plain-font-family=Roboto&regular-font-weight=400&seed-error=%23ffb4ab&seed-neutral=%237c7769&seed-neutral-variant=%237e7760&seed-primary=%23e6c612&seed-secondary=%23d8c67e&seed-tertiary=%23a5d654 */
+/* Seed Colors: primary: #e6c612, secondary: #d8c67e, tertiary: #a5d654, error: #ffb4ab, neutral: #7c7769, neutral-variant: #7e7760 */
+/* Seed Typography: plain-font-family: Roboto, brand-font-family: Roboto, bold-font-weight: 700, medium-font-weight: 500, regular-font-weight: 400 */
+
+/* Make sure to import fonts in `<head>` of html */
+/*
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto&display=swap');
+</style>
+
+OR
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto&display=swap">
+*/
+
+/* Light Theme */
+:root,
+:host {
+  --sys-primary: #6e5e00;
+  --sys-on-primary: #ffffff;
+  --sys-primary-container: #ffe25b;
+  --sys-on-primary-container: #221b00;
+  --sys-inverse-primary: #e5c510;
+  --sys-primary-fixed: #ffe25b;
+  --sys-primary-fixed-dim: #e5c510;
+  --sys-on-primary-fixed: #221b00;
+  --sys-on-primary-fixed-variant: #534600;
+  --sys-secondary: #6b5e21;
+  --sys-on-secondary: #ffffff;
+  --sys-secondary-container: #f5e298;
+  --sys-on-secondary-container: #221b00;
+  --sys-secondary-fixed: #f5e298;
+  --sys-secondary-fixed-dim: #d8c67e;
+  --sys-on-secondary-fixed: #221b00;
+  --sys-on-secondary-fixed-variant: #52460a;
+  --sys-tertiary: #466800;
+  --sys-on-tertiary: #ffffff;
+  --sys-tertiary-container: #c0f36d;
+  --sys-on-tertiary-container: #121f00;
+  --sys-tertiary-fixed: #c0f36d;
+  --sys-tertiary-fixed-dim: #a5d654;
+  --sys-on-tertiary-fixed: #121f00;
+  --sys-on-tertiary-fixed-variant: #344e00;
+  --sys-background: #fdf8f6;
+  --sys-on-background: #1c1b1a;
+  --sys-surface: #fdf8f6;
+  --sys-surface-dim: #ddd9d7;
+  --sys-surface-bright: #fdf8f6;
+  --sys-surface-container-lowest: #ffffff;
+  --sys-surface-container-low: #f7f3f0;
+  --sys-surface-container: #f1edeb;
+  --sys-surface-container-high: #ece7e5;
+  --sys-surface-container-highest: #e6e2df;
+  --sys-on-surface: #1c1b1a;
+  --sys-shadow: #000000;
+  --sys-scrim: #000000;
+  --sys-surface-tint: #635e51;
+  --sys-inverse-surface: #31302f;
+  --sys-inverse-on-surface: #f4f0ed;
+  --sys-outline: #7b776e;
+  --sys-outline-variant: #ccc6ba;
+  --sys-neutral: #797775;
+  --sys-neutral10: #1c1b1a;
+  --sys-error: #ba1a1a;
+  --sys-error-container: #ffdad6;
+  --sys-on-error: #ffffff;
+  --sys-on-error-container: #410002;
+  --sys-surface-variant: #e8e2d5;
+  --sys-on-surface-variant: #4a473e;
+  --sys-neutral-variant: #7b776d;
+  --sys-neutral-variant20: #333028;
+  --sys-inverse-secondary: #d8c67e;
+  --sys-inverse-tertiary: #a5d654;
+}
+
+/* Dark Theme */
+.dark {
+  --sys-primary: #e5c510;
+  --sys-on-primary: #393000;
+  --sys-primary-container: #534600;
+  --sys-on-primary-container: #ffe25b;
+  --sys-inverse-primary: #6e5e00;
+  --sys-primary-fixed: #ffe25b;
+  --sys-primary-fixed-dim: #e5c510;
+  --sys-on-primary-fixed: #221b00;
+  --sys-on-primary-fixed-variant: #534600;
+  --sys-secondary: #d8c67e;
+  --sys-on-secondary: #3a3000;
+  --sys-secondary-container: #52460a;
+  --sys-on-secondary-container: #f5e298;
+  --sys-secondary-fixed: #f5e298;
+  --sys-secondary-fixed-dim: #d8c67e;
+  --sys-on-secondary-fixed: #221b00;
+  --sys-on-secondary-fixed-variant: #52460a;
+  --sys-tertiary: #a5d654;
+  --sys-on-tertiary: #223600;
+  --sys-tertiary-container: #344e00;
+  --sys-on-tertiary-container: #c0f36d;
+  --sys-tertiary-fixed: #c0f36d;
+  --sys-tertiary-fixed-dim: #a5d654;
+  --sys-on-tertiary-fixed: #121f00;
+  --sys-on-tertiary-fixed-variant: #344e00;
+  --sys-background: #141312;
+  --sys-on-background: #e6e2df;
+  --sys-surface: #141312;
+  --sys-surface-dim: #141312;
+  --sys-surface-bright: #3a3937;
+  --sys-surface-container-lowest: #0f0e0d;
+  --sys-surface-container-low: #1c1b1a;
+  --sys-surface-container: #201f1e;
+  --sys-surface-container-high: #2b2a28;
+  --sys-surface-container-highest: #363433;
+  --sys-on-surface: #e6e2df;
+  --sys-shadow: #000000;
+  --sys-scrim: #000000;
+  --sys-surface-tint: #cdc6b6;
+  --sys-inverse-surface: #e6e2df;
+  --sys-inverse-on-surface: #31302f;
+  --sys-outline: #959087;
+  --sys-outline-variant: #4a473e;
+  --sys-neutral: #797775;
+  --sys-neutral10: #1c1b1a;
+  --sys-error: #ffb4ab;
+  --sys-error-container: #93000a;
+  --sys-on-error: #690005;
+  --sys-on-error-container: #ffdad6;
+  --sys-surface-variant: #4a473e;
+  --sys-on-surface-variant: #ccc6ba;
+  --sys-neutral-variant: #7b776d;
+  --sys-neutral-variant20: #333028;
+  --sys-inverse-secondary: #6b5e21;
+  --sys-inverse-tertiary: #466800;
+}
+
+/* Typography */
+:root,
+:host {
+  --sys-brand-font-family: Roboto;
+  --sys-plain-font-family: Roboto;
+  --sys-bold-font-weight: 700;
+  --sys-medium-font-weight: 500;
+  --sys-regular-font-weight: 400;
+  --sys-body-large-font: var(--sys-plain-font-family);
+  --sys-body-medium-font: var(--sys-plain-font-family);
+  --sys-body-small-font: var(--sys-plain-font-family);
+  --sys-label-large-font: var(--sys-plain-font-family);
+  --sys-label-medium-font: var(--sys-plain-font-family);
+  --sys-label-small-font: var(--sys-plain-font-family);
+  --sys-title-medium-font: var(--sys-plain-font-family);
+  --sys-title-small-font: var(--sys-plain-font-family);
+  --sys-body-large: var(--sys-body-large-weight) var(--sys-body-large-size) /
+    var(--sys-body-large-line-height) var(--sys-body-large-font);
+  --sys-body-medium: var(--sys-body-medium-weight) var(--sys-body-medium-size) /
+    var(--sys-body-medium-line-height) var(--sys-body-medium-font);
+  --sys-body-small: var(--sys-body-small-weight) var(--sys-body-small-size) /
+    var(--sys-body-small-line-height) var(--sys-body-small-font);
+  --sys-label-large: var(--sys-label-large-weight) var(--sys-label-large-size) /
+    var(--sys-label-large-line-height) var(--sys-label-large-font);
+  --sys-label-medium: var(--sys-label-medium-weight)
+    var(--sys-label-medium-size) / var(--sys-label-medium-line-height)
+    var(--sys-label-medium-font);
+  --sys-label-small: var(--sys-label-small-weight) var(--sys-label-small-size) /
+    var(--sys-label-small-line-height) var(--sys-label-small-font);
+  --sys-title-large: var(--sys-title-large-weight) var(--sys-title-large-size) /
+    var(--sys-title-large-line-height) var(--sys-title-large-font);
+  --sys-title-medium: var(--sys-title-medium-weight)
+    var(--sys-title-medium-size) / var(--sys-title-medium-line-height)
+    var(--sys-title-medium-font);
+  --sys-title-small: var(--sys-title-small-weight) var(--sys-title-small-size) /
+    var(--sys-title-small-line-height) var(--sys-title-small-font);
+  --sys-headline-large: var(--sys-headline-large-weight)
+    var(--sys-headline-large-size) / var(--sys-headline-large-line-height)
+    var(--sys-headline-large-font);
+  --sys-headline-medium: var(--sys-headline-medium-weight)
+    var(--sys-headline-medium-size) / var(--sys-headline-medium-line-height)
+    var(--sys-headline-medium-font);
+  --sys-headline-small: var(--sys-headline-small-weight)
+    var(--sys-headline-small-size) / var(--sys-headline-small-line-height)
+    var(--sys-headline-small-font);
+  --sys-display-large: var(--sys-display-large-weight)
+    var(--sys-display-large-size) / var(--sys-display-large-line-height)
+    var(--sys-display-large-font);
+  --sys-display-medium: var(--sys-display-medium-weight)
+    var(--sys-display-medium-size) / var(--sys-display-medium-line-height)
+    var(--sys-display-medium-font);
+  --sys-display-small: var(--sys-display-small-weight)
+    var(--sys-display-small-size) / var(--sys-display-small-line-height)
+    var(--sys-display-small-font);
+  --sys-headline-large-font: var(--sys-brand-font-family);
+  --sys-headline-medium-font: var(--sys-brand-font-family);
+  --sys-headline-small-font: var(--sys-brand-font-family);
+  --sys-display-large-font: var(--sys-brand-font-family);
+  --sys-display-medium-font: var(--sys-brand-font-family);
+  --sys-display-small-font: var(--sys-brand-font-family);
+  --sys-title-large-font: var(--sys-brand-font-family);
+  --sys-label-large-weight-prominent: var(--sys-bold-font-weight);
+  --sys-label-medium-weight-prominent: var(--sys-bold-font-weight);
+  --sys-label-large-weight: var(--sys-medium-font-weight);
+  --sys-label-medium-weight: var(--sys-medium-font-weight);
+  --sys-label-small-weight: var(--sys-medium-font-weight);
+  --sys-title-medium-weight: var(--sys-medium-font-weight);
+  --sys-title-small-weight: var(--sys-medium-font-weight);
+  --sys-body-large-weight: var(--sys-regular-font-weight);
+  --sys-body-medium-weight: var(--sys-regular-font-weight);
+  --sys-body-small-weight: var(--sys-regular-font-weight);
+  --sys-display-large-weight: var(--sys-regular-font-weight);
+  --sys-display-medium-weight: var(--sys-regular-font-weight);
+  --sys-display-small-weight: var(--sys-regular-font-weight);
+  --sys-headline-large-weight: var(--sys-regular-font-weight);
+  --sys-headline-medium-weight: var(--sys-regular-font-weight);
+  --sys-headline-small-weight: var(--sys-regular-font-weight);
+  --sys-title-large-weight: var(--sys-regular-font-weight);
+}

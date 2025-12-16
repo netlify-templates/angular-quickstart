@@ -3,9 +3,9 @@
     <header class="why-header">
       <h2 class="why-title">Why Choose ProVolt Electrical</h2>
       <p class="why-subtitle">
-        Hill Country homeowners and businesses trust ProVolt for safe,
-        dependable electrical work, transparent communication, and long-term
-        reliability on every project.
+        Hill Country homeowners, businesses, and ranches trust ProVolt for local
+        expertise, code-compliant installations, clean and labeled work, and
+        clear communication from the first estimate to the final walkthrough.
       </p>
     </header>
 
@@ -15,11 +15,10 @@
           <div class="why-icon-circle">
             <mat-icon>{{ reason.icon }}</mat-icon>
           </div>
+          <mat-card-title class="why-card-title">
+            {{ reason.title }}
+          </mat-card-title>
         </div>
-
-        <mat-card-title class="why-card-title">
-          {{ reason.title }}
-        </mat-card-title>
 
         <mat-card-content class="why-card-description">
           {{ reason.description }}

@@ -2,11 +2,6 @@
   <!-- HERO SECTION -->
   <section class="tp-hero">
     <div class="tp-hero-left">
-      <p class="tp-badge">
-        <mat-icon>location_on</mat-icon>
-        {{ heroBadgeText }}
-      </p>
-
       <h1 class="tp-hero-title">
         {{ heroTitle }}
       </h1>
@@ -23,14 +18,14 @@
       </ul>
 
       <div class="tp-hero-actions">
-        <button mat-raised-button color="primary" (click)="onCallClick()">
-          <mat-icon>call</mat-icon>
-          Call {{ townConfig.phoneNumber }}
-        </button>
-        <button mat-stroked-button color="primary" (click)="onRequestQuote()">
-          <mat-icon>assignment</mat-icon>
-          Request a Quote
-        </button>
+        <app-cta-button
+          [label]="'Call'"
+          (click)="onCallClick()"
+        ></app-cta-button>
+        <app-cta-button
+          [label]="'Request a Quote'"
+          (click)="onRequestQuote()"
+        ></app-cta-button>
       </div>
 
       <p class="tp-hero-note">
@@ -204,14 +199,14 @@
         </p>
       </div>
       <div class="tp-final-actions">
-        <button mat-raised-button color="primary" (click)="onCallClick()">
-          <mat-icon>call</mat-icon>
-          Call {{ townConfig.phoneNumber }}
-        </button>
-        <button mat-stroked-button color="primary" (click)="onRequestQuote()">
-          <mat-icon>mail</mat-icon>
-          Schedule Service
-        </button>
+        <app-cta-button
+          [label]="'Call'"
+          (click)="onCallClick()"
+        ></app-cta-button>
+        <app-cta-button
+          [label]="'Request a Quote'"
+          (click)="onRequestQuote()"
+        ></app-cta-button>
       </div>
     </div>
   </section>

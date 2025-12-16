@@ -110,7 +110,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       'Boerne',
       'Helotes',
     ],
-    urlSlug: '/electrician-kerrville-tx',
+    urlSlug: '/service-areas/kerrville-tx-electrician',
     seo: {
       metaTitle:
         'Electrician Kerrville TX | Residential & Commercial Electrical',
@@ -183,7 +183,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       'Comfort',
       'Bandera',
     ],
-    urlSlug: '/electrician-ingram-tx',
+    urlSlug: '/service-areas/ingram-tx-electrician',
     seo: {
       metaTitle: 'Electrician Ingram TX | ProVolt Electrical Services',
       metaDescription:
@@ -251,7 +251,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       'Center Point',
       'Mountain Home',
     ],
-    urlSlug: '/electrician-hunt-tx',
+    urlSlug: '/service-areas/hunt-tx-electrician',
     seo: {
       metaTitle:
         'Electrician Hunt TX | Ranch & Residential Electrical Services',
@@ -319,7 +319,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       'Kerrville',
       'Center Point',
     ],
-    urlSlug: '/electrician-comfort-tx',
+    urlSlug: '/service-areas/comfort-tx-electrician',
     seo: {
       metaTitle: 'Electrician Comfort TX | Repairs, Lighting & Panel Upgrades',
       metaDescription:
@@ -391,7 +391,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       'Ingram',
       'Hunt',
     ],
-    urlSlug: '/electrician-fredericksburg-tx',
+    urlSlug: '/service-areas/fredericksburg-tx-electrician',
     seo: {
       metaTitle:
         'Electrician Fredericksburg TX | Residential & Winery Electrical',
@@ -460,7 +460,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       'Plan your next Boerne remodel or new build with efficient wiring, circuits, and lighting from day one.',
     energyServices: BASE_ENERGY_SERVICES,
     areasServed: ['Boerne', 'Comfort', 'Fredericksburg', 'Helotes', 'Bandera'],
-    urlSlug: '/electrician-boerne-tx',
+    urlSlug: '/service-areas/boerne-tx-electrician',
     seo: {
       metaTitle:
         'Electrician Boerne TX | Trusted Residential & Commercial Work',
@@ -522,7 +522,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       'Thoughtful, efficient electrical design reduces downtime and long-term costs on rural properties.',
     energyServices: BASE_ENERGY_SERVICES,
     areasServed: ['Bandera', 'Kerrville', 'Comfort', 'Boerne', 'Helotes'],
-    urlSlug: '/electrician-bandera-tx',
+    urlSlug: '/service-areas/bandera-tx-electrician',
     seo: {
       metaTitle:
         'Electrician Bandera TX | Ranch, Residential & Outdoor Lighting',
@@ -584,7 +584,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       'We upgrade lighting and electrical design to improve efficiency and lower operating costs.',
     energyServices: BASE_ENERGY_SERVICES,
     areasServed: ['Center Point', 'Kerrville', 'Ingram', 'Comfort', 'Bandera'],
-    urlSlug: '/electrician-center-point-tx',
+    urlSlug: '/service-areas/center-point-tx-electrician',
     seo: {
       metaTitle:
         'Electrician Center Point TX | Reliable Hill Country Electrician',
@@ -655,7 +655,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       'San Antonio (NW)',
       'Comfort',
     ],
-    urlSlug: '/electrician-helotes-tx',
+    urlSlug: '/service-areas/helotes-tx-electrician',
     seo: {
       metaTitle:
         'Electrician Helotes TX | Repairs, Lighting & Smart Home Wiring',

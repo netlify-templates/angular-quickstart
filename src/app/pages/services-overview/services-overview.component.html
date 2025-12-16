@@ -1,22 +1,58 @@
 <section class="our-services">
-  <header class="our-services__header">
-    <h1>Our Electrical Services</h1>
-    <p>
-      Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers
-      master-level electrical work for homes, businesses, and rural properties.
-    </p>
-  </header>
+  <app-electrical-service-cards></app-electrical-service-cards>
 
   <div class="our-services__chips">
-    <span class="chip chip--legend">Residential</span>
-    <span class="chip chip--legend chip--commercial">Commercial</span>
-    <span class="chip chip--legend chip--both">Both</span>
+    <!-- <span class="chip chip--legend">
+      <mat-checkbox
+        class="chip-checkbox"
+        [checked]="selectedCategory === null"
+        (change)="clearCategoryFilter()"
+      >
+        All
+      </mat-checkbox>
+    </span>
+    <span class="chip chip--legend chip--both">
+      <mat-checkbox
+        class="chip-checkbox"
+        [checked]="selectedCategory === 'Both'"
+        (change)="setCategoryFilter('Both')"
+      >
+        Both
+      </mat-checkbox>
+    </span> -->
+    <span class="chip chip--legend chip--residential">
+      <mat-checkbox
+        class="chip-checkbox"
+        [checked]="selectedCategory === 'Residential'"
+        (change)="setCategoryFilter('Residential')"
+      >
+        Residential
+      </mat-checkbox>
+    </span>
+    <span class="chip chip--legend chip--commercial">
+      <mat-checkbox
+        class="chip-checkbox"
+        [checked]="selectedCategory === 'Commercial'"
+        (change)="setCategoryFilter('Commercial')"
+      >
+        Commercial
+      </mat-checkbox>
+    </span>
+    <span class="chip chip--legend chip--ranch-and-rural">
+      <mat-checkbox
+        class="chip-checkbox"
+        [checked]="selectedCategory === 'RanchAndRural'"
+        (change)="setCategoryFilter('RanchAndRural')"
+      >
+        Ranch and Rural
+      </mat-checkbox>
+    </span>
   </div>
 
   <div class="our-services__grid">
     <mat-card
       class="service-card"
-      *ngFor="let service of services"
+      *ngFor="let service of filteredServices"
       [ngClass]="{
         'service-card--residential': service.category === 'Residential',
         'service-card--commercial': service.category === 'Commercial',
@@ -29,7 +65,9 @@
         </div>
         <div>
           <mat-card-title>{{ service.title }}</mat-card-title>
-          <mat-card-subtitle>{{ service.category }}</mat-card-subtitle>
+          <mat-card-subtitle *ngIf="service.category !== 'Both'">{{
+            service.category
+          }}</mat-card-subtitle>
         </div>
       </mat-card-header>
 
@@ -37,7 +75,6 @@
         <p class="service-card__description">
           {{ service.description }}
         </p>
-
         <mat-divider></mat-divider>
 
         <ul class="service-card__list">
@@ -47,12 +84,15 @@
           </li>
         </ul>
       </mat-card-content>
-
-      <mat-card-actions align="end">
-        <button mat-stroked-button color="primary">Schedule Service</button>
+      <mat-card-actions align="start">
+        <button mat-stroked-button (click)="onCallNow()">
+          Schedule Service
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
+
+  <app-areas-we-serve></app-areas-we-serve>
 
   <footer class="our-services__footer">
     <p>

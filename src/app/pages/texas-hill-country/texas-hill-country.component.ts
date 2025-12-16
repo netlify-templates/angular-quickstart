@@ -39,7 +39,7 @@ export class TexasHillCountryComponent implements OnInit {
   towns: TownCard[] = [];
 
   private readonly pageUrl =
-    'https://provoltelectricalservices.com/texas-hill-country-electrician';
+    'https://provoltelectricalservices.com/service-areas/texas-hill-country-electrician';
 
   // TODO: point to a real OG image for this landing page
   private readonly ogImage =

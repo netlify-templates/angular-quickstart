@@ -1,0 +1,61 @@
+<section class="our-services">
+  <div class="our-services__header">
+    <h1>Commercial Electrical Services</h1>
+    <p>
+      Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers
+      master-level electrical work for homes, businesses, and rural properties.
+    </p>
+  </div>
+
+  <div class="our-services__grid">
+    <mat-card
+      class="service-card"
+      *ngFor="let service of services"
+      [ngClass]="{
+        'service-card--residential': service.category === 'Residential',
+        'service-card--commercial': service.category === 'Commercial',
+        'service-card--both': service.category === 'Both'
+      }"
+    >
+      <mat-card-header>
+        <div mat-card-avatar class="service-card__icon">
+          <mat-icon>{{ service.icon }}</mat-icon>
+        </div>
+        <div>
+          <mat-card-title>{{ service.title }}</mat-card-title>
+          <mat-card-subtitle *ngIf="service.category !== 'Both'">{{
+            service.category
+          }}</mat-card-subtitle>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="service-card__description">
+          {{ service.description }}
+        </p>
+        <mat-divider></mat-divider>
+
+        <ul class="service-card__list">
+          <li *ngFor="let bullet of service.bullets">
+            <mat-icon class="service-card__bullet-icon">bolt</mat-icon>
+            <span>{{ bullet }}</span>
+          </li>
+        </ul>
+      </mat-card-content>
+      <mat-card-actions align="start">
+        <button mat-stroked-button (click)="onCallNow()">
+          Schedule Service
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <app-areas-we-serve></app-areas-we-serve>
+
+  <footer class="our-services__footer">
+    <p>
+      Not seeing exactly what you need? <span>Give us a call</span>—if it’s
+      electrical, ProVolt can help.
+    </p>
+  </footer>
+</section>
