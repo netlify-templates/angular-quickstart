@@ -46,8 +46,8 @@ export interface TownPageConfig {
 
 // Shared constants
 const BASE_DOMAIN = 'https://provoltelectricalservices.com';
-const PHONE_DISPLAY = '(830) 000-0000'; // TODO: real number
-const PHONE_E164 = '+1-830-000-0000'; // TODO: real number in E.164
+const PHONE_DISPLAY = '(830) 928-5046';
+const PHONE_E164 = '+18309285046';
 const DEFAULT_REGION = 'Texas Hill Country';
 const DEFAULT_OG_IMAGE = `${BASE_DOMAIN}/assets/og-default.jpg`; // TODO: update or replace
 
@@ -117,7 +117,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       pageUrl: `${BASE_DOMAIN}/service-areas/kerrville-tx-electrician`,
       ogImage: DEFAULT_OG_IMAGE,
       robots: 'index,follow',
-      jsonLdId: 'json-ld-town-kerrville-electrician',
+      jsonLdId: 'json-ld-kerrville',
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'Electrician',
@@ -143,7 +143,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
           'Electrical panel upgrades',
           'Lighting installation',
           'Electrical troubleshooting and repairs',
-          'Energy efficiency upgrades',
+          'Energy audits and efficiency upgrades',
           'Electrical consultations for renovations and new builds',
         ],
       },
@@ -271,7 +271,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       'From barns and shops to larger ranch facilities, we keep your Hunt property powered and protected.',
     commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
     energyIntro:
-      'Long-term and remote properties benefit from thoughtful, efficient electrical design and backup power systems.',
+      'Long-run and remote properties benefit from thoughtful, efficient electrical design and dependable power distribution.',
     energyServices: BASE_ENERGY_SERVICES,
     areasServed: [
       'Hunt',
@@ -285,17 +285,17 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       metaTitle:
         'Electrician Hunt TX | Ranch & Residential Electrical Services',
       metaDescription:
-        'Electrical service in Hunt, TX including ranch wiring, outdoor lighting, panel upgrades, generators & more. Quality work from a local master electrician.',
-      pageUrl: `${BASE_DOMAIN}/electrician-hunt-tx`,
+        'Electrical service in Hunt, TX including ranch wiring, outdoor lighting, panel upgrades, troubleshooting & repairs. Quality work from a local master electrician.',
+      pageUrl: `${BASE_DOMAIN}/service-areas/hunt-tx-electrician`,
       ogImage: DEFAULT_OG_IMAGE,
       robots: 'index,follow',
       jsonLdId: 'json-ld-hunt',
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/electrician-hunt-tx#electrician`,
+        '@id': `${BASE_DOMAIN}/service-areas/hunt-tx-electrician#electrician`,
         name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/electrician-hunt-tx`,
+        url: `${BASE_DOMAIN}/service-areas/hunt-tx-electrician`,
         description:
           'ProVolt Electrical Services provides expert electrical work for homes, ranches, and river properties in Hunt, TX.',
         telephone: PHONE_E164,
@@ -307,16 +307,13 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
           addressRegion: 'TX',
           addressCountry: 'US',
         },
-        areaServed: {
-          '@type': 'Place',
-          name: 'Hunt, TX',
-        },
+        areaServed: { '@type': 'Place', name: 'Hunt, TX' },
         serviceType: [
           'Ranch and rural property electrical',
           'Outdoor and landscape lighting',
-          'Generator and backup power systems',
           'Panel upgrades',
           'Electrical troubleshooting and repairs',
+          'Well and pump circuits',
         ],
       },
     },
@@ -473,7 +470,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
     phoneNumber: PHONE_DISPLAY,
     heroBullets: [
       'Perfect for growing neighborhoods & remodels',
-      'EV charger, appliance, and panel expertise',
+      'Smart home, lighting, and panel expertise',
       'Reliable service for homes and small businesses',
     ],
     residentialIntro:
@@ -481,10 +478,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
     residentialServices: BASE_RESIDENTIAL_SERVICES,
     commercialIntro:
       'Shops, offices, and small commercial spaces in Boerne count on us for reliable power and lighting.',
-    commercialServices: [
-      { label: 'EV charger & appliance circuits', icon: 'ev_station' },
-      ...BASE_COMMERCIAL_RANCH_SERVICES,
-    ],
+    commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
     energyIntro:
       'Plan your next Boerne remodel or new build with efficient wiring, circuits, and lighting from day one.',
     energyServices: BASE_ENERGY_SERVICES,
@@ -494,19 +488,19 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       metaTitle:
         'Electrician Boerne TX | Trusted Residential & Commercial Work',
       metaDescription:
-        'Expert electrician in Boerne, TX providing repairs, lighting, EV chargers, renovations & commercial electrical services. Local, licensed, dependable.',
-      pageUrl: `${BASE_DOMAIN}/electrician-boerne-tx`,
+        'Expert electrician in Boerne, TX providing repairs, lighting, panel upgrades, remodel wiring & commercial electrical services. Local, licensed, dependable.',
+      pageUrl: `${BASE_DOMAIN}/service-areas/boerne-tx-electrician`,
       ogImage: DEFAULT_OG_IMAGE,
       robots: 'index,follow',
       jsonLdId: 'json-ld-boerne',
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/electrician-boerne-tx#electrician`,
+        '@id': `${BASE_DOMAIN}/service-areas/boerne-tx-electrician#electrician`,
         name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/electrician-boerne-tx`,
+        url: `${BASE_DOMAIN}/service-areas/boerne-tx-electrician`,
         description:
-          'ProVolt Electrical Services offers residential, commercial, and renovation-focused electrical services in Boerne, TX.',
+          'ProVolt Electrical Services offers residential and commercial electrical services in Boerne, TX.',
         telephone: PHONE_E164,
         image: DEFAULT_OG_IMAGE,
         priceRange: '$$',
@@ -516,15 +510,13 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
           addressRegion: 'TX',
           addressCountry: 'US',
         },
-        areaServed: {
-          '@type': 'Place',
-          name: 'Boerne, TX',
-        },
+        areaServed: { '@type': 'Place', name: 'Boerne, TX' },
         serviceType: [
           'Residential electrical services',
           'Commercial electrical services',
           'Panel and service upgrades',
-          'EV charger and appliance circuits',
+          'Lighting and ceiling fan installation',
+          'Electrical troubleshooting and repairs',
           'Electrical consultations for renovations and new builds',
         ],
       },
@@ -557,16 +549,16 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Electrician Bandera TX | Ranch, Residential & Outdoor Lighting',
       metaDescription:
         'Serving Bandera, TX with ranch wiring, outdoor lighting, panel upgrades & electrical repairs. Reliable service for rural and residential properties.',
-      pageUrl: `${BASE_DOMAIN}/electrician-bandera-tx`,
+      pageUrl: `${BASE_DOMAIN}/service-areas/bandera-tx-electrician`,
       ogImage: DEFAULT_OG_IMAGE,
       robots: 'index,follow',
       jsonLdId: 'json-ld-bandera',
       jsonLd: {
         '@context': 'https://schema.org',
         '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/electrician-bandera-tx#electrician`,
+        '@id': `${BASE_DOMAIN}/service-areas/bandera-tx-electrician#electrician`,
         name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/electrician-bandera-tx`,
+        url: `${BASE_DOMAIN}/service-areas/bandera-tx-electrician`,
         description:
           'ProVolt Electrical Services specializes in ranch, rural, and residential electrical work in Bandera, TX.',
         telephone: PHONE_E164,
@@ -578,15 +570,12 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
           addressRegion: 'TX',
           addressCountry: 'US',
         },
-        areaServed: {
-          '@type': 'Place',
-          name: 'Bandera, TX',
-        },
+        areaServed: { '@type': 'Place', name: 'Bandera, TX' },
         serviceType: [
           'Ranch and rural property electrical',
           'Outdoor and security lighting',
           'Panel upgrades and replacements',
-          'Generator-ready installations',
+          'Trenching and long-run outdoor power',
           'Electrical troubleshooting and repairs',
         ],
       },

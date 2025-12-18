@@ -35,7 +35,29 @@ interface NavLink {
 export class ToolBarComponent {
   navLinks: NavLink[] = [
     { label: 'Home', path: '/home' },
-    { label: 'Services', path: '/electrical-services' },
+    {
+      label: 'Services',
+      path: '/electrical-services',
+      children: [
+        {
+          label: 'Services Overview',
+          path: '/electrical-services',
+        },
+        {
+          label: 'Residential',
+          path: '/electrical-services/residential-electrician',
+        },
+        {
+          label: 'Commercial',
+          path: '/electrical-services/commercial-electrician',
+        },
+
+        {
+          label: 'Ranch & Rural',
+          path: '/electrical-services/ranch-rural-electrician',
+        },
+      ],
+    },
     {
       label: 'Areas We Serve',
       path: '/service-areas/texas-hill-country-electrician',

@@ -7,65 +7,12 @@
 }
 
 .osp-title {
-  letter-spacing: 0.12em;
-  font-weight: 600;
   text-align: center;
   margin: 0 0 2.25rem;
-  font-size: 1.6rem;
 }
 
-/* TIMELINE */
-
-.osp-timeline {
-  position: relative;
-  width: 100%;
-  max-width: 1100px;
-  margin-bottom: 2.75rem;
-}
-
-.osp-timeline-line {
-  position: absolute;
-  top: 32px;
-  left: 5%;
-  right: 5%;
-  height: 2px;
-  background: var(--brand-red);
-}
-
-.osp-timeline-steps {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1.5rem;
-  position: relative;
-  z-index: 1;
-}
-
-.osp-timeline-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 0;
-  text-align: center;
-}
-
-.osp-step-circle {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 2px solid var(--brand-red);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--brand-yellow);
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.osp-step-label {
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-  opacity: 0.9;
+.header {
+  margin-bottom: 1.75rem;
 }
 
 /* CARDS */
@@ -81,8 +28,7 @@
 
 .osp-card {
   flex: 1 1 0;
-  background: var(--brand-yellow);
-  color: var(--text-primary);
+  background: var(--background-alt);
   border-radius: 18px;
   padding: 1.25rem 1.5rem;
 }
@@ -102,7 +48,7 @@
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  border: 2px solid var(--brand-red);
+  background-color: var(--brand-yellow-02);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,6 +56,7 @@
 
 .osp-icon-circle mat-icon {
   font-size: 26px;
+  color: var(--icon-color);
 }
 
 /* Card text */

@@ -1,24 +1,16 @@
-:host {
-  display: block;
-}
-
 /* Section wrapper */
 
 .about-section-small {
   padding: 32px 1.5rem;
   background: var(--background);
 
-  .about-inner {
-    max-width: 1100px;
-    margin: 0 auto;
+  .header {
+    text-align: center;
+    margin-bottom: 1.75rem;
   }
 
-  .about-title {
-    font-size: clamp(1.75rem, 2.4vw, 2.25rem);
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 2.5rem;
-    letter-spacing: 0.02em;
+  .about-inner {
+    margin: 0 auto;
   }
 
   .about-cards {
@@ -63,7 +55,7 @@
       padding: 0.75rem 1.5rem 1.5rem;
       font-size: 0.95rem;
       line-height: 1.6;
-      color: #e5e7eb;
+      color: var(--background);
 
       p {
         margin: 0 0 0.75rem;
@@ -90,19 +82,12 @@
     text-transform: uppercase;
     font-weight: 600;
 
-    border-radius: 999px;
-    border: 1px solid var(--brand-red);
-    background: radial-gradient(
-      circle at top left,
-      var(--sys-secondary-fixed),
-      var(--sys-secondary-fixed-dim) 60%
-    );
-
     // Optional icon if you ever add one inside the badge
     mat-icon {
       font-size: 16px;
       width: 16px;
       height: 16px;
+      color: var(--brand-green);
     }
   }
 }

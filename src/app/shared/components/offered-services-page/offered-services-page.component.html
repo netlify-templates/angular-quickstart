@@ -1,5 +1,5 @@
 <section class="our-services">
-  <!-- HERO HEADER (new) -->
+  <!-- HERO -->
   <header>
     <h1 class="page-title">{{ hero.title }}</h1>
     <div class="hero">
@@ -35,52 +35,88 @@
 
       <div class="hero__chips">
         <div class="section-kicker">Who we help</div>
-        <mat-chip-listbox aria-label="Customers we serve">
+        <mat-chip-listbox aria-label="Clients we serve">
           <mat-chip *ngFor="let item of whoWeHelp">{{ item }}</mat-chip>
         </mat-chip-listbox>
       </div>
     </div>
   </header>
 
-  <!-- YOUR EXISTING HERO CARDS -->
-  <app-electrical-service-cards
-    [leftAligned]="true"
-  ></app-electrical-service-cards>
-
-  <!-- POPULAR SERVICES (new) -->
-  <section class="section">
-    <h2>Popular Service Links</h2>
-    <p class="section__subtitle">
-      Choose the service type that best matches your need—or contact us and
-      we’ll guide you to the safest, most practical next step.
-    </p>
+  <!-- POPULAR JOBS -->
+  <section class="section" *ngIf="popularCards?.length">
+    <h2>{{ popularSectionTitle }}</h2>
+    <p class="section__subtitle">{{ popularSectionSubtitle }}</p>
 
     <div class="cards-grid">
       <mat-card
         class="link-card"
-        *ngFor="let link of popularServices; trackBy: trackByTitle"
+        *ngFor="let job of popularCards; trackBy: trackByTitle"
       >
         <mat-card-header>
           <div mat-card-avatar class="link-card__icon">
-            <mat-icon>{{ link.icon }}</mat-icon>
+            <mat-icon>{{ job.icon }}</mat-icon>
           </div>
-          <mat-card-title>{{ link.title }}</mat-card-title>
+          <mat-card-title>{{ job.title }}</mat-card-title>
         </mat-card-header>
 
         <mat-card-content>
-          <p>{{ link.description }}</p>
+          <p>{{ job.description }}</p>
         </mat-card-content>
 
         <mat-card-actions align="start" class="popular-service-card-actions">
-          <button mat-button (click)="onCallNow()">Call</button>
-          <!-- <a mat-stroked-button [routerLink]="link.routerLink">View</a> -->
+          <button mat-button (click)="onCallNow()">Schedule</button>
+
+          <a mat-stroked-button [routerLink]="job.path">Learn More</a>
         </mat-card-actions>
       </mat-card>
     </div>
   </section>
 
-  <!-- HOW WE WORK (new) -->
+  <!-- SERVICES GRID -->
+  <section class="section" *ngIf="services?.length">
+    <h2>Service Capabilities</h2>
 
+    <div class="our-services__grid">
+      <mat-card
+        class="service-card"
+        *ngFor="let service of services; trackBy: trackByTitle"
+      >
+        <mat-card-header>
+          <div mat-card-avatar class="service-card__icon">
+            <mat-icon>{{ service.icon }}</mat-icon>
+          </div>
+          <div>
+            <mat-card-title>{{ service.title }}</mat-card-title>
+            <mat-card-subtitle
+              *ngIf="showCategorySubtitle && service.category !== 'Both'"
+            >
+              {{ customCategoryLabel ?? service.category }}
+            </mat-card-subtitle>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p class="service-card__description">{{ service.description }}</p>
+          <mat-divider></mat-divider>
+
+          <ul class="service-card__list">
+            <li *ngFor="let bullet of service.bullets">
+              <mat-icon class="service-card__bullet-icon">bolt</mat-icon>
+              <span>{{ bullet }}</span>
+            </li>
+          </ul>
+        </mat-card-content>
+
+        <mat-card-actions align="start" class="service-capabilities-actions">
+          <button mat-stroked-button (click)="onCallNow()">
+            Schedule Service
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
   <section class="section" *ngIf="processSteps?.length">
     <h2>How We Work</h2>
 
@@ -100,11 +136,12 @@
     </div>
   </section>
 
+  <!-- AREAS SERVED -->
   <app-areas-we-serve [leftAlign]="true"></app-areas-we-serve>
 
-  <!-- FAQ (new) -->
-  <section class="section">
-    <h2>Electrical Services FAQ</h2>
+  <!-- FAQ -->
+  <section class="section" *ngIf="faqs?.length">
+    <h2>Electrical FAQ</h2>
 
     <mat-accordion multi>
       <mat-expansion-panel *ngFor="let faq of faqs">

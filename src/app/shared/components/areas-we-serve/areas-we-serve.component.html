@@ -1,8 +1,10 @@
-<section class="areas-served">
+<section class="areas-served" [ngClass]="{ 'center-aligned': !leftAlign }">
   <div class="areas-served__container">
     <header class="areas-served__header">
-      <h2 class="areas-served__title">Areas We Proudly Serve</h2>
-      <p class="areas-served__subtitle">
+      <h2 class="areas-served__title" [ngClass]="{ 'left-align': leftAlign }">
+        Areas We Proudly Serve
+      </h2>
+      <p class="areas-served__subtitle" [ngClass]="{ 'left-align': leftAlign }">
         Based in
         <strong>{{ headquarters.city }}, {{ headquarters.state }}</strong
         >, ProVolt Electric provides fast, professional electrical service

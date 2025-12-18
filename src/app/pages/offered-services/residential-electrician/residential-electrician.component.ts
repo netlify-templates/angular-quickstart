@@ -12,6 +12,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { SeoService } from 'src/app/shared/services/seo.service';
 import { AreasWeServeComponent } from 'src/app/shared/components/areas-we-serve/areas-we-serve.component';
 import { ElectricalServiceCardsComponent } from 'src/app/shared/components/electrical-service-cards/electrical-service-cards.component';
+import { OfferedServicesPageComponent } from 'src/app/shared/components/offered-services-page/offered-services-page.component';
 
 interface ServiceItem {
   title: string;
@@ -53,8 +54,7 @@ interface FaqItem {
     MatDividerModule,
     MatChipsModule,
     MatExpansionModule,
-    AreasWeServeComponent,
-    ElectricalServiceCardsComponent,
+    OfferedServicesPageComponent,
   ],
 })
 export class ResidentialElectricianComponent implements OnInit {

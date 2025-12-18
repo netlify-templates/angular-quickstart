@@ -1,11 +1,20 @@
 .our-services {
   background-color: var(--background);
-  padding: 0 1.5rem 4rem;
+  padding: 0 1.5rem 2rem;
   margin: 0 auto;
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+.page-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-top: 1.5rem;
+  margin-bottom: 1.75rem;
+  text-align: center;
 }
 
 /* HERO */
@@ -30,7 +39,7 @@
 
   &__subtitle {
     margin: 0 0 0.85rem;
-    max-width: 60ch;
+    max-width: 70ch;
     font-size: 0.98rem;
     line-height: 1.65;
     color: rgba(0, 0, 0, 0.78);
@@ -58,8 +67,8 @@
   }
 
   &__primary {
-    background-color: var(--brand-red, #d6262b);
-    color: #fff;
+    background-color: var(--brand-yellow-02);
+    color: var(--text-primary);
   }
 
   &__chips {
@@ -134,7 +143,7 @@
   }
 }
 
-/* EXISTING GRID */
+/* SERVICES GRID */
 .our-services__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));

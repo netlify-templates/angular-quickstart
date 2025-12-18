@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,6 +27,7 @@ interface HeroServiceCard {
   ],
 })
 export class ElectricalServiceCardsComponent {
+  @Input() leftAligned: boolean = false;
   services: HeroServiceCard[] = [
     {
       title: 'Residential Electrical Services',
@@ -74,6 +75,21 @@ export class ElectricalServiceCardsComponent {
         'Trenching & long-run power to gates, arenas & remote structures',
         'Yard, driveway, security & motion lighting for rural properties',
         'Ranch and rural troubleshooting, safety checks & repairs',
+      ],
+    },
+    {
+      title: 'Contact a Licensed Master Electrician',
+      description:
+        'Speak with a licensed master electrician for residential, commercial, and ranch projects—fast quotes, 24/7 emergency electrical repair, and code‑compliant service across the Texas Hill Country.',
+      ctaLabel: 'Get an Electrical Quote',
+      routerLink: '/contact',
+      icon: 'contact_mail',
+      bullets: [
+        'Fast quotes for panel upgrades, service replacements & troubleshooting',
+        '24/7 emergency electrical repair—troubleshooting breakers, circuits & outages',
+        'NEC‑compliant wiring, safety inspections & code violation corrections',
+        'Lighting design, LED retrofits, & controls',
+        'Fully licensed & insured—serving the Texas Hill Country',
       ],
     },
   ];

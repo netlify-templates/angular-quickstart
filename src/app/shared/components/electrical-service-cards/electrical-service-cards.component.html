@@ -1,11 +1,13 @@
-<section class="services-section">
+<section
+  class="services-section"
+  [ngClass]="{ 'services-center': leftAligned }"
+>
   <div class="services-inner">
-    <div class="header">
-      <h1>Our Electrical Services</h1>
+    <div class="header" [ngClass]="{ 'header-left': leftAligned }">
+      <h2>Our Electrical Services</h2>
       <p>
-        Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers
-        master-level electrical work for homes, businesses, and rural
-        properties.
+        Choose the service category that best matches your property—or contact
+        us and we’ll guide you to the safest, most practical next step.
       </p>
     </div>
 

@@ -10,7 +10,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { SeoService } from 'src/app/shared/services/seo.service';
-import { AreasWeServeComponent } from 'src/app/shared/components/areas-we-serve/areas-we-serve.component';
+import { OfferedServicesPageComponent } from 'src/app/shared/components/offered-services-page/offered-services-page.component';
 
 interface ServiceItem {
   title: string;
@@ -52,7 +52,7 @@ interface FaqItem {
     MatDividerModule,
     MatChipsModule,
     MatExpansionModule,
-    AreasWeServeComponent,
+    OfferedServicesPageComponent,
   ],
 })
 export class CommercialElectricianComponent implements OnInit {
@@ -73,7 +73,7 @@ export class CommercialElectricianComponent implements OnInit {
       'Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers master-level electrical work for homes, businesses, and rural properties.',
   };
 
-  whoWeServe: string[] = [
+  whoWeHelp: string[] = [
     'Retail stores & strip centers',
     'Offices & professional buildings',
     'Restaurants & kitchens',

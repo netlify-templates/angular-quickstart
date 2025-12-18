@@ -8,7 +8,10 @@ body {
   /* Brand Colors */
   --brand-red: #d6262b;
   --brand-yellow: #e6c612;
+  --brand-yellow-02: #d9b524;
   --brand-black: #1a1a1a;
+  --brand-grey: #7f7e7e;
+  --brand-green: #4caf50;
 
   --background: #f7f5f0;
   --background-alt: #ffffff;
@@ -19,6 +22,9 @@ body {
   --text-secondary: #6b6b6b;
   --text-muted: #757575;
   --text-neutral: #9e9e9e;
+
+  /* Icons */
+  --icon-color: #ffffff;
 
   /* Headers */
   --header-primary: #1a1a1a;
@@ -40,6 +46,12 @@ body {
   p,
   h1 {
     color: var(--text-primary);
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
   }
 }
 

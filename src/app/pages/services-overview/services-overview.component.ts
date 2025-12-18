@@ -81,34 +81,69 @@ export class ServicesOverviewComponent implements OnInit {
     'Service upgrades & safety fixes',
   ];
 
-  popularLinks: PopularLink[] = [
+  popularServices: PopularLink[] = [
     {
-      title: 'Residential Electrician',
+      title: 'Emergency Electrical Repairs',
       description:
-        'Repairs, panels, lighting, smart home controls, remodel wiring, and safety upgrades.',
-      icon: 'home',
-      routerLink: '/electrical-services/residential-electrician',
+        'Fast help for outages, burning smells, sparking, and urgent electrical hazards.',
+      icon: 'warning',
+      routerLink: '/electrical-services/emergency-electrician',
     },
     {
-      title: 'Commercial Electrician',
+      title: 'Electrical Panel Upgrades',
       description:
-        'Tenant build-outs, code compliance work, lighting retrofits, troubleshooting, and repairs.',
-      icon: 'apartment',
-      routerLink: '/electrical-services/commercial-electrician',
+        'Breaker box upgrades, service upgrades, and safer power for modern loads.',
+      icon: 'electrical_services',
+      routerLink: '/electrical-services/electrical-panel-upgrades',
     },
     {
-      title: 'Ranch & Rural Electrician',
+      title: 'Breaker & Circuit Repairs',
       description:
-        'Barn/shop wiring, outdoor power, well/pump circuits, and reliability for long runs.',
-      icon: 'agriculture',
-      routerLink: '/electrical-services/ranch-rural-electrician',
+        'Fix tripping breakers, overloaded circuits, and unreliable power issues.',
+      icon: 'bolt',
+      routerLink: '/electrical-services/circuit-breaker-repair',
     },
     {
-      title: 'Contact Us',
+      title: 'Troubleshooting & Diagnostics',
       description:
-        'Tell us what’s going on—we’ll help you plan the safest, most practical next step.',
-      icon: 'edit',
-      routerLink: '/contact-us',
+        'Track down flickering lights, dead outlets, and recurring electrical problems.',
+      icon: 'search',
+      routerLink: '/electrical-services/electrical-troubleshooting',
+    },
+    {
+      title: 'Outlet & Switch Work',
+      description:
+        'New outlets, repairs, and upgrades—including GFCI where needed.',
+      icon: 'power',
+      routerLink: '/electrical-services/outlet-switch-installation',
+    },
+    {
+      title: 'Lighting Installation',
+      description:
+        'Install or upgrade fixtures, LEDs, and indoor/outdoor lighting.',
+      icon: 'lightbulb',
+      routerLink: '/electrical-services/lighting-installation',
+    },
+    {
+      title: 'Ceiling Fan Installation',
+      description:
+        'New fan installs, replacements, balancing, and safe mounting.',
+      icon: 'toys_fan',
+      routerLink: '/electrical-services/ceiling-fan-installation',
+    },
+    {
+      title: 'Whole-Home Surge Protection',
+      description:
+        'Protect appliances and electronics with panel-mounted surge protection.',
+      icon: 'shield',
+      routerLink: '/electrical-services/whole-home-surge-protection',
+    },
+    {
+      title: 'Rewiring & Remodel Wiring',
+      description:
+        'Rewires, new circuits, and remodel wiring done cleanly and up to code.',
+      icon: 'construction',
+      routerLink: '/electrical-services/rewiring-remodel-wiring',
     },
   ];
 

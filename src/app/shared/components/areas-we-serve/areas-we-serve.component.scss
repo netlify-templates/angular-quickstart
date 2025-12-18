@@ -21,12 +21,14 @@ $text-muted: #6b7280;
 // ===============================
 // SECTION WRAPPER
 // ===============================
+.center-aligned {
+  padding: 2rem 0;
+}
+
 .areas-served {
-  padding: 2rem 1.5rem;
   background: var(--background);
 
   &__container {
-    max-width: 1120px;
     margin: 0 auto;
   }
 
@@ -35,7 +37,6 @@ $text-muted: #6b7280;
   // ===============================
   &__header {
     text-align: center;
-    margin-bottom: 2.5rem;
   }
 
   &__eyebrow {
@@ -47,24 +48,25 @@ $text-muted: #6b7280;
     margin-bottom: 0.5rem;
   }
 
+  .left-align {
+    text-align: left;
+    padding-left: 24px;
+  }
+
   &__title {
-    font-size: 2rem;
-    line-height: 1.2;
     font-weight: 700;
     color: $text-main;
     margin: 0 0 0.75rem;
   }
 
   &__subtitle {
-    max-width: 640px;
-    margin: 0 auto;
     color: $text-muted;
+    margin-bottom: 1.5rem;
     font-size: 0.95rem;
-    line-height: 1.6;
 
     strong {
       color: $primary; // highlight Kerrville with brand red
-      font-weight: 700;
+      font-weight: 900;
     }
   }
 
@@ -72,7 +74,6 @@ $text-muted: #6b7280;
   // CARD CONTAINER
   // ===============================
   &__card {
-    border-radius: 1.5rem;
     background: $surface-color;
     // box-shadow: $shadow-soft;
     padding: 1.75rem 2rem;
@@ -171,13 +172,13 @@ $text-muted: #6b7280;
     gap: 0.55rem;
     padding: 0.6rem 0.9rem;
     border-radius: 999px;
-    background: #fafafa;
-    border: 1px solid rgba(214, 38, 43, 0.25); // faint red border
+    background: #e0e0e0;
+    // border: 1px solid rgba(214, 38, 43, 0.25); // faint red border
     transition: all 150ms ease;
 
     &:hover {
-      background: $surface-color;
-      border-color: $primary;
+      background: darken(#e0e0e0, 5%);
+      // border-color: $primary;
       transform: translateY(-2px);
       // box-shadow: 0 8px 18px rgba(214, 38, 43, 0.2);
     }
