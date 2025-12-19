@@ -6,12 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 
 import { SeoService } from 'src/app/shared/services/seo.service';
-import {
-  TownPageComponent,
-  TownPageConfig,
-} from 'src/app/shared/components/town-page/town-page.component';
+import { TownPageComponent } from 'src/app/shared/components/town-page/town-page.component';
 import {
   TOWN_CONFIGS,
+  TownPageConfig,
   TownSeoConfig,
 } from 'src/app/shared/configs/town-page.config';
 

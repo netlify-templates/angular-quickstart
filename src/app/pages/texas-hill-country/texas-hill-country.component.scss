@@ -14,6 +14,23 @@
   grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
   gap: 2rem;
   align-items: stretch;
+
+  &__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  &__primary--yellow {
+    background-color: var(--brand-yellow);
+    color: var(--primary-text);
+  }
+
+  a {
+    border-color: var(--brand-yellow);
+    border-width: 3px;
+  }
 }
 
 .wcu-hero-text {
@@ -27,11 +44,11 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.35rem 0.85rem;
-  background: #e3f2fd;
+  background: var(--brand-chips);
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 500;
-  color: #0d47a1;
+  color: var(--brand-yellow-02);
   margin: 0;
 }
 
@@ -44,18 +61,16 @@
   font-size: 2.1rem;
   line-height: 1.2;
   font-weight: 600;
-  color: #102a43;
 }
 
 .wcu-title span {
   display: block;
-  color: #0d47a1;
+  color: var(--brand-yellow-02);
 }
 
 .wcu-subtitle {
   margin: 0;
   font-size: 0.98rem;
-  color: #455a64;
   line-height: 1.6;
 }
 
@@ -103,8 +118,8 @@
 .wcu-hero-card {
   width: 100%;
   border-radius: 18px;
-  background: linear-gradient(145deg, #0d47a1, #1976d2);
-  color: #ffffff;
+  background: var(--background-alt);
+  color: var(--text-primary);
 
   .summary-card {
     margin-bottom: 0.5rem;
@@ -120,11 +135,11 @@
 }
 
 .wcu-hero-avatar mat-icon {
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .wcu-hero-card mat-card-subtitle {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
 }
 
 .wcu-hero-card mat-card-content p {
@@ -181,17 +196,16 @@
 
 .wcu-town-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
   border-color: rgba(13, 71, 161, 0.3);
 }
 
 .wcu-town-card:focus-visible {
-  outline: 2px solid #0d47a1;
+  outline: 2px solid var(--brand-yellow-02);
   outline-offset: 2px;
 }
 
 .wcu-town-avatar {
-  background: #e3f2fd;
+  background: var(--brand-yellow-02);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -199,7 +213,7 @@
 }
 
 .wcu-town-avatar mat-icon {
-  color: #0d47a1;
+  color: var(--background-alt);
 }
 
 .wcu-town-card mat-card-title {
@@ -225,6 +239,8 @@
   align-items: center;
   gap: 0.3rem;
   font-size: 0.85rem;
+  border-color: var(--brand-yellow);
+  border-width: 3px;
 }
 
 .wcu-town-btn mat-icon {
@@ -240,8 +256,8 @@
 .wcu-summary-inner {
   border-radius: 18px;
   padding: 1.75rem 1.25rem;
-  background: linear-gradient(135deg, #0d47a1, #1565c0);
-  color: #ffffff;
+  background: var(--background-alt);
+  color: var(--primary-text);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -265,8 +281,13 @@
   gap: 0.75rem;
 }
 
-.wcu-summary-actions button mat-icon {
-  margin-right: 0.35rem;
+.wcu-summary-actions button {
+  background-color: var(--brand-yellow);
+  color: var(--primary-text);
+
+  mat-icon {
+    margin-right: 0.35rem;
+  }
 }
 
 /* RESPONSIVE */

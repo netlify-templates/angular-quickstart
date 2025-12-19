@@ -27,16 +27,19 @@ export interface TownPageConfig {
   residentialHeading?: string;
   residentialSubheading?: string;
   residentialIntro?: string;
+  residentialLink: string;
   residentialServices: ServiceItem[];
 
   commercialHeading?: string;
   commercialSubheading?: string;
   commercialIntro?: string;
+  commercialLink: string;
   commercialServices: ServiceItem[];
 
   energyHeading?: string;
   energySubheading?: string;
   energyIntro?: string;
+  energyLink?: string;
   energyServices: ServiceItem[];
 
   areasServed: string[];
@@ -91,9 +94,11 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
     residentialIntro:
       'Whether you’re dealing with a tripping breaker, outdated panel, or planning a remodel, we help keep your Kerrville home safe, bright, and efficient.',
     residentialServices: BASE_RESIDENTIAL_SERVICES,
+    residentialLink: '/electrical-services/residential-electrician',
     commercialIntro:
       'From small businesses in town to ranch shops outside city limits, we design and maintain electrical systems built for real workloads.',
     commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+    commercialLink: '/electrical-services/commercial-electrician',
     energyIntro:
       'Planning a new build or remodel in Kerrville? We provide electrical design input, load calculations, and energy-efficient solutions that save money long-term.',
     energyServices: BASE_ENERGY_SERVICES,
@@ -198,9 +203,11 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
     residentialIntro:
       'From river homes to neighborhood properties, we keep your Ingram home powered safely and reliably.',
     residentialServices: BASE_RESIDENTIAL_SERVICES,
+    residentialLink: '/electrical-services/residential-electrician',
     commercialIntro:
       'Shops, small businesses, and rural properties in Ingram count on us for dependable electrical systems.',
     commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+    commercialLink: '/electrical-services/commercial-electrician',
     energyIntro:
       'We help Ingram homeowners and businesses cut costs with energy-efficient lighting and smart electrical design.',
     energyServices: BASE_ENERGY_SERVICES,
@@ -267,9 +274,11 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
     residentialIntro:
       'We support the unique electrical needs of homes and river properties in Hunt with safe, reliable service.',
     residentialServices: BASE_RESIDENTIAL_SERVICES,
+    residentialLink: '/electrical-services/residential-electrician',
     commercialIntro:
       'From barns and shops to larger ranch facilities, we keep your Hunt property powered and protected.',
     commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+    commercialLink: '/electrical-services/commercial-electrician',
     energyIntro:
       'Long-run and remote properties benefit from thoughtful, efficient electrical design and dependable power distribution.',
     energyServices: BASE_ENERGY_SERVICES,
@@ -332,9 +341,11 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
     residentialIntro:
       'We provide full residential electrical service to Comfort homeowners, from repairs to upgrades and remodels.',
     residentialServices: BASE_RESIDENTIAL_SERVICES,
+    residentialLink: '/electrical-services/residential-electrician',
     commercialIntro:
       'Small businesses and rural properties in Comfort rely on us for dependable, code-compliant electrical systems.',
     commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+    commercialLink: '/electrical-services/commercial-electrician',
     energyIntro:
       'Upgrade to efficient lighting and modern electrical design that lowers utility costs over time.',
     energyServices: BASE_ENERGY_SERVICES,
@@ -398,6 +409,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
     ],
     residentialIntro:
       'From historic homes to new builds, we provide safe, modern electrical solutions across Fredericksburg.',
+    residentialLink: '/electrical-services/residential-electrician',
     residentialServices: BASE_RESIDENTIAL_SERVICES,
     commercialHeading: 'Commercial, Winery & Ranch Electrical Services',
     commercialIntro:
@@ -406,6 +418,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       { label: 'Winery & tasting room electrical', icon: 'wine_bar' },
       ...BASE_COMMERCIAL_RANCH_SERVICES,
     ],
+    commercialLink: '/electrical-services/commercial-electrician',
     energyIntro:
       'We help Fredericksburg properties improve efficiency with LED upgrades, better power distribution, and smart planning.',
     energyServices: BASE_ENERGY_SERVICES,
@@ -476,9 +489,11 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
     residentialIntro:
       'We support Boerne homeowners with safe, modern electrical systems for today’s loads and tomorrow’s upgrades.',
     residentialServices: BASE_RESIDENTIAL_SERVICES,
+    residentialLink: '/electrical-services/residential-electrician',
     commercialIntro:
       'Shops, offices, and small commercial spaces in Boerne count on us for reliable power and lighting.',
     commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+    commercialLink: '/electrical-services/commercial-electrician',
     energyIntro:
       'Plan your next Boerne remodel or new build with efficient wiring, circuits, and lighting from day one.',
     energyServices: BASE_ENERGY_SERVICES,
@@ -536,9 +551,11 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
     residentialIntro:
       'We serve Bandera residents with dependable electrical repairs, upgrades, and remodel support.',
     residentialServices: BASE_RESIDENTIAL_SERVICES,
+    residentialLink: '/electrical-services/residential-electrician',
     commercialIntro:
       'Ranch shops, barns, and rural businesses in Bandera rely on our expertise for safe, heavy-duty electrical systems.',
     commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+    commercialLink: '/electrical-services/commercial-electrician',
     energyIntro:
       'Thoughtful, efficient electrical design reduces downtime and long-term costs on rural properties.',
     energyServices: BASE_ENERGY_SERVICES,
@@ -595,9 +612,11 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
     residentialIntro:
       'From repairs to upgrades, we help keep Center Point homes safe and powered.',
     residentialServices: BASE_RESIDENTIAL_SERVICES,
+    residentialLink: '/electrical-services/residential-electrician',
     commercialIntro:
       'Shops, barns, and outbuildings in Center Point rely on us for durable, practical electrical work.',
     commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+    commercialLink: '/electrical-services/commercial-electrician',
     energyIntro:
       'We upgrade lighting and electrical design to improve efficiency and lower operating costs.',
     energyServices: BASE_ENERGY_SERVICES,
@@ -657,12 +676,14 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
     residentialIntro:
       'We help Helotes homeowners keep up with modern electrical demands, from panels to lighting and smart systems.',
     residentialServices: BASE_RESIDENTIAL_SERVICES,
+    residentialLink: '/electrical-services/residential-electrician',
     commercialIntro:
       'Shops and offices in Helotes rely on us for dependable power, clean lighting, and safe wiring.',
     commercialServices: [
       { label: 'Smart home & automation wiring', icon: 'home_iot_device' },
       ...BASE_COMMERCIAL_RANCH_SERVICES,
     ],
+    commercialLink: '/electrical-services/commercial-electrician',
     energyIntro:
       'Upgrade your Helotes home or business with efficient lighting, better circuits, and smart power planning.',
     energyServices: BASE_ENERGY_SERVICES,

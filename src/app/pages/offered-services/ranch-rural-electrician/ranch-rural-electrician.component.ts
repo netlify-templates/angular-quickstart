@@ -59,10 +59,6 @@ interface FaqItem {
 export class RanchRuralElectricianComponent implements OnInit {
   constructor(private seo: SeoService) {}
 
-  /**
-   * Standardize this across your site when ready.
-   * Your marketing copy elsewhere uses (830) 955-2909.
-   */
   private readonly phoneNumber = '8309285046';
 
   hero = {
@@ -307,12 +303,13 @@ export class RanchRuralElectricianComponent implements OnInit {
   private setupSeo(): void {
     this.seo.setMetaTags({
       title:
-        'Ranch & Rural Electrician | Texas Hill Country | ProVolt Electric',
+        'Ranch & Rural Electrician | Texas Hill Country | ProVolt Electrical Services',
       description:
         'Ranch and rural electrical services for barns, wells, shops, outdoor power, trenching, and upgrades across the Texas Hill Country. Licensed & insured. Call now.',
       url: 'https://provoltelectricalservices.com/electrical-services/ranch-rural-electrician',
       type: 'website',
       robots: 'index,follow',
+      // @Nathaniel I will need to add these images to the assets folder
     });
   }
 
@@ -322,7 +319,7 @@ export class RanchRuralElectricianComponent implements OnInit {
       '@type': 'Service',
       name: 'Ranch & Rural Electrical Services',
       serviceType:
-        'Ranch and rural electrical services: barns, wells, pumps, shops, outdoor power, trenching, and repairs',
+        'Ranch and rural electrical: barns, shops, wells, gates, long‑distance feeders, and weather‑ready installs',
       provider: {
         '@type': 'Electrician',
         name: 'ProVolt Electric',
@@ -343,14 +340,18 @@ export class RanchRuralElectricianComponent implements OnInit {
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Ranch & Rural Electrical Services',
-        itemListElement: this.services.map((s) => ({
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: s.title,
-            description: s.description,
-          },
-        })),
+        itemListElement: this.services
+          .filter(
+            (s) => s.category === 'RanchAndRural' || s.category === 'Both'
+          )
+          .map((s) => ({
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: s.title,
+              description: s.description,
+            },
+          })),
       },
     };
 

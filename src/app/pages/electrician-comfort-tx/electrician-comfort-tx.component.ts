@@ -5,11 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { SeoService } from 'src/app/shared/services/seo.service';
+import { TownPageComponent } from 'src/app/shared/components/town-page/town-page.component';
 import {
-  TownPageComponent,
+  TOWN_CONFIGS,
   TownPageConfig,
-} from 'src/app/shared/components/town-page/town-page.component';
-import { TOWN_CONFIGS } from 'src/app/shared/configs/town-page.config';
+} from 'src/app/shared/configs/town-page.config';
 
 interface ServiceItem {
   label: string;

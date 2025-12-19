@@ -304,12 +304,11 @@ export class CommercialElectricianComponent implements OnInit {
   }
 
   private setupSeo(): void {
-    // IMPORTANT: This should match your actual route for this page.
-    // If the route is not /services/commercial-electrician, update the URL and (ideally) the route path.
     this.seo.setMetaTags({
-      title: 'Commercial Electrician | Texas Hill Country | ProVolt Electric',
+      title:
+        'Commercial Electrician | Texas Hill Country | ProVolt Electrical Services',
       description:
-        'Commercial electrical repairs, troubleshooting, panel upgrades, tenant build-outs, lighting retrofits, and code compliance across the Texas Hill Country. Licensed & insured. Call (830) 955-2909.',
+        'Code‑compliant commercial electrical: troubleshooting, panel/service upgrades, lighting, dedicated circuits, and emergency work. Serving the Hill Country.',
       url: 'https://provoltelectricalservices.com/electrical-services/commercial-electrician',
       type: 'website',
       robots: 'index,follow',
@@ -322,7 +321,7 @@ export class CommercialElectricianComponent implements OnInit {
       '@type': 'Service',
       name: 'Commercial Electrical Services',
       serviceType:
-        'Commercial electrical repairs, troubleshooting, upgrades, lighting, and code compliance',
+        'Commercial electrical repairs, upgrades, lighting, dedicated circuits, and emergency service',
       provider: {
         '@type': 'Electrician',
         name: 'ProVolt Electric',
@@ -343,14 +342,16 @@ export class CommercialElectricianComponent implements OnInit {
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Commercial Electrical Services',
-        itemListElement: this.services.map((s) => ({
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: s.title,
-            description: s.description,
-          },
-        })),
+        itemListElement: this.services
+          .filter((s) => s.category === 'Commercial' || s.category === 'Both')
+          .map((s) => ({
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: s.title,
+              description: s.description,
+            },
+          })),
       },
     };
 
@@ -384,12 +385,11 @@ export class CommercialElectricianComponent implements OnInit {
           '@type': 'ListItem',
           position: 3,
           name: 'Commercial Electrician',
-          item: 'https://provoltelectricalservices.com/services/commercial-electrician',
+          item: 'https://provoltelectricalservices.com/electrical-services/commercial-electrician',
         },
       ],
     };
 
-    // @Nathaniel make sure this breadcrumb being set actually works with our SEO service.
     this.seo.setJsonLd('json-ld-commercial-service-provolt', serviceJsonLd);
     this.seo.setJsonLd('json-ld-commercial-faq-provolt', faqJsonLd);
     this.seo.setJsonLd(

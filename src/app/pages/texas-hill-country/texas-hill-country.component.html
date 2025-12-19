@@ -51,15 +51,25 @@
         </li>
       </ul>
 
-      <div class="wcu-hero-actions">
-        <button mat-raised-button color="primary">
+      <div class="wcu-hero__cta">
+        <button
+          mat-flat-button
+          class="wcu-hero__primary--yellow"
+          (click)="onCallNow()"
+        >
           <mat-icon>call</mat-icon>
-          Call to Schedule Service
+          Call Now
         </button>
-        <button mat-stroked-button color="primary">
-          <mat-icon>assignment</mat-icon>
+
+        <a mat-stroked-button (click)="onCallNow()">
+          <mat-icon>edit</mat-icon>
           Request a Quote
-        </button>
+        </a>
+
+        <a mat-stroked-button (click)="onCallNow()">
+          <mat-icon>warning</mat-icon>
+          Emergency Service
+        </a>
       </div>
     </div>
 
@@ -129,7 +139,6 @@
           </p>
           <button
             mat-stroked-button
-            color="primary"
             class="wcu-town-btn"
             type="button"
             [routerLink]="town.urlSlug"
@@ -155,11 +164,11 @@
         </p>
       </div>
       <div class="wcu-summary-actions">
-        <button mat-raised-button color="primary">
+        <button mat-raised-button>
           <mat-icon>call</mat-icon>
           Call to Book Service
         </button>
-        <button mat-stroked-button color="primary">
+        <button mat-stroked-button>
           <mat-icon>mail</mat-icon>
           Send a Service Request
         </button>

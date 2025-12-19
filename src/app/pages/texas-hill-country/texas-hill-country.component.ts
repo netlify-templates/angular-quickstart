@@ -37,6 +37,7 @@ interface TownCard {
 export class TexasHillCountryComponent implements OnInit {
   regionLabel = 'Texas Hill Country';
   towns: TownCard[] = [];
+  phoneNumber = '830-000-0000'; // TODO: replace with real number
 
   private readonly pageUrl =
     'https://provoltelectricalservices.com/service-areas/texas-hill-country-electrician';
@@ -133,5 +134,9 @@ export class TexasHillCountryComponent implements OnInit {
         window.scrollTo(0, 0);
       });
     }
+  }
+
+  onCallNow(): void {
+    window.location.href = `tel:${this.phoneNumber}`;
   }
 }

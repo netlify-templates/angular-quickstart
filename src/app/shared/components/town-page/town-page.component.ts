@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { SeoService } from '../../services/seo.service';
 import { CtaButtonComponent } from '../cta-button/cta-button.component';
+import { TownPageConfig } from '../../configs/town-page.config';
+import { RouterModule } from '@angular/router';
 
 export interface ServiceItem {
   label: string;
@@ -28,36 +30,6 @@ export interface TownSeoConfig {
   jsonLd?: unknown; // prebuilt JSON-LD object
 }
 
-export interface TownPageConfig {
-  townName: string; // e.g. 'Kerrville'
-  stateAbbr: string; // e.g. 'TX'
-  regionLabel: string; // e.g. 'Texas Hill Country'
-  phoneNumber: string; // display format e.g. '(830) 555-1234'
-  heroTitle?: string; // optional override
-  heroSubtitle?: string; // optional override
-  heroBadgeText?: string; // optional override; fallback built
-  heroBullets: string[]; // 2–4 bullets
-
-  residentialHeading?: string;
-  residentialSubheading?: string;
-  residentialIntro?: string;
-  residentialServices: ServiceItem[];
-
-  commercialHeading?: string;
-  commercialSubheading?: string;
-  commercialIntro?: string;
-  commercialServices: ServiceItem[];
-
-  energyHeading?: string;
-  energySubheading?: string;
-  energyIntro?: string;
-  energyServices: ServiceItem[];
-
-  areasServed: string[];
-
-  seo?: TownSeoConfig; // optional SEO + JSON-LD config
-}
-
 @Component({
   selector: 'app-town-page',
   standalone: true,
@@ -68,6 +40,7 @@ export interface TownPageConfig {
     MatButtonModule,
     MatChipsModule,
     CtaButtonComponent,
+    RouterModule,
   ],
   templateUrl: './town-page.component.html',
   styleUrls: ['./town-page.component.scss'],

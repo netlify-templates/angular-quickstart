@@ -316,9 +316,9 @@ export class ResidentialElectricianComponent implements OnInit {
   }
 
   private setupSeo(): void {
-    // IMPORTANT: Update this URL to match your real route.
     this.seo.setMetaTags({
-      title: 'Residential Electrician | Texas Hill Country | ProVolt Electric',
+      title:
+        'Residential Electrician | Texas Hill Country | ProVolt Electrical Services',
       description:
         'Residential electrical repairs, panel upgrades, lighting installs, smart home work, and safety inspections across the Texas Hill Country. Licensed & insured. Call now.',
       url: 'https://provoltelectricalservices.com/electrical-services/residential-electrician',
@@ -355,7 +355,9 @@ export class ResidentialElectricianComponent implements OnInit {
         '@type': 'OfferCatalog',
         name: 'Residential Electrical Services',
         itemListElement: this.services
-          .filter((s) => s.category === 'Residential' || s.category === 'Both')
+          .filter(
+            (s) => s.category === 'RanchAndRural' || s.category === 'Both'
+          )
           .map((s) => ({
             '@type': 'Offer',
             itemOffered: {
@@ -390,14 +392,14 @@ export class ResidentialElectricianComponent implements OnInit {
         {
           '@type': 'ListItem',
           position: 2,
-          name: 'Services',
-          item: 'https://provoltelectricalservices.com/services',
+          name: 'Electrical Services',
+          item: 'https://provoltelectricalservices.com/electrical-services',
         },
         {
           '@type': 'ListItem',
           position: 3,
-          name: 'Residential Electrician',
-          item: 'https://provoltelectricalservices.com/services/residential-electrician',
+          name: 'Ranch & Rural Electrician',
+          item: 'https://provoltelectricalservices.com/electrical-services/residential-electrician',
         },
       ],
     };
