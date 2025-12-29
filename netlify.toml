@@ -1,15 +1,9 @@
 [build]
   command="npm run build"
-  publish="dist/provolt"
+  publish="dist/provolt/browser"
 
 [build.environment]
-  // @Nathaniel I may need to update this url to be the netlify url for the time being
   SITEMAP_BASE_URL = "https://provoltelectricalservices.com"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
 
 [[plugins]]
   package = "netlify-plugin-cypress"

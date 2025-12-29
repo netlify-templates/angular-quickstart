@@ -21,14 +21,18 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputMode": "server",
             "outputPath": {
               "base": "dist/provolt"
             },
             "index": "src/index.html",
-            "polyfills": ["src/polyfills.ts"],
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss"
@@ -38,7 +42,8 @@
             "server": "src/main.server.ts",
             "ssr": {
               "entry": "src/server.ts"
-            }
+            },
+            "prerender": true
           },
           "configurations": {
             "production": {
