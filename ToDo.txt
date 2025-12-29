@@ -1,5 +1,25 @@
+Finish all the pages
+  - add backlinks from the town pages to the service pages
+  - make the corrections and suggestions made by dad
+  - correct the styling for mobile devices
+  - add a section giving a brief overview of each city
+  - Finish the contact us page
+  - add the robots.txt file and the schema page
+  - add images
+  
+
+
+Add the pages in the footer
+I need to update the SEO reload upon page switches using ng destroy
+Rework all the town pages to use the shared component
+Add hours of operation
+Move footer into the index.html file outside of the body portion
 I want to make the toolbar sticky 
+
+Ask chatgpt to do the following when you push everything to netlify: "If you tell me what your Netlify publish directory currently is (what folder contains the built index.html after ng build), I’ll give you the exact netlify.toml (build command + publish dir) that matches your output structure."
+
 I think I want to have two rows to the toolbar with the social media icons on the top
+
 
 // @Nathaniel what does this mean?:"Netlify config (works for both CSR + prerender)
 If you have any routes that are NOT prerendered, you still want the SPA fallback redirect:
@@ -17,14 +37,6 @@ SEO optimization
     - for all URL slugs (i.e. services, projects, etc.)
 QR code
 Email List
-
-Finish all the pages
-Server side rendering
-Add the pages in the footer
-I need to update the SEO reload upon page switches
-Rework all the town pages to use the shared component
-Add hours of operation
-Move footer into the index.html file outside of the body portion
 
 
 In services

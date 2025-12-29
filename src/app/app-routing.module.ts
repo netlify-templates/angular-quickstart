@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-// @Nathaniel add title keys to all routes for SEO purposes
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent, title: 'ProVolt Electrical Services' },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
   {
     path: 'about-us',
     title: 'About Us - Provolt Electrical Services',
@@ -19,14 +18,6 @@ const routes: Routes = [
     loadComponent: () =>
       import('./pages/careers/careers.component').then(
         (m) => m.CareersComponent
-      ),
-  },
-  {
-    path: 'commercial',
-    title: 'Commercial - Provolt Electrical Services',
-    loadComponent: () =>
-      import('./pages/commercial/commercial.component').then(
-        (m) => m.CommercialComponent
       ),
   },
   {
@@ -185,7 +176,15 @@ const routes: Routes = [
         (m) => m.TestimonialsComponent
       ),
   },
-  { path: '**', redirectTo: '/home' }, // Wildcard for 404
+  {
+    path: '**',
+    title: '404 Not Found - Provolt Electrical Services',
+    data: { statusCode: 404 },
+    loadComponent: () =>
+      import('./pages/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
+  },
 ];
 
 @NgModule({

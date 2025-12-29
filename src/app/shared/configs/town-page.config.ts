@@ -52,9 +52,14 @@ const BASE_DOMAIN = 'https://provoltelectricalservices.com';
 const PHONE_DISPLAY = '(830) 928-5046';
 const PHONE_E164 = '+18309285046';
 const DEFAULT_REGION = 'Texas Hill Country';
-const DEFAULT_OG_IMAGE = `${BASE_DOMAIN}/assets/og-default.jpg`; // TODO: update or replace
+const DEFAULT_OG_IMAGE = `${BASE_DOMAIN}/assets/og-default.jpg`; // TODO: replace if needed
 
-// Shared service groups (you can customize per-town below if you want)
+// Helpers (avoid URL drift)
+const pageUrlFromSlug = (slug: string) => `${BASE_DOMAIN}${slug}`;
+const electricianIdFromSlug = (slug: string) =>
+  `${BASE_DOMAIN}${slug}#electrician`;
+
+// Shared service groups (customize per-town if desired)
 const BASE_RESIDENTIAL_SERVICES: ServiceItem[] = [
   { label: 'Troubleshooting & repairs', icon: 'bolt' },
   { label: 'Breaker & panel upgrades', icon: 'electrical_services' },
@@ -80,660 +85,631 @@ const BASE_ENERGY_SERVICES: ServiceItem[] = [
   { label: 'Solar-ready electrical prep', icon: 'solar_power' },
 ];
 
+// SEO builders (consistent canonical/og:url/jsonld)
+function buildElectricianSeo(args: {
+  slug: string;
+  townName: string;
+  metaTitle: string;
+  metaDescription: string;
+  descriptionLong: string;
+  serviceType: string[];
+  robots?: string;
+  breadcrumb?: { serviceAreasUrl: string; serviceAreasLabel?: string };
+  addressLocality: string;
+  extra?: Partial<Record<string, unknown>>;
+  extraJsonLdScripts?: Array<{ id: string; data: unknown }>;
+}): TownSeoConfig {
+  const {
+    slug,
+    townName,
+    metaTitle,
+    metaDescription,
+    descriptionLong,
+    serviceType,
+    robots = 'index,follow',
+    breadcrumb,
+    addressLocality,
+    extra,
+    extraJsonLdScripts = [],
+  } = args;
+
+  const pageUrl = pageUrlFromSlug(slug);
+
+  const electricianSchema: any = {
+    '@context': 'https://schema.org',
+    '@type': 'Electrician',
+    '@id': electricianIdFromSlug(slug),
+    name: 'ProVolt Electrical Services',
+    url: pageUrl,
+    description: descriptionLong,
+    telephone: PHONE_E164,
+    image: DEFAULT_OG_IMAGE,
+    priceRange: '$$',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality,
+      addressRegion: 'TX',
+      addressCountry: 'US',
+    },
+    areaServed: { '@type': 'Place', name: `${townName}, TX` },
+    serviceType,
+    ...(extra ?? {}),
+  };
+
+  const scripts: Array<{ id: string; data: unknown }> = [
+    {
+      id: `json-ld-town-${slugToIdSuffix(slug)}-electrician`,
+      data: electricianSchema,
+    },
+    ...extraJsonLdScripts,
+  ];
+
+  if (breadcrumb?.serviceAreasUrl) {
+    scripts.push({
+      id: `json-ld-town-${slugToIdSuffix(slug)}-breadcrumb`,
+      data: {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: `${BASE_DOMAIN}/`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: breadcrumb.serviceAreasLabel ?? 'Service Areas',
+            item: breadcrumb.serviceAreasUrl,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: `${townName}, TX`,
+            item: pageUrl,
+          },
+        ],
+      },
+    });
+  }
+
+  return {
+    metaTitle,
+    metaDescription,
+    pageUrl,
+    ogImage: DEFAULT_OG_IMAGE,
+    robots,
+    jsonLdId: `json-ld-${slugToIdSuffix(slug)}`,
+    jsonLd: electricianSchema,
+    jsonLdScripts: scripts,
+  };
+}
+
+function slugToIdSuffix(slug: string): string {
+  // "/service-areas/kerrville-tx-electrician" -> "service-areas-kerrville-tx-electrician"
+  return slug.replace(/^\//, '').replace(/\//g, '-');
+}
+
+const SERVICE_AREAS_PAGE = `${BASE_DOMAIN}/service-areas/texas-hill-country-electrician`;
+
 export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
-  kerrville: {
-    townName: 'Kerrville',
-    stateAbbr: 'TX',
-    regionLabel: DEFAULT_REGION,
-    phoneNumber: PHONE_DISPLAY,
-    heroBullets: [
-      'Master electrician with Hill Country experience',
-      'Fast, reliable troubleshooting and repairs',
-      'Code-compliant work that protects your property',
-    ],
-    residentialIntro:
-      'Whether you’re dealing with a tripping breaker, outdated panel, or planning a remodel, we help keep your Kerrville home safe, bright, and efficient.',
-    residentialServices: BASE_RESIDENTIAL_SERVICES,
-    residentialLink: '/electrical-services/residential-electrician',
-    commercialIntro:
-      'From small businesses in town to ranch shops outside city limits, we design and maintain electrical systems built for real workloads.',
-    commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
-    commercialLink: '/electrical-services/commercial-electrician',
-    energyIntro:
-      'Planning a new build or remodel in Kerrville? We provide electrical design input, load calculations, and energy-efficient solutions that save money long-term.',
-    energyServices: BASE_ENERGY_SERVICES,
-    areasServed: [
-      'Kerrville',
-      'Ingram',
-      'Hunt',
-      'Center Point',
-      'Comfort',
-      'Bandera',
-      'Fredericksburg',
-      'Boerne',
-      'Helotes',
-    ],
-    urlSlug: '/service-areas/kerrville-tx-electrician',
-    seo: {
+  kerrville: (() => {
+    const slug = '/service-areas/kerrville-tx-electrician';
+
+    const seo = buildElectricianSeo({
+      slug,
+      townName: 'Kerrville',
+      addressLocality: 'Kerrville',
       metaTitle:
         'Electrician Kerrville TX | Residential & Commercial Electrical',
       metaDescription:
         'Trusted electrician in Kerrville, TX for repairs, upgrades, lighting, panels, ranch wiring & more. Licensed, insured, and local to the Hill Country.',
-      pageUrl: `${BASE_DOMAIN}/service-areas/kerrville-tx-electrician`,
-      ogImage: DEFAULT_OG_IMAGE,
-      robots: 'index,follow',
-      jsonLdId: 'json-ld-kerrville',
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/service-areas/kerrville-tx-electrician#electrician`,
-        name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/service-areas/kerrville-tx-electrician`,
-        description:
-          'ProVolt Electrical Services provides residential, commercial, and ranch & rural electrical work in Kerrville, TX and the surrounding Texas Hill Country.',
-        telephone: PHONE_E164,
-        image: DEFAULT_OG_IMAGE,
-        priceRange: '$$',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Kerrville',
-          addressRegion: 'TX',
-          addressCountry: 'US',
-        },
-        areaServed: { '@type': 'Place', name: 'Kerrville, TX' },
-        serviceType: [
-          'Residential electrical services',
-          'Commercial electrical services',
-          'Ranch and rural property electrical',
-          'Electrical panel upgrades',
-          'Lighting installation',
-          'Electrical troubleshooting and repairs',
-          'Energy audits and efficiency upgrades',
-          'Electrical consultations for renovations and new builds',
-        ],
-      },
-      jsonLdScripts: [
-        {
-          id: 'json-ld-town-kerrville-electrician',
-          data: {
-            /* Electrician schema from above */
-          },
-        },
-        {
-          id: 'json-ld-town-kerrville-breadcrumb',
-          data: {
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-              {
-                '@type': 'ListItem',
-                position: 1,
-                name: 'Home',
-                item: `${BASE_DOMAIN}/home`,
-              },
-              {
-                '@type': 'ListItem',
-                position: 2,
-                name: 'Service Areas',
-                item: `${BASE_DOMAIN}/service-areas/texas-hill-country-electrician`,
-              },
-              {
-                '@type': 'ListItem',
-                position: 3,
-                name: 'Kerrville, TX',
-                item: `${BASE_DOMAIN}/service-areas/kerrville-tx-electrician`,
-              },
-            ],
-          },
-        },
+      descriptionLong:
+        'ProVolt Electrical Services provides residential, commercial, and ranch & rural electrical work in Kerrville, TX and the surrounding Texas Hill Country.',
+      serviceType: [
+        'Residential electrical services',
+        'Commercial electrical services',
+        'Ranch and rural property electrical',
+        'Electrical panel upgrades',
+        'Lighting installation',
+        'Electrical troubleshooting and repairs',
+        'Energy audits and efficiency upgrades',
+        'Electrical consultations for renovations and new builds',
       ],
-    },
-  },
+      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+    });
 
-  ingram: {
-    townName: 'Ingram',
-    stateAbbr: 'TX',
-    regionLabel: DEFAULT_REGION,
-    phoneNumber: PHONE_DISPLAY,
-    heroBullets: [
-      'Responsive service for river and rural properties',
-      'Licensed, insured, and local to the Hill Country',
-      'Clean, safe, and code-compliant electrical work',
-    ],
-    residentialIntro:
-      'From river homes to neighborhood properties, we keep your Ingram home powered safely and reliably.',
-    residentialServices: BASE_RESIDENTIAL_SERVICES,
-    residentialLink: '/electrical-services/residential-electrician',
-    commercialIntro:
-      'Shops, small businesses, and rural properties in Ingram count on us for dependable electrical systems.',
-    commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
-    commercialLink: '/electrical-services/commercial-electrician',
-    energyIntro:
-      'We help Ingram homeowners and businesses cut costs with energy-efficient lighting and smart electrical design.',
-    energyServices: BASE_ENERGY_SERVICES,
-    areasServed: [
-      'Ingram',
-      'Kerrville',
-      'Hunt',
-      'Center Point',
-      'Comfort',
-      'Bandera',
-    ],
-    urlSlug: '/service-areas/ingram-tx-electrician',
-    seo: {
+    return {
+      townName: 'Kerrville',
+      stateAbbr: 'TX',
+      regionLabel: DEFAULT_REGION,
+      phoneNumber: PHONE_DISPLAY,
+      heroBullets: [
+        'Master electrician with Hill Country experience',
+        'Fast, reliable troubleshooting and repairs',
+        'Code-compliant work that protects your property',
+      ],
+      residentialIntro:
+        'Whether you’re dealing with a tripping breaker, outdated panel, or planning a remodel, we help keep your Kerrville home safe, bright, and efficient.',
+      residentialServices: BASE_RESIDENTIAL_SERVICES,
+      residentialLink: '/electrical-services/residential-electrician',
+      commercialIntro:
+        'From small businesses in town to ranch shops outside city limits, we design and maintain electrical systems built for real workloads.',
+      commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+      commercialLink: '/electrical-services/commercial-electrician',
+      energyIntro:
+        'Planning a new build or remodel in Kerrville? We provide electrical design input, load calculations, and energy-efficient solutions that save money long-term.',
+      energyServices: BASE_ENERGY_SERVICES,
+      areasServed: [
+        'Kerrville',
+        'Ingram',
+        'Hunt',
+        'Center Point',
+        'Comfort',
+        'Bandera',
+        'Fredericksburg',
+        'Boerne',
+        'Helotes',
+      ],
+      urlSlug: slug,
+      seo,
+    };
+  })(),
+
+  ingram: (() => {
+    const slug = '/service-areas/ingram-tx-electrician';
+
+    const seo = buildElectricianSeo({
+      slug,
+      townName: 'Ingram',
+      addressLocality: 'Ingram',
       metaTitle: 'Electrician Ingram TX | ProVolt Electrical Services',
       metaDescription:
         'Reliable electrician in Ingram, TX offering repairs, lighting, panel upgrades & rural property electrical work. Local, licensed, and dependable.',
-      pageUrl: `${BASE_DOMAIN}/electrician-ingram-tx`,
-      ogImage: DEFAULT_OG_IMAGE,
-      robots: 'index,follow',
-      jsonLdId: 'json-ld-ingram',
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/electrician-ingram-tx#electrician`,
-        name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/electrician-ingram-tx`,
-        description:
-          'ProVolt Electrical Services offers licensed residential, commercial, and rural electrical services in Ingram, TX and nearby Hill Country areas.',
-        telephone: PHONE_E164,
-        image: DEFAULT_OG_IMAGE,
-        priceRange: '$$',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Ingram',
-          addressRegion: 'TX',
-          addressCountry: 'US',
-        },
-        areaServed: {
-          '@type': 'Place',
-          name: 'Ingram, TX',
-        },
-        serviceType: [
-          'Residential electrical services',
-          'Commercial electrical services',
-          'Ranch and rural property electrical',
-          'Lighting installation',
-          'Panel upgrades and replacements',
-          'Electrical troubleshooting and repairs',
-        ],
-      },
-    },
-  },
+      descriptionLong:
+        'ProVolt Electrical Services offers licensed residential, commercial, and rural electrical services in Ingram, TX and nearby Hill Country areas.',
+      serviceType: [
+        'Residential electrical services',
+        'Commercial electrical services',
+        'Ranch and rural property electrical',
+        'Lighting installation',
+        'Panel upgrades and replacements',
+        'Electrical troubleshooting and repairs',
+      ],
+      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+    });
 
-  hunt: {
-    townName: 'Hunt',
-    stateAbbr: 'TX',
-    regionLabel: DEFAULT_REGION,
-    phoneNumber: PHONE_DISPLAY,
-    heroBullets: [
-      'Experienced with ranch and river properties',
-      'Designed for long runs and heavy loads',
-      'Trusted Hill Country master electrician',
-    ],
-    residentialIntro:
-      'We support the unique electrical needs of homes and river properties in Hunt with safe, reliable service.',
-    residentialServices: BASE_RESIDENTIAL_SERVICES,
-    residentialLink: '/electrical-services/residential-electrician',
-    commercialIntro:
-      'From barns and shops to larger ranch facilities, we keep your Hunt property powered and protected.',
-    commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
-    commercialLink: '/electrical-services/commercial-electrician',
-    energyIntro:
-      'Long-run and remote properties benefit from thoughtful, efficient electrical design and dependable power distribution.',
-    energyServices: BASE_ENERGY_SERVICES,
-    areasServed: [
-      'Hunt',
-      'Ingram',
-      'Kerrville',
-      'Center Point',
-      'Mountain Home',
-    ],
-    urlSlug: '/service-areas/hunt-tx-electrician',
-    seo: {
+    return {
+      townName: 'Ingram',
+      stateAbbr: 'TX',
+      regionLabel: DEFAULT_REGION,
+      phoneNumber: PHONE_DISPLAY,
+      heroBullets: [
+        'Responsive service for river and rural properties',
+        'Licensed, insured, and local to the Hill Country',
+        'Clean, safe, and code-compliant electrical work',
+      ],
+      residentialIntro:
+        'From river homes to neighborhood properties, we keep your Ingram home powered safely and reliably.',
+      residentialServices: BASE_RESIDENTIAL_SERVICES,
+      residentialLink: '/electrical-services/residential-electrician',
+      commercialIntro:
+        'Shops, small businesses, and rural properties in Ingram count on us for dependable electrical systems.',
+      commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+      commercialLink: '/electrical-services/commercial-electrician',
+      energyIntro:
+        'We help Ingram homeowners and businesses cut costs with energy-efficient lighting and smart electrical design.',
+      energyServices: BASE_ENERGY_SERVICES,
+      areasServed: [
+        'Ingram',
+        'Kerrville',
+        'Hunt',
+        'Center Point',
+        'Comfort',
+        'Bandera',
+      ],
+      urlSlug: slug,
+      seo,
+    };
+  })(),
+
+  hunt: (() => {
+    const slug = '/service-areas/hunt-tx-electrician';
+
+    const seo = buildElectricianSeo({
+      slug,
+      townName: 'Hunt',
+      addressLocality: 'Hunt',
       metaTitle:
         'Electrician Hunt TX | Ranch & Residential Electrical Services',
       metaDescription:
         'Electrical service in Hunt, TX including ranch wiring, outdoor lighting, panel upgrades, troubleshooting & repairs. Quality work from a local master electrician.',
-      pageUrl: `${BASE_DOMAIN}/service-areas/hunt-tx-electrician`,
-      ogImage: DEFAULT_OG_IMAGE,
-      robots: 'index,follow',
-      jsonLdId: 'json-ld-hunt',
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/service-areas/hunt-tx-electrician#electrician`,
-        name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/service-areas/hunt-tx-electrician`,
-        description:
-          'ProVolt Electrical Services provides expert electrical work for homes, ranches, and river properties in Hunt, TX.',
-        telephone: PHONE_E164,
-        image: DEFAULT_OG_IMAGE,
-        priceRange: '$$',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Hunt',
-          addressRegion: 'TX',
-          addressCountry: 'US',
-        },
-        areaServed: { '@type': 'Place', name: 'Hunt, TX' },
-        serviceType: [
-          'Ranch and rural property electrical',
-          'Outdoor and landscape lighting',
-          'Panel upgrades',
-          'Electrical troubleshooting and repairs',
-          'Well and pump circuits',
-        ],
-      },
-    },
-  },
+      descriptionLong:
+        'ProVolt Electrical Services provides expert electrical work for homes, ranches, and river properties in Hunt, TX.',
+      serviceType: [
+        'Ranch and rural property electrical',
+        'Outdoor and landscape lighting',
+        'Panel upgrades',
+        'Electrical troubleshooting and repairs',
+        'Well and pump circuits',
+      ],
+      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+    });
 
-  comfort: {
-    townName: 'Comfort',
-    stateAbbr: 'TX',
-    regionLabel: DEFAULT_REGION,
-    phoneNumber: PHONE_DISPLAY,
-    heroBullets: [
-      'Fast response for Comfort homeowners',
-      'Respectful of historic and modern homes',
-      'Honest pricing and clear communication',
-    ],
-    residentialIntro:
-      'We provide full residential electrical service to Comfort homeowners, from repairs to upgrades and remodels.',
-    residentialServices: BASE_RESIDENTIAL_SERVICES,
-    residentialLink: '/electrical-services/residential-electrician',
-    commercialIntro:
-      'Small businesses and rural properties in Comfort rely on us for dependable, code-compliant electrical systems.',
-    commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
-    commercialLink: '/electrical-services/commercial-electrician',
-    energyIntro:
-      'Upgrade to efficient lighting and modern electrical design that lowers utility costs over time.',
-    energyServices: BASE_ENERGY_SERVICES,
-    areasServed: [
-      'Comfort',
-      'Boerne',
-      'Fredericksburg',
-      'Kerrville',
-      'Center Point',
-    ],
-    urlSlug: '/service-areas/comfort-tx-electrician',
-    seo: {
+    return {
+      townName: 'Hunt',
+      stateAbbr: 'TX',
+      regionLabel: DEFAULT_REGION,
+      phoneNumber: PHONE_DISPLAY,
+      heroBullets: [
+        'Experienced with ranch and river properties',
+        'Designed for long runs and heavy loads',
+        'Trusted Hill Country master electrician',
+      ],
+      residentialIntro:
+        'We support the unique electrical needs of homes and river properties in Hunt with safe, reliable service.',
+      residentialServices: BASE_RESIDENTIAL_SERVICES,
+      residentialLink: '/electrical-services/residential-electrician',
+      commercialIntro:
+        'From barns and shops to larger ranch facilities, we keep your Hunt property powered and protected.',
+      commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+      commercialLink: '/electrical-services/commercial-electrician',
+      energyIntro:
+        'Long-run and remote properties benefit from thoughtful, efficient electrical design and dependable power distribution.',
+      energyServices: BASE_ENERGY_SERVICES,
+      areasServed: [
+        'Hunt',
+        'Ingram',
+        'Kerrville',
+        'Center Point',
+        'Mountain Home',
+      ],
+      urlSlug: slug,
+      seo,
+    };
+  })(),
+
+  comfort: (() => {
+    const slug = '/service-areas/comfort-tx-electrician';
+
+    const seo = buildElectricianSeo({
+      slug,
+      townName: 'Comfort',
+      addressLocality: 'Comfort',
       metaTitle: 'Electrician Comfort TX | Repairs, Lighting & Panel Upgrades',
       metaDescription:
         'Professional electrician in Comfort, TX for troubleshooting, lighting, rewiring, surge protection & energy efficiency upgrades. Fast, reliable service.',
-      pageUrl: `${BASE_DOMAIN}/electrician-comfort-tx`,
-      ogImage: DEFAULT_OG_IMAGE,
-      robots: 'index,follow',
-      jsonLdId: 'json-ld-comfort',
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/electrician-comfort-tx#electrician`,
-        name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/electrician-comfort-tx`,
-        description:
-          'ProVolt Electrical Services delivers residential and light commercial electrical services in Comfort, TX and the surrounding Hill Country.',
-        telephone: PHONE_E164,
-        image: DEFAULT_OG_IMAGE,
-        priceRange: '$$',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Comfort',
-          addressRegion: 'TX',
-          addressCountry: 'US',
-        },
-        areaServed: {
-          '@type': 'Place',
-          name: 'Comfort, TX',
-        },
-        serviceType: [
-          'Residential electrical services',
-          'Troubleshooting and repairs',
-          'Lighting and ceiling fan installation',
-          'Panel and breaker upgrades',
-          'Energy audits and efficiency upgrades',
-        ],
-      },
-    },
-  },
+      descriptionLong:
+        'ProVolt Electrical Services delivers residential and light commercial electrical services in Comfort, TX and the surrounding Hill Country.',
+      serviceType: [
+        'Residential electrical services',
+        'Troubleshooting and repairs',
+        'Lighting and ceiling fan installation',
+        'Panel and breaker upgrades',
+        'Energy audits and efficiency upgrades',
+      ],
+      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+    });
 
-  fredericksburg: {
-    townName: 'Fredericksburg',
-    stateAbbr: 'TX',
-    regionLabel: DEFAULT_REGION,
-    phoneNumber: PHONE_DISPLAY,
-    heroBullets: [
-      'Experienced with historic homes and wineries',
-      'Clean, precise workmanship you can trust',
-      'Local knowledge of Hill Country properties',
-    ],
-    residentialIntro:
-      'From historic homes to new builds, we provide safe, modern electrical solutions across Fredericksburg.',
-    residentialLink: '/electrical-services/residential-electrician',
-    residentialServices: BASE_RESIDENTIAL_SERVICES,
-    commercialHeading: 'Commercial, Winery & Ranch Electrical Services',
-    commercialIntro:
-      'Wineries, tasting rooms, ranch properties, and businesses trust us for reliable, scalable electrical systems.',
-    commercialServices: [
-      { label: 'Winery & tasting room electrical', icon: 'wine_bar' },
-      ...BASE_COMMERCIAL_RANCH_SERVICES,
-    ],
-    commercialLink: '/electrical-services/commercial-electrician',
-    energyIntro:
-      'We help Fredericksburg properties improve efficiency with LED upgrades, better power distribution, and smart planning.',
-    energyServices: BASE_ENERGY_SERVICES,
-    areasServed: [
-      'Fredericksburg',
-      'Kerrville',
-      'Comfort',
-      'Boerne',
-      'Ingram',
-      'Hunt',
-    ],
-    urlSlug: '/service-areas/fredericksburg-tx-electrician',
-    seo: {
+    return {
+      townName: 'Comfort',
+      stateAbbr: 'TX',
+      regionLabel: DEFAULT_REGION,
+      phoneNumber: PHONE_DISPLAY,
+      heroBullets: [
+        'Fast response for Comfort homeowners',
+        'Respectful of historic and modern homes',
+        'Honest pricing and clear communication',
+      ],
+      residentialIntro:
+        'We provide full residential electrical service to Comfort homeowners, from repairs to upgrades and remodels.',
+      residentialServices: BASE_RESIDENTIAL_SERVICES,
+      residentialLink: '/electrical-services/residential-electrician',
+      commercialIntro:
+        'Small businesses and rural properties in Comfort rely on us for dependable, code-compliant electrical systems.',
+      commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+      commercialLink: '/electrical-services/commercial-electrician',
+      energyIntro:
+        'Upgrade to efficient lighting and modern electrical design that lowers utility costs over time.',
+      energyServices: BASE_ENERGY_SERVICES,
+      areasServed: [
+        'Comfort',
+        'Boerne',
+        'Fredericksburg',
+        'Kerrville',
+        'Center Point',
+      ],
+      urlSlug: slug,
+      seo,
+    };
+  })(),
+
+  fredericksburg: (() => {
+    const slug = '/service-areas/fredericksburg-tx-electrician';
+
+    const seo = buildElectricianSeo({
+      slug,
+      townName: 'Fredericksburg',
+      addressLocality: 'Fredericksburg',
       metaTitle:
         'Electrician Fredericksburg TX | Residential & Winery Electrical',
       metaDescription:
         'Licensed electrician in Fredericksburg, TX for lighting, rewiring, panel upgrades & winery electrical systems. Trusted Hill Country electrical service.',
-      pageUrl: `${BASE_DOMAIN}/electrician-fredericksburg-tx`,
-      ogImage: DEFAULT_OG_IMAGE,
-      robots: 'index,follow',
-      jsonLdId: 'json-ld-fredericksburg',
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/electrician-fredericksburg-tx#electrician`,
-        name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/electrician-fredericksburg-tx`,
-        description:
-          'ProVolt Electrical Services provides residential, commercial, ranch, and winery electrical work in Fredericksburg, TX and the surrounding Texas Hill Country.',
-        telephone: PHONE_E164,
-        image: DEFAULT_OG_IMAGE,
-        priceRange: '$$',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Fredericksburg',
-          addressRegion: 'TX',
-          addressCountry: 'US',
-        },
-        areaServed: {
-          '@type': 'Place',
-          name: 'Fredericksburg, TX',
-        },
-        serviceType: [
-          'Residential electrical services',
-          'Commercial electrical services',
-          'Winery electrical services',
-          'Ranch and rural property electrical',
-          'Electrical panel upgrades',
-          'Lighting and chandelier installation',
-          'Electrical troubleshooting and repairs',
-          'Energy audits and LED retrofits',
-          'Electrical consultations for renovations and new builds',
-        ],
-      },
-    },
-  },
+      descriptionLong:
+        'ProVolt Electrical Services provides residential, commercial, ranch, and winery electrical work in Fredericksburg, TX and the surrounding Texas Hill Country.',
+      serviceType: [
+        'Residential electrical services',
+        'Commercial electrical services',
+        'Winery electrical services',
+        'Ranch and rural property electrical',
+        'Electrical panel upgrades',
+        'Lighting and chandelier installation',
+        'Electrical troubleshooting and repairs',
+        'Energy audits and LED retrofits',
+        'Electrical consultations for renovations and new builds',
+      ],
+      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+    });
 
-  boerne: {
-    townName: 'Boerne',
-    stateAbbr: 'TX',
-    regionLabel: DEFAULT_REGION,
-    phoneNumber: PHONE_DISPLAY,
-    heroBullets: [
-      'Perfect for growing neighborhoods & remodels',
-      'Smart home, lighting, and panel expertise',
-      'Reliable service for homes and small businesses',
-    ],
-    residentialIntro:
-      'We support Boerne homeowners with safe, modern electrical systems for today’s loads and tomorrow’s upgrades.',
-    residentialServices: BASE_RESIDENTIAL_SERVICES,
-    residentialLink: '/electrical-services/residential-electrician',
-    commercialIntro:
-      'Shops, offices, and small commercial spaces in Boerne count on us for reliable power and lighting.',
-    commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
-    commercialLink: '/electrical-services/commercial-electrician',
-    energyIntro:
-      'Plan your next Boerne remodel or new build with efficient wiring, circuits, and lighting from day one.',
-    energyServices: BASE_ENERGY_SERVICES,
-    areasServed: ['Boerne', 'Comfort', 'Fredericksburg', 'Helotes', 'Bandera'],
-    urlSlug: '/service-areas/boerne-tx-electrician',
-    seo: {
+    return {
+      townName: 'Fredericksburg',
+      stateAbbr: 'TX',
+      regionLabel: DEFAULT_REGION,
+      phoneNumber: PHONE_DISPLAY,
+      heroBullets: [
+        'Experienced with historic homes and wineries',
+        'Clean, precise workmanship you can trust',
+        'Local knowledge of Hill Country properties',
+      ],
+      residentialIntro:
+        'From historic homes to new builds, we provide safe, modern electrical solutions across Fredericksburg.',
+      residentialLink: '/electrical-services/residential-electrician',
+      residentialServices: BASE_RESIDENTIAL_SERVICES,
+      commercialHeading: 'Commercial, Winery & Ranch Electrical Services',
+      commercialIntro:
+        'Wineries, tasting rooms, ranch properties, and businesses trust us for reliable, scalable electrical systems.',
+      commercialServices: [
+        { label: 'Winery & tasting room electrical', icon: 'wine_bar' },
+        ...BASE_COMMERCIAL_RANCH_SERVICES,
+      ],
+      commercialLink: '/electrical-services/commercial-electrician',
+      energyIntro:
+        'We help Fredericksburg properties improve efficiency with LED upgrades, better power distribution, and smart planning.',
+      energyServices: BASE_ENERGY_SERVICES,
+      areasServed: [
+        'Fredericksburg',
+        'Kerrville',
+        'Comfort',
+        'Boerne',
+        'Ingram',
+        'Hunt',
+      ],
+      urlSlug: slug,
+      seo,
+    };
+  })(),
+
+  boerne: (() => {
+    const slug = '/service-areas/boerne-tx-electrician';
+
+    const seo = buildElectricianSeo({
+      slug,
+      townName: 'Boerne',
+      addressLocality: 'Boerne',
       metaTitle:
         'Electrician Boerne TX | Trusted Residential & Commercial Work',
       metaDescription:
         'Expert electrician in Boerne, TX providing repairs, lighting, panel upgrades, remodel wiring & commercial electrical services. Local, licensed, dependable.',
-      pageUrl: `${BASE_DOMAIN}/service-areas/boerne-tx-electrician`,
-      ogImage: DEFAULT_OG_IMAGE,
-      robots: 'index,follow',
-      jsonLdId: 'json-ld-boerne',
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/service-areas/boerne-tx-electrician#electrician`,
-        name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/service-areas/boerne-tx-electrician`,
-        description:
-          'ProVolt Electrical Services offers residential and commercial electrical services in Boerne, TX.',
-        telephone: PHONE_E164,
-        image: DEFAULT_OG_IMAGE,
-        priceRange: '$$',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Boerne',
-          addressRegion: 'TX',
-          addressCountry: 'US',
-        },
-        areaServed: { '@type': 'Place', name: 'Boerne, TX' },
-        serviceType: [
-          'Residential electrical services',
-          'Commercial electrical services',
-          'Panel and service upgrades',
-          'Lighting and ceiling fan installation',
-          'Electrical troubleshooting and repairs',
-          'Electrical consultations for renovations and new builds',
-        ],
-      },
-    },
-  },
+      descriptionLong:
+        'ProVolt Electrical Services offers residential and commercial electrical services in Boerne, TX.',
+      serviceType: [
+        'Residential electrical services',
+        'Commercial electrical services',
+        'Panel and service upgrades',
+        'Lighting and ceiling fan installation',
+        'Electrical troubleshooting and repairs',
+        'Electrical consultations for renovations and new builds',
+      ],
+      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+    });
 
-  bandera: {
-    townName: 'Bandera',
-    stateAbbr: 'TX',
-    regionLabel: DEFAULT_REGION,
-    phoneNumber: PHONE_DISPLAY,
-    heroBullets: [
-      'Ideal for ranch and rural properties',
-      'Built to handle pumps, barns, and outbuildings',
-      'Reliable service where others won’t drive',
-    ],
-    residentialIntro:
-      'We serve Bandera residents with dependable electrical repairs, upgrades, and remodel support.',
-    residentialServices: BASE_RESIDENTIAL_SERVICES,
-    residentialLink: '/electrical-services/residential-electrician',
-    commercialIntro:
-      'Ranch shops, barns, and rural businesses in Bandera rely on our expertise for safe, heavy-duty electrical systems.',
-    commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
-    commercialLink: '/electrical-services/commercial-electrician',
-    energyIntro:
-      'Thoughtful, efficient electrical design reduces downtime and long-term costs on rural properties.',
-    energyServices: BASE_ENERGY_SERVICES,
-    areasServed: ['Bandera', 'Kerrville', 'Comfort', 'Boerne', 'Helotes'],
-    urlSlug: '/service-areas/bandera-tx-electrician',
-    seo: {
+    return {
+      townName: 'Boerne',
+      stateAbbr: 'TX',
+      regionLabel: DEFAULT_REGION,
+      phoneNumber: PHONE_DISPLAY,
+      heroBullets: [
+        'Perfect for growing neighborhoods & remodels',
+        'Smart home, lighting, and panel expertise',
+        'Reliable service for homes and small businesses',
+      ],
+      residentialIntro:
+        'We support Boerne homeowners with safe, modern electrical systems for today’s loads and tomorrow’s upgrades.',
+      residentialServices: BASE_RESIDENTIAL_SERVICES,
+      residentialLink: '/electrical-services/residential-electrician',
+      commercialIntro:
+        'Shops, offices, and small commercial spaces in Boerne count on us for reliable power and lighting.',
+      commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+      commercialLink: '/electrical-services/commercial-electrician',
+      energyIntro:
+        'Plan your next Boerne remodel or new build with efficient wiring, circuits, and lighting from day one.',
+      energyServices: BASE_ENERGY_SERVICES,
+      areasServed: [
+        'Boerne',
+        'Comfort',
+        'Fredericksburg',
+        'Helotes',
+        'Bandera',
+      ],
+      urlSlug: slug,
+      seo,
+    };
+  })(),
+
+  bandera: (() => {
+    const slug = '/service-areas/bandera-tx-electrician';
+
+    const seo = buildElectricianSeo({
+      slug,
+      townName: 'Bandera',
+      addressLocality: 'Bandera',
       metaTitle:
         'Electrician Bandera TX | Ranch, Residential & Outdoor Lighting',
       metaDescription:
         'Serving Bandera, TX with ranch wiring, outdoor lighting, panel upgrades & electrical repairs. Reliable service for rural and residential properties.',
-      pageUrl: `${BASE_DOMAIN}/service-areas/bandera-tx-electrician`,
-      ogImage: DEFAULT_OG_IMAGE,
-      robots: 'index,follow',
-      jsonLdId: 'json-ld-bandera',
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/service-areas/bandera-tx-electrician#electrician`,
-        name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/service-areas/bandera-tx-electrician`,
-        description:
-          'ProVolt Electrical Services specializes in ranch, rural, and residential electrical work in Bandera, TX.',
-        telephone: PHONE_E164,
-        image: DEFAULT_OG_IMAGE,
-        priceRange: '$$',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Bandera',
-          addressRegion: 'TX',
-          addressCountry: 'US',
-        },
-        areaServed: { '@type': 'Place', name: 'Bandera, TX' },
-        serviceType: [
-          'Ranch and rural property electrical',
-          'Outdoor and security lighting',
-          'Panel upgrades and replacements',
-          'Trenching and long-run outdoor power',
-          'Electrical troubleshooting and repairs',
-        ],
-      },
-    },
-  },
+      descriptionLong:
+        'ProVolt Electrical Services specializes in ranch, rural, and residential electrical work in Bandera, TX.',
+      serviceType: [
+        'Ranch and rural property electrical',
+        'Outdoor and security lighting',
+        'Panel upgrades and replacements',
+        'Trenching and long-run outdoor power',
+        'Electrical troubleshooting and repairs',
+      ],
+      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+    });
 
-  centerPoint: {
-    townName: 'Center Point',
-    stateAbbr: 'TX',
-    regionLabel: DEFAULT_REGION,
-    phoneNumber: PHONE_DISPLAY,
-    heroBullets: [
-      'Reliable service for homes, shops, and small farms',
-      'Designed for real Hill Country conditions',
-      'Local master electrician you can trust',
-    ],
-    residentialIntro:
-      'From repairs to upgrades, we help keep Center Point homes safe and powered.',
-    residentialServices: BASE_RESIDENTIAL_SERVICES,
-    residentialLink: '/electrical-services/residential-electrician',
-    commercialIntro:
-      'Shops, barns, and outbuildings in Center Point rely on us for durable, practical electrical work.',
-    commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
-    commercialLink: '/electrical-services/commercial-electrician',
-    energyIntro:
-      'We upgrade lighting and electrical design to improve efficiency and lower operating costs.',
-    energyServices: BASE_ENERGY_SERVICES,
-    areasServed: ['Center Point', 'Kerrville', 'Ingram', 'Comfort', 'Bandera'],
-    urlSlug: '/service-areas/center-point-tx-electrician',
-    seo: {
+    return {
+      townName: 'Bandera',
+      stateAbbr: 'TX',
+      regionLabel: DEFAULT_REGION,
+      phoneNumber: PHONE_DISPLAY,
+      heroBullets: [
+        'Ideal for ranch and rural properties',
+        'Built to handle pumps, barns, and outbuildings',
+        'Reliable service where others won’t drive',
+      ],
+      residentialIntro:
+        'We serve Bandera residents with dependable electrical repairs, upgrades, and remodel support.',
+      residentialServices: BASE_RESIDENTIAL_SERVICES,
+      residentialLink: '/electrical-services/residential-electrician',
+      commercialIntro:
+        'Ranch shops, barns, and rural businesses in Bandera rely on our expertise for safe, heavy-duty electrical systems.',
+      commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+      commercialLink: '/electrical-services/commercial-electrician',
+      energyIntro:
+        'Thoughtful, efficient electrical design reduces downtime and long-term costs on rural properties.',
+      energyServices: BASE_ENERGY_SERVICES,
+      areasServed: ['Bandera', 'Kerrville', 'Comfort', 'Boerne', 'Helotes'],
+      urlSlug: slug,
+      seo,
+    };
+  })(),
+
+  centerPoint: (() => {
+    const slug = '/service-areas/center-point-tx-electrician';
+
+    const seo = buildElectricianSeo({
+      slug,
+      townName: 'Center Point',
+      addressLocality: 'Center Point',
       metaTitle:
         'Electrician Center Point TX | Reliable Hill Country Electrician',
       metaDescription:
         'Electrical repairs, lighting upgrades, shop wiring & panel services in Center Point, TX. Local master electrician serving the Hill Country.',
-      pageUrl: `${BASE_DOMAIN}/electrician-center-point-tx`,
-      ogImage: DEFAULT_OG_IMAGE,
-      robots: 'index,follow',
-      jsonLdId: 'json-ld-center-point',
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/electrician-center-point-tx#electrician`,
-        name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/electrician-center-point-tx`,
-        description:
-          'ProVolt Electrical Services provides reliable residential, shop, and rural electrical services in Center Point, TX.',
-        telephone: PHONE_E164,
-        image: DEFAULT_OG_IMAGE,
-        priceRange: '$$',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Center Point',
-          addressRegion: 'TX',
-          addressCountry: 'US',
-        },
-        areaServed: {
-          '@type': 'Place',
-          name: 'Center Point, TX',
-        },
-        serviceType: [
-          'Residential electrical services',
-          'Shop and outbuilding wiring',
-          'Lighting upgrades',
-          'Panel and breaker services',
-          'Energy efficiency upgrades',
-        ],
-      },
-    },
-  },
+      descriptionLong:
+        'ProVolt Electrical Services provides reliable residential, shop, and rural electrical services in Center Point, TX.',
+      serviceType: [
+        'Residential electrical services',
+        'Shop and outbuilding wiring',
+        'Lighting upgrades',
+        'Panel and breaker services',
+        'Energy efficiency upgrades',
+      ],
+      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+    });
 
-  helotes: {
-    townName: 'Helotes',
-    stateAbbr: 'TX',
-    regionLabel: DEFAULT_REGION,
-    phoneNumber: PHONE_DISPLAY,
-    heroBullets: [
-      'Perfect for growing neighborhoods and remodels',
-      'Smart home, panel, and lighting expertise',
-      'Reliable service for homes and small businesses',
-    ],
-    residentialIntro:
-      'We help Helotes homeowners keep up with modern electrical demands, from panels to lighting and smart systems.',
-    residentialServices: BASE_RESIDENTIAL_SERVICES,
-    residentialLink: '/electrical-services/residential-electrician',
-    commercialIntro:
-      'Shops and offices in Helotes rely on us for dependable power, clean lighting, and safe wiring.',
-    commercialServices: [
-      { label: 'Smart home & automation wiring', icon: 'home_iot_device' },
-      ...BASE_COMMERCIAL_RANCH_SERVICES,
-    ],
-    commercialLink: '/electrical-services/commercial-electrician',
-    energyIntro:
-      'Upgrade your Helotes home or business with efficient lighting, better circuits, and smart power planning.',
-    energyServices: BASE_ENERGY_SERVICES,
-    areasServed: [
-      'Helotes',
-      'Boerne',
-      'Bandera',
-      'San Antonio (NW)',
-      'Comfort',
-    ],
-    urlSlug: '/service-areas/helotes-tx-electrician',
-    seo: {
+    return {
+      townName: 'Center Point',
+      stateAbbr: 'TX',
+      regionLabel: DEFAULT_REGION,
+      phoneNumber: PHONE_DISPLAY,
+      heroBullets: [
+        'Reliable service for homes, shops, and small farms',
+        'Designed for real Hill Country conditions',
+        'Local master electrician you can trust',
+      ],
+      residentialIntro:
+        'From repairs to upgrades, we help keep Center Point homes safe and powered.',
+      residentialServices: BASE_RESIDENTIAL_SERVICES,
+      residentialLink: '/electrical-services/residential-electrician',
+      commercialIntro:
+        'Shops, barns, and outbuildings in Center Point rely on us for durable, practical electrical work.',
+      commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+      commercialLink: '/electrical-services/commercial-electrician',
+      energyIntro:
+        'We upgrade lighting and electrical design to improve efficiency and lower operating costs.',
+      energyServices: BASE_ENERGY_SERVICES,
+      areasServed: [
+        'Center Point',
+        'Kerrville',
+        'Ingram',
+        'Comfort',
+        'Bandera',
+      ],
+      urlSlug: slug,
+      seo,
+    };
+  })(),
+
+  helotes: (() => {
+    const slug = '/service-areas/helotes-tx-electrician';
+
+    const seo = buildElectricianSeo({
+      slug,
+      townName: 'Helotes',
+      addressLocality: 'Helotes',
       metaTitle:
         'Electrician Helotes TX | Repairs, Lighting & Smart Home Wiring',
       metaDescription:
         'Electrician in Helotes, TX offering troubleshooting, panel upgrades, lighting, smart home wiring & commercial electrical services. Licensed & insured.',
-      pageUrl: `${BASE_DOMAIN}/electrician-helotes-tx`,
-      ogImage: DEFAULT_OG_IMAGE,
-      robots: 'index,follow',
-      jsonLdId: 'json-ld-helotes',
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'Electrician',
-        '@id': `${BASE_DOMAIN}/electrician-helotes-tx#electrician`,
-        name: 'ProVolt Electrical Services',
-        url: `${BASE_DOMAIN}/electrician-helotes-tx`,
-        description:
-          'ProVolt Electrical Services offers residential and commercial electrical services, including smart home and panel upgrades, in Helotes, TX.',
-        telephone: PHONE_E164,
-        image: DEFAULT_OG_IMAGE,
-        priceRange: '$$',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Helotes',
-          addressRegion: 'TX',
-          addressCountry: 'US',
-        },
-        areaServed: {
-          '@type': 'Place',
-          name: 'Helotes, TX',
-        },
-        serviceType: [
-          'Residential electrical services',
-          'Commercial electrical services',
-          'Panel and service upgrades',
-          'Smart home and automation wiring',
-          'Lighting and ceiling fan installation',
-          'Electrical troubleshooting and repairs',
-        ],
-      },
-    },
-  },
+      descriptionLong:
+        'ProVolt Electrical Services offers residential and commercial electrical services, including smart home and panel upgrades, in Helotes, TX.',
+      serviceType: [
+        'Residential electrical services',
+        'Commercial electrical services',
+        'Panel and service upgrades',
+        'Smart home and automation wiring',
+        'Lighting and ceiling fan installation',
+        'Electrical troubleshooting and repairs',
+      ],
+      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+    });
+
+    return {
+      townName: 'Helotes',
+      stateAbbr: 'TX',
+      regionLabel: DEFAULT_REGION,
+      phoneNumber: PHONE_DISPLAY,
+      heroBullets: [
+        'Perfect for growing neighborhoods and remodels',
+        'Smart home, panel, and lighting expertise',
+        'Reliable service for homes and small businesses',
+      ],
+      residentialIntro:
+        'We help Helotes homeowners keep up with modern electrical demands, from panels to lighting and smart systems.',
+      residentialServices: BASE_RESIDENTIAL_SERVICES,
+      residentialLink: '/electrical-services/residential-electrician',
+      commercialIntro:
+        'Shops and offices in Helotes rely on us for dependable power, clean lighting, and safe wiring.',
+      commercialServices: [
+        { label: 'Smart home & automation wiring', icon: 'home_iot_device' },
+        ...BASE_COMMERCIAL_RANCH_SERVICES,
+      ],
+      commercialLink: '/electrical-services/commercial-electrician',
+      energyIntro:
+        'Upgrade your Helotes home or business with efficient lighting, better circuits, and smart power planning.',
+      energyServices: BASE_ENERGY_SERVICES,
+      areasServed: [
+        'Helotes',
+        'Boerne',
+        'Bandera',
+        'San Antonio (NW)',
+        'Comfort',
+      ],
+      urlSlug: slug,
+      seo,
+    };
+  })(),
 };

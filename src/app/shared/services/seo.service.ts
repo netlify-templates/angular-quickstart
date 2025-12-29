@@ -23,35 +23,82 @@ export class SeoService {
     const {
       title,
       description,
-      url = this.document.location?.href ?? '',
+      url, // <- prefer always passing this
       image,
       type = 'website',
       robots = 'index,follow',
     } = config;
 
+    // UPdate page title every time this function is called
     this.title.setTitle(title);
 
-    this.meta.updateTag({ name: 'description', content: description });
-    this.meta.updateTag({ name: 'robots', content: robots });
+    // Standard
+    this.meta.updateTag(
+      { name: 'description', content: description },
+      'name="description"'
+    );
+    this.meta.updateTag({ name: 'robots', content: robots }, 'name="robots"');
 
-    // Canonical
-    this.setCanonical(url);
+    // Canonical + OG URL (only if provided)
+    if (url) {
+      this.setCanonical(url);
+      this.meta.updateTag(
+        { property: 'og:url', content: url },
+        'property="og:url"'
+      );
+    } else {
+      // If you want, you can remove canonical when url not provided:
+      // const link = this.document.querySelector('link[rel="canonical"]');
+      // link?.parentNode?.removeChild(link);
+      this.meta.removeTag('property="og:url"');
+    }
 
     // Open Graph
-    this.meta.updateTag({ property: 'og:type', content: type });
-    this.meta.updateTag({ property: 'og:title', content: title });
-    this.meta.updateTag({ property: 'og:description', content: description });
-    this.meta.updateTag({ property: 'og:url', content: url });
-    if (image) this.meta.updateTag({ property: 'og:image', content: image });
+    this.meta.updateTag(
+      { property: 'og:type', content: type },
+      'property="og:type"'
+    );
+    this.meta.updateTag(
+      { property: 'og:title', content: title },
+      'property="og:title"'
+    );
+    this.meta.updateTag(
+      { property: 'og:description', content: description },
+      'property="og:description"'
+    );
+
+    if (image) {
+      this.meta.updateTag(
+        { property: 'og:image', content: image },
+        'property="og:image"'
+      );
+    } else {
+      this.meta.removeTag('property="og:image"');
+    }
 
     // Twitter
-    this.meta.updateTag({
-      name: 'twitter:card',
-      content: 'summary_large_image',
-    });
-    this.meta.updateTag({ name: 'twitter:title', content: title });
-    this.meta.updateTag({ name: 'twitter:description', content: description });
-    if (image) this.meta.updateTag({ name: 'twitter:image', content: image });
+    const twitterCard = image ? 'summary_large_image' : 'summary';
+    this.meta.updateTag(
+      { name: 'twitter:card', content: twitterCard },
+      'name="twitter:card"'
+    );
+    this.meta.updateTag(
+      { name: 'twitter:title', content: title },
+      'name="twitter:title"'
+    );
+    this.meta.updateTag(
+      { name: 'twitter:description', content: description },
+      'name="twitter:description"'
+    );
+
+    if (image) {
+      this.meta.updateTag(
+        { name: 'twitter:image', content: image },
+        'name="twitter:image"'
+      );
+    } else {
+      this.meta.removeTag('name="twitter:image"');
+    }
   }
 
   setJsonLd(id: string, jsonLdObject: unknown): void {

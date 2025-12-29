@@ -1,0 +1,28 @@
+{
+  "paths": [
+    "/",
+    "/home",
+    "/about-us",
+    "/careers",
+    "/commercial",
+    "/contact-us",
+    "/electrical-services",
+    "/electrical-services/commercial-electrician",
+    "/electrical-services/ranch-rural-electrician",
+    "/electrical-services/residential-electrician",
+    "/service-areas/bandera-tx-electrician",
+    "/service-areas/boerne-tx-electrician",
+    "/service-areas/center-point-tx-electrician",
+    "/service-areas/comfort-tx-electrician",
+    "/service-areas/fredericksburg-tx-electrician",
+    "/service-areas/helotes-tx-electrician",
+    "/service-areas/hunt-tx-electrician",
+    "/service-areas/ingram-tx-electrician",
+    "/service-areas/kerrville-tx-electrician",
+    "/service-areas/texas-hill-country-electrician",
+    "/privacy-policy",
+    "/projects",
+    "/terms-of-service",
+    "/testimonials"
+  ]
+}

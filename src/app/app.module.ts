@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,6 +12,7 @@ import { ToolBarComponent } from './shared/components/tool-bar/tool-bar.componen
 import { ActionBannerComponent } from './shared/components/action-banner/action-banner.component';
 import { FooterSectionComponent } from './shared/components/footer-section/footer-section.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,8 +23,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ToolBarComponent,
     ActionBannerComponent,
     BrowserAnimationsModule,
+    RouterModule,
   ],
-  providers: [],
+  providers: [provideClientHydration(withEventReplay())],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

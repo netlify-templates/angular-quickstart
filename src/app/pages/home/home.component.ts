@@ -42,10 +42,8 @@ export class HomeComponent implements OnInit {
         'ProVolt Electrical Services | Texas Hill Country Electrician (Licensed & Insured)',
       description:
         'Need an electrician in the Texas Hill Country? ProVolt handles electrical repairs, panel upgrades, generators, EV chargers, lighting, and wiring. Serving Kerrville, Fredericksburg, Boerne, Bandera, Comfort, Ingram, Hunt, Center Point & Helotes. Call for a quote.',
-      url: canonicalUrl,
-      image: ogImageUrl,
-      type: 'website',
-      robots: 'index,follow',
+      url: canonicalUrl, // ✅ always pass (canonical + og:url)
+      image: ogImageUrl, // ✅ include only if real; otherwise omit
     });
 
     // JSON-LD (Homepage)
@@ -158,6 +156,7 @@ export class HomeComponent implements OnInit {
             },
           ],
           // Optional but helpful if you have these pages
+          // @Nathaniel fix these
           hasOfferCatalog: {
             '@type': 'OfferCatalog',
             name: 'Electrical Services',

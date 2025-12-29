@@ -1,12 +1,16 @@
 {
   "name": "provolt",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "sitemap": "node scripts/generate-sitemap.js",
+    "sitemap:dev": "SITEMAP_BASE_URL=\"http://localhost:4200\" node scripts/generate-sitemap.js",
+    "sitemap:prod": "SITEMAP_BASE_URL=\"https://provoltelectricalservices.com\" node scripts/generate-sitemap.js",
+    "prebuild": "npm run sitemap"
   },
   "private": true,
   "dependencies": {
