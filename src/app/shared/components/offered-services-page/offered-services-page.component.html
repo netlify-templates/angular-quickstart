@@ -18,18 +18,18 @@
             (click)="onCallNow()"
           >
             <mat-icon>call</mat-icon>
-            Call Now
+            {{ hero.actionButtonText }}
           </button>
 
-          <a mat-stroked-button (click)="onCallNow()">
+          <button mat-stroked-button (click)="onCallNow()">
             <mat-icon>edit</mat-icon>
             Request a Quote
-          </a>
+          </button>
 
-          <a mat-stroked-button (click)="onCallNow()">
+          <button mat-stroked-button (click)="onCallNow()">
             <mat-icon>warning</mat-icon>
             Emergency Service
-          </a>
+          </button>
         </div>
       </div>
 
@@ -65,8 +65,8 @@
 
         <mat-card-actions align="start" class="popular-service-card-actions">
           <button mat-button (click)="onCallNow()">Schedule</button>
-
-          <a mat-stroked-button [routerLink]="job.path">Learn More</a>
+          <!-- @Nathaniel make the individual pages for each service -->
+          <!-- <a mat-stroked-button [routerLink]="job.path">Learn More</a> -->
         </mat-card-actions>
       </mat-card>
     </div>
@@ -141,7 +141,7 @@
 
   <!-- FAQ -->
   <section class="section" *ngIf="faqs?.length">
-    <h2>Electrical FAQ</h2>
+    <h2>{{ serviceTitle }} FAQ</h2>
 
     <mat-accordion multi>
       <mat-expansion-panel *ngFor="let faq of faqs">

@@ -66,12 +66,15 @@ export class ResidentialElectricianComponent implements OnInit {
    */
   private readonly phoneNumber = '8309285046';
 
+  serviceTitle = 'Residential Electrical Services';
+
   hero = {
     title: 'Residential Electrician Services in the Texas Hill Country',
     subtitle:
       'Safe, clean, code-compliant electrical work for Hill Country homes—repairs, upgrades, lighting, panels, smart home additions, and wiring for remodels and new construction.',
     trustLine:
       'Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers master-level electrical work for homes, businesses, and rural properties.',
+    actionButtonText: 'Contact Our Residential Electrician Support',
   };
 
   whoWeHelp: string[] = [

@@ -4,7 +4,6 @@ Finish all the pages
   - correct the styling for mobile devices
   - add a section giving a brief overview of each city
   - Finish the contact us page
-  - add the robots.txt file and the schema page
   - add images
   
 

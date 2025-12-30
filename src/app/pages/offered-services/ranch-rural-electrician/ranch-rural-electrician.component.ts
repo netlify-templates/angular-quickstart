@@ -61,12 +61,15 @@ export class RanchRuralElectricianComponent implements OnInit {
 
   private readonly phoneNumber = '8309285046';
 
+  serviceTitle = 'Ranch & Rural Electrical Services';
+
   hero = {
     title: 'Ranch & Rural Electrician Services in the Texas Hill Country',
     subtitle:
       'Dependable electrical work for acreage properties—barns, wells, pumps, shops, outdoor power, and long-run circuits. Built for reliability, safety, and real-world Hill Country conditions.',
     trustLine:
       'Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers master-level electrical work for homes, businesses, and rural properties.',
+    actionButtonText: 'Contact Our Electricians',
   };
 
   whoWeHelp: string[] = [

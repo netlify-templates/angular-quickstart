@@ -64,6 +64,8 @@ export class CommercialElectricianComponent implements OnInit {
    */
   private readonly phoneNumber = '8309552909';
 
+  serviceTitle = 'Commercial Electrical Services';
+
   hero = {
     title: 'Commercial Electrical Services in the Texas Hill Country',
     // cardTitle: 'ProVolt Commercial Electrical Services Overview',
@@ -71,6 +73,7 @@ export class CommercialElectricianComponent implements OnInit {
       'Keep your business powered, safe, and code-compliant. ProVolt delivers fast response, clean workmanship, and master-level electrical solutions for offices, retail, restaurants, shops, and facilities across the Hill Country.',
     trustLine:
       'Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers master-level electrical work for homes, businesses, and rural properties.',
+    actionButtonText: 'Request a Licensed Electrician',
   };
 
   whoWeHelp: string[] = [

@@ -75,20 +75,35 @@
 
               <!-- Dropdown menu with Angular Material (desktop only) -->
               <div *ngIf="link.children">
-                <a mat-button [matMenuTriggerFor]="areasMenu" class="nav-link">
+                <button
+                  mat-button
+                  class="nav-link"
+                  [matMenuTriggerFor]="areasMenu"
+                >
                   {{ link.label }}
                   <mat-icon>arrow_drop_down</mat-icon>
-                </a>
+                </button>
 
                 <mat-menu #areasMenu="matMenu">
-                  <button
+                  <a
                     *ngFor="let child of link.children"
                     mat-menu-item
                     [routerLink]="child.path"
                   >
                     {{ child.label }}
-                  </button>
+                  </a>
                 </mat-menu>
+
+                <!-- Crawlable static links; visually hidden, non-interactive -->
+                <nav class="sr-only" aria-hidden="true">
+                  <a
+                    *ngFor="let child of link.children"
+                    [attr.href]="child.path"
+                    (click)="$event.preventDefault()"
+                  >
+                    {{ child.label }}
+                  </a>
+                </nav>
               </div>
             </ng-container>
           </nav>

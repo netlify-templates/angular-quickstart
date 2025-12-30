@@ -39,6 +39,7 @@ interface HeroData {
   title: string;
   subtitle: string;
   trustLine: string;
+  actionButtonText: string;
 }
 
 @Component({
@@ -59,6 +60,7 @@ interface HeroData {
   styleUrls: ['./offered-services-page.component.scss'],
 })
 export class OfferedServicesPageComponent {
+  @Input() serviceTitle = 'Electrical Services';
   @Input() hero!: HeroData;
   @Input() whoWeHelp: string[] = [];
 

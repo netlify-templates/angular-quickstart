@@ -2,16 +2,14 @@
   <!-- HERO SECTION -->
   <section class="tp-hero">
     <div class="tp-hero-left">
-      <h1 class="tp-hero-title">
-        {{ heroTitle }}
-      </h1>
+      <h1 class="tp-hero-title">{{ heroTitle }}</h1>
 
-      <p class="tp-hero-subtitle">
-        {{ heroSubtitle }}
-      </p>
+      <p class="tp-hero-subtitle">{{ heroSubtitle }}</p>
 
-      <ul class="tp-hero-list">
-        <li *ngFor="let bullet of townConfig.heroBullets">
+      <ul class="tp-hero-list" *ngIf="townConfig.heroBullets?.length">
+        <li
+          *ngFor="let bullet of townConfig.heroBullets; trackBy: trackByIndex"
+        >
           <mat-icon [attr.aria-label]="'Bullet check mark'" role="img"
             >check_circle</mat-icon
           >
@@ -28,6 +26,7 @@
           <mat-icon [attr.aria-label]="'Phone icon'" role="img">call</mat-icon>
           Call to Book Service
         </button>
+
         <button
           mat-stroked-button
           (click)="onRequestQuote()"
@@ -60,12 +59,14 @@
             {{ townConfig.areasServed.slice(0, 4).join(" • ") }}
           </mat-card-subtitle>
         </mat-card-header>
+
         <mat-card-content>
           <p>
             From homes and remodels to ranch shops and small businesses, we
             design, repair, and upgrade electrical systems built for real
             {{ townConfig.regionLabel }} use.
           </p>
+
           <div class="tp-chip-row">
             <mat-chip-listbox aria-label="Service highlights">
               <mat-chip>Licensed & Insured</mat-chip>
@@ -77,6 +78,177 @@
         </mat-card-content>
       </mat-card>
     </div>
+  </section>
+
+  <!-- LOCAL CONTEXT (Town-specific differentiator) -->
+  <section class="tp-section" *ngIf="townConfig.localContext">
+    <mat-card class="tp-card">
+      <mat-card-header>
+        <div mat-card-avatar class="tp-card-avatar" aria-hidden="true">
+          <mat-icon [attr.aria-label]="'Info icon'" role="img">info</mat-icon>
+        </div>
+        <mat-card-title
+          >Electrical Work That Fits {{ townLabel }}</mat-card-title
+        >
+        <mat-card-subtitle>
+          Real-world context we see around {{ townConfig.regionLabel }}.
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content class="tp-two-col">
+        <div
+          class="tp-col"
+          *ngIf="townConfig.localContext?.homesAndProperties?.length"
+        >
+          <h3 class="tp-mini-title">Homes & Properties</h3>
+          <ul class="tp-bullets">
+            <li
+              *ngFor="
+                let item of townConfig.localContext.homesAndProperties;
+                trackBy: trackByIndex
+              "
+            >
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="tp-col"
+          *ngIf="townConfig.localContext?.commonElectricalIssues?.length"
+        >
+          <h3 class="tp-mini-title">Common Issues We Fix</h3>
+          <ul class="tp-bullets">
+            <li
+              *ngFor="
+                let item of townConfig.localContext.commonElectricalIssues;
+                trackBy: trackByIndex
+              "
+            >
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="tp-col"
+          *ngIf="townConfig.localContext?.businessAndRanchNotes?.length"
+        >
+          <h3 class="tp-mini-title">Shops, Ranches & Small Businesses</h3>
+          <ul class="tp-bullets">
+            <li
+              *ngFor="
+                let item of townConfig.localContext.businessAndRanchNotes;
+                trackBy: trackByIndex
+              "
+            >
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- NEIGHBORHOODS / LANDMARKS (lightweight uniqueness) -->
+  <section
+    class="tp-section"
+    *ngIf="townConfig.neighborhoods?.length || townConfig.landmarks?.length"
+  >
+    <mat-card class="tp-card">
+      <mat-card-header>
+        <div mat-card-avatar class="tp-card-avatar" aria-hidden="true">
+          <mat-icon [attr.aria-label]="'Map icon'" role="img">place</mat-icon>
+        </div>
+        <mat-card-title>Where We Work Around {{ townLabel }}</mat-card-title>
+        <mat-card-subtitle>
+          Familiar areas we regularly serve (and nearby communities).
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div
+          class="tp-chip-row tp-chip-row--wrap"
+          *ngIf="townConfig.neighborhoods?.length"
+        >
+          <p class="tp-section-intro tp-tight">Neighborhoods & Subdivisions</p>
+          <mat-chip-listbox aria-label="Neighborhoods served">
+            <mat-chip
+              *ngFor="let n of townConfig.neighborhoods; trackBy: trackByIndex"
+            >
+              {{ n }}
+            </mat-chip>
+          </mat-chip-listbox>
+        </div>
+
+        <div
+          class="tp-chip-row tp-chip-row--wrap"
+          *ngIf="townConfig.landmarks?.length"
+        >
+          <p class="tp-section-intro tp-tight">Landmarks & Corridors</p>
+          <mat-chip-listbox aria-label="Landmarks served">
+            <mat-chip
+              *ngFor="let l of townConfig.landmarks; trackBy: trackByIndex"
+            >
+              {{ l }}
+            </mat-chip>
+          </mat-chip-listbox>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- RECENT LOCAL WORK (highest-value uniqueness) -->
+  <section class="tp-section" *ngIf="townConfig.localProjects?.length">
+    <mat-card class="tp-card">
+      <mat-card-header>
+        <div mat-card-avatar class="tp-card-avatar" aria-hidden="true">
+          <mat-icon [attr.aria-label]="'Work icon'" role="img">build</mat-icon>
+        </div>
+        <mat-card-title
+          >Recent Electrical Work in {{ townLabel }}</mat-card-title
+        >
+        <mat-card-subtitle>
+          A few examples of what we’ve completed locally.
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="tp-project-grid">
+          <mat-card
+            class="tp-project"
+            *ngFor="let p of townConfig.localProjects; trackBy: trackByIndex"
+          >
+            <div class="tp-project-head">
+              <div>
+                <div class="tp-project-title">{{ p.title }}</div>
+                <div class="tp-project-sub" *ngIf="p.areaHint">
+                  {{ p.areaHint }}
+                </div>
+              </div>
+
+              <mat-icon aria-hidden="true">task_alt</mat-icon>
+            </div>
+
+            <p class="tp-project-summary">{{ p.summary }}</p>
+
+            <ul class="tp-project-bullets" *ngIf="p.bullets?.length">
+              <li *ngFor="let b of p.bullets; trackBy: trackByIndex">
+                {{ b }}
+              </li>
+            </ul>
+
+            <div class="tp-chip-row tp-chip-row--wrap" *ngIf="p.tags?.length">
+              <mat-chip-listbox aria-label="Project tags">
+                <mat-chip *ngFor="let t of p.tags; trackBy: trackByIndex">
+                  {{ t }}
+                </mat-chip>
+              </mat-chip-listbox>
+            </div>
+          </mat-card>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </section>
 
   <!-- RESIDENTIAL SERVICES -->
@@ -96,14 +268,19 @@
           }}
         </mat-card-subtitle>
       </mat-card-header>
+
       <mat-card-content>
         <p class="tp-section-intro" *ngIf="townConfig.residentialIntro">
           {{ townConfig.residentialIntro }}
         </p>
+
         <div class="tp-service-grid">
           <div
             class="tp-service-item"
-            *ngFor="let service of townConfig.residentialServices"
+            *ngFor="
+              let service of townConfig.residentialServices;
+              trackBy: trackByLabel
+            "
           >
             <mat-icon
               class="tp-service-icon"
@@ -135,14 +312,19 @@
           }}
         </mat-card-subtitle>
       </mat-card-header>
+
       <mat-card-content>
         <p class="tp-section-intro" *ngIf="townConfig.commercialIntro">
           {{ townConfig.commercialIntro }}
         </p>
+
         <div class="tp-service-grid">
           <div
             class="tp-service-item"
-            *ngFor="let service of townConfig.commercialServices"
+            *ngFor="
+              let service of townConfig.commercialServices;
+              trackBy: trackByLabel
+            "
           >
             <mat-icon
               class="tp-service-icon"
@@ -171,14 +353,19 @@
           {{ townConfig.energySubheading || "Plan it right the first time." }}
         </mat-card-subtitle>
       </mat-card-header>
+
       <mat-card-content>
         <p class="tp-section-intro" *ngIf="townConfig.energyIntro">
           {{ townConfig.energyIntro }}
         </p>
+
         <div class="tp-service-grid">
           <div
             class="tp-service-item"
-            *ngFor="let service of townConfig.energyServices"
+            *ngFor="
+              let service of townConfig.energyServices;
+              trackBy: trackByLabel
+            "
           >
             <mat-icon
               class="tp-service-icon"
@@ -188,6 +375,70 @@
             >
             <span>{{ service.label }}</span>
           </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- FAQs (Town-specific) -->
+  <section class="tp-section" *ngIf="townConfig.faqs?.length">
+    <mat-card class="tp-card">
+      <mat-card-header>
+        <div mat-card-avatar class="tp-card-avatar" aria-hidden="true">
+          <mat-icon [attr.aria-label]="'FAQ icon'" role="img">help</mat-icon>
+        </div>
+        <mat-card-title>FAQs for {{ townLabel }}</mat-card-title>
+        <mat-card-subtitle>
+          Quick answers based on what customers ask most in this area.
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-accordion class="tp-accordion">
+          <mat-expansion-panel
+            *ngFor="let faq of townConfig.faqs; trackBy: trackByIndex"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ faq.question }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p class="tp-faq-answer">{{ faq.answer }}</p>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- Testimonials (Town-specific proof) -->
+  <section class="tp-section" *ngIf="townConfig.testimonials?.length">
+    <mat-card class="tp-card">
+      <mat-card-header>
+        <div mat-card-avatar class="tp-card-avatar" aria-hidden="true">
+          <mat-icon [attr.aria-label]="'Reviews icon'" role="img"
+            >reviews</mat-icon
+          >
+        </div>
+        <mat-card-title>What {{ townLabel }} Customers Say</mat-card-title>
+        <mat-card-subtitle
+          >Local feedback from recent projects.</mat-card-subtitle
+        >
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="tp-testimonial-grid">
+          <mat-card
+            class="tp-quote"
+            *ngFor="let t of townConfig.testimonials; trackBy: trackByIndex"
+          >
+            <div class="tp-quote-mark">“</div>
+            <p class="tp-quote-text">{{ t.quote }}</p>
+            <mat-divider></mat-divider>
+            <div class="tp-quote-meta">
+              <span *ngIf="t.name">{{ t.name }}</span>
+              <span *ngIf="t.areaHint" class="tp-quote-area"
+                >• {{ t.areaHint }}</span
+              >
+            </div>
+          </mat-card>
         </div>
       </mat-card-content>
     </mat-card>
@@ -209,19 +460,46 @@
         </mat-card-title>
         <mat-card-subtitle>Local service you can rely on.</mat-card-subtitle>
       </mat-card-header>
+
       <mat-card-content>
         <p class="tp-section-intro">
           Our base in {{ townLabel }} allows us to regularly serve homeowners,
           businesses, and ranch properties across the surrounding
           {{ townConfig.regionLabel }}.
         </p>
-        <div class="tp-chip-row tp-chip-row--wrap">
+
+        <div
+          class="tp-chip-row tp-chip-row--wrap"
+          *ngIf="townConfig.areasServed?.length"
+        >
           <mat-chip-listbox aria-label="Areas served">
-            <mat-chip *ngFor="let area of townConfig.areasServed">
+            <mat-chip
+              *ngFor="let area of townConfig.areasServed; trackBy: trackByIndex"
+            >
               {{ area }}
             </mat-chip>
           </mat-chip-listbox>
         </div>
+
+        <div class="tp-related" *ngIf="townConfig.relatedLinks?.length">
+          <p class="tp-section-intro tp-tight">Related services in this area</p>
+          <div class="tp-related-links">
+            <a
+              class="tp-related-link"
+              *ngFor="
+                let link of townConfig.relatedLinks;
+                trackBy: trackByIndex
+              "
+              [routerLink]="link.routerLink"
+            >
+              <mat-icon *ngIf="link.icon" aria-hidden="true">{{
+                link.icon
+              }}</mat-icon>
+              {{ link.label }}
+            </a>
+          </div>
+        </div>
+
         <button
           mat-stroked-button
           class="wcu-town-btn"
@@ -248,6 +526,7 @@
           ProVolt Electrical Services is ready to help.
         </p>
       </div>
+
       <div class="tp-final-actions">
         <app-cta-button
           [label]="'Call'"

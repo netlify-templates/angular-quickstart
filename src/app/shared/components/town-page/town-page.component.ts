@@ -6,14 +6,18 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+
 import { SeoService } from '../../services/seo.service';
 import { CtaButtonComponent } from '../cta-button/cta-button.component';
 import { TownPageConfig } from '../../configs/town-page.config';
-import { RouterModule } from '@angular/router';
 
 export interface ServiceItem {
   label: string;
@@ -26,8 +30,8 @@ export interface TownSeoConfig {
   pageUrl: string;
   ogImage?: string;
   robots?: string;
-  jsonLdId?: string; // e.g. 'json-ld-kerrville'
-  jsonLd?: unknown; // prebuilt JSON-LD object
+  jsonLdId?: string;
+  jsonLd?: unknown;
 }
 
 @Component({
@@ -35,12 +39,14 @@ export interface TownSeoConfig {
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
     MatChipsModule,
+    MatExpansionModule,
+    MatDividerModule,
     CtaButtonComponent,
-    RouterModule,
   ],
   templateUrl: './town-page.component.html',
   styleUrls: ['./town-page.component.scss'],
@@ -60,6 +66,8 @@ export class TownPageComponent implements OnInit, OnChanges {
     }
   }
 
+  // ------- Derived labels -------
+
   get townLabel(): string {
     if (!this.townConfig) return '';
     return `${this.townConfig.townName}, ${this.townConfig.stateAbbr}`;
@@ -73,11 +81,6 @@ export class TownPageComponent implements OnInit, OnChanges {
   get heroSubtitle(): string {
     if (this.townConfig?.heroSubtitle) return this.townConfig.heroSubtitle;
     return `ProVolt Electrical Services provides licensed, insured residential, commercial, and ranch electrical work throughout ${this.townLabel} and the surrounding ${this.townConfig?.regionLabel}.`;
-  }
-
-  get heroBadgeText(): string {
-    if (this.townConfig?.heroBadgeText) return this.townConfig.heroBadgeText;
-    return `Electrician in ${this.townLabel}, ${this.townConfig?.regionLabel}`;
   }
 
   get residentialHeading(): string {
@@ -97,6 +100,8 @@ export class TownPageComponent implements OnInit, OnChanges {
       ? this.townConfig.energyHeading
       : `Energy Efficiency & Electrical Consultations`;
   }
+
+  // ------- SEO -------
 
   private applySeo(): void {
     if (!this.townConfig?.seo) return;
@@ -125,21 +130,31 @@ export class TownPageComponent implements OnInit, OnChanges {
     }
   }
 
+  // ------- UX actions -------
+
   onCallClick(): void {
     if (!this.townConfig?.phoneNumber) return;
     const digits = this.townConfig.phoneNumber.replace(/[^0-9]/g, '');
-    if (digits) {
-      window.location.href = `tel:${digits}`;
-    }
+    if (digits) window.location.href = `tel:${digits}`;
   }
 
   onRequestQuote(): void {
-    // TODO: hook this into your router or contact form
-    // e.g. this.router.navigate(['/contact']);
-    if (!this.townConfig?.phoneNumber) return;
-    const digits = this.townConfig.phoneNumber.replace(/[^0-9]/g, '');
-    if (digits) {
-      window.location.href = `tel:${digits}`;
+    // Prefer routing to a contact form when you have it.
+    if (this.townConfig?.requestQuoteLink) {
+      // You can switch this to router navigation if you inject Router.
+      window.location.href = this.townConfig.requestQuoteLink;
+      return;
     }
+    this.onCallClick();
+  }
+
+  // ------- TrackBy helpers -------
+
+  trackByIndex(index: number): number {
+    return index;
+  }
+
+  trackByLabel(_: number, item: { label?: string }): string {
+    return item?.label ?? '';
   }
 }
