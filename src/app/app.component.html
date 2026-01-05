@@ -1,7 +1,39 @@
-<div id="header">
-  <app-tool-bar></app-tool-bar>
-</div>
-<div id="body">
-  <router-outlet></router-outlet>
-</div>
-<div id="footer"><app-footer-section></app-footer-section></div>
+<mat-sidenav-container class="app-sidenav-container">
+  <mat-sidenav #drawer mode="over" position="end" class="app-sidenav">
+    <div class="sidenav-header">
+      <span class="sidenav-title">Menu</span>
+      <button mat-icon-button (click)="drawer.close()" aria-label="Close menu">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/home" (click)="drawer.close()">Home</a>
+      <a
+        mat-list-item
+        routerLink="/electrical-services"
+        (click)="drawer.close()"
+        >Services</a
+      >
+      <a
+        mat-list-item
+        routerLink="/service-areas/texas-hill-country-electrician"
+        (click)="drawer.close()"
+        >Areas We Serve</a
+      >
+      <a mat-list-item routerLink="/contact-us" (click)="drawer.close()"
+        >Contact Us</a
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div id="header">
+      <app-tool-bar [sidenav]="drawer"></app-tool-bar>
+    </div>
+    <div id="body">
+      <router-outlet></router-outlet>
+    </div>
+    <div id="footer"><app-footer-section></app-footer-section></div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

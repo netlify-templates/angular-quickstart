@@ -1,124 +1,61 @@
-<!-- Section for links with children (Areas We Serve) -->
-<!-- <ng-container *ngIf="link.children">
-            <button
-              mat-menu-item
-              disabled
-              class="menu-section-title"
-              [routerLink]="'/service-areas/texas-hill-country-electrician'"
-            >
-              {{ link.label }}
-            </button> -->
-<!-- <button
-              mat-menu-item
-              *ngFor="let child of link.children"
-              [routerLink]="child.path"
-            >
-              {{ child.label }}
-            </button> -->
-<!-- </ng-container> -->
 <header class="page-header">
-  <!-- MOBILE SIDE NAV -->
-  <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav
-      #sidenav
-      mode="over"
-      position="end"
-      class="app-sidenav"
-      role="navigation"
-    >
-      <div class="sidenav-header">
-        <span class="sidenav-title">Menu</span>
-        <button
-          mat-icon-button
-          (click)="sidenav.close()"
-          aria-label="Close menu"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
+  <mat-toolbar class="top-toolbar">
+    <div class="toolbar-inner">
+      <div class="logo-area">
+        <div class="logo-mark"></div>
+        <div class="logo-text">
+          <span class="logo-title">ProVolt</span>
+          <span class="logo-subtitle">Electrical Services</span>
+        </div>
       </div>
 
-      <mat-nav-list>
+      <nav class="nav-links desktop-nav">
         <ng-container *ngFor="let link of navLinks">
-          <!-- Links without children -->
-          <a mat-list-item [routerLink]="link.path" (click)="sidenav.close()">
+          <a
+            mat-button
+            *ngIf="!link.children"
+            [routerLink]="link.path"
+            class="nav-link"
+          >
             {{ link.label }}
           </a>
-        </ng-container>
-      </mat-nav-list>
-    </mat-sidenav>
 
-    <mat-sidenav-content>
-      <!-- MAIN CONTENT (TOOLBAR) -->
-      <mat-toolbar class="top-toolbar">
-        <div class="toolbar-inner">
-          <!-- Logo / Brand -->
-          <div class="logo-area">
-            <div class="logo-mark"></div>
-            <div class="logo-text">
-              <span class="logo-title">ProVolt</span>
-              <span class="logo-subtitle">Electrical Services</span>
-            </div>
-          </div>
-
-          <!-- Desktop navigation -->
-          <nav class="nav-links desktop-nav">
-            <ng-container *ngFor="let link of navLinks">
-              <!-- Regular link -->
+          <div *ngIf="link.children">
+            <button mat-button class="nav-link" [matMenuTriggerFor]="areasMenu">
+              {{ link.label }}
+              <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #areasMenu="matMenu">
               <a
-                mat-button
-                *ngIf="!link.children"
-                [routerLink]="link.path"
-                class="nav-link"
+                *ngFor="let child of link.children"
+                mat-menu-item
+                [routerLink]="child.path"
               >
-                {{ link.label }}
+                {{ child.label }}
               </a>
+            </mat-menu>
 
-              <!-- Dropdown menu with Angular Material (desktop only) -->
-              <div *ngIf="link.children">
-                <button
-                  mat-button
-                  class="nav-link"
-                  [matMenuTriggerFor]="areasMenu"
-                >
-                  {{ link.label }}
-                  <mat-icon>arrow_drop_down</mat-icon>
-                </button>
+            <nav class="sr-only" aria-hidden="true">
+              <a
+                *ngFor="let child of link.children"
+                [attr.href]="child.path"
+                (click)="$event.preventDefault()"
+              >
+                {{ child.label }}
+              </a>
+            </nav>
+          </div>
+        </ng-container>
+      </nav>
 
-                <mat-menu #areasMenu="matMenu">
-                  <a
-                    *ngFor="let child of link.children"
-                    mat-menu-item
-                    [routerLink]="child.path"
-                  >
-                    {{ child.label }}
-                  </a>
-                </mat-menu>
-
-                <!-- Crawlable static links; visually hidden, non-interactive -->
-                <nav class="sr-only" aria-hidden="true">
-                  <a
-                    *ngFor="let child of link.children"
-                    [attr.href]="child.path"
-                    (click)="$event.preventDefault()"
-                  >
-                    {{ child.label }}
-                  </a>
-                </nav>
-              </div>
-            </ng-container>
-          </nav>
-
-          <!-- Mobile menu button -->
-          <button
-            mat-icon-button
-            class="mobile-menu-button"
-            (click)="sidenav.toggle()"
-            aria-label="Open navigation menu"
-          >
-            <mat-icon>menu</mat-icon>
-          </button>
-        </div>
-      </mat-toolbar>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+      <button
+        mat-icon-button
+        class="mobile-menu-button"
+        (click)="sidenav?.toggle()"
+        aria-label="Open navigation menu"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
 </header>

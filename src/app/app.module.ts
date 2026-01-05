@@ -12,7 +12,11 @@ import { ToolBarComponent } from './shared/components/tool-bar/tool-bar.componen
 import { ActionBannerComponent } from './shared/components/action-banner/action-banner.component';
 import { FooterSectionComponent } from './shared/components/footer-section/footer-section.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +28,12 @@ import { RouterModule } from '@angular/router';
     ActionBannerComponent,
     BrowserAnimationsModule,
     RouterModule,
+    RouterOutlet,
+    MatSidenavModule,
+    MatListModule,
+    ToolBarComponent,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [provideClientHydration(withEventReplay())],
   bootstrap: [AppComponent],
