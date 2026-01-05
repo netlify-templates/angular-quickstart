@@ -18,6 +18,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { SeoService } from '../../services/seo.service';
 import { CtaButtonComponent } from '../cta-button/cta-button.component';
 import { TownPageConfig } from '../../configs/town-page.config';
+import { SitePaths as ImportedSitePaths } from '../../configs/site-urls.config';
 
 export interface ServiceItem {
   label: string;
@@ -52,6 +53,7 @@ export interface TownSeoConfig {
   styleUrls: ['./town-page.component.scss'],
 })
 export class TownPageComponent implements OnInit, OnChanges {
+  readonly SitePaths = ImportedSitePaths;
   @Input() townConfig!: TownPageConfig;
 
   constructor(private seo: SeoService) {}
@@ -95,12 +97,6 @@ export class TownPageComponent implements OnInit, OnChanges {
       : `Commercial & Ranch Electrical Services`;
   }
 
-  get energyHeading(): string {
-    return this.townConfig?.energyHeading
-      ? this.townConfig.energyHeading
-      : `Energy Efficiency & Electrical Consultations`;
-  }
-
   // ------- SEO -------
 
   private applySeo(): void {
@@ -136,16 +132,6 @@ export class TownPageComponent implements OnInit, OnChanges {
     if (!this.townConfig?.phoneNumber) return;
     const digits = this.townConfig.phoneNumber.replace(/[^0-9]/g, '');
     if (digits) window.location.href = `tel:${digits}`;
-  }
-
-  onRequestQuote(): void {
-    // Prefer routing to a contact form when you have it.
-    if (this.townConfig?.requestQuoteLink) {
-      // You can switch this to router navigation if you inject Router.
-      window.location.href = this.townConfig.requestQuoteLink;
-      return;
-    }
-    this.onCallClick();
   }
 
   // ------- TrackBy helpers -------

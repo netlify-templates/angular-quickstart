@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +25,7 @@ import { TownPageComponent } from 'src/app/shared/components/town-page/town-page
   templateUrl: './electrician-ingram-tx.component.html',
   styleUrls: ['./electrician-ingram-tx.component.scss'],
 })
-export class ElectricianIngramTxComponent implements OnInit {
+export class ElectricianIngramTxComponent implements OnInit, OnDestroy {
   config: TownPageConfig = TOWN_CONFIGS['ingram'];
 
   constructor(private seo: SeoService) {}
@@ -47,5 +47,9 @@ export class ElectricianIngramTxComponent implements OnInit {
         this.seo.setJsonLd(seoConfig.jsonLdId, seoConfig.jsonLd);
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.seo.removeJsonLd(this.config.seo?.jsonLdId || '');
   }
 }

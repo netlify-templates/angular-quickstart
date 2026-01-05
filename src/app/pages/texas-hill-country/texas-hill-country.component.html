@@ -1,16 +1,64 @@
 <div class="wcu-page">
+  <!-- SERVICE AREA GRID -->
+  <section class="wcu-section">
+    <div class="wcu-section-header">
+      <h1>Our Texas Hill Country Service Area</h1>
+      <p>
+        We proudly serve a wide range of communities across the
+        {{ regionLabel }}. Select your town below to view detailed electrical
+        services available in your area.
+      </p>
+    </div>
+
+    <div class="wcu-town-grid">
+      <mat-card
+        class="wcu-town-card"
+        *ngFor="let town of towns"
+        (click)="onTownClick(town)"
+        tabindex="0"
+      >
+        <mat-card-header>
+          <div mat-card-avatar class="wcu-town-avatar">
+            <mat-icon>location_city</mat-icon>
+          </div>
+          <mat-card-title>{{ town.label }}</mat-card-title>
+          <mat-card-subtitle *ngIf="town.primaryAreas.length">
+            Also serving
+            {{ town.primaryAreas.join(", ") }}
+            <span *ngIf="town.primaryAreas.length === 3">and nearby areas</span>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="town-card-body">
+            Full-service electrical work for homes, small businesses, and ranch
+            properties in and around {{ town.name }}.
+          </p>
+          <button
+            mat-stroked-button
+            class="wcu-town-btn"
+            type="button"
+            [routerLink]="town.urlSlug"
+          >
+            <mat-icon>arrow_forward</mat-icon>
+            View {{ town.name }} Services
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+
   <!-- HERO / INTRO -->
   <section class="wcu-hero">
     <div class="wcu-hero-text">
-      <p class="wcu-badge">
+      <!-- <p class="wcu-badge">
         <mat-icon>location_on</mat-icon>
         Electrician Serving the {{ regionLabel }}
-      </p>
+      </p> -->
 
-      <h1 class="wcu-title">
+      <h2 class="wcu-title">
         Why Choose ProVolt Electrical Services
         <span>in the Texas Hill Country</span>
-      </h1>
+      </h2>
 
       <p class="wcu-subtitle">
         We’re a licensed, insured master electrical contractor serving homes,
@@ -60,16 +108,6 @@
           <mat-icon>call</mat-icon>
           Call Now
         </button>
-
-        <button mat-stroked-button (click)="onCallNow()">
-          <mat-icon>edit</mat-icon>
-          Request a Quote
-        </button>
-
-        <button mat-stroked-button (click)="onCallNow()">
-          <mat-icon>warning</mat-icon>
-          Emergency Service
-        </button>
       </div>
     </div>
 
@@ -103,54 +141,6 @@
     </div>
   </section>
 
-  <!-- SERVICE AREA GRID -->
-  <section class="wcu-section">
-    <div class="wcu-section-header">
-      <h2>Our Texas Hill Country Service Area</h2>
-      <p>
-        We proudly serve a wide range of communities across the
-        {{ regionLabel }}. Select your town below to view detailed electrical
-        services available in your area.
-      </p>
-    </div>
-
-    <div class="wcu-town-grid">
-      <mat-card
-        class="wcu-town-card"
-        *ngFor="let town of towns"
-        (click)="onTownClick(town)"
-        tabindex="0"
-      >
-        <mat-card-header>
-          <div mat-card-avatar class="wcu-town-avatar">
-            <mat-icon>location_city</mat-icon>
-          </div>
-          <mat-card-title>{{ town.label }}</mat-card-title>
-          <mat-card-subtitle *ngIf="town.primaryAreas.length">
-            Also serving
-            {{ town.primaryAreas.join(", ") }}
-            <span *ngIf="town.primaryAreas.length === 3">and nearby areas</span>
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <p class="town-card-body">
-            Full-service electrical work for homes, small businesses, and ranch
-            properties in and around {{ town.name }}.
-          </p>
-          <button
-            mat-stroked-button
-            class="wcu-town-btn"
-            type="button"
-            [routerLink]="town.urlSlug"
-          >
-            <mat-icon>arrow_forward</mat-icon>
-            View {{ town.name }} Services
-          </button>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </section>
-
   <!-- SUMMARY / CTA -->
   <section class="wcu-section wcu-summary">
     <div class="wcu-summary-inner">
@@ -167,10 +157,6 @@
         <button mat-raised-button>
           <mat-icon>call</mat-icon>
           Call to Book Service
-        </button>
-        <button mat-stroked-button>
-          <mat-icon>mail</mat-icon>
-          Send a Service Request
         </button>
       </div>
     </div>

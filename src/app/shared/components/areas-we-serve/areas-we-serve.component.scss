@@ -1,22 +1,13 @@
-// ===============================
-// PROVOLT BRANDING COLORS
-// ===============================
-// $primary: #d6262b; // fire-engine electrician red
-// $primary-soft: rgba(214, 38, 43, 0.12);
-$primary: #d9b524; // fire-engine electrician red
+$primary: var(--brand-yellow-02);
 $primary-soft: rgba(230, 198, 18, 0.15);
 
 $secondary: #d6262b; // warm Hill Country yellow
 $secondary-soft: rgba(214, 38, 43, 0.12);
-// $secondary: #e6c612; // warm Hill Country yellow
-// $secondary-soft: rgba(230, 198, 18, 0.15);
 
 $surface-color: var(--background-alt);
 $background-color: var(--background);
 $text-main: #1f2933;
 $text-muted: #6b7280;
-
-// $shadow-soft: 0 22px 45px rgba(15, 23, 42, 0.12);
 
 // ===============================
 // SECTION WRAPPER
@@ -26,6 +17,8 @@ $text-muted: #6b7280;
 }
 
 .areas-served {
+  padding-left: 24px;
+  padding-right: 24px;
   background: var(--background);
 
   &__container {
@@ -37,6 +30,10 @@ $text-muted: #6b7280;
   // ===============================
   &__header {
     text-align: center;
+  }
+
+  &__body {
+    margin-top: 12px;
   }
 
   &__eyebrow {
@@ -94,23 +91,6 @@ $text-muted: #6b7280;
   }
 
   // ===============================
-  // BADGE (Local • Licensed • Insured)
-  // ===============================
-  &__badge {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding: 0.35rem 0.8rem;
-    border-radius: 999px;
-    background: $primary-soft;
-    color: $primary;
-    font-size: 0.75rem;
-    font-weight: 700;
-    gap: 0.4rem;
-    width: fit-content;
-  }
-
-  // ===============================
   // HEADQUARTERS BLOCK
   // ===============================
   &__headquarters {
@@ -132,7 +112,6 @@ $text-muted: #6b7280;
   &__headquarters-city {
     font-size: 1.15rem;
     font-weight: 700;
-    color: $primary; // Kerrville pops with brand color
     margin: 0 0 0.15rem;
   }
 
@@ -172,12 +151,12 @@ $text-muted: #6b7280;
     gap: 0.55rem;
     padding: 0.6rem 0.9rem;
     border-radius: 999px;
-    background: #e0e0e0;
-    // border: 1px solid rgba(214, 38, 43, 0.25); // faint red border
+    // background: #e0e0e0;
+    border: 2px solid $primary; // faint red border
     transition: all 150ms ease;
 
     &:hover {
-      background: #d3d3d3;
+      // background: #d3d3d3;
       // border-color: $primary;
       transform: translateY(-2px);
       // box-shadow: 0 8px 18px rgba(214, 38, 43, 0.2);
@@ -197,6 +176,12 @@ $text-muted: #6b7280;
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: $text-muted;
+    // color: $text-muted;
+  }
+
+  &__pill-arrow {
+    margin-left: auto;
+    color: $primary;
+    font-size: 22px;
   }
 }

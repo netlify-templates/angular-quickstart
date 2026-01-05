@@ -39,7 +39,7 @@ export class ActionBannerComponent {
     {
       title: 'Ranch & Rural Electrical Services',
       description:
-        'Power solutions for barns, wells, shops, and acreage properties—including trenching, outdoor power, and equipment circuits across the Hill Country.',
+        'Power solutions for barns, shops, and acreage properties—including trenching, outdoor power, and equipment circuits across the Hill Country.',
       ctaLabel: 'View Ranch & Rural Services',
       routerLink: '/services/ranch-rural',
       icon: 'agriculture',

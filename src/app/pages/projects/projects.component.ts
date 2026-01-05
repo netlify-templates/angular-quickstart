@@ -71,7 +71,7 @@ export class ProjectsComponent implements OnInit {
       title: 'Commercial Lighting Retrofit for Local Retail Shop',
       location: 'Kerrville, TX',
       category: 'commercial',
-      scopeLabel: 'LED retrofit, lighting design',
+      scopeLabel: 'LED retrofit, lighting upgrades',
       durationLabel: 'Completed in 1 night',
       featured: true,
       summary:

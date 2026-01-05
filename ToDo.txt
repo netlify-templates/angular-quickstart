@@ -154,7 +154,7 @@ services: ServiceItem[] = [
         'Pre-purchase home inspections',
         'Code compliance assessments',
         'Insurance & safety reports',
-        'Thermal checks for hot spots',
+        'Thermal checks for overheated circuits',
       ],
     },
     {
@@ -175,10 +175,9 @@ services: ServiceItem[] = [
       category: 'Commercial',
       icon: 'agriculture',
       description:
-        'Dependable power solutions for barns, wells, shops, and rural properties across the Hill Country.',
+        'Dependable power solutions for barns, shops, and rural properties across the Hill Country.',
       bullets: [
         'Barn & outbuilding wiring',
-        'Well & pump circuits',
         'Equipment circuits & receptacles',
         'Outdoor power distribution',
       ],

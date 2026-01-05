@@ -1,9 +1,9 @@
 export interface LocalProject {
-  title: string; // e.g. "200A Panel Upgrade"
-  summary: string; // 1–2 sentences
-  areaHint?: string; // e.g. "Near Schreiner University" / "In Comanche Trace"
-  bullets?: string[]; // 2–4 specifics
-  tags?: string[]; // e.g. ["Panel", "Permits", "Inspection"]
+  title: string;
+  summary: string;
+  areaHint?: string;
+  bullets?: string[];
+  tags?: string[];
   imageUrl?: string; // optional local photo
   imageAlt?: string;
 }
@@ -55,24 +55,24 @@ export interface TownPageConfig {
   heroSubtitle?: string;
   heroBadgeText?: string;
   heroBullets: string[];
+  heroCTAText?: string;
 
   residentialHeading?: string;
   residentialSubheading?: string;
   residentialIntro?: string;
-  residentialLink: string;
   residentialServices: ServiceItem[];
+
+  ranchHeading?: string;
+  ranchSubheading?: string;
+  ranchIntro?: string;
+  ranchLink?: string;
+  ranchServices?: ServiceItem[];
 
   commercialHeading?: string;
   commercialSubheading?: string;
   commercialIntro?: string;
   commercialLink: string;
   commercialServices: ServiceItem[];
-
-  energyHeading?: string;
-  energySubheading?: string;
-  energyIntro?: string;
-  energyLink?: string;
-  energyServices: ServiceItem[];
 
   areasServed: string[];
   urlSlug: string;
@@ -85,9 +85,6 @@ export interface TownPageConfig {
   localProjects: LocalProject[];
   testimonials: Testimonial[];
   faqs: FaqItem[];
-
-  relatedLinks?: RelatedLink[];
-  requestQuoteLink?: string; // e.g. "/contact-us"
 }
 
 // Shared constants
@@ -101,32 +98,6 @@ const DEFAULT_OG_IMAGE = `${BASE_DOMAIN}/assets/og-default.jpg`; // TODO: replac
 const pageUrlFromSlug = (slug: string) => `${BASE_DOMAIN}${slug}`;
 const electricianIdFromSlug = (slug: string) =>
   `${BASE_DOMAIN}${slug}#electrician`;
-
-// Shared service groups (customize per-town if desired)
-const BASE_RESIDENTIAL_SERVICES: ServiceItem[] = [
-  { label: 'Troubleshooting & repairs', icon: 'bolt' },
-  { label: 'Breaker & panel upgrades', icon: 'electrical_services' },
-  { label: 'Indoor & outdoor lighting', icon: 'lightbulb' },
-  { label: 'Rewiring & code corrections', icon: 'rule' },
-  { label: 'Whole-home surge protection', icon: 'offline_bolt' },
-  { label: 'Ceiling fans & switches', icon: 'toys' },
-];
-
-const BASE_COMMERCIAL_RANCH_SERVICES: ServiceItem[] = [
-  { label: 'Ranch & shop wiring', icon: 'agriculture' },
-  { label: 'Dedicated equipment circuits', icon: 'precision_manufacturing' },
-  { label: 'Parking & security lighting', icon: 'outdoor_grill' },
-  { label: 'Panel & service upgrades', icon: 'settings_input_component' },
-  { label: 'Maintenance & emergency service', icon: 'build' },
-];
-
-const BASE_ENERGY_SERVICES: ServiceItem[] = [
-  { label: 'Energy audits', icon: 'analytics' },
-  { label: 'LED & efficiency upgrades', icon: 'light_mode' },
-  { label: 'Load calculations', icon: 'calculate' },
-  { label: 'New build & remodel consultations', icon: 'architecture' },
-  { label: 'Solar-ready electrical prep', icon: 'solar_power' },
-];
 
 // SEO builders (consistent canonical/og:url/jsonld)
 function buildElectricianSeo(args: {
@@ -245,22 +216,29 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townName: 'Kerrville',
       addressLocality: 'Kerrville',
       metaTitle:
-        'Electrician Kerrville TX | Residential & Commercial Electrical',
+        'Electrician in Kerrville, TX | Panel Upgrades, Repairs & Lighting',
       metaDescription:
-        'Trusted electrician in Kerrville, TX for repairs, upgrades, lighting, panels, ranch wiring & more. Licensed, insured, and local to the Hill Country.',
+        'Licensed electrician in Kerrville, TX for troubleshooting, panel upgrades, surge protection, lighting, and ranch/shop wiring. Call ProVolt Electrical Services.',
       descriptionLong:
-        'ProVolt Electrical Services provides residential, commercial, and ranch & rural electrical work in Kerrville, TX and the surrounding Texas Hill Country.',
+        'ProVolt Electrical Services provides residential, commercial, and ranch & rural electrical work in Kerrville, TX—serving Hill Country homes, small businesses, and rural properties near the Guadalupe River with clean, code-compliant workmanship.',
       serviceType: [
-        'Residential electrical services',
-        'Commercial electrical services',
-        'Ranch and rural property electrical',
-        'Electrical panel upgrades',
-        'Lighting installation',
         'Electrical troubleshooting and repairs',
-        'Energy audits and efficiency upgrades',
-        'Electrical consultations for renovations and new builds',
+        'Electrical panel upgrades',
+        'Surge protection',
+        'Lighting installation and upgrades',
+        'Ranch and rural property electrical',
+        'Commercial electrical services',
       ],
       breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+      extra: {
+        // More specific "areaServed" improves locality signals without keyword-stuffing.
+        areaServed: [
+          { '@type': 'City', name: 'Kerrville, TX' },
+          { '@type': 'City', name: 'Ingram, TX' },
+          { '@type': 'City', name: 'Hunt, TX' },
+          { '@type': 'City', name: 'Center Point, TX' },
+        ],
+      },
     });
 
     return {
@@ -268,189 +246,202 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
       phoneNumber: PHONE_DISPLAY,
-      heroBullets: [
-        'Master electrician with Hill Country experience',
-        'Fast, reliable troubleshooting and repairs',
-        'Code-compliant work that protects your property',
-      ],
-      heroTitle: 'Electrician in Kerrville',
+
+      heroTitle: 'Master Electrician in Kerrville, TX',
       heroSubtitle:
-        'Local, licensed, and dependable—built for Kerrville homes, shops, and ranch properties.',
-      residentialIntro:
-        'Whether you’re dealing with a tripping breaker, outdated panel, or planning a remodel, we help keep your Kerrville home safe, bright, and efficient.',
-      residentialServices: [
-        { label: 'Breaker & panel upgrades', icon: 'electrical_services' },
-        { label: 'Troubleshooting & repairs', icon: 'bolt' },
-        { label: 'Whole-home surge protection', icon: 'offline_bolt' },
-        { label: 'Indoor & outdoor lighting', icon: 'lightbulb' },
-        { label: 'Rewiring & code corrections', icon: 'rule' },
-        { label: 'Ceiling fans & switches', icon: 'toys' },
+        'Licensed, insured electrical work for Kerrville homes, small businesses, and Hill Country properties—clean installs, clear pricing, and code-compliant results.',
+      heroBadgeText: 'Local • Licensed • Insured',
+      heroBullets: [
+        'Fast troubleshooting for outages, breaker trips, and flickering lights',
+        'Panel upgrades, surge protection, and service improvements',
+        'Lighting, remodel wiring, and dedicated circuits for modern loads',
+        'Ranch/shop power: long runs, outbuildings, and equipment circuits',
       ],
-      residentialLink: '/electrical-services/residential-electrician',
-      commercialIntro:
-        'From small businesses in town to ranch shops outside city limits, we design and maintain electrical systems built for real workloads.',
-      commercialServices: [
-        { label: 'Panel & service upgrades', icon: 'settings_input_component' },
-        { label: 'Ranch & shop wiring', icon: 'agriculture' },
+      heroCTAText: 'Call to Speak With an Electrician',
+
+      residentialHeading:
+        'Kerrville Residential Electrical Services – Expert Electrical Solutions for Homes',
+      residentialSubheading:
+        'Safe repairs, tidy installs, and upgrades that last.',
+      residentialIntro:
+        'Kerrville homes often need a mix of practical fixes and smart capacity planning—whether it’s recurring breaker trips, aging panels, or new appliance loads. We troubleshoot the root cause, install cleanly, and leave everything inspection-ready and neat.',
+      residentialServices: [
+        { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
-          label: 'Dedicated equipment circuits',
+          label: 'Panel Upgrades & Breaker Replacement',
+          icon: 'electrical_services',
+        },
+        { label: 'Dedicated Circuits for Appliances & HVAC', icon: 'power' },
+        { label: 'Whole-Home Surge Protection', icon: 'offline_bolt' },
+        { label: 'Indoor/Outdoor Lighting & Dimmers', icon: 'lightbulb' },
+        { label: 'GFCI/AFCI Safety Protection', icon: 'verified' },
+        { label: 'Remodel Wiring & Code Corrections', icon: 'rule' },
+      ],
+
+      // -------------------- COMMERCIAL --------------------
+      commercialHeading:
+        'Kerrville Commercial Electrical Services – Reliable Solutions for Businesses',
+      commercialSubheading: 'Power and lighting built for daily operations.',
+      commercialIntro:
+        'From small storefronts to workshops, we help Kerrville businesses stay powered and compliant. Expect clear communication, clean installs, and circuits sized correctly for equipment, lighting, and real-world use.',
+      commercialLink: '/electrical-services/commercial-electrician',
+      commercialServices: [
+        { label: 'Commercial Troubleshooting & Repairs', icon: 'build' },
+        { label: 'Tenant Build-Outs & Service Additions', icon: 'storefront' },
+        { label: 'Lighting Upgrades & LED Retrofits', icon: 'emoji_objects' },
+        {
+          label: 'Dedicated 240V Circuits for Equipment',
           icon: 'precision_manufacturing',
         },
-        { label: 'Parking & security lighting', icon: 'outdoor_grill' },
-        { label: 'Maintenance & emergency service', icon: 'build' },
+        {
+          label: 'Panel/Service Upgrades & Load Planning',
+          icon: 'settings_input_component',
+        },
+        {
+          label: 'Exterior, Parking & Security Lighting',
+          icon: 'local_parking',
+        },
       ],
-      commercialLink: '/electrical-services/commercial-electrician',
-      energyIntro:
-        'Planning a new build or remodel in Kerrville? We provide electrical design input, load calculations, and energy-efficient solutions that save money long-term.',
-      energyServices: [
-        { label: 'Energy audits', icon: 'analytics' },
-        { label: 'LED & efficiency upgrades', icon: 'light_mode' },
-        { label: 'Load calculations', icon: 'calculate' },
-        { label: 'New build & remodel consultations', icon: 'architecture' },
-        { label: 'Solar-ready electrical prep', icon: 'solar_power' },
+
+      // -------------------- RANCH & RURAL --------------------
+      ranchHeading:
+        'Kerrville Ranch & Rural Electrician Services – Wiring, Subpanels & Outdoor Power',
+      ranchSubheading:
+        'Long runs, outbuildings, and equipment loads—done right.',
+      ranchIntro:
+        'Need dependable power across a property in Kerrville? We wire barns, shops, and outbuildings with the details that matter—proper conductor sizing, clean subpanel work, safe outdoor power, and circuits built for heavy 240V equipment.',
+      ranchLink: '/electrical-services/ranch-electrician',
+      ranchServices: [
+        { label: 'Barn & Shop Wiring', icon: 'warehouse' },
+        {
+          label: 'Outbuilding Subpanels & Feeder Runs',
+          icon: 'electrical_services',
+        },
+        { label: 'Outdoor Power & Trenching to Buildings', icon: 'cable' },
+        { label: 'RV 30/50-Amp Hookups', icon: 'rv_hookup' },
+        {
+          label: '240V Circuits for Welders & Equipment',
+          icon: 'precision_manufacturing',
+        },
+        { label: 'Area & Security Lighting', icon: 'lightbulb' },
+        { label: 'Grounding/Bonding & Surge Protection', icon: 'shield' },
       ],
+
       areasServed: [
-        'Kerrville',
         'Ingram',
-        'Hunt',
         'Center Point',
+        'Hunt',
         'Comfort',
-        'Bandera',
         'Fredericksburg',
-        'Boerne',
-        'Helotes',
       ],
       urlSlug: slug,
       seo,
 
       neighborhoods: [
-        'Comanche Trace',
-        'Riverhill',
-        'Northwest Hills',
         'Downtown Kerrville',
-        'Junction Hwy corridor',
+        'Riverhill area',
+        'I-10 corridor',
+        'Hwy 16 corridor',
+        'Outside city limits (rural properties)',
       ],
       landmarks: [
-        'Schreiner University',
         'Guadalupe River',
-        'Sidney Baker St',
+        'Schreiner University',
         'Louise Hays Park',
-        'Loop 534',
+        'Sidney Baker St',
+        'Kerrville-Schreiner Park',
       ],
       localContext: {
         homesAndProperties: [
-          '1970s–1990s ranch homes',
-          'Riverfront properties with outdoor circuits',
-          'Metal shop buildings and barns',
-          'Remodels and additions',
+          '1970s–1990s ranch homes and additions',
+          'River-adjacent properties with outdoor circuits',
+          'Detached garages, workshops, and metal shop buildings',
+          'Remodels and service capacity upgrades',
         ],
         commonElectricalIssues: [
-          'Aging panels (Zinsco/FPE) and undersized services',
-          'Long service runs to outbuildings',
-          'Outdoor GFCI and lighting failures',
-          'Aluminum branch circuits in older homes',
+          'Aging panels and undersized services',
+          'Breaker trips from added loads (HVAC, EV charging, appliances)',
+          'Outdoor GFCI/receptacle failures and lighting issues',
+          'Long runs to outbuildings needing proper sizing',
         ],
         businessAndRanchNotes: [
-          '240V circuits for welders and compressors',
-          'RV hookups and shore power',
-          'Well/pump circuits and trenching considerations',
+          '240V circuits for welders, compressors, and shop equipment',
+          'RV hookups and shore power planning',
+          'Circuits and trenching considerations',
         ],
       },
 
       localProjects: [
         {
-          title: '200A Panel Upgrade',
-          summary: 'Main service and panel replacement for a 1980s ranch home.',
-          areaHint: 'Near Schreiner University',
+          title: 'Example: 200A Panel Upgrade + Surge Protection',
+          summary:
+            'Service capacity upgrade to support HVAC and modern appliance loads with whole-home surge protection.',
+          areaHint: 'Near the Guadalupe River area',
           bullets: [
-            'Replaced obsolete panel with 200A service',
-            'New grounding and bonding per code',
-            'Load calculation for future EV charger',
+            'Load calc + breaker schedule cleanup',
+            'New surge device + bonding/grounding review',
           ],
-          tags: ['Panel', 'Permits', 'Inspection'],
+          tags: ['Panel', 'Surge', 'Safety'],
         },
         {
-          title: 'Hot Tub Circuit & GFCI',
+          title: 'Example: Troubleshooting Breaker Trips',
           summary:
-            'Dedicated 50A spa circuit with outdoor-rated disconnect and GFCI.',
-          areaHint: 'Riverhill',
+            'Isolated nuisance trips and corrected circuit issues to stabilize a frequently used circuit.',
+          areaHint: 'I-10 corridor',
           bullets: [
-            'Correct conductor sizing for run length',
-            'Weatherproof equipment and bonding',
+            'Circuit tracing + load verification',
+            'Replaced damaged device + corrected terminations',
           ],
-          tags: ['Outdoor', 'GFCI', 'Safety'],
+          tags: ['Troubleshooting', 'Repairs'],
         },
         {
-          title: 'Shop Subpanel & Lighting',
+          title: 'Example: Shop Subpanel + Lighting',
           summary:
-            'Added 100A subpanel to metal shop with task and area lighting.',
-          areaHint: 'Comanche Trace',
+            'Added a subpanel and bright, efficient LED lighting for a workshop space.',
+          areaHint: 'Rural Kerrville property',
           bullets: [
             'Dedicated 240V circuits for equipment',
-            'LED bay lights with high CRI',
+            'High-efficiency LED layout for task lighting',
           ],
           tags: ['Shop', 'Subpanel', 'Lighting'],
         },
       ],
 
-      testimonials: [
-        {
-          quote:
-            'Quick diagnosis and clean panel upgrade—our lights stopped flickering immediately.',
-          name: 'M. R.',
-          areaHint: 'Riverhill',
-        },
-        {
-          quote:
-            'They knew exactly how to handle our long run to the barn. No more nuisance trips.',
-          name: 'J. M.',
-          areaHint: 'Comanche Trace',
-        },
-      ],
+      // IMPORTANT: Only populate with real customer reviews (do not fabricate).
+      testimonials: [],
 
       faqs: [
         {
-          question: 'Do I need a permit in Kerrville for a panel upgrade?',
+          question:
+            'Do panel upgrades in Kerrville typically require a permit and inspection?',
           answer:
-            'Panel and service upgrades typically require permits and inspections. We handle the permit process and coordinate inspections.',
+            'Often, yes—especially for service or panel replacements. Requirements can vary by jurisdiction and scope, so we confirm what applies to your address and handle the permitting/inspection steps when needed.',
         },
         {
           question:
-            'Can you service properties outside Kerrville city limits (ranches)?',
+            'Why do breakers trip more in Kerrville during peak summer heat?',
           answer:
-            'Yes. We regularly work on rural properties and plan for long runs, proper voltage drop, and trenching requirements.',
+            'High HVAC demand plus kitchens, laundry, and shop loads can push older services near their limit. We troubleshoot the circuit, check connections, and recommend the safest fix—often dedicated circuits, load balancing, or a service/panel upgrade when capacity is the issue.',
         },
         {
           question:
-            'What’s the most common cause of breaker trips in Kerrville homes?',
+            'Can you add power for a detached garage, shop, or metal building on a Kerrville property?',
           answer:
-            'Often overloaded circuits or aging breakers. We evaluate loads and correct wiring or upgrade breakers/panels as needed.',
+            'Yes. We plan the run based on distance and equipment needs, then install correctly sized wiring, grounding, and a subpanel if appropriate so power stays reliable even on long runs.',
         },
         {
-          question: 'How long do inspections take in Kerr County for upgrades?',
+          question:
+            'What’s the safest way to add outdoor power for lighting, patios, or a backyard workspace?',
           answer:
-            'Timing varies, but upgrades often complete within 1–2 weeks depending on utility coordination and inspector availability.',
+            'Outdoor circuits should use weather-rated materials and the right protection (like GFCI where required). We can add new circuits, outlets, and lighting with proper trenching, conduit, and protection so it holds up to Hill Country conditions.',
+        },
+        {
+          question:
+            'Do you offer whole-home surge protection in Kerrville, and is it worth it?',
+          answer:
+            'Yes. Surge protection helps reduce damage from utility surges and lightning-related events. It’s a smart add-on when you have newer appliances, HVAC equipment, or have invested in a panel/service upgrade.',
         },
       ],
-
-      relatedLinks: [
-        {
-          label: 'Electrical Panel Upgrades',
-          routerLink: '/electrical-services/panel-upgrades',
-          icon: 'electrical_services',
-        },
-        {
-          label: 'EV Charger Installation',
-          routerLink: '/electrical-services/ev-chargers',
-          icon: 'electric_car',
-        },
-        {
-          label: 'Generator Interlock/Switches',
-          routerLink: '/electrical-services/generators',
-          icon: 'generator',
-        },
-      ],
-      requestQuoteLink: '/contact-us',
     };
   })(),
 
@@ -461,20 +452,31 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       slug,
       townName: 'Ingram',
       addressLocality: 'Ingram',
-      metaTitle: 'Electrician Ingram TX | ProVolt Electrical Services',
+      metaTitle:
+        'Electrician in Ingram, TX | Repairs, Panels, Outdoor Power & Lighting',
       metaDescription:
-        'Reliable electrician in Ingram, TX offering repairs, lighting, panel upgrades & rural property electrical work. Local, licensed, and dependable.',
+        'Electrician in Ingram, TX for troubleshooting, panel upgrades, outdoor outlets/GFCI, lighting, dedicated circuits, and shop wiring. ProVolt Electrical Services—licensed and insured.',
       descriptionLong:
-        'ProVolt Electrical Services offers licensed residential, commercial, and rural electrical services in Ingram, TX and nearby Hill Country areas.',
+        'ProVolt Electrical Services serves Ingram, TX with residential and rural-property electrical work—focused on safe troubleshooting, panel capacity, outdoor power and lighting, and clean wiring for garages and workshops in the Texas Hill Country.',
       serviceType: [
-        'Residential electrical services',
-        'Commercial electrical services',
-        'Ranch and rural property electrical',
-        'Lighting installation',
-        'Panel upgrades and replacements',
         'Electrical troubleshooting and repairs',
+        'Electrical panel upgrades',
+        'Outdoor outlets and GFCI upgrades',
+        'Lighting installation and upgrades',
+        'Dedicated circuits for appliances and equipment',
+        'Shop and outbuilding wiring',
+        'Surge protection',
       ],
       breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+      extra: {
+        // More specific "areaServed" improves locality signals without keyword-stuffing.
+        areaServed: [
+          { '@type': 'City', name: 'Ingram, TX' },
+          { '@type': 'City', name: 'Kerrville, TX' },
+          { '@type': 'City', name: 'Hunt, TX' },
+          { '@type': 'City', name: 'Center Point, TX' },
+        ],
+      },
     });
 
     return {
@@ -482,126 +484,399 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
       phoneNumber: PHONE_DISPLAY,
-      heroBullets: [
-        'Responsive service for river and rural properties',
-        'Licensed, insured, and local to the Hill Country',
-        'Clean, safe, and code-compliant electrical work',
-      ],
-      heroTitle: 'Electrician in Ingram',
+
+      heroTitle: 'Master Electrician in Ingram, TX',
       heroSubtitle:
-        'River homes, rural properties, and shops—built for the realities of the Guadalupe.',
-      residentialIntro:
-        'From river homes to neighborhood properties, we keep your Ingram home powered safely and reliably.',
-      residentialServices: [
-        { label: 'Troubleshooting & repairs', icon: 'bolt' },
-        { label: 'Lighting & ceiling fans', icon: 'lightbulb' },
-        { label: 'Panel upgrades', icon: 'electrical_services' },
-        { label: 'Surge protection', icon: 'offline_bolt' },
-        { label: 'Outdoor circuits & GFCI', icon: 'outdoor_grill' },
+        'Local electrical repairs and upgrades for Ingram homes and Hill Country properties—troubleshooting, panels, lighting, and dedicated circuits done cleanly and safely.',
+      heroBadgeText: 'Fast Service • Code-Compliant',
+      heroBullets: [
+        'Troubleshooting for outages, breaker trips, and intermittent power',
+        'Panel and service upgrades for added home loads',
+        'Outdoor power, lighting, and GFCI protection for yards and patios',
+        'Garage/shop circuits and upgrades for tools and equipment',
       ],
-      residentialLink: '/electrical-services/residential-electrician',
+      heroCTAText: 'Get Help Today',
+
+      residentialHeading:
+        'Ingram Residential Electrical Services – Expert Electrical Solutions for Homes',
+      residentialSubheading:
+        'Straightforward fixes and upgrades—done clean and safe.',
+      residentialIntro:
+        'Ingram homeowners often need reliable troubleshooting plus practical improvements for everyday living and property use. We focus on safe protection, neat workmanship, and solutions that hold up over time.',
+      residentialServices: [
+        { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
+        { label: 'Outlet/Switch Replacement & Updates', icon: 'toggle_on' },
+        { label: 'Panel & Breaker Improvements', icon: 'electrical_services' },
+        { label: 'Outdoor Receptacles (Weather-Rated)', icon: 'verified' },
+        { label: 'Lighting Updates (Interior/Exterior)', icon: 'lightbulb' },
+        { label: 'Dedicated Circuits for Appliances', icon: 'power' },
+        { label: 'Whole-Home Surge Protection', icon: 'offline_bolt' },
+      ],
+
+      commercialHeading:
+        'Ingram Commercial Electrical Services – Reliable Solutions for Businesses',
+      commercialSubheading:
+        'Support for shops, small offices, and service calls.',
       commercialIntro:
-        'Shops, small businesses, and rural properties in Ingram count on us for dependable electrical systems.',
+        'For small commercial spaces in Ingram, we handle repairs, upgrades, and electrical additions that keep operations moving. Expect code-aware work and circuits sized for real loads.',
+      commercialLink: '/electrical-services/commercial-electrician',
       commercialServices: [
-        { label: 'Ranch & shop wiring', icon: 'agriculture' },
+        { label: 'Electrical Repairs & Diagnostics', icon: 'build' },
+        { label: 'Lighting Upgrades & Retrofits', icon: 'emoji_objects' },
         {
-          label: 'Dedicated equipment circuits',
+          label: 'Dedicated Equipment Circuits',
           icon: 'precision_manufacturing',
         },
-        { label: 'Security & area lighting', icon: 'outdoor_grill' },
-        { label: 'Service upgrades', icon: 'settings_input_component' },
+        {
+          label: 'Subpanel/Service Additions',
+          icon: 'settings_input_component',
+        },
+        { label: 'Exterior Lighting & Security', icon: 'security' },
+        { label: 'Preventive Maintenance Checks', icon: 'schedule' },
       ],
-      commercialLink: '/electrical-services/commercial-electrician',
-      energyIntro:
-        'We help Ingram homeowners and businesses cut costs with energy-efficient lighting and smart electrical design.',
-      energyServices: BASE_ENERGY_SERVICES,
+
+      ranchHeading:
+        'Ingram Ranch & Rural Electrical Services – Power Solutions for Shops, Barns & Outbuildings',
+      ranchSubheading:
+        'Rural power built for distance, weather, and heavy use.',
+      ranchIntro:
+        'Ingram properties often need dependable power across multiple structures. We install outdoor circuits, subpanels, and equipment-ready 240V power with attention to safety, grounding, and clean layout.',
+      ranchLink: '/electrical-services/ranch-electrician',
+      ranchServices: [
+        { label: 'Shop & Outbuilding Wiring', icon: 'warehouse' },
+        {
+          label: 'Subpanels for Barns/Outbuildings',
+          icon: 'electrical_services',
+        },
+        { label: 'Outdoor Power Runs & Trenching', icon: 'cable' },
+        { label: 'RV 30/50-Amp Hookups', icon: 'rv_hookup' },
+        {
+          label: '240V Equipment & Welder Circuits',
+          icon: 'precision_manufacturing',
+        },
+        { label: 'Yard/Driveway Security Lighting', icon: 'lightbulb' },
+        { label: 'Surge Protection & Grounding', icon: 'shield' },
+      ],
+
       areasServed: [
-        'Ingram',
         'Kerrville',
         'Hunt',
         'Center Point',
         'Comfort',
-        'Bandera',
+        'Fredericksburg',
       ],
       urlSlug: slug,
       seo,
 
-      neighborhoods: ['Old Ingram', 'Johnson Creek area', 'River Rd'],
-      landmarks: ['Ingram Dam', 'Guadalupe River (Hwy 39)', 'Old Ingram Loop'],
+      neighborhoods: [
+        'Ingram (in town)',
+        'Along Hwy 39',
+        'Rural properties outside city limits',
+        'Nearby Kerrville border',
+      ],
+      landmarks: [
+        'Ingram Lake',
+        'Hwy 39',
+        'Johnson Creek area',
+        'Louise Hays Park (nearby)',
+      ],
       localContext: {
         homesAndProperties: [
-          'Riverfront cabins and weekend homes',
-          'Manufactured homes with add-ons',
-          'Rural lots with detached shops',
+          'Single-family homes with outdoor living spaces',
+          'Properties needing reliable outdoor power and lighting',
+          'Detached garages and workshops',
+          'Older circuits that benefit from safety upgrades',
         ],
         commonElectricalIssues: [
-          'Outdoor GFCI trips and moisture intrusion',
-          'Aging service equipment near river exposure',
-          'Voltage drop on long runs to outbuildings',
+          'Outdoor receptacle/GFCI failures and weather exposure',
+          'Breaker trips from added appliances and HVAC demand',
+          'Loose connections causing flicker or intermittent power',
+          'Undersized circuits for workshops and equipment',
         ],
         businessAndRanchNotes: [
-          'RV hookups for guests',
-          'Well/pump circuits with proper protection',
+          'Long-run conductor sizing for outbuildings',
+          'RV/shores power and dedicated outlets',
+          'Shop equipment circuits and subpanels',
         ],
       },
 
       localProjects: [
         {
-          title: 'RV Hookup & Subpanel',
+          title: 'Example: Outdoor Power + GFCI Upgrades',
           summary:
-            'Installed 50A RV receptacle with small subpanel for guest parking.',
-          areaHint: 'Near Ingram Dam',
+            'Added protected outdoor outlets and improved patio/yard power reliability.',
+          areaHint: 'Near Ingram Lake',
           bullets: [
-            'Correct wire sizing for 100’ run',
-            'GFCI per code for outdoor circuits',
+            'Weather-rated boxes and covers',
+            'GFCI protection for outdoor circuits',
           ],
-          tags: ['RV', 'Subpanel', 'Outdoor'],
+          tags: ['Outdoor', 'GFCI', 'Safety'],
         },
         {
-          title: 'River Cabin Lighting',
+          title: 'Example: Breaker Trip Diagnosis',
           summary:
-            'Upgraded interior and exterior lighting to sealed LED fixtures.',
-          areaHint: 'Hwy 39 corridor',
-          bullets: ['Weather-rated fixtures', 'Smart timer controls'],
-          tags: ['Lighting', 'Outdoor', 'Energy'],
+            'Tracked down nuisance trips and corrected circuit loading for stability.',
+          areaHint: 'Hwy 39 area',
+          bullets: [
+            'Circuit tracing + load check',
+            'Corrected terminations and device issues',
+          ],
+          tags: ['Troubleshooting', 'Repairs'],
+        },
+        {
+          title: 'Example: Garage/Shop Subpanel',
+          summary:
+            'Installed a subpanel to support tools and lighting in a detached space.',
+          areaHint: 'Rural Ingram property',
+          bullets: [
+            'Dedicated circuits for equipment',
+            'Efficient LED lighting layout',
+          ],
+          tags: ['Shop', 'Subpanel', 'Lighting'],
         },
       ],
 
-      testimonials: [
-        {
-          quote:
-            'Helped us sort out recurring GFCI trips by sealing and rerouting outdoor runs.',
-          name: 'T. K.',
-          areaHint: 'Old Ingram',
-        },
-      ],
+      // IMPORTANT: Only populate with real customer reviews (do not fabricate).
+      testimonials: [],
 
       faqs: [
         {
-          question: 'Can you install RV hookups at river properties in Ingram?',
+          question: 'Do you service properties outside Ingram city limits?',
           answer:
-            'Yes. We size conductors for run length, install proper disconnects, and ensure GFCI and weather protection.',
+            'Yes. We regularly work on rural Hill Country properties where long runs and outbuildings need properly sized, code-compliant wiring.',
         },
         {
-          question: 'Do river homes need special fixtures?',
+          question: 'Can you add power for a garage, shed, or workshop?',
           answer:
-            'We recommend sealed, damp/wet-rated LED fixtures and in-use covers to reduce nuisance trips and corrosion.',
+            'Absolutely. We’ll size the feeder and circuits for the tools/equipment you actually use and install weather-rated components where needed.',
+        },
+        {
+          question: 'Why do my lights flicker when appliances start?',
+          answer:
+            'It can be a loose connection, overloaded circuit, or service capacity issue. We can diagnose the cause and recommend the safest fix.',
+        },
+        {
+          question: 'Should outdoor outlets be GFCI protected?',
+          answer:
+            'Yes—outdoor receptacles typically require GFCI protection for safety. We can test and upgrade outlets and covers to reduce weather damage.',
+        },
+        {
+          question:
+            'Do I need a permit for electrical upgrades in Kerr County?',
+          answer:
+            'Many service/panel upgrades and certain additions require permits/inspections. We can help you understand what applies at your address and coordinate the steps.',
+        },
+      ],
+    };
+  })(),
+
+  centerPoint: (() => {
+    const slug = '/service-areas/center-point-tx-electrician';
+
+    const seo = buildElectricianSeo({
+      slug,
+      townName: 'Center Point',
+      addressLocality: 'Center Point',
+      metaTitle:
+        'Electrician in Center Point, TX | Repairs, Panels, Outdoor Power & Lighting',
+      metaDescription:
+        'Electrician in Center Point, TX for troubleshooting, panel upgrades, outdoor outlets/GFCI, lighting, dedicated circuits, and shop wiring. ProVolt Electrical Services—licensed and insured.',
+      descriptionLong:
+        'ProVolt Electrical Services serves Center Point, TX with residential and rural-property electrical work—focused on safe troubleshooting, panel capacity, outdoor power and lighting, and clean wiring for garages and workshops in the Texas Hill Country.',
+      serviceType: [
+        'Electrical troubleshooting and repairs',
+        'Electrical panel upgrades',
+        'Outdoor outlets and GFCI upgrades',
+        'Lighting installation and upgrades',
+        'Dedicated circuits for appliances and equipment',
+        'Shop and outbuilding wiring',
+        'Surge protection',
+      ],
+      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+      extra: {
+        // More specific "areaServed" improves locality signals without keyword-stuffing.
+        areaServed: [
+          { '@type': 'City', name: 'Ingram, TX' },
+          { '@type': 'City', name: 'Kerrville, TX' },
+          { '@type': 'City', name: 'Hunt, TX' },
+          { '@type': 'City', name: 'Center Point, TX' },
+        ],
+      },
+    });
+
+    return {
+      townName: 'Center Point',
+      stateAbbr: 'TX',
+      regionLabel: DEFAULT_REGION,
+      phoneNumber: PHONE_DISPLAY,
+
+      heroTitle: 'Master Electrician in Center Point, TX',
+      heroSubtitle:
+        'Local electrical repairs and upgrades for Center Point homes and Hill Country properties—troubleshooting, panels, lighting, and dedicated circuits done cleanly and safely.',
+      heroBadgeText: 'Fast Service • Code-Compliant',
+      heroBullets: [
+        'Troubleshooting for outages, breaker trips, and intermittent power',
+        'Panel and service upgrades for added home loads',
+        'Outdoor power, lighting, and GFCI protection for yards and patios',
+        'Garage/shop circuits and upgrades for tools and equipment',
+      ],
+      heroCTAText: 'Call for Service',
+
+      residentialHeading:
+        'Center Point Residential Electrical Services – Expert Electrical Solutions for Homes',
+      residentialSubheading: 'Reliable power with modern safety protection.',
+      residentialIntro:
+        'Center Point homes and properties often blend indoor needs with outdoor use—shops, sheds, and added loads. We troubleshoot issues, improve safety protection, and install upgrades that stay dependable.',
+      residentialServices: [
+        { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
+        { label: 'GFCI/AFCI Safety Upgrades', icon: 'verified' },
+        {
+          label: 'Panel Upgrades & Breaker Replacement',
+          icon: 'electrical_services',
+        },
+        { label: 'Ceiling Fans & Switch Replacements', icon: 'toys' },
+        { label: 'Lighting Installations & Dimmers', icon: 'lightbulb' },
+        { label: 'Dedicated Circuits for New Loads', icon: 'power' },
+        { label: 'Surge Protection & Grounding Checks', icon: 'offline_bolt' },
+      ],
+
+      commercialHeading:
+        'Center Point Commercial Electrical Services – Reliable Solutions for Businesses',
+      commercialSubheading:
+        'Practical electrical support for small businesses.',
+      commercialIntro:
+        'We help Center Point commercial spaces with repairs, lighting, and service additions—so your power is safe, stable, and ready for daily use.',
+      commercialLink: '/electrical-services/commercial-electrician',
+      commercialServices: [
+        { label: 'Service Calls & Troubleshooting', icon: 'build' },
+        { label: 'Lighting Upgrades & LED Conversions', icon: 'emoji_objects' },
+        { label: 'Tenant Improvements & Additions', icon: 'storefront' },
+        {
+          label: 'Dedicated Circuits for Equipment',
+          icon: 'precision_manufacturing',
+        },
+        { label: 'Panel/Service Upgrades', icon: 'settings_input_component' },
+        { label: 'Exterior & Security Lighting', icon: 'security' },
+      ],
+
+      ranchHeading:
+        'Center Point Ranch & Rural Electrical Services – Wiring, Subpanels & Outdoor Power',
+      ranchSubheading: 'Shops, barns, and outdoor power you can count on.',
+      ranchIntro:
+        'For Center Point ranch and rural properties, we build safe, organized electrical systems—subpanels, outdoor power, and equipment circuits planned for distance and reliability.',
+      ranchLink: '/electrical-services/ranch-electrician',
+      ranchServices: [
+        { label: 'Barn/Shop Wiring & Circuits', icon: 'warehouse' },
+        {
+          label: 'Outbuilding Subpanels & Feeders',
+          icon: 'electrical_services',
+        },
+        { label: 'Outdoor Power Runs & Trenching', icon: 'cable' },
+        { label: 'Well/Pump & Utility Circuits', icon: 'water' },
+        { label: 'RV Hookups (30/50-Amp)', icon: 'rv_hookup' },
+        { label: '240V Equipment Circuits', icon: 'precision_manufacturing' },
+        { label: 'Grounding/Bonding & Surge Protection', icon: 'shield' },
+      ],
+
+      areasServed: ['Comfort', 'Kerrville', 'Ingram', 'Fredericksburg'],
+      urlSlug: slug,
+      seo,
+
+      neighborhoods: [
+        'Center Point (in town)',
+        'Along Hwy 39',
+        'Rural properties outside city limits',
+        'Nearby Kerrville border',
+      ],
+      landmarks: ['Hwy 39', 'Johnson Creek area', 'Louise Hays Park (nearby)'],
+      localContext: {
+        homesAndProperties: [
+          'Single-family homes with outdoor living spaces',
+          'Properties needing reliable outdoor power and lighting',
+          'Detached garages and workshops',
+          'Older circuits that benefit from safety upgrades',
+        ],
+        commonElectricalIssues: [
+          'Outdoor receptacle/GFCI failures and weather exposure',
+          'Breaker trips from added appliances and HVAC demand',
+          'Loose connections causing flicker or intermittent power',
+          'Undersized circuits for workshops and equipment',
+        ],
+        businessAndRanchNotes: [
+          'Long-run conductor sizing for outbuildings',
+          'RV/shores power and dedicated outlets',
+          'Shop equipment circuits and subpanels',
+        ],
+      },
+
+      localProjects: [
+        {
+          title: 'Example: Outdoor Power + GFCI Upgrades',
+          summary:
+            'Added protected outdoor outlets and improved patio/yard power reliability.',
+          areaHint: 'Near Ingram Lake',
+          bullets: [
+            'Weather-rated boxes and covers',
+            'GFCI protection for outdoor circuits',
+          ],
+          tags: ['Outdoor', 'GFCI', 'Safety'],
+        },
+        {
+          title: 'Example: Breaker Trip Diagnosis',
+          summary:
+            'Tracked down nuisance trips and corrected circuit loading for stability.',
+          areaHint: 'Hwy 39 area',
+          bullets: [
+            'Circuit tracing + load check',
+            'Corrected terminations and device issues',
+          ],
+          tags: ['Troubleshooting', 'Repairs'],
+        },
+        {
+          title: 'Example: Garage/Shop Subpanel',
+          summary:
+            'Installed a subpanel to support tools and lighting in a detached space.',
+          areaHint: 'Rural Ingram property',
+          bullets: [
+            'Dedicated circuits for equipment',
+            'Efficient LED lighting layout',
+          ],
+          tags: ['Shop', 'Subpanel', 'Lighting'],
         },
       ],
 
-      relatedLinks: [
+      // IMPORTANT: Only populate with real customer reviews (do not fabricate).
+      testimonials: [],
+
+      faqs: [
         {
-          label: 'Outdoor & Landscape Lighting',
-          routerLink: '/electrical-services/outdoor-lighting',
-          icon: 'forest',
+          question:
+            'Do you service properties outside Center Point city limits?',
+          answer:
+            'Yes. We regularly work on rural Hill Country properties where long runs and outbuildings need properly sized, code-compliant wiring.',
         },
         {
-          label: 'RV Hookup Installation',
-          routerLink: '/electrical-services/rv-hookups',
-          icon: 'rv_hookup',
+          question: 'Can you add power for a garage, shed, or workshop?',
+          answer:
+            'Absolutely. We’ll size the feeder and circuits for the tools/equipment you actually use and install weather-rated components where needed.',
+        },
+        {
+          question: 'Why do my lights flicker when appliances start?',
+          answer:
+            'It can be a loose connection, overloaded circuit, or service capacity issue. We can diagnose the cause and recommend the safest fix.',
+        },
+        {
+          question: 'Should outdoor outlets be GFCI protected?',
+          answer:
+            'Yes—outdoor receptacles typically require GFCI protection for safety. We can test and upgrade outlets and covers to reduce weather damage.',
+        },
+        {
+          question:
+            'Do I need a permit for electrical upgrades in Kerr County?',
+          answer:
+            'Many service/panel upgrades and certain additions require permits/inspections. We can help you understand what applies at your address and coordinate the steps.',
         },
       ],
-      requestQuoteLink: '/contact-us',
     };
   })(),
 
@@ -613,19 +888,30 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townName: 'Hunt',
       addressLocality: 'Hunt',
       metaTitle:
-        'Electrician Hunt TX | Ranch & Residential Electrical Services',
+        'Electrician in Hunt, TX | Outdoor Power, Panels, Lighting & Rural Wiring',
       metaDescription:
-        'Electrical service in Hunt, TX including ranch wiring, outdoor lighting, panel upgrades, troubleshooting & repairs. Quality work from a local master electrician.',
+        'Electrician in Hunt, TX for outdoor outlets/GFCI, lighting, panel upgrades, surge protection, and long-run circuits to outbuildings. ProVolt Electrical Services—licensed and insured.',
       descriptionLong:
-        'ProVolt Electrical Services provides expert electrical work for homes, ranches, and river properties in Hunt, TX.',
+        'ProVolt Electrical Services provides Hunt, TX with dependable Hill Country electrical work—specializing in outdoor power, long-run circuits for outbuildings, panel upgrades, surge protection, and troubleshooting for river-area and rural properties.',
       serviceType: [
+        'Outdoor outlets and GFCI upgrades',
+        'Lighting installation and upgrades',
+        'Electrical panel upgrades',
+        'Surge protection',
         'Ranch and rural property electrical',
-        'Outdoor and landscape lighting',
-        'Panel upgrades',
         'Electrical troubleshooting and repairs',
-        'Well and pump circuits',
+        'Subpanels and long-run feeders',
       ],
       breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+      extra: {
+        // More specific "areaServed" improves locality signals without keyword-stuffing.
+        areaServed: [
+          { '@type': 'City', name: 'Hunt, TX' },
+          { '@type': 'City', name: 'Ingram, TX' },
+          { '@type': 'City', name: 'Kerrville, TX' },
+          { '@type': 'City', name: 'Mountain Home, TX' },
+        ],
+      },
     });
 
     return {
@@ -633,125 +919,184 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
       phoneNumber: PHONE_DISPLAY,
-      heroBullets: [
-        'Experienced with ranch and river properties',
-        'Designed for long runs and heavy loads',
-        'Trusted Hill Country master electrician',
-      ],
-      heroTitle: 'Electrician in Hunt',
+
+      heroTitle: 'Master Electrician in Hunt, TX',
       heroSubtitle:
-        'Ranch-ready electrical: long runs, pump circuits, and durable outdoor work.',
-      residentialIntro:
-        'We support the unique electrical needs of homes and river properties in Hunt with safe, reliable service.',
-      residentialServices: [
-        { label: 'Troubleshooting & repairs', icon: 'bolt' },
-        { label: 'Outdoor & landscape lighting', icon: 'outdoor_grill' },
-        { label: 'Panel upgrades', icon: 'electrical_services' },
-        { label: 'Surge protection', icon: 'offline_bolt' },
+        'Hill Country electrical work for Hunt homes and river-area properties—outdoor power, lighting, panels, and long-run circuits done safely and neatly.',
+      heroBadgeText: 'River Properties • Rural Circuits',
+      heroBullets: [
+        'Outdoor outlets, lighting, and weather-rated repairs',
+        'Long runs to outbuildings, barns, and guest houses—sized correctly',
+        'Panel upgrades and surge protection for rural reliability',
+        'Troubleshooting for intermittent power and breaker trips',
       ],
-      residentialLink: '/electrical-services/residential-electrician',
-      commercialIntro:
-        'From barns and shops to larger ranch facilities, we keep your Hunt property powered and protected.',
-      commercialServices: [
-        { label: 'Ranch & shop wiring', icon: 'agriculture' },
-        { label: 'Well & pump circuits', icon: 'water' },
+      heroCTAText: 'Get Electrical Help Today',
+
+      residentialHeading:
+        'Hunt Residential Electrical Services – Expert Electrical Solutions for Homes',
+      residentialSubheading:
+        'Weather-ready upgrades for Hill Country properties.',
+      residentialIntro:
+        'Hunt homes often lean on outdoor power, exterior lighting, and reliable protection during storms and outages. We prioritize weather-rated materials, safe protection devices, and clean installs that keep your system dependable.',
+      residentialServices: [
+        { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
+        { label: 'Outdoor Outlets (GFCI/Weather-Rated)', icon: 'verified' },
+        { label: 'Landscape/Patio/Security Lighting', icon: 'lightbulb' },
         {
-          label: 'Dedicated equipment circuits',
+          label: 'Panel Improvements & Breaker Repairs',
+          icon: 'electrical_services',
+        },
+        { label: 'Dedicated Circuits for Appliances/HVAC', icon: 'power' },
+        { label: 'Surge Protection & Grounding', icon: 'offline_bolt' },
+        { label: 'Ceiling Fans & Switch Upgrades', icon: 'toys' },
+      ],
+
+      commercialHeading:
+        'Hunt Commercial Electrical Services – Reliable Solutions for Businesses',
+      commercialSubheading:
+        'Lighting, circuits, and upgrades with minimal disruption.',
+      commercialIntro:
+        'We support Hunt businesses with practical repairs, lighting improvements, and electrical additions. The goal is simple: safe power, clear communication, and work that holds up.',
+      commercialLink: '/electrical-services/commercial-electrician',
+      commercialServices: [
+        { label: 'Troubleshooting & Repair for Businesses', icon: 'build' },
+        { label: 'Lighting Retrofits & Upgrades', icon: 'emoji_objects' },
+        {
+          label: 'Dedicated Equipment Circuits',
           icon: 'precision_manufacturing',
         },
-        { label: 'Service upgrades', icon: 'settings_input_component' },
+        { label: 'Service/Panel Upgrades', icon: 'settings_input_component' },
+        { label: 'Exterior & Parking Area Lighting', icon: 'local_parking' },
+        { label: 'Maintenance & Safety Checks', icon: 'schedule' },
       ],
-      commercialLink: '/electrical-services/commercial-electrician',
-      energyIntro:
-        'Long-run and remote properties benefit from thoughtful, efficient electrical design and dependable power distribution.',
-      energyServices: BASE_ENERGY_SERVICES,
-      areasServed: [
-        'Hunt',
-        'Ingram',
-        'Kerrville',
-        'Center Point',
-        'Mountain Home',
+
+      ranchHeading:
+        'Hunt Ranch & Rural Electrical Services – Power Solutions for Shops, Barns & Outbuildings',
+      ranchSubheading: 'Outdoor power and subpanels built for distance.',
+      ranchIntro:
+        'Hunt properties frequently need reliable power spread across multiple structures. We install feeder runs, subpanels, outdoor power, and equipment-ready circuits with strong grounding and clean layout.',
+      ranchLink: '/electrical-services/ranch-electrician',
+      ranchServices: [
+        { label: 'Shop/Barn Wiring', icon: 'warehouse' },
+        { label: 'Subpanels for Outbuildings', icon: 'electrical_services' },
+        { label: 'Outdoor Power Runs & Trenching', icon: 'cable' },
+        { label: 'RV 30/50-Amp Hookups', icon: 'rv_hookup' },
+        {
+          label: '240V Circuits for Equipment',
+          icon: 'precision_manufacturing',
+        },
+        { label: 'Security/Area Lighting', icon: 'lightbulb' },
+        { label: 'Grounding & Surge Protection', icon: 'shield' },
       ],
+
+      areasServed: ['Ingram', 'Kerrville', 'Fredericksburg'],
       urlSlug: slug,
       seo,
 
-      neighborhoods: ['North Fork Guadalupe', 'Camp area corridors'],
-      landmarks: ['Camp Mystic', 'Mo Ranch', 'Guadalupe River'],
+      neighborhoods: [
+        'Guadalupe River corridor',
+        'Hwy 39 area',
+        'Rural Hunt properties',
+        'Guest houses and outbuildings',
+      ],
+      landmarks: [
+        'Guadalupe River',
+        'Hunt Store area',
+        'Hwy 39',
+        'Mo-Ranch area',
+      ],
       localContext: {
         homesAndProperties: [
-          'River properties with detached structures',
-          'Ranches with multiple outbuildings',
+          'River-adjacent homes with outdoor power needs',
+          'Guest houses and detached living spaces',
+          'Barns, shops, and outbuildings',
+          'Properties with long feeder runs',
         ],
         commonElectricalIssues: [
-          'Voltage drop on long trench runs',
-          'Pump controller and well circuit issues',
-          'Lighting for large outdoor areas',
+          'Outdoor receptacles failing from weather exposure',
+          'Voltage drop on long runs to outbuildings',
+          'Surge/lightning events affecting sensitive electronics',
+          'Breaker trips when equipment starts (Compressor/HVAC)',
         ],
         businessAndRanchNotes: [
-          '240V equipment circuits (welders/compressors)',
-          'Subpanels for barns and shops',
+          'Proper sizing for distance + voltage drop',
+          'Weather-rated equipment and grounding',
+          'Equipment circuits for shop tools',
         ],
       },
 
       localProjects: [
         {
-          title: 'Barn Subpanel & Lighting',
-          summary: 'Installed 125A subpanel with bay lights and GFCI circuits.',
-          areaHint: 'North Fork',
+          title: 'Example: Outdoor GFCI + Weatherproof Repairs',
+          summary:
+            'Improved outdoor safety and reliability with protected receptacles and covers.',
+          areaHint: 'Guadalupe River area',
           bullets: [
-            'Feeder sized for 300’ trench run',
-            'LED high-bay fixtures with switching zones',
+            'Weather-rated boxes/covers',
+            'GFCI protection and circuit testing',
           ],
-          tags: ['Ranch', 'Subpanel', 'Lighting'],
+          tags: ['Outdoor', 'GFCI', 'Safety'],
         },
         {
-          title: 'Well Pump Circuit Upgrade',
+          title: 'Example: Long Run to Outbuilding',
           summary:
-            'Rewired pump controller and added surge protection on the service.',
-          areaHint: 'Near Mo Ranch',
+            'Installed a correctly sized feeder and subpanel for a detached structure.',
+          areaHint: 'Hwy 39 corridor',
           bullets: [
-            'New disconnect and bonding',
-            'SPD added at main panel for pump protection',
+            'Conductor sizing for distance',
+            'Grounding/bonding and labeling',
           ],
-          tags: ['Pump', 'Surge', 'Outdoor'],
+          tags: ['Feeder', 'Subpanel', 'Rural'],
+        },
+        {
+          title: 'Example: Surge Protection Upgrade',
+          summary:
+            'Added surge protection strategy to help safeguard appliances and electronics.',
+          areaHint: 'Rural Hunt property',
+          bullets: [
+            'Whole-home surge device',
+            'Grounding review and improvements',
+          ],
+          tags: ['Surge', 'Safety'],
         },
       ],
 
-      testimonials: [
-        {
-          quote:
-            'Our ranch shop finally has proper power—no more dim lights and tripping breakers.',
-          name: 'S. L.',
-          areaHint: 'North Fork',
-        },
-      ],
+      // IMPORTANT: Only populate with real customer reviews (do not fabricate).
+      testimonials: [],
 
       faqs: [
         {
-          question: 'Do you trench and run feeders to remote barns?',
+          question:
+            'Can you run power to a guest house or outbuilding in Hunt?',
           answer:
-            'Yes. We size feeders for distance and load, plan voltage drop, and use proper conduit depths and materials.',
+            'Yes. We’ll evaluate distance, load, and trenching needs, then install properly sized wiring, subpanels, and grounding for reliable power.',
         },
         {
-          question: 'Can you diagnose well/pump electrical issues?',
+          question: 'Why do outdoor outlets stop working?',
           answer:
-            'We service pump controllers, disconnects, and wiring, and add surge protection to reduce failures.',
+            'Weather exposure and failed GFCI devices are common. We can test the circuit, replace damaged components, and upgrade covers and protection.',
+        },
+        {
+          question: 'Do you work on river-area properties?',
+          answer:
+            'Yes—outdoor circuits and weather-rated repairs are common around river properties. We use code-compliant components designed for exterior environments.',
+        },
+        {
+          question: 'Do you install surge protection in rural areas?',
+          answer:
+            'Yes. Surge protection can help reduce damage from lightning and utility surges, especially where sensitive electronics and appliances are present.',
+        },
+        {
+          question: 'Can you help with breaker trips when a compressor starts?',
+          answer:
+            'We can diagnose whether it’s a circuit overload, motor start draw, wiring issue, or breaker problem and recommend the safest fix.',
+        },
+        {
+          question: 'Do I need permits for electrical work in Kerr County?',
+          answer:
+            'Many upgrades, especially service/panel work and additions, require permits/inspections. We can help identify what applies to your address.',
         },
       ],
-
-      relatedLinks: [
-        {
-          label: 'Ranch & Rural Electrical',
-          routerLink: '/electrical-services/ranch',
-          icon: 'agriculture',
-        },
-        {
-          label: 'Outdoor Lighting',
-          routerLink: '/electrical-services/outdoor-lighting',
-          icon: 'outdoor_grill',
-        },
-      ],
-      requestQuoteLink: '/contact-us',
     };
   })(),
 
@@ -762,19 +1107,31 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       slug,
       townName: 'Comfort',
       addressLocality: 'Comfort',
-      metaTitle: 'Electrician Comfort TX | Repairs, Lighting & Panel Upgrades',
+      metaTitle:
+        'Electrician in Comfort, TX | Repairs, Panels, Remodel Wiring & Lighting',
       metaDescription:
-        'Professional electrician in Comfort, TX for troubleshooting, lighting, rewiring, surge protection & energy efficiency upgrades. Fast, reliable service.',
+        'Electrician in Comfort, TX for troubleshooting, panel upgrades, remodel wiring, lighting, surge protection, and EV charger circuits. ProVolt Electrical Services—licensed and insured.',
       descriptionLong:
-        'ProVolt Electrical Services delivers residential and light commercial electrical services in Comfort, TX and the surrounding Hill Country.',
+        'ProVolt Electrical Services serves Comfort, TX with professional electrical repairs and upgrades—specializing in panel/service capacity, remodel wiring, lighting improvements, and safety upgrades for Hill Country homes and small businesses.',
       serviceType: [
-        'Residential electrical services',
-        'Troubleshooting and repairs',
-        'Lighting and ceiling fan installation',
-        'Panel and breaker upgrades',
-        'Energy audits and efficiency upgrades',
+        'Electrical troubleshooting and repairs',
+        'Electrical panel upgrades',
+        'Remodel wiring and code corrections',
+        'Lighting installation and upgrades',
+        'Surge protection',
+        'EV charger installation',
+        'Commercial electrical services',
       ],
       breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+      extra: {
+        // More specific "areaServed" improves locality signals without keyword-stuffing.
+        areaServed: [
+          { '@type': 'City', name: 'Comfort, TX' },
+          { '@type': 'City', name: 'Boerne, TX' },
+          { '@type': 'City', name: 'Kerrville, TX' },
+          { '@type': 'City', name: 'Fredericksburg, TX' },
+        ],
+      },
     });
 
     return {
@@ -782,515 +1139,1069 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
       phoneNumber: PHONE_DISPLAY,
-      heroBullets: [
-        'Fast response for Comfort homeowners',
-        'Respectful of historic and modern homes',
-        'Honest pricing and clear communication',
-      ],
-      heroTitle: 'Electrician in Comfort',
+
+      heroTitle: 'Master Electrician in Comfort, TX',
       heroSubtitle:
-        'Historic homes and newer builds—work done cleanly and to code.',
-      residentialIntro:
-        'We provide full residential electrical service to Comfort homeowners, from repairs to upgrades and remodels.',
-      residentialServices: [
-        { label: 'Panel & breaker upgrades', icon: 'electrical_services' },
-        { label: 'Troubleshooting & repairs', icon: 'bolt' },
-        { label: 'Lighting & fans', icon: 'lightbulb' },
-        { label: 'Rewiring & code corrections', icon: 'rule' },
-        { label: 'Surge protection', icon: 'offline_bolt' },
+        'Professional electrical service for Comfort homes and Hill Country properties—repairs, panels, lighting, and remodel wiring with clear communication and clean workmanship.',
+      heroBadgeText: 'Permits • Inspections • Done Right',
+      heroBullets: [
+        'Troubleshooting and repairs for outages, trips, and flicker',
+        'Panel/service upgrades and surge protection',
+        'Remodel wiring, additions, and code corrections',
+        'Lighting upgrades for homes, patios, and small businesses',
       ],
-      residentialLink: '/electrical-services/residential-electrician',
+      heroCTAText: 'Get Expert Electrical Help',
+
+      residentialHeading:
+        'Comfort Residential Electrical Services – Expert Electrical Solutions for Homes',
+      residentialSubheading:
+        'Safety upgrades and clean installs for remodel-friendly work.',
+      residentialIntro:
+        'Comfort homes often combine older wiring realities with modern expectations. We help improve capacity and safety—panels, grounding, protection devices, and lighting—while keeping work tidy and aligned with your remodel plans.',
+      residentialServices: [
+        { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
+        {
+          label: 'Panel Upgrades & Breaker Replacement',
+          icon: 'electrical_services',
+        },
+        { label: 'GFCI/AFCI Safety Improvements', icon: 'verified' },
+        { label: 'Remodel Wiring & Code Corrections', icon: 'rule' },
+        { label: 'Lighting Upgrades (Interior/Exterior)', icon: 'lightbulb' },
+        { label: 'Dedicated Circuits for Kitchens/Laundry', icon: 'power' },
+        { label: 'Whole-Home Surge Protection', icon: 'offline_bolt' },
+      ],
+
+      commercialHeading:
+        'Comfort Commercial Electrical Services – Reliable Solutions for Businesses',
+      commercialSubheading:
+        'Service calls, lighting, and electrical additions done right.',
       commercialIntro:
-        'Small businesses and rural properties in Comfort rely on us for dependable, code-compliant electrical systems.',
-      commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
+        'We help Comfort businesses with electrical repairs, lighting upgrades, and code-correct improvements that keep your space safe for staff and customers.',
       commercialLink: '/electrical-services/commercial-electrician',
-      energyIntro:
-        'Upgrade to efficient lighting and modern electrical design that lowers utility costs over time.',
-      energyServices: BASE_ENERGY_SERVICES,
+      commercialServices: [
+        { label: 'Commercial Service Calls & Repairs', icon: 'build' },
+        { label: 'Code Compliance Corrections', icon: 'fact_check' },
+        { label: 'LED Lighting Upgrades', icon: 'emoji_objects' },
+        { label: 'Tenant Improvements & Additions', icon: 'storefront' },
+        {
+          label: 'Dedicated Equipment Circuits',
+          icon: 'precision_manufacturing',
+        },
+        {
+          label: 'Panel/Service Capacity Upgrades',
+          icon: 'settings_input_component',
+        },
+      ],
+
+      ranchHeading:
+        'Comfort Ranch & Rural Electrical Services – Wiring, Subpanels & Outdoor Power',
+      ranchSubheading: 'Barns, shops, and property power—organized and safe.',
+      ranchIntro:
+        'For Comfort ranch properties, we build clean, code-correct power distribution—subpanels, outdoor circuits, and equipment-ready 240V power—with careful grounding and durable components.',
+      ranchLink: '/electrical-services/ranch-electrician',
+      ranchServices: [
+        { label: 'Barn & Shop Wiring', icon: 'warehouse' },
+        {
+          label: 'Outbuilding Subpanels & Feeders',
+          icon: 'electrical_services',
+        },
+        { label: 'Outdoor Power Runs & Trenching', icon: 'cable' },
+        { label: 'Well/Pump & Utility Circuits', icon: 'water' },
+        { label: 'RV Hookups (30/50-Amp)', icon: 'rv_hookup' },
+        {
+          label: '240V Equipment & Welder Circuits',
+          icon: 'precision_manufacturing',
+        },
+        { label: 'Surge Protection & Grounding/Bonding', icon: 'shield' },
+      ],
+
       areasServed: [
-        'Comfort',
-        'Boerne',
-        'Fredericksburg',
-        'Kerrville',
         'Center Point',
+        'Boerne',
+        'Kerrville',
+        'Fredericksburg',
+        'Bandera',
       ],
       urlSlug: slug,
       seo,
 
       neighborhoods: [
-        'Historic District',
-        'Cypress Creek area',
-        'I-10 frontage',
+        'Downtown Comfort',
+        'I-10 corridor',
+        'Rural properties outside town',
+        'Near Cypress Creek area',
       ],
-      landmarks: ['High St', 'Comfort Park', 'Cypress Creek'],
+      landmarks: [
+        'I-10',
+        'High Street (Comfort)',
+        'Guadalupe River area',
+        'Cypress Creek',
+      ],
       localContext: {
         homesAndProperties: [
-          'Historic homes with older wiring methods',
-          'Remodels and additions blending old/new',
+          'Older homes needing grounding and safety upgrades',
+          'Remodels and additions requiring new circuits',
+          'Detached garages and workshops',
+          'Properties along the I-10 corridor',
         ],
         commonElectricalIssues: [
-          'Non-grounded receptacles',
-          'Outdated panels and brittle insulation',
-          'Limited circuits leading to nuisance trips',
+          'Undersized services for modern HVAC/appliance loads',
+          'Loose connections causing flicker or warm outlets',
+          'Missing GFCI/AFCI protection in key locations',
+          'Outdoor lighting and receptacle reliability issues',
         ],
         businessAndRanchNotes: [
-          'Retail and restaurants along Main/High',
-          'Rural shops needing dedicated equipment circuits',
+          'Lighting upgrades for small storefronts',
+          'Shop circuits for tools and equipment',
+          'Service planning for expansions and additions',
         ],
       },
 
       localProjects: [
         {
-          title: 'Historic Home Receptacle Upgrades',
-          summary: 'Upgraded circuits and added GFCI/AFCI where required.',
-          areaHint: 'Historic District',
+          title: 'Example: Panel Capacity Upgrade',
+          summary:
+            'Improved service capacity to support HVAC and a remodel plan.',
+          areaHint: 'I-10 corridor',
           bullets: [
-            'Mapped existing circuits and loads',
-            'Added grounded receptacles safely',
+            'Load planning for future circuits',
+            'Grounding/bonding review',
           ],
-          tags: ['Rewiring', 'Safety', 'Code'],
+          tags: ['Panel', 'Safety'],
         },
         {
-          title: 'Panel Upgrade & Surge',
-          summary: 'Modernized service equipment and added surge protection.',
-          areaHint: 'Near Comfort Park',
-          bullets: ['New 200A panel', 'SPD for whole-home protection'],
-          tags: ['Panel', 'Surge'],
+          title: 'Example: Remodel Wiring + Code Corrections',
+          summary:
+            'Added new circuits and updated protection to meet current code needs.',
+          areaHint: 'Downtown Comfort area',
+          bullets: [
+            'Dedicated kitchen/laundry circuits',
+            'GFCI/AFCI upgrades where required',
+          ],
+          tags: ['Remodel', 'Code'],
+        },
+        {
+          title: 'Example: Exterior Lighting Upgrade',
+          summary:
+            'Installed efficient exterior lighting for security and usability.',
+          areaHint: 'Rural Comfort property',
+          bullets: [
+            'Weather-rated fixtures and controls',
+            'Improved coverage and reduced glare',
+          ],
+          tags: ['Lighting', 'Outdoor'],
         },
       ],
 
-      testimonials: [
-        {
-          quote:
-            'Respectful of our older home—they explained options and left everything tidy.',
-          name: 'A. D.',
-          areaHint: 'Comfort',
-        },
-      ],
+      // IMPORTANT: Only populate with real customer reviews (do not fabricate).
+      testimonials: [],
 
       faqs: [
         {
           question:
-            'Do Comfort’s historic homes need special electrical considerations?',
+            'Do I need a permit for electrical work in Comfort or Kendall County?',
           answer:
-            'Yes. We evaluate grounding, insulation condition, and panel capacity, and recommend safe upgrades without over-altering the structure.',
+            'Many service/panel upgrades and certain additions require permits and inspections. We can help determine what applies to your address and coordinate the process.',
         },
         {
-          question: 'Can you add new circuits during a remodel?',
+          question: 'Can you help with remodel wiring in older homes?',
           answer:
-            'We coordinate load calculations and code requirements to add circuits cleanly and safely.',
+            'Yes. We add new circuits, upgrade protection, and correct issues while keeping the work organized and aligned with your renovation scope.',
+        },
+        {
+          question: 'Why are my outlets warm or flickering occurs?',
+          answer:
+            'Warm outlets and flicker can indicate loose connections or overloaded circuits. We can diagnose safely and repair before it becomes a hazard.',
+        },
+        {
+          question: 'Should I upgrade to GFCI/AFCI protection?',
+          answer:
+            'These protections reduce shock and fire risks. We can recommend the right upgrades based on your panel, circuits, and where the devices are located.',
+        },
+        {
+          question: 'Can you add power to a detached garage or shop?',
+          answer:
+            'Yes. We’ll size the feeder for distance and load, then install a subpanel and dedicated circuits as needed.',
         },
       ],
-
-      relatedLinks: [
-        {
-          label: 'Home Rewiring & Safety',
-          routerLink: '/electrical-services/rewiring',
-          icon: 'rule',
-        },
-        {
-          label: 'Surge Protection',
-          routerLink: '/electrical-services/surge-protection',
-          icon: 'offline_bolt',
-        },
-      ],
-      requestQuoteLink: '/contact-us',
     };
   })(),
 
   fredericksburg: (() => {
     const slug = '/service-areas/fredericksburg-tx-electrician';
+
     const seo = buildElectricianSeo({
       slug,
       townName: 'Fredericksburg',
       addressLocality: 'Fredericksburg',
-      metaTitle: 'Electrician Fredericksburg TX | Vacation Rental & Lighting',
+      metaTitle:
+        'Electrician in Fredericksburg, TX | Panels, Lighting, Repairs & Safety Upgrades',
       metaDescription:
-        'Electrician in Fredericksburg, TX focused on rental safety inspections, lighting upgrades, EV chargers, and service upgrades.',
+        'Electrician in Fredericksburg, TX for troubleshooting, panel upgrades, lighting, rental safety inspections, surge protection, and EV charger circuits. ProVolt Electrical Services—licensed and insured.',
       descriptionLong:
-        'ProVolt provides electrical services for homes and vacation rentals in Fredericksburg, TX—lighting upgrades, EV chargers, inspections, and service upgrades.',
+        'ProVolt Electrical Services provides Fredericksburg, TX with professional residential and small-business electrical service—focused on safe upgrades for homes and rentals, lighting improvements, panel capacity, and reliable troubleshooting in the Texas Hill Country.',
       serviceType: [
-        'Residential electrical services',
-        'Vacation rental safety inspections',
-        'Lighting upgrades',
+        'Electrical troubleshooting and repairs',
+        'Electrical panel upgrades',
+        'Lighting installation and upgrades',
+        'Safety inspections for homes and rentals',
+        'Surge protection',
         'EV charger installation',
-        'Service upgrades',
+        'Commercial electrical services',
       ],
       breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+      extra: {
+        // More specific "areaServed" improves locality signals without keyword-stuffing.
+        areaServed: [
+          { '@type': 'City', name: 'Fredericksburg, TX' },
+          { '@type': 'City', name: 'Stonewall, TX' },
+          { '@type': 'City', name: 'Johnson City, TX' },
+          { '@type': 'City', name: 'Comfort, TX' },
+        ],
+      },
     });
+
     return {
       townName: 'Fredericksburg',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
       phoneNumber: PHONE_DISPLAY,
+
+      heroTitle: 'Master Electrician in Fredericksburg, TX',
+      heroSubtitle:
+        'Electrical service for Fredericksburg homes, short-term rentals, and small businesses—panels, lighting, repairs, and safety upgrades handled cleanly and professionally.',
+      heroBadgeText: 'Homes • Rentals • Small Business',
       heroBullets: [
-        'Vacation rental safety and compliance',
-        'Lighting upgrades for historic and modern homes',
-        'EV charger installs with proper load calculations',
+        'Troubleshooting, repairs, and safety inspections for homes and rentals',
+        'Lighting upgrades for interiors, exteriors, and landscape areas',
+        'Panel upgrades and surge protection for modern appliance loads',
+        'Dedicated circuits for HVAC, kitchens, and EV chargers',
       ],
+      heroCTAText: 'Request a Licensed Electrician',
+
+      residentialHeading:
+        'Fredericksburg Residential Electrical Services – Expert Electrical Solutions for Homes',
+      residentialSubheading:
+        'Guest-ready safety, lighting, and reliable power.',
       residentialIntro:
-        'From historic homes to modern rentals, we help keep Fredericksburg properties safe, efficient, and guest-ready.',
+        'Fredericksburg properties often see frequent use—family gatherings, guest spaces, and busy weekends. We improve safety and reliability with clean panel work, protected outlets, lighting upgrades, and code-correct repairs.',
       residentialServices: [
+        { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
-          label: 'Vacation rental safety inspections',
-          icon: 'assignment_turned_in',
+          label: 'Panel Upgrades & Breaker Replacement',
+          icon: 'electrical_services',
         },
-        { label: 'Lighting upgrades', icon: 'lightbulb' },
-        { label: 'EV charger installation', icon: 'electric_car' },
-        { label: 'Panel & service upgrades', icon: 'electrical_services' },
-        { label: 'Troubleshooting & repairs', icon: 'bolt' },
+        { label: 'GFCI/AFCI Protection Upgrades', icon: 'verified' },
+        { label: 'Indoor/Outdoor Lighting Improvements', icon: 'lightbulb' },
+        { label: 'Dedicated Circuits for Kitchens/HVAC', icon: 'power' },
+        { label: 'Surge Protection & Grounding', icon: 'offline_bolt' },
+        { label: 'Smoke/CO Circuit Updates', icon: 'health_and_safety' },
       ],
-      residentialLink: '/electrical-services/residential-electrician',
+
+      commercialHeading:
+        'Fredericksburg Commercial Electrical Services – Reliable Solutions for Businesses',
+      commercialSubheading:
+        'Lighting, circuits, and compliance support for business spaces.',
       commercialIntro:
-        'Shops, tasting rooms, and small businesses rely on clean, dependable power.',
+        'We help Fredericksburg businesses with practical electrical upgrades—lighting retrofits, equipment circuits, and code-correct fixes—so your space stays safe and dependable for staff and customers.',
+      commercialLink: '/electrical-services/commercial-electrician',
       commercialServices: [
+        { label: 'Troubleshooting & Electrical Repairs', icon: 'build' },
+        { label: 'Lighting Retrofits & LED Upgrades', icon: 'emoji_objects' },
         {
-          label: 'Dedicated equipment circuits',
+          label: 'Dedicated Circuits for Equipment',
           icon: 'precision_manufacturing',
         },
-        { label: 'Lighting & ambiance controls', icon: 'light_mode' },
-        { label: 'Service upgrades', icon: 'settings_input_component' },
+        {
+          label: 'Tenant Improvements & Build-Out Support',
+          icon: 'storefront',
+        },
+        { label: 'Exterior/Signage Lighting Circuits', icon: 'outdoor_grill' },
+        { label: 'Service/Panel Upgrades', icon: 'settings_input_component' },
       ],
-      commercialLink: '/electrical-services/commercial-electrician',
-      energyIntro:
-        'Smart design avoids nuisance trips and keeps rentals energy efficient without sacrificing comfort.',
-      energyServices: BASE_ENERGY_SERVICES,
-      areasServed: [
-        'Fredericksburg',
-        'Stonewall',
-        'Luckenbach',
-        'Johnson City',
-        'Kerrville',
+
+      ranchHeading:
+        'Fredericksburg Ranch & Rural Electrical Services – Power Solutions for Shops, Barns & Outbuildings',
+      ranchSubheading:
+        'Outdoor power and subpanels planned for long-run reliability.',
+      ranchIntro:
+        'Fredericksburg ranch properties frequently need safe power across multiple structures. We install feeder runs, subpanels, RV hookups, and equipment-ready circuits—built with clean organization and solid grounding.',
+      ranchLink: '/electrical-services/ranch-electrician',
+      ranchServices: [
+        { label: 'Barn/Shop Wiring & Circuits', icon: 'warehouse' },
+        { label: 'Subpanels for Outbuildings', icon: 'electrical_services' },
+        { label: 'Outdoor Power Runs & Trenching', icon: 'cable' },
+        { label: 'RV 30/50-Amp Hookups', icon: 'rv_hookup' },
+        {
+          label: '240V Circuits for Equipment',
+          icon: 'precision_manufacturing',
+        },
+        { label: 'Area/Security Lighting', icon: 'lightbulb' },
+        { label: 'Surge Protection & Grounding/Bonding', icon: 'shield' },
       ],
+
+      areasServed: ['Comfort', ' Kerrville', 'Center Point', 'Ingram', 'Hunt'],
       urlSlug: slug,
       seo,
 
-      neighborhoods: ['Stone Ridge', 'Historic Downtown', 'Post Oak'],
-      landmarks: ['Main St', 'Loop 163', 'Marktplatz', 'Winery corridor'],
+      neighborhoods: [
+        'Downtown Fredericksburg',
+        'US-290 corridor',
+        'Rural properties and ranches',
+        'Wine country area',
+      ],
+      landmarks: [
+        'Main Street (Fredericksburg)',
+        'US-290',
+        'National Museum of the Pacific War',
+        'Enchanted Rock (area)',
+      ],
       localContext: {
         homesAndProperties: [
-          'Historic homes with mixed wiring eras',
-          'Vacation rentals with higher usage turnover',
+          'Older/historic homes with modern upgrades',
+          'Short-term rentals needing reliable safety and lighting',
+          'Outdoor living areas with landscape lighting',
+          'Rural properties with detached structures',
         ],
         commonElectricalIssues: [
-          'Underpowered panels for EV + HVAC',
-          'Loose/aged connections causing flicker',
+          'Older wiring needing safety updates',
+          'Receptacle/GFCI requirements in kitchens and baths',
+          'Panel capacity upgrades for modern loads',
+          'Exterior lighting and weather exposure issues',
         ],
         businessAndRanchNotes: [
-          'Tasting rooms needing ambiance lighting and dedicated circuits',
+          'Lighting and power for retail/restaurant spaces',
+          'Dedicated circuits for equipment and HVAC',
+          'Service reliability planning for guest properties',
         ],
       },
 
-      localProjects: [],
-      testimonials: [],
-      faqs: [
+      localProjects: [
         {
-          question:
-            'Can you provide safety checks for short-term rental properties?',
-          answer:
-            'Yes. We review panels, GFCI/AFCI, smoke/CO placement, and provide a punch list to meet typical platform and local expectations.',
+          title: 'Example: Rental Safety & GFCI Upgrades',
+          summary:
+            'Improved safety with protected receptacles and updated devices where needed.',
+          areaHint: 'Downtown Fredericksburg area',
+          bullets: [
+            'GFCI upgrades in wet locations',
+            'Outlet/switch inspection and repairs',
+          ],
+          tags: ['Safety', 'GFCI'],
+        },
+        {
+          title: 'Example: Lighting Refresh (Interior + Exterior)',
+          summary:
+            'Upgraded fixtures and controls for better ambiance and usability.',
+          areaHint: 'Main Street vicinity',
+          bullets: [
+            'Dimmer-friendly fixture selection',
+            'Exterior lighting improvements for pathways',
+          ],
+          tags: ['Lighting', 'Controls'],
+        },
+        {
+          title: 'Example: Panel Upgrade + Surge Protection',
+          summary:
+            'Increased capacity for modern appliances and added surge mitigation.',
+          areaHint: 'US-290 corridor',
+          bullets: [
+            'Breaker schedule cleanup',
+            'Surge device + grounding review',
+          ],
+          tags: ['Panel', 'Surge'],
         },
       ],
 
-      relatedLinks: [
+      // IMPORTANT: Only populate with real customer reviews (do not fabricate).
+      testimonials: [],
+
+      faqs: [
         {
-          label: 'EV Charger Installation',
-          routerLink: '/electrical-services/ev-chargers',
-          icon: 'electric_car',
+          question:
+            'Can you help make a short-term rental electrical system safer?',
+          answer:
+            'Yes. We can inspect common safety items (GFCI/AFCI, loose devices, lighting, panel condition) and recommend upgrades that improve reliability for guests.',
         },
         {
-          label: 'Lighting Upgrades',
-          routerLink: '/electrical-services/lighting',
-          icon: 'light_mode',
+          question: 'Do older Fredericksburg homes need special attention?',
+          answer:
+            'Often yes. Older wiring and panels may not match modern load demands. We’ll diagnose safely and provide code-compliant upgrade options.',
+        },
+        {
+          question: 'Do you install landscape and exterior lighting?',
+          answer:
+            'Yes. We install and upgrade outdoor lighting with weather-rated components and safe circuit protection.',
+        },
+        {
+          question: 'Can you upgrade a panel for modern appliances?',
+          answer:
+            'Yes. We can evaluate capacity, perform load calculations, and upgrade the panel/service where needed to support HVAC, kitchens, and EV charging.',
+        },
+        {
+          question: 'Do you handle permits/inspections in Gillespie County?',
+          answer:
+            'Requirements vary by jurisdiction. We can help identify what applies at your address and coordinate the right steps.',
         },
       ],
-      requestQuoteLink: '/contact-us',
     };
   })(),
 
   boerne: (() => {
     const slug = '/service-areas/boerne-tx-electrician';
+
     const seo = buildElectricianSeo({
       slug,
       townName: 'Boerne',
       addressLocality: 'Boerne',
-      metaTitle: 'Electrician Boerne TX | Panels, Lighting & EV Chargers',
+      metaTitle:
+        'Electrician in Boerne, TX | Repairs, Panels, EV Chargers & Lighting Upgrades',
       metaDescription:
-        'Boerne electrician for panel upgrades, lighting, EV chargers, and shop power. Licensed and local.',
+        'Electrician in Boerne, TX for troubleshooting, panel upgrades, surge protection, lighting/LED retrofits, and EV charger circuits. ProVolt Electrical Services—licensed and insured.',
       descriptionLong:
-        'ProVolt Electrical Services supports Boerne homeowners and shops with panels, lighting, EV chargers, and dedicated equipment circuits.',
+        'ProVolt Electrical Services serves Boerne, TX with residential and commercial electrical work—specializing in troubleshooting, panel/service capacity upgrades, lighting improvements, LED retrofits, and EV charger circuits for modern Hill Country living.',
       serviceType: [
-        'Panel upgrades',
-        'Lighting',
-        'EV chargers',
-        'Troubleshooting & repairs',
-        'Shop power',
+        'Electrical troubleshooting and repairs',
+        'Electrical panel upgrades',
+        'EV charger installation',
+        'Lighting installation and LED retrofits',
+        'Surge protection',
+        'Commercial electrical services',
+        'Remodel wiring and code corrections',
       ],
       breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+      extra: {
+        areaServed: [
+          { '@type': 'City', name: 'Boerne, TX' },
+          { '@type': 'City', name: 'Bandera, TX' },
+          { '@type': 'City', name: 'Comfort, TX' },
+          { '@type': 'City', name: 'Helotes, TX' },
+        ],
+      },
     });
+
     return {
       townName: 'Boerne',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
       phoneNumber: PHONE_DISPLAY,
+
+      heroTitle: 'Master Electrician in Boerne, TX',
+      heroSubtitle:
+        'Reliable electrical work for Boerne homes and businesses—troubleshooting, panels, lighting, and upgrades for modern loads with clean, code-compliant installs.',
+      heroBadgeText: 'Residential • Commercial • Fast Response',
       heroBullets: [
-        'Panels and EV-ready upgrades',
-        'Lighting and smart controls',
-        'Shop circuits done right',
+        'Troubleshooting and repairs for outages, trips, and flicker',
+        'Panel upgrades, surge protection, and service capacity planning',
+        'Lighting upgrades and LED retrofits for homes and businesses',
+        'EV chargers and dedicated circuits for modern living',
       ],
+      heroCTAText: 'Get Service From a Licensed Electrician',
+
+      residentialHeading:
+        'Boerne Residential Electrical Services – Expert Electrical Solutions for Homes',
+      residentialSubheading:
+        'Upgrades that improve safety, comfort, and reliability.',
       residentialIntro:
-        'We help Boerne homes modernize panels, add chargers, and improve lighting with clean, code-compliant work.',
+        'Boerne homes often grow into new electrical needs—kitchen upgrades, added appliances, and expanded living spaces. We plan capacity correctly and deliver clean installs with modern safety protection.',
       residentialServices: [
-        { label: 'Panel & service upgrades', icon: 'electrical_services' },
-        { label: 'EV charger installation', icon: 'electric_car' },
-        { label: 'Lighting & smart controls', icon: 'light_mode' },
-        { label: 'Troubleshooting & repairs', icon: 'bolt' },
-      ],
-      residentialLink: '/electrical-services/residential-electrician',
-      commercialIntro:
-        'From garages to small businesses, we plan circuits and lighting that match real-world loads.',
-      commercialServices: [
+        { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
-          label: 'Dedicated equipment circuits',
+          label: 'Panel Upgrades & Breaker Replacement',
+          icon: 'electrical_services',
+        },
+        { label: 'Dedicated Circuits for New Appliances', icon: 'power' },
+        { label: 'Lighting Upgrades & Dimmers', icon: 'lightbulb' },
+        { label: 'GFCI/AFCI Protection', icon: 'verified' },
+        { label: 'Ceiling Fans & Switch Upgrades', icon: 'toys' },
+        { label: 'Surge Protection & Grounding', icon: 'offline_bolt' },
+      ],
+
+      commercialHeading:
+        'Boerne Commercial Electrical Services – Reliable Solutions for Businesses',
+      commercialSubheading:
+        'Tenant improvements, lighting, and service upgrades.',
+      commercialIntro:
+        'We support Boerne commercial spaces with build-out wiring, lighting improvements, and code-correct upgrades—focused on keeping your operation safe and minimizing disruption.',
+      commercialLink: '/electrical-services/commercial-electrician',
+      commercialServices: [
+        { label: 'Tenant Build-Outs & Additions', icon: 'storefront' },
+        { label: 'Lighting Retrofits & LED Upgrades', icon: 'emoji_objects' },
+        { label: 'Service Calls & Troubleshooting', icon: 'build' },
+        {
+          label: 'Dedicated Circuits for Equipment',
           icon: 'precision_manufacturing',
         },
-        { label: 'Shop subpanels', icon: 'settings_input_component' },
-        { label: 'Security & parking lighting', icon: 'outdoor_grill' },
+        { label: 'Exterior/Parking Area Lighting', icon: 'local_parking' },
+        {
+          label: 'Panel/Service Upgrades & Load Planning',
+          icon: 'settings_input_component',
+        },
       ],
-      commercialLink: '/electrical-services/commercial-electrician',
-      energyIntro:
-        'Thoughtful load calculations and efficient lighting save money and reduce nuisance trips.',
-      energyServices: BASE_ENERGY_SERVICES,
-      areasServed: ['Boerne', 'Fair Oaks Ranch', 'Comfort', 'Kendall County'],
+
+      ranchHeading:
+        'Boerne Ranch & Rural Electrical Services – Wiring, Subpanels & Outdoor Power',
+      ranchSubheading:
+        'Organized distribution for barns, shops, and property power.',
+      ranchIntro:
+        'Boerne-area rural properties need safe power distribution across multiple structures. We build clean subpanel layouts, outdoor circuits, RV hookups, and equipment-ready 240V power with durable components and strong grounding.',
+      ranchLink: '/electrical-services/ranch-electrician',
+      ranchServices: [
+        { label: 'Shop & Outbuilding Wiring', icon: 'warehouse' },
+        {
+          label: 'Outbuilding Subpanels & Feeders',
+          icon: 'electrical_services',
+        },
+        { label: 'Outdoor Power Runs & Trenching', icon: 'cable' },
+        { label: 'RV Hookups (30/50-Amp)', icon: 'rv_hookup' },
+        {
+          label: '240V Circuits for Equipment',
+          icon: 'precision_manufacturing',
+        },
+        { label: 'Area Lighting & Security', icon: 'lightbulb' },
+        { label: 'Surge Protection & Grounding/Bonding', icon: 'shield' },
+      ],
+
+      areasServed: [
+        'Comfort',
+        'Helotes',
+        'Bandera',
+        'Kerrville',
+        'Fredericksburg',
+      ],
       urlSlug: slug,
       seo,
 
-      neighborhoods: ['North Boerne', 'Downtown corridor', 'Fair Oaks fringe'],
-      landmarks: ['River Rd Park', 'Main St', 'I-10 corridor'],
-      localContext: {},
-      localProjects: [],
-      testimonials: [],
-      faqs: [],
-      relatedLinks: [
+      neighborhoods: [
+        'Downtown Boerne',
+        'I-10 corridor',
+        'Rural properties outside town',
+      ],
+      landmarks: [
+        'Main Street (Boerne)',
+        'Cibolo Creek',
+        'Boerne Lake',
+        'I-10',
+        'Kendall County area',
+      ],
+      localContext: {
+        homesAndProperties: [
+          'Modern homes adding EV charging and appliance loads',
+          'Renovations and additions requiring new circuits',
+          'Outdoor living spaces needing safe power/lighting',
+          'Small commercial tenant spaces and offices',
+        ],
+        commonElectricalIssues: [
+          'Panel capacity constraints from added loads',
+          'Breaker trips from overloaded circuits',
+          'Lighting improvements and LED conversions',
+          'Outdoor receptacle protection and weather exposure',
+        ],
+        businessAndRanchNotes: [
+          'Tenant build-outs and service additions',
+          'Dedicated circuits for equipment and signage',
+          'Lighting retrofits that reduce operating costs',
+        ],
+      },
+
+      localProjects: [
         {
-          label: 'EV Charger Installation',
-          routerLink: '/electrical-services/ev-chargers',
-          icon: 'electric_car',
+          title: 'Example: EV Charger Circuit + Load Check',
+          summary:
+            'Installed a dedicated Level 2 charger circuit with service capacity verification.',
+          areaHint: 'I-10 corridor',
+          bullets: [
+            'Load calculation and breaker sizing',
+            'Clean conduit/wiring run and labeling',
+          ],
+          tags: ['EV', 'Load Calc'],
         },
         {
-          label: 'Panel Upgrades',
-          routerLink: '/electrical-services/panel-upgrades',
-          icon: 'electrical_services',
+          title: 'Example: LED Retrofit for a Small Business',
+          summary:
+            'Upgraded interior lighting to efficient LED for better visibility and lower cost.',
+          areaHint: 'Downtown Boerne area',
+          bullets: [
+            'Fixture selection for color/brightness',
+            'Controls and switching improvements',
+          ],
+          tags: ['LED', 'Commercial'],
+        },
+        {
+          title: 'Example: Panel Upgrade + Surge Protection',
+          summary:
+            'Improved capacity and added surge mitigation for modern loads.',
+          areaHint: 'Bandera',
+          bullets: [
+            'Breaker schedule cleanup',
+            'Surge device + grounding review',
+          ],
+          tags: ['Panel', 'Surge'],
         },
       ],
-      requestQuoteLink: '/contact-us',
+
+      // IMPORTANT: Only populate with real customer reviews (do not fabricate).
+      testimonials: [],
+
+      faqs: [
+        {
+          question:
+            'Can you help if breakers trip when multiple appliances run?',
+          answer:
+            'Yes. We’ll diagnose whether it’s a circuit overload, device issue, or service capacity limitation and recommend the safest fix.',
+        },
+        {
+          question:
+            'Do you handle commercial service calls and lighting retrofits?',
+          answer:
+            'Yes. We support small businesses and tenant spaces with troubleshooting, LED upgrades, and code compliance fixes.',
+        },
+        {
+          question: 'Do I need permits for a panel upgrade in Kendall County?',
+          answer:
+            'Many service and panel upgrades require permits and inspections. We can help identify requirements for your address and coordinate the process.',
+        },
+        {
+          question: 'Should I add whole-home surge protection?',
+          answer:
+            'Surge protection helps protect electronics from lightning and utility surges—especially valuable after panel upgrades or when you have smart devices and newer appliances.',
+        },
+        {
+          question: 'Can you wire outdoor lighting and outlets safely?',
+          answer:
+            'Yes. We install weather-rated components and proper protection (like GFCI where required) for safe, reliable outdoor power.',
+        },
+      ],
     };
   })(),
 
   bandera: (() => {
     const slug = '/service-areas/bandera-tx-electrician';
+
     const seo = buildElectricianSeo({
       slug,
       townName: 'Bandera',
       addressLocality: 'Bandera',
-      metaTitle: 'Electrician Bandera TX | Ranch & Residential Electrical',
+      metaTitle:
+        'Electrician in Bandera, TX | Rural Wiring, Panels, Repairs & Outdoor Lighting',
       metaDescription:
-        'Bandera electrician for ranch wiring, well/pump circuits, panel upgrades, and lighting.',
+        'Electrician in Bandera, TX for troubleshooting, panel upgrades, surge protection, outdoor power/lighting, and rural outbuilding wiring. ProVolt Electrical Services—licensed and insured.',
       descriptionLong:
-        'ProVolt supports Bandera ranch and residential properties with durable electrical work: pumps, trenching, panels, and lighting.',
+        'ProVolt Electrical Services provides Bandera, TX with dependable Hill Country electrical work—specializing in rural wiring for outbuildings, long-run feeders, panel upgrades, outdoor lighting, surge protection, and safe troubleshooting for ranch properties.',
       serviceType: [
-        'Ranch electrical',
-        'Well/pump circuits',
-        'Panel upgrades',
-        'Outdoor lighting',
+        'Ranch and rural property electrical',
+        'Subpanels and long-run feeders',
+        'Electrical panel upgrades',
+        'Outdoor lighting and outlets',
+        'Surge protection',
+        'Electrical troubleshooting and repairs',
+        'Dedicated circuits for equipment',
       ],
       breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+      extra: {
+        // More specific "areaServed" improves locality signals without keyword-stuffing.
+        areaServed: [
+          { '@type': 'City', name: 'Bandera, TX' },
+          { '@type': 'City', name: 'Pipe Creek, TX' },
+          { '@type': 'City', name: 'Comfort, TX' },
+          { '@type': 'City', name: 'Helotes, TX' },
+        ],
+      },
     });
+
     return {
       townName: 'Bandera',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
       phoneNumber: PHONE_DISPLAY,
+
+      heroTitle: 'Master Electrician in Bandera, TX',
+      heroSubtitle:
+        'Dependable electrical work for Bandera homes and rural properties—outbuildings, panels, lighting, and repairs built for Hill Country conditions.',
+      heroBadgeText: 'Ranch & Rural Specialists',
       heroBullets: [
-        'Ranch and rural property experience',
-        'Long-run feeders sized correctly',
-        'Outdoor lighting that lasts',
+        'Ranch, shop, and outbuilding wiring—long runs sized correctly',
+        'Troubleshooting and repairs for outages and breaker trips',
+        'Panel upgrades, surge protection, and safety improvements',
+        'Outdoor power and lighting for properties and driveways',
       ],
+      heroCTAText: "Let's Talk About Your Electrical Needs",
+
+      residentialHeading:
+        'Bandera Residential Electrical Services – Expert Electrical Solutions for Homes',
+      residentialSubheading:
+        'Safe, practical upgrades for Hill Country homes and properties.',
       residentialIntro:
-        'We help Bandera properties with durable, code-compliant wiring and lighting.',
+        'Bandera homes and acreage properties often rely on outdoor circuits, reliable protection, and electrical systems that can handle real use. We troubleshoot issues, improve safety devices, and install upgrades with clean workmanship.',
       residentialServices: [
-        { label: 'Troubleshooting & repairs', icon: 'bolt' },
-        { label: 'Panel upgrades', icon: 'electrical_services' },
-        { label: 'Outdoor lighting', icon: 'outdoor_grill' },
-      ],
-      residentialLink: '/electrical-services/residential-electrician',
-      commercialIntro:
-        'Shops and ranch facilities get equipment-ready circuits and safe distribution.',
-      commercialServices: [
-        { label: 'Ranch & shop wiring', icon: 'agriculture' },
+        { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
-          label: 'Dedicated equipment circuits',
-          icon: 'precision_manufacturing',
-        },
-        { label: 'Service upgrades', icon: 'settings_input_component' },
-      ],
-      commercialLink: '/electrical-services/commercial-electrician',
-      energyIntro: 'Plan feeders and loads to avoid voltage drop issues.',
-      energyServices: BASE_ENERGY_SERVICES,
-      areasServed: ['Bandera', 'Pipe Creek', 'Lakehills', 'Medina'],
-      urlSlug: slug,
-      seo,
-
-      neighborhoods: ['Downtown Bandera', 'FM 1077 area'],
-      landmarks: ['Bandera City Park', 'Medina River'],
-      localContext: {},
-      localProjects: [],
-      testimonials: [],
-      faqs: [],
-      relatedLinks: [
-        {
-          label: 'Ranch Electrical',
-          routerLink: '/electrical-services/ranch',
-          icon: 'agriculture',
-        },
-      ],
-      requestQuoteLink: '/contact-us',
-    };
-  })(),
-
-  centerPoint: (() => {
-    const slug = '/service-areas/center-point-tx-electrician';
-    const seo = buildElectricianSeo({
-      slug,
-      townName: 'Center Point',
-      addressLocality: 'Center Point',
-      metaTitle: 'Electrician Center Point TX | Residential & Ranch',
-      metaDescription:
-        'Center Point electrician for homes, shops, and rural properties.',
-      descriptionLong:
-        'ProVolt serves Center Point with residential and ranch electrical—panels, lighting, feeders, and troubleshooting.',
-      serviceType: [
-        'Residential electrical',
-        'Ranch electrical',
-        'Troubleshooting & repairs',
-      ],
-      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
-    });
-    return {
-      townName: 'Center Point',
-      stateAbbr: 'TX',
-      regionLabel: DEFAULT_REGION,
-      phoneNumber: PHONE_DISPLAY,
-      heroBullets: [
-        'Local coverage from Kerrville',
-        'Panels, lighting, and shop power',
-        'Rural-ready planning',
-      ],
-      residentialIntro:
-        'Panel upgrades, lighting, and clean repairs for Center Point homes.',
-      residentialServices: BASE_RESIDENTIAL_SERVICES,
-      residentialLink: '/electrical-services/residential-electrician',
-      commercialIntro:
-        'Ranch and shop work with proper feeders and equipment circuits.',
-      commercialServices: BASE_COMMERCIAL_RANCH_SERVICES,
-      commercialLink: '/electrical-services/commercial-electrician',
-      energyIntro: 'Efficient lighting and smart load planning.',
-      energyServices: BASE_ENERGY_SERVICES,
-      areasServed: ['Center Point', 'Kerrville', 'Comfort'],
-      urlSlug: slug,
-      seo,
-
-      neighborhoods: ['Downtown Center Point', 'Guadalupe River corridor'],
-      landmarks: ['Center Point Park', 'FM 480'],
-      localContext: {},
-      localProjects: [],
-      testimonials: [],
-      faqs: [],
-      relatedLinks: [
-        {
-          label: 'Panel Upgrades',
-          routerLink: '/electrical-services/panel-upgrades',
+          label: 'Panel & Breaker Repairs/Upgrades',
           icon: 'electrical_services',
         },
+        { label: 'Outdoor Outlets (GFCI/Weather-Rated)', icon: 'verified' },
+        { label: 'Exterior Lighting & Security', icon: 'lightbulb' },
+        { label: 'Dedicated Circuits for Appliances/HVAC', icon: 'power' },
+        { label: 'Ceiling Fans & Switch Replacements', icon: 'toys' },
+        { label: 'Surge Protection & Grounding', icon: 'offline_bolt' },
       ],
-      requestQuoteLink: '/contact-us',
+
+      commercialHeading:
+        'Bandera Commercial Electrical Services – Reliable Solutions for Businesses',
+      commercialSubheading:
+        'Service calls, lighting, and electrical additions for business spaces.',
+      commercialIntro:
+        'We help Bandera businesses with troubleshooting, lighting upgrades, and electrical additions that keep your space safe and functional—without the messy installs.',
+      commercialLink: '/electrical-services/commercial-electrician',
+      commercialServices: [
+        { label: 'Commercial Repairs & Troubleshooting', icon: 'build' },
+        { label: 'Lighting Upgrades & Retrofits', icon: 'emoji_objects' },
+        { label: 'Tenant Improvements & Additions', icon: 'storefront' },
+        {
+          label: 'Dedicated Circuits for Equipment',
+          icon: 'precision_manufacturing',
+        },
+        { label: 'Panel/Service Upgrades', icon: 'settings_input_component' },
+        { label: 'Exterior/Parking Lighting', icon: 'local_parking' },
+      ],
+
+      ranchHeading:
+        'Bandera Ranch & Rural Electrical Services – Power Solutions for Shops, Barns & Outbuildings',
+      ranchSubheading:
+        'Built for long runs, outdoor exposure, and working loads.',
+      ranchIntro:
+        'Bandera ranch properties often need power distributed across barns, shops, and gates with attention to distance, voltage drop, and grounding. We build safe feeder runs, subpanels, RV power, and equipment circuits designed to last.',
+      ranchLink: '/electrical-services/ranch-electrician',
+      ranchServices: [
+        { label: 'Barn & Shop Wiring', icon: 'warehouse' },
+        { label: 'Long-Run Feeders & Subpanels', icon: 'electrical_services' },
+        { label: 'Outdoor Power & Trenching', icon: 'cable' },
+        { label: 'Well/Pump & Utility Circuits', icon: 'water' },
+        { label: 'Gate/Entry Power Circuits', icon: 'gate' },
+        { label: 'RV 30/50-Amp Hookups', icon: 'rv_hookup' },
+        { label: '240V Equipment Circuits', icon: 'precision_manufacturing' },
+      ],
+
+      areasServed: ['Boerne', 'Kerrville', 'Comfort', 'Helotes'],
+      urlSlug: slug,
+      seo,
+
+      neighborhoods: [
+        'Bandera (in town)',
+        'SH-16 corridor',
+        'Rural ranch properties',
+        'Medina River area',
+      ],
+      landmarks: [
+        'Medina River',
+        'Bandera City Park',
+        'SH-16',
+        'Hill Country ranch areas',
+      ],
+      localContext: {
+        homesAndProperties: [
+          'Rural properties with outbuildings and long runs',
+          'Workshops, barns, and equipment-heavy circuits',
+          'Outdoor lighting for driveways and gates',
+          'Homes needing reliable surge mitigation',
+        ],
+        commonElectricalIssues: [
+          'Voltage drop on long feeders to outbuildings',
+          'Outdoor receptacle/weather damage',
+          'Breaker trips from motor start loads',
+          'Undersized panels for added equipment',
+        ],
+        businessAndRanchNotes: [
+          '240V circuits for welders and compressors',
+          'Gate operator circuits',
+          'Weather-rated installs and grounding strategy',
+        ],
+      },
+
+      localProjects: [
+        {
+          title: 'Example: Outbuilding Feeder + Subpanel',
+          summary:
+            'Installed a properly sized feeder and subpanel for a detached shop.',
+          areaHint: 'SH-16 corridor',
+          bullets: [
+            'Voltage-drop aware conductor sizing',
+            'Grounding/bonding and labeling',
+          ],
+          tags: ['Rural', 'Subpanel'],
+        },
+        {
+          title: 'Example: Outdoor Lighting & Power',
+          summary:
+            'Improved property usability and security with exterior lighting and safe outlets.',
+          areaHint: 'Medina River area',
+          bullets: [
+            'Weather-rated fixtures and covers',
+            'GFCI protection where required',
+          ],
+          tags: ['Outdoor', 'Lighting'],
+        },
+        {
+          title: 'Example: Panel Upgrade + Surge Strategy',
+          summary:
+            'Improved service capacity and added surge mitigation for reliability.',
+          areaHint: 'Rural Bandera property',
+          bullets: [
+            'Panel/service planning',
+            'Surge device + grounding review',
+          ],
+          tags: ['Panel', 'Surge'],
+        },
+      ],
+
+      // IMPORTANT: Only populate with real customer reviews (do not fabricate).
+      testimonials: [],
+
+      faqs: [
+        {
+          question: 'Can you wire a barn, shop, or outbuilding in Bandera?',
+          answer:
+            'Yes. We’ll evaluate distance and load, then size conductors correctly, install subpanels where needed, and ensure proper grounding for safe rural power.',
+        },
+        {
+          question: 'Why do breakers trip when equipment starts?',
+          answer:
+            'Motors can draw high start current. We can diagnose the circuit and recommend the right breaker, wiring, or load solution.',
+        },
+        {
+          question: 'Do you install outdoor lighting for driveways and gates?',
+          answer:
+            'Yes. We install weather-rated lighting and safe power options for security and usability on rural properties.',
+        },
+        {
+          question: 'Do you install surge protection in Bandera?',
+          answer:
+            'Yes. Surge protection can help reduce damage from lightning and utility surges—especially valuable for rural properties and sensitive electronics.',
+        },
+        {
+          question:
+            'Do I need a permit for electrical upgrades in Bandera County?',
+          answer:
+            'Requirements can vary by jurisdiction. We can help identify what applies to your address and coordinate the correct steps for service/panel work or additions.',
+        },
+      ],
     };
   })(),
 
   helotes: (() => {
     const slug = '/service-areas/helotes-tx-electrician';
+
     const seo = buildElectricianSeo({
       slug,
       townName: 'Helotes',
       addressLocality: 'Helotes',
-      metaTitle: 'Electrician Helotes TX | Lighting, Panels & EV',
+      metaTitle:
+        'Electrician in Helotes, TX | Repairs, Panels, EV Chargers & Lighting Upgrades',
       metaDescription:
-        'Helotes electrician for lighting upgrades, panel upgrades, and EV chargers.',
+        'Electrician in Helotes, TX for troubleshooting, panel upgrades, surge protection, lighting/LED upgrades, and EV charger circuits. ProVolt Electrical Services—licensed and insured.',
       descriptionLong:
-        'ProVolt services Helotes homes with lighting upgrades, EV chargers, panel work, and troubleshooting.',
+        'ProVolt Electrical Services serves Helotes, TX with professional residential and small-business electrical work—focused on troubleshooting, panel/service upgrades, lighting improvements, surge protection, and EV charger circuits for modern loads.',
       serviceType: [
-        'Lighting upgrades',
-        'EV chargers',
-        'Panel upgrades',
-        'Troubleshooting & repairs',
+        'Electrical troubleshooting and repairs',
+        'Electrical panel upgrades',
+        'Lighting installation and LED conversions',
+        'Surge protection',
+        'Commercial electrical services',
+        'Dedicated circuits for modern loads',
       ],
       breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
+      extra: {
+        // More specific "areaServed" improves locality signals without keyword-stuffing.
+        areaServed: [
+          { '@type': 'City', name: 'Helotes, TX' },
+          { '@type': 'City', name: 'Boerne, TX' },
+          { '@type': 'City', name: 'Bandera, TX' },
+          { '@type': 'City', name: 'San Antonio, TX' },
+        ],
+      },
     });
+
     return {
       townName: 'Helotes',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
       phoneNumber: PHONE_DISPLAY,
+
+      heroTitle: 'Master Electrician in Helotes, TX',
+      heroSubtitle:
+        'Professional electrical service for Helotes homes and small businesses—repairs, panels, lighting, and modern upgrades with clean installs and code compliance.',
+      heroBadgeText: 'Modern Upgrades • Fast Troubleshooting',
       heroBullets: [
-        'Modern lighting and smart controls',
-        'EV-ready panel upgrades',
-        'Clean, code-compliant installs',
+        'Troubleshooting and repairs for outages, trips, and flicker',
+        'Panel upgrades, surge protection, and service planning',
+        'Lighting upgrades and LED conversions for comfort and security',
+        'EV chargers and dedicated circuits for modern loads',
       ],
+      heroCTAText: 'Request Service Now',
+
+      residentialHeading:
+        'Helotes Residential Electrical Services – Expert Electrical Solutions for Homes',
+      residentialSubheading:
+        'Clean installs and safety-first upgrades for modern living.',
       residentialIntro:
-        'Lighting, EV chargers, and panel upgrades tailored for Helotes neighborhoods.',
+        'Helotes homeowners often want dependable upgrades that look as good as they perform—lighting updates, dedicated circuits, panel improvements, and protection devices. We keep the work tidy, the plan clear, and the results code-correct.',
       residentialServices: [
-        { label: 'Lighting & smart controls', icon: 'light_mode' },
-        { label: 'EV charger installation', icon: 'electric_car' },
-        { label: 'Panel upgrades', icon: 'electrical_services' },
-        { label: 'Troubleshooting & repairs', icon: 'bolt' },
-      ],
-      residentialLink: '/electrical-services/residential-electrician',
-      commercialIntro:
-        'Small business circuits and lighting with minimal downtime.',
-      commercialServices: [
+        { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
-          label: 'Dedicated equipment circuits',
+          label: 'Panel Upgrades & Breaker Replacement',
+          icon: 'electrical_services',
+        },
+        { label: 'Lighting Upgrades & Dimmers', icon: 'lightbulb' },
+        { label: 'GFCI/AFCI Safety Protection', icon: 'verified' },
+        { label: 'Dedicated Circuits for Appliances', icon: 'power' },
+        { label: 'Ceiling Fans, Switches & Controls', icon: 'tune' },
+        { label: 'Surge Protection & Grounding', icon: 'offline_bolt' },
+      ],
+
+      commercialHeading:
+        'Helotes Commercial Electrical Services – Reliable Solutions for Businesses',
+      commercialSubheading:
+        'Service calls, lighting, and upgrades with minimal downtime.',
+      commercialIntro:
+        'We support Helotes businesses with troubleshooting, lighting improvements, and electrical additions—focused on safe work, clean installs, and clear timelines.',
+      commercialLink: '/electrical-services/commercial-electrician',
+      commercialServices: [
+        { label: 'Service Calls & Troubleshooting', icon: 'build' },
+        { label: 'Lighting Retrofits & LED Upgrades', icon: 'emoji_objects' },
+        { label: 'Tenant Improvements & Additions', icon: 'storefront' },
+        {
+          label: 'Dedicated Equipment Circuits',
           icon: 'precision_manufacturing',
         },
-        { label: 'Service upgrades', icon: 'settings_input_component' },
-        { label: 'Security & area lighting', icon: 'outdoor_grill' },
+        { label: 'Panel/Service Upgrades', icon: 'settings_input_component' },
+        { label: 'Exterior/Security Lighting', icon: 'security' },
       ],
-      commercialLink: '/electrical-services/commercial-electrician',
-      energyIntro: 'Get efficient lighting that looks great and saves energy.',
-      energyServices: BASE_ENERGY_SERVICES,
-      areasServed: ['Helotes', 'San Antonio NW', 'Leon Valley'],
+
+      ranchHeading:
+        'Helotes Ranch & Rural Electrical Services – Wiring, Subpanels & Outdoor Power',
+      ranchSubheading:
+        'Property power that’s organized, safe, and built for use.',
+      ranchIntro:
+        'Helotes-area rural properties often need clean distribution across outbuildings and equipment loads. We install subpanels, outdoor circuits, RV hookups, and equipment-ready power with durable components and strong grounding.',
+      ranchLink: '/electrical-services/ranch-electrician',
+      ranchServices: [
+        { label: 'Shop/Outbuilding Wiring', icon: 'warehouse' },
+        {
+          label: 'Outbuilding Subpanels & Feeders',
+          icon: 'electrical_services',
+        },
+        { label: 'Outdoor Power Runs & Trenching', icon: 'cable' },
+        { label: 'RV Hookups (30/50-Amp)', icon: 'rv_hookup' },
+        {
+          label: '240V Circuits for Equipment',
+          icon: 'precision_manufacturing',
+        },
+        { label: 'Area/Security Lighting', icon: 'lightbulb' },
+        { label: 'Surge Protection & Grounding/Bonding', icon: 'shield' },
+      ],
+
+      areasServed: ['Boerne', 'Bandera', 'Comfort'],
       urlSlug: slug,
       seo,
 
-      neighborhoods: ['Helotes Park Estates', 'Iron Horse Canyon'],
-      landmarks: ['Old Town Helotes', 'Bandera Rd'],
-      localContext: {},
-      localProjects: [],
-      testimonials: [],
-      faqs: [],
-      relatedLinks: [
+      neighborhoods: [
+        'Old Town Helotes area',
+        'Bandera Rd corridor',
+        'Loop 1604 area',
+        'NW San Antonio border',
+      ],
+      landmarks: [
+        'Old Town Helotes',
+        'Bandera Rd (SH-16)',
+        'Loop 1604',
+        'Government Canyon area',
+      ],
+      localContext: {
+        homesAndProperties: [
+          'Modern homes adding EV charging and appliance loads',
+          'Outdoor living spaces needing safe power/lighting',
+          'Renovations and additions requiring new circuits',
+          'Small commercial spaces and service calls',
+        ],
+        commonElectricalIssues: [
+          'Breaker trips from circuit overloads',
+          'Panel capacity constraints for new loads',
+          'Lighting upgrades and LED conversions',
+          'Outdoor receptacle protection and weather exposure',
+        ],
+        businessAndRanchNotes: [
+          'Lighting and power upgrades for small businesses',
+          'Dedicated circuits for equipment and signage',
+          'Service planning for remodels and expansions',
+        ],
+      },
+
+      localProjects: [
         {
-          label: 'EV Chargers',
-          routerLink: '/electrical-services/ev-chargers',
-          icon: 'electric_car',
+          title: 'Example: EV Charger Install + Load Calc',
+          summary:
+            'Installed a Level 2 charger circuit with capacity planning for safe charging.',
+          areaHint: 'Loop 1604 area',
+          bullets: [
+            'Load calculation and breaker sizing',
+            'Clean wiring run and labeling',
+          ],
+          tags: ['EV', 'Load Calc'],
         },
         {
-          label: 'Lighting Upgrades',
-          routerLink: '/electrical-services/lighting',
-          icon: 'light_mode',
+          title: 'Example: Lighting Upgrade + Controls',
+          summary:
+            'Upgraded interior and exterior lighting with better controls and efficiency.',
+          areaHint: 'Bandera Rd corridor',
+          bullets: [
+            'LED fixture selection',
+            'Timers/dimmers for comfort and security',
+          ],
+          tags: ['Lighting', 'Controls'],
+        },
+        {
+          title: 'Example: Panel Upgrade + Surge Protection',
+          summary:
+            'Improved capacity and added surge mitigation for modern loads.',
+          areaHint: 'NW San Antonio border area',
+          bullets: [
+            'Breaker schedule cleanup',
+            'Surge device + grounding review',
+          ],
+          tags: ['Panel', 'Surge'],
         },
       ],
-      requestQuoteLink: '/contact-us',
+
+      // IMPORTANT: Only populate with real customer reviews (do not fabricate).
+      testimonials: [],
+
+      faqs: [
+        {
+          question: 'Can you help with lighting upgrades and LED conversions?',
+          answer:
+            'Yes. We can recommend fixtures and controls that improve brightness, comfort, and energy efficiency for both interior and exterior lighting.',
+        },
+        {
+          question: 'Why do breakers trip when multiple devices run?',
+          answer:
+            'It can be an overloaded circuit, a wiring issue, or service capacity limitations. We’ll diagnose safely and recommend the right fix.',
+        },
+        {
+          question:
+            'Do I need a permit for a panel upgrade in Bexar County jurisdictions?',
+          answer:
+            'Many service and panel upgrades require permits and inspections. We can help identify requirements for your address and coordinate the process.',
+        },
+        {
+          question: 'Should I add whole-home surge protection?',
+          answer:
+            'Surge protection helps protect appliances and electronics from lightning and utility surges—especially useful with newer smart devices and equipment.',
+        },
+        {
+          question: 'Can you add outdoor power safely for patios or lighting?',
+          answer:
+            'Yes. We install weather-rated components and the right circuit protection (including GFCI where required) for safe outdoor power.',
+        },
+      ],
     };
   })(),
 };

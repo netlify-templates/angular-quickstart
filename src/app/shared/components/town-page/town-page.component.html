@@ -21,27 +21,12 @@
         <button
           mat-raised-button
           (click)="onCallClick()"
-          aria-label="Call to book service"
+          [attr.aria-label]="townConfig.heroCTAText || 'Call to book service'"
         >
           <mat-icon [attr.aria-label]="'Phone icon'" role="img">call</mat-icon>
-          Call to Book Service
-        </button>
-
-        <button
-          mat-stroked-button
-          (click)="onRequestQuote()"
-          class="outlined-button"
-          aria-label="Send a service request"
-        >
-          <mat-icon aria-label="Mail icon" role="img">mail</mat-icon>
-          Send a Service Request
+          {{ townConfig.heroCTAText || "Call to book service" }}
         </button>
       </div>
-
-      <p class="tp-hero-note">
-        24/7 emergency service available in {{ townLabel }} and nearby
-        communities.
-      </p>
     </div>
 
     <div class="tp-hero-right">
@@ -55,8 +40,13 @@
           <mat-card-title
             >Local {{ townConfig.regionLabel }} Electrician</mat-card-title
           >
+          <!-- // @Nathaniel fix this to add links to the surrounding areas -->
           <mat-card-subtitle>
-            {{ townConfig.areasServed.slice(0, 4).join(" • ") }}
+            {{
+              townConfig.areasServed.slice(0, 4).join(" • ")
+                ? townConfig.areasServed.slice(0, 4).join(" • ") + " • View All"
+                : "View All"
+            }}
           </mat-card-subtitle>
         </mat-card-header>
 
@@ -78,6 +68,177 @@
         </mat-card-content>
       </mat-card>
     </div>
+  </section>
+
+  <!-- RESIDENTIAL SERVICES -->
+  <section class="tp-section">
+    <mat-card class="tp-card">
+      <mat-card-header>
+        <div mat-card-avatar class="tp-card-avatar" aria-hidden="true">
+          <mat-icon [attr.aria-label]="'Home services icon'" role="img"
+            >home</mat-icon
+          >
+        </div>
+        <mat-card-title>{{ residentialHeading }}</mat-card-title>
+        <mat-card-subtitle>
+          {{
+            townConfig.residentialSubheading ||
+              "Safe, clean, and code-compliant work for your home."
+          }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="tp-section-intro" *ngIf="townConfig.residentialIntro">
+          {{ townConfig.residentialIntro }}
+        </p>
+
+        <div class="tp-service-grid">
+          <div
+            class="tp-service-item"
+            *ngFor="
+              let service of townConfig.residentialServices;
+              trackBy: trackByLabel
+            "
+          >
+            <mat-icon
+              class="tp-service-icon"
+              [attr.aria-label]="service.label + ' icon'"
+              role="img"
+              >{{ service.icon }}</mat-icon
+            >
+            <span>{{ service.label }}</span>
+          </div>
+        </div>
+        <button
+          mat-stroked-button
+          class="tp-card-btn"
+          type="button"
+          [routerLink]="[
+            '/',
+            SitePaths.electricalServices,
+            SitePaths.residentialElectrician
+          ]"
+        >
+          <mat-icon>arrow_forward</mat-icon>
+          View All ProVolt Residential Services
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- COMMERCIAL SERVICES -->
+  <section class="tp-section">
+    <mat-card class="tp-card">
+      <mat-card-header>
+        <div mat-card-avatar class="tp-card-avatar" aria-hidden="true">
+          <mat-icon [attr.aria-label]="'Business services icon'" role="img"
+            >business</mat-icon
+          >
+        </div>
+        <mat-card-title>{{ commercialHeading }}</mat-card-title>
+        <mat-card-subtitle>
+          {{
+            townConfig.commercialSubheading ||
+              "Built for shops, businesses, and Hill Country properties."
+          }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="tp-section-intro" *ngIf="townConfig.commercialIntro">
+          {{ townConfig.commercialIntro }}
+        </p>
+
+        <div class="tp-service-grid">
+          <div
+            class="tp-service-item"
+            *ngFor="
+              let service of townConfig.commercialServices;
+              trackBy: trackByLabel
+            "
+          >
+            <mat-icon
+              class="tp-service-icon"
+              [attr.aria-label]="service.label + ' icon'"
+              role="img"
+              >{{ service.icon }}</mat-icon
+            >
+            <span>{{ service.label }}</span>
+          </div>
+        </div>
+        <button
+          mat-stroked-button
+          class="tp-card-btn"
+          type="button"
+          [routerLink]="[
+            '/',
+            SitePaths.electricalServices,
+            SitePaths.commercialElectrician
+          ]"
+        >
+          <mat-icon>arrow_forward</mat-icon>
+          View All ProVolt Commercial Services
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- RANCH SERVICES -->
+  <section class="tp-section">
+    <mat-card class="tp-card">
+      <mat-card-header>
+        <div mat-card-avatar class="tp-card-avatar" aria-hidden="true">
+          <mat-icon [attr.aria-label]="'Ranch services icon'" role="img"
+            >business</mat-icon
+          >
+        </div>
+        <mat-card-title>{{ townConfig.ranchHeading }}</mat-card-title>
+        <mat-card-subtitle>
+          {{
+            townConfig.ranchSubheading ||
+              "Built for shops, businesses, and Hill Country properties."
+          }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="tp-section-intro" *ngIf="townConfig.ranchIntro">
+          {{ townConfig.ranchIntro }}
+        </p>
+
+        <div class="tp-service-grid">
+          <div
+            class="tp-service-item"
+            *ngFor="
+              let service of townConfig.ranchServices;
+              trackBy: trackByLabel
+            "
+          >
+            <mat-icon
+              class="tp-service-icon"
+              [attr.aria-label]="service.label + ' icon'"
+              role="img"
+              >{{ service.icon }}</mat-icon
+            >
+            <span>{{ service.label }}</span>
+          </div>
+        </div>
+        <button
+          mat-stroked-button
+          class="tp-card-btn"
+          type="button"
+          [routerLink]="[
+            '/',
+            SitePaths.electricalServices,
+            SitePaths.ranchRuralElectrician
+          ]"
+        >
+          <mat-icon>arrow_forward</mat-icon>
+          View All ProVolt Ranch & Rural Services
+        </button>
+      </mat-card-content>
+    </mat-card>
   </section>
 
   <!-- LOCAL CONTEXT (Town-specific differentiator) -->
@@ -251,135 +412,6 @@
     </mat-card>
   </section>
 
-  <!-- RESIDENTIAL SERVICES -->
-  <section class="tp-section">
-    <mat-card class="tp-card">
-      <mat-card-header>
-        <div mat-card-avatar class="tp-card-avatar" aria-hidden="true">
-          <mat-icon [attr.aria-label]="'Home services icon'" role="img"
-            >home</mat-icon
-          >
-        </div>
-        <mat-card-title>{{ residentialHeading }}</mat-card-title>
-        <mat-card-subtitle>
-          {{
-            townConfig.residentialSubheading ||
-              "Safe, clean, and code-compliant work for your home."
-          }}
-        </mat-card-subtitle>
-      </mat-card-header>
-
-      <mat-card-content>
-        <p class="tp-section-intro" *ngIf="townConfig.residentialIntro">
-          {{ townConfig.residentialIntro }}
-        </p>
-
-        <div class="tp-service-grid">
-          <div
-            class="tp-service-item"
-            *ngFor="
-              let service of townConfig.residentialServices;
-              trackBy: trackByLabel
-            "
-          >
-            <mat-icon
-              class="tp-service-icon"
-              [attr.aria-label]="service.label + ' icon'"
-              role="img"
-              >{{ service.icon }}</mat-icon
-            >
-            <span>{{ service.label }}</span>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </section>
-
-  <!-- COMMERCIAL & RANCH SERVICES -->
-  <section class="tp-section">
-    <mat-card class="tp-card">
-      <mat-card-header>
-        <div mat-card-avatar class="tp-card-avatar" aria-hidden="true">
-          <mat-icon [attr.aria-label]="'Business services icon'" role="img"
-            >business</mat-icon
-          >
-        </div>
-        <mat-card-title>{{ commercialHeading }}</mat-card-title>
-        <mat-card-subtitle>
-          {{
-            townConfig.commercialSubheading ||
-              "Built for shops, businesses, and Hill Country properties."
-          }}
-        </mat-card-subtitle>
-      </mat-card-header>
-
-      <mat-card-content>
-        <p class="tp-section-intro" *ngIf="townConfig.commercialIntro">
-          {{ townConfig.commercialIntro }}
-        </p>
-
-        <div class="tp-service-grid">
-          <div
-            class="tp-service-item"
-            *ngFor="
-              let service of townConfig.commercialServices;
-              trackBy: trackByLabel
-            "
-          >
-            <mat-icon
-              class="tp-service-icon"
-              [attr.aria-label]="service.label + ' icon'"
-              role="img"
-              >{{ service.icon }}</mat-icon
-            >
-            <span>{{ service.label }}</span>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </section>
-
-  <!-- ENERGY & CONSULTATION -->
-  <section class="tp-section">
-    <mat-card class="tp-card">
-      <mat-card-header>
-        <div mat-card-avatar class="tp-card-avatar" aria-hidden="true">
-          <mat-icon [attr.aria-label]="'Energy savings icon'" role="img"
-            >energy_savings_leaf</mat-icon
-          >
-        </div>
-        <mat-card-title>{{ energyHeading }}</mat-card-title>
-        <mat-card-subtitle>
-          {{ townConfig.energySubheading || "Plan it right the first time." }}
-        </mat-card-subtitle>
-      </mat-card-header>
-
-      <mat-card-content>
-        <p class="tp-section-intro" *ngIf="townConfig.energyIntro">
-          {{ townConfig.energyIntro }}
-        </p>
-
-        <div class="tp-service-grid">
-          <div
-            class="tp-service-item"
-            *ngFor="
-              let service of townConfig.energyServices;
-              trackBy: trackByLabel
-            "
-          >
-            <mat-icon
-              class="tp-service-icon"
-              [attr.aria-label]="service.label + ' icon'"
-              role="img"
-              >{{ service.icon }}</mat-icon
-            >
-            <span>{{ service.label }}</span>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </section>
-
   <!-- FAQs (Town-specific) -->
   <section class="tp-section" *ngIf="townConfig.faqs?.length">
     <mat-card class="tp-card">
@@ -463,54 +495,29 @@
 
       <mat-card-content>
         <p class="tp-section-intro">
-          Our base in {{ townLabel }} allows us to regularly serve homeowners,
-          businesses, and ranch properties across the surrounding
-          {{ townConfig.regionLabel }}.
+          Serving {{ townLabel }} and nearby
+          {{
+            townConfig.areasServed
+              .slice(0, townConfig.areasServed.length - 1)
+              .join(", ") +
+              ", and " +
+              townConfig.areasServed[townConfig.areasServed.length - 1]
+          }}. For the full coverage map and complete list of towns:
         </p>
-
-        <div
-          class="tp-chip-row tp-chip-row--wrap"
-          *ngIf="townConfig.areasServed?.length"
-        >
-          <mat-chip-listbox aria-label="Areas served">
-            <mat-chip
-              *ngFor="let area of townConfig.areasServed; trackBy: trackByIndex"
-            >
-              {{ area }}
-            </mat-chip>
-          </mat-chip-listbox>
-        </div>
-
-        <div class="tp-related" *ngIf="townConfig.relatedLinks?.length">
-          <p class="tp-section-intro tp-tight">Related services in this area</p>
-          <div class="tp-related-links">
-            <a
-              class="tp-related-link"
-              *ngFor="
-                let link of townConfig.relatedLinks;
-                trackBy: trackByIndex
-              "
-              [routerLink]="link.routerLink"
-            >
-              <mat-icon *ngIf="link.icon" aria-hidden="true">{{
-                link.icon
-              }}</mat-icon>
-              {{ link.label }}
-            </a>
-          </div>
-        </div>
 
         <button
           mat-stroked-button
-          class="wcu-town-btn"
+          class="tp-card-btn"
           type="button"
-          [routerLink]="townConfig.residentialLink"
+          [routerLink]="[
+            '/' + SitePaths.serviceAreas,
+            SitePaths.texasHillCountryElectrician
+          ]"
         >
           <mat-icon [attr.aria-label]="'Visit residential services'" role="img"
             >arrow_forward</mat-icon
           >
-          View All {{ townConfig.regionLabel }} Residential ProVolt Electrical
-          Services
+          View All ProVolt Electrical Services
         </button>
       </mat-card-content>
     </mat-card>
@@ -531,10 +538,6 @@
         <app-cta-button
           [label]="'Call'"
           (click)="onCallClick()"
-        ></app-cta-button>
-        <app-cta-button
-          [label]="'Request a Quote'"
-          (click)="onRequestQuote()"
         ></app-cta-button>
       </div>
     </div>

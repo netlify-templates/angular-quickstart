@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,7 +30,7 @@ interface ServiceItem {
   templateUrl: './electrician-helotes-tx.component.html',
   styleUrls: ['./electrician-helotes-tx.component.scss'],
 })
-export class ElectricianHelotesTxComponent implements OnInit {
+export class ElectricianHelotesTxComponent implements OnInit, OnDestroy {
   config: TownPageConfig = TOWN_CONFIGS['helotes'];
 
   constructor(private seo: SeoService) {}
@@ -52,5 +52,9 @@ export class ElectricianHelotesTxComponent implements OnInit {
         this.seo.setJsonLd(seoConfig.jsonLdId, seoConfig.jsonLd);
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.seo.removeJsonLd(this.config.seo?.jsonLdId || '');
   }
 }

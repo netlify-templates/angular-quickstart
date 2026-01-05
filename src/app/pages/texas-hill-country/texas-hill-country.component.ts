@@ -56,7 +56,13 @@ export class TexasHillCountryComponent implements OnInit {
   private buildTownCards(): void {
     const entries = Object.entries(TOWN_CONFIGS) as [string, TownPageConfig][];
 
-    this.towns = entries.map(([key, cfg]) => ({
+    const sortedEntries = entries.sort(([, aCfg], [, bCfg]) =>
+      aCfg.townName.localeCompare(bCfg.townName, undefined, {
+        sensitivity: 'base',
+      })
+    );
+
+    this.towns = sortedEntries.map(([key, cfg]) => ({
       key,
       name: cfg.townName,
       label: `${cfg.townName}, ${cfg.stateAbbr}`,
@@ -121,7 +127,7 @@ export class TexasHillCountryComponent implements OnInit {
         'Lighting installation and retrofits',
         'Generator and backup power systems',
         'Energy audits and efficiency upgrades',
-        'Electrical consultations for renovations and new builds',
+        'Electrical for renovations and new builds',
       ],
     };
 

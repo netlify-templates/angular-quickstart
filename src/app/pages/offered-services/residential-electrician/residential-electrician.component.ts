@@ -66,12 +66,14 @@ export class ResidentialElectricianComponent implements OnInit {
    */
   private readonly phoneNumber = '8309285046';
 
-  serviceTitle = 'Residential Electrical Services';
-
+  serviceTitle = "ProVolt's Residential Electrical Services";
+  footerText =
+    'Tell us what’s going on and where you’re located — we’ll recommend the safest, most cost-effective next step.';
   hero = {
-    title: 'Residential Electrician Services in the Texas Hill Country',
+    title:
+      "ProVolt's Residential Electrical Services in the Texas Hill Country",
     subtitle:
-      'Safe, clean, code-compliant electrical work for Hill Country homes—repairs, upgrades, lighting, panels, smart home additions, and wiring for remodels and new construction.',
+      'Looking for a dependable residential electrician in Kerrville or the Texas Hill Country? ProVolt Electric helps homeowners with safe, code-compliant electrical repairs and upgrades across Kerrville, Ingram, Center Point, Comfort, Hunt, Fredericksburg, Boerne, Bandera, and Helotes. Whether you’re dealing with a breaker that keeps tripping, planning a remodel, or upgrading your panel for modern power demands, we’ll explain your options clearly and deliver clean, professional work.',
     trustLine:
       'Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers master-level electrical work for homes, businesses, and rural properties.',
     actionButtonText: 'Contact Our Residential Electrician Support',
@@ -180,125 +182,208 @@ export class ResidentialElectricianComponent implements OnInit {
 
   faqs: FaqItem[] = [
     {
-      question: 'Do you work on older homes in the Hill Country?',
+      question:
+        'What residential electrical services do you handle most often?',
       answer:
-        'Yes. We regularly upgrade older wiring, panels, and outlets to improve safety and support modern electrical demand.',
+        'Most calls are for troubleshooting (flickering lights, dead outlets, tripping breakers), panel and service upgrades, new circuits or dedicated circuits, lighting and ceiling fan installs, surge protection, and safety upgrades like GFCI/AFCI protection.',
     },
     {
-      question: 'How do I know if I need a panel upgrade?',
+      question:
+        'Do you service older homes in Kerrville and the Texas Hill Country?',
       answer:
-        'Frequent breaker trips, hot panels, buzzing, signs of corrosion, or adding large loads (EV charger, workshop equipment, remodels) are common reasons to upgrade.',
+        'Yes. We regularly work on older Hill Country homes—upgrading panels, correcting unsafe wiring or connections, improving grounding, and bringing common issues up to modern safety expectations while keeping the work practical and code-compliant.',
     },
     {
-      question: 'Can you install GFCI outlets and modern safety protections?',
+      question:
+        'How can I tell if my home needs a panel upgrade or service upgrade?',
       answer:
-        'Yes. We install and correct GFCI/AFCI protection where appropriate and bring common safety issues up to modern standards.',
+        'Common signs include frequent breaker trips, warm/buzzing panels, visible corrosion, limited breaker space, or when you’re adding new loads like a remodel, kitchen appliances, HVAC changes, a shop/garage expansion, or additional circuits.',
     },
     {
-      question: 'Do you do lighting upgrades and dimmer/controls installs?',
+      question:
+        'Can you add new circuits or dedicated circuits for appliances and equipment?',
       answer:
-        'Yes. We install LED upgrades, dimmers, recessed lights, exterior/security lighting, and control solutions.',
+        'Yes. We install new circuits and dedicated circuits for higher-demand needs like kitchens, laundry rooms, garages/shops, HVAC equipment, and other appliances—helping prevent overloads and nuisance breaker trips.',
+    },
+    {
+      question:
+        'Do you install subpanels for garages, additions, or workshops?',
+      answer:
+        'Yes. Subpanels are a great option when you need more capacity in a specific area (garage, addition, workshop) and want cleaner circuit organization and easier future expansion.',
+    },
+    {
+      question:
+        'Do you handle indoor and outdoor lighting, ceiling fans, and switches/dimmers?',
+      answer:
+        'Yes. We install and upgrade recessed lighting, LED fixtures, motion/timer/dusk-to-dawn lighting, security lighting, ceiling fans, and switch/dimmer controls—including 3-way and 4-way switch setups.',
+    },
+    {
+      question:
+        'Do you install whole-home surge protection and safety protections like GFCI/AFCI?',
+      answer:
+        'Yes. We can add whole-home surge protection and update GFCI/AFCI protection where appropriate—especially in kitchens, bathrooms, garages, and outdoor areas—based on your home’s layout and needs.',
+    },
+    {
+      question: 'Do you pull permits and coordinate inspections when required?',
+      answer:
+        'Yes. When a permit is required for the scope of work, we can pull permits and coordinate with inspectors to keep the job compliant and moving smoothly.',
+    },
+    {
+      question: 'Can you help with Cat6 wiring and home Wi-Fi improvements?',
+      answer:
+        'Yes. We install and test Cat6 runs and can help with mesh Wi-Fi placement and troubleshooting to improve coverage—especially in larger homes, garages, and detached spaces.',
+    },
+    {
+      question:
+        'What issues should I treat as urgent and call about right away?',
+      answer:
+        'Call right away if you notice burning smells, sparking, warm or buzzing outlets/panels, repeated breaker trips that won’t reset, or sudden partial power. These can indicate a safety hazard and should be checked promptly.',
     },
     {
       question: 'Do you handle new construction and remodel wiring?',
       answer:
         'Yes. We can wire additions and remodels to code, add dedicated circuits, and plan loads for future needs.',
     },
-    {
-      question: 'What counts as an electrical emergency?',
-      answer:
-        'Burning smells, sparking, hot outlets/panels, repeated breaker trips, or power loss are all reasons to call immediately.',
-    },
   ];
 
   services: ServiceItem[] = [
     {
-      title: 'Residential Electrical Services',
-      category: 'Residential',
-      icon: 'home',
-      description:
-        'Full-service residential electrical work—from panel upgrades and lighting installation to whole-home rewiring—done safely, efficiently, and up to code for Texas Hill Country homes.',
-      bullets: [
-        'Troubleshooting & diagnostics for flickering lights, tripped breakers, and dead outlets',
-        'Repairs & safety corrections by a licensed residential electrician',
-        'New construction & remodel wiring that meets current NEC standards',
-        'Ceiling fans, switches & outlets, smoke detectors, and indoor/outdoor lighting',
-      ],
-    },
-    {
-      title: 'Smart Home & Controls',
-      category: 'Residential',
-      icon: 'devices',
-      description:
-        'Smart home electrical solutions that add comfort, convenience, and energy savings throughout your home.',
-      bullets: [
-        'Smart switches, dimmers, and scene-based lighting control',
-        'Smart thermostats, sensors, and linked comfort controls',
-        'Wi-Fi / mesh-enabled panels and smart-ready wiring (where applicable)',
-        'Whole-home automation prep: dedicated circuits, wiring, and power',
-      ],
-    },
-    {
-      title: 'Electrical Troubleshooting & Repairs',
-      category: 'Both',
-      icon: 'troubleshoot',
-      description:
-        'Fast, thorough troubleshooting for electrical issues in homes, businesses, and rural properties across the Texas Hill Country.',
-      bullets: [
-        'Identify the cause of tripped breakers, hot spots, and nuisance shutdowns',
-        'Track down dead outlets, flickering lights, and intermittent power loss',
-        'Test and verify circuits, loads, and protective devices',
-        'Provide repair options, safety recommendations, and a clear path forward',
-      ],
-    },
-    {
       title: 'Panel & Service Upgrades',
-      category: 'Both',
+      category: 'Residential',
       icon: 'electrical_services',
       description:
-        'Modernize your electrical system for today’s loads and tomorrow’s needs with code-compliant panel and service upgrades.',
+        'Upgrade outdated or undersized panels and service equipment to improve safety, capacity, and long-term reliability for Hill Country homes.',
       bullets: [
-        'Panel upgrades & replacements for added capacity and safety',
-        'New circuits & subpanels for shops, additions, and new equipment',
-        'Whole-home and whole-facility surge protection for sensitive electronics',
-        'Load calculations & capacity planning for future growth',
+        'Breaker panel replacements and capacity upgrades',
+        'Load corrections and circuit rebalancing (as needed)',
+        'Service equipment upgrades where applicable',
+        'Clear recommendations for future-ready electrical capacity',
       ],
     },
     {
-      title: 'Lighting Design & Installation',
-      category: 'Both',
+      title: 'Troubleshooting & Electrical Repairs',
+      category: 'Residential',
+      icon: 'manage_search',
+      description:
+        'Find the root cause and fix common home electrical issues with a safety-first, explain-the-options approach.',
+      bullets: [
+        'Flickering or dimming lights and intermittent power',
+        'Dead outlets, partial power, and loose/failed connections',
+        'Breakers that trip repeatedly or circuits that overload',
+        'Circuit testing and verification (loads, protection, and continuity)',
+      ],
+    },
+    {
+      title: 'New Circuits, Subpanels & Dedicated Circuits',
+      category: 'Residential',
+      icon: 'device_hub',
+      description:
+        'Add power where you need it—new circuits, subpanels, and dedicated circuits for higher-demand home equipment.',
+      bullets: [
+        'New circuit additions for kitchens, laundry rooms, garages, and shops',
+        'Dedicated circuits for HVAC, appliances, and equipment',
+        'Subpanel installations for additions, garages, or workshops',
+        'Circuit planning to reduce nuisance trips and overloads',
+      ],
+    },
+    {
+      title: 'Lighting, Fans & Controls',
+      category: 'Residential',
       icon: 'lightbulb',
       description:
-        'Custom interior and exterior lighting design and installation that enhances comfort, security, and energy efficiency.',
+        'Comfortable, clean, and functional lighting and fixture installs—plus controls that make your home easier to live in.',
       bullets: [
-        'LED upgrades, dimming solutions, and lighting controls',
-        'Landscape & architectural lighting for curb appeal',
-        'Security & motion lighting for homes, shops, and businesses',
-        'Garage, shop, barn, and outdoor work-area lighting',
+        'Recessed lighting, fixture swaps, and LED upgrades',
+        'Ceiling fan installation and replacement',
+        '3-way/4-way switches, dimmers, and updated controls',
+        'Motion, timer, and dusk-to-dawn lighting options',
       ],
     },
     {
-      title: 'Safety Inspections & Code Compliance',
-      category: 'Both',
-      icon: 'verified',
+      title: 'Safety Upgrades & Surge Protection',
+      category: 'Residential',
+      icon: 'bolt',
       description:
-        'Comprehensive electrical safety inspections by a licensed electrician to help protect your family, property, or business.',
+        'Reduce risk and protect electronics with modern safety upgrades designed for real-world home electrical use.',
       bullets: [
-        'Pre-purchase home inspections and electrical system reviews',
-        'Code compliance assessments for residential and commercial properties',
-        'Insurance & safety reports and electrical load analysis',
-        'Thermal checks and visual inspections to identify hot spots and hazards',
+        'Whole-home surge protection installs',
+        'GFCI/AFCI protection upgrades where appropriate',
+        'Smoke/CO device replacements or wiring where applicable',
+        'Targeted safety improvements for older circuits and connections',
       ],
     },
     {
-      title: '24/7 Emergency Electrical Service',
-      category: 'Both',
-      icon: 'warning',
+      title: 'Electrical Inspections & Code Guidance',
+      category: 'Residential',
+      icon: 'fact_check',
       description:
-        'When something goes wrong, our emergency electricians respond quickly to make things safe and restore power.',
+        'Know what you’re working with—practical inspections and guidance to prioritize repairs and improvements.',
+      bullets: [
+        'Pre-purchase electrical inspections and system reviews',
+        'Hazard identification and remediation recommendations',
+        'Code-compliance guidance and upgrade planning',
+        'Documentation-ready findings and clear next steps',
+      ],
+    },
+    {
+      title: 'Low-Voltage, Internet & Wi-Fi',
+      category: 'Residential',
+      icon: 'router',
+      description:
+        'Improve coverage and reliability with structured cabling and connectivity support throughout your home.',
+      bullets: [
+        'Cat6 installs, terminations, and cable testing',
+        'Mesh Wi-Fi placement, setup, and troubleshooting',
+        'Network cleanup for better coverage and stability',
+        'Device/location planning for clean, future-friendly runs',
+      ],
+    },
+    {
+      title: 'Remodels, Additions & New Construction Wiring',
+      category: 'Residential',
+      icon: 'construction',
+      description:
+        'From remodels to additions, we install wiring that’s planned cleanly and built to current NEC requirements.',
+      bullets: [
+        'Remodel wiring updates and new circuit planning',
+        'Additions and expansions with properly sized circuits',
+        'Device/lighting layout support and rough-in planning',
+        'Final trim-out with clean installs and verified function',
+      ],
+    },
+    {
+      title: 'Outdoor Power & Trenching',
+      category: 'Residential',
+      icon: 'yard',
+      description:
+        'Bring reliable power outdoors—perfect for patios, workshops, detached garages, and outbuildings.',
+      bullets: [
+        'Outdoor receptacles and power runs to exterior areas',
+        'Trenching and conduit runs as needed',
+        'Power to detached garages, shops, and outbuildings',
+        'Outdoor-rated protection and weather-appropriate installs',
+      ],
+    },
+    {
+      title: 'Permits & Inspections Coordination',
+      category: 'Residential',
+      icon: 'assignment_turned_in',
+      description:
+        'We handle the paperwork side when it’s required—so your project stays straightforward and compliant.',
+      bullets: [
+        'Permits pulled when required',
+        'Coordination with inspectors when needed',
+        'Support working with local utility/service providers as applicable',
+        'Clear scope and documentation for smoother approvals',
+      ],
+    },
+    {
+      title: 'Storm & Weather-Related Electrical Damage Restoration',
+      category: 'Both',
+      icon: 'thunderstorm',
+      description: 'For storm, flood, or lightning-related electrical damage.',
       bullets: [
         'Power loss, tripped breakers, and partial outages',
-        'Burning smells, sparking outlets, and overheated panels',
         'Storm, flood, or lightning-related electrical damage',
         'Make-safe repairs, temporary solutions, and follow-up service planning',
       ],

@@ -117,6 +117,7 @@ export class SeoService {
     if (existing?.parentNode) existing.parentNode.removeChild(existing);
   }
 
+  // @Nathaniel I may be able to delete this method if we don't need it.
   removeJsonLdByPrefix(prefix: string): void {
     const scripts = Array.from(
       this.document.querySelectorAll<HTMLScriptElement>(

@@ -137,6 +137,10 @@
 
 .tp-section {
   width: 100%;
+
+  mat-card-content {
+    margin-left: 20px;
+  }
 }
 
 .tp-section--alt {
@@ -179,9 +183,19 @@
 }
 
 .tp-card .tp-section-intro {
-  margin: 0.75rem 0 1.25rem;
+  margin: 0.75rem 0 0;
   font-size: 0.95rem;
   color: var(--text-primary) !important;
+}
+
+.tp-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  border-color: var(--brand-yellow);
+  border-width: 3px;
+  margin-top: 20px;
 }
 
 .tp-tight {
@@ -194,6 +208,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
+  margin-left: 20px;
 }
 
 .tp-mini-title {
@@ -220,6 +235,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem 1.5rem;
+  margin-top: 10px;
 }
 
 .tp-service-item {
@@ -410,7 +426,7 @@
   }
 
   .tp-hero-right {
-    order: -1;
+    order: 1;
   }
 
   .tp-page {

@@ -65,7 +65,7 @@ export class ServicesOverviewComponent implements OnInit {
   private readonly phoneNumber = '8309285046';
 
   hero = {
-    title: 'Electrical Services in the Texas Hill Country',
+    title: "ProVolt's Electrical Services in the Texas Hill Country",
     subtitle:
       'Residential, commercial, and ranch & rural electrical work—done safely, cleanly, and to code. From troubleshooting and repairs to panel upgrades and lighting, ProVolt helps you protect what matters and keep power reliable.',
     trustLine:
@@ -270,10 +270,10 @@ export class ServicesOverviewComponent implements OnInit {
       category: 'RanchAndRural',
       icon: 'agriculture',
       description:
-        'Dependable ranch and rural electrical services for barns, wells, shops, and acreage properties across the Texas Hill Country.',
+        'Dependable ranch and rural electrical services for barns, shops, and acreage properties across the Texas Hill Country.',
       bullets: [
         'Barn & outbuilding wiring, lighting, and panel work',
-        'Well & pump circuits, controls, protection, and troubleshooting',
+        'Circuits troubleshooting',
         'Equipment circuits & receptacles for tools, compressors, and ag equipment',
         'Outdoor power distribution and trenching for gates, driveways, and remote structures',
       ],
@@ -285,7 +285,7 @@ export class ServicesOverviewComponent implements OnInit {
       description:
         'Fast, thorough troubleshooting for electrical issues in homes, businesses, and rural properties across the Texas Hill Country.',
       bullets: [
-        'Identify the cause of tripped breakers, hot spots, and nuisance shutdowns',
+        'Identify the cause of tripped breakers, overheated circuits, and nuisance shutdowns',
         'Track down dead outlets, flickering lights, and intermittent power loss',
         'Test and verify circuits, loads, and protective devices',
         'Provide repair options, safety recommendations, and a clear path forward',
@@ -305,16 +305,16 @@ export class ServicesOverviewComponent implements OnInit {
       ],
     },
     {
-      title: 'Lighting Design & Installation',
+      title: 'Lighting Upgrades & Installation',
       category: 'Both',
       icon: 'lightbulb',
       description:
-        'Custom interior and exterior lighting design and installation that enhances comfort, security, and energy efficiency.',
+        'Custom interior and exterior lighting installation that enhances comfort, security, and energy efficiency.',
       bullets: [
         'LED upgrades, dimming solutions, and lighting controls',
         'Landscape & architectural lighting for curb appeal',
         'Security & motion lighting for homes, shops, and businesses',
-        'Garage, shop, barn, and outdoor work-area lighting',
+        'Garage, shop, barn, and outdoor lighting',
       ],
     },
     {
@@ -327,7 +327,7 @@ export class ServicesOverviewComponent implements OnInit {
         'Pre-purchase home inspections and electrical system reviews',
         'Code compliance assessments for residential and commercial properties',
         'Insurance & safety reports and electrical load analysis',
-        'Thermal checks and visual inspections to identify hot spots and hazards',
+        'Thermal checks and visual inspections to identify overheated circuits and hazards',
       ],
     },
     {

@@ -62,11 +62,13 @@ export class RanchRuralElectricianComponent implements OnInit {
   private readonly phoneNumber = '8309285046';
 
   serviceTitle = 'Ranch & Rural Electrical Services';
-
+  footerText =
+    'Tell us about your property and what you’re powering — we’ll recommend the safest, most reliable approach.';
   hero = {
-    title: 'Ranch & Rural Electrician Services in the Texas Hill Country',
+    title:
+      "ProVolt's Ranch & Rural Electrical Services in the Texas Hill Country",
     subtitle:
-      'Dependable electrical work for acreage properties—barns, wells, pumps, shops, outdoor power, and long-run circuits. Built for reliability, safety, and real-world Hill Country conditions.',
+      'Need a dependable ranch and rural electrician in Kerrville and the Texas Hill Country? ProVolt Electric helps property owners across Kerrville, Ingram, Center Point, Comfort, Hunt, Fredericksburg, Boerne, Bandera, and Helotes power barns, shops, outbuildings, and remote structures with safe, code-compliant electrical work built for real-world loads. From long-run power and subpanels to equipment circuits and outdoor lighting, we focus on reliability, clean installs, and practical solutions that hold up over time.',
     trustLine:
       'Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers master-level electrical work for homes, businesses, and rural properties.',
     actionButtonText: 'Contact Our Electricians',
@@ -75,7 +77,6 @@ export class RanchRuralElectricianComponent implements OnInit {
   whoWeHelp: string[] = [
     'Ranch homes & acreage properties',
     'Barns, shops, and outbuildings',
-    'Wells, pumps, and water systems',
     'Gates, driveways, and outdoor power',
     'Equipment power & dedicated circuits',
     'Property managers & landowners',
@@ -84,13 +85,6 @@ export class RanchRuralElectricianComponent implements OnInit {
   // These are internal-link cards to future (or existing) detail pages.
   // You can stub these routes now and publish detail pages gradually.
   popularRanchRuralJobs: LinkCard[] = [
-    {
-      title: 'Well & Pump Circuits',
-      description:
-        'Reliable circuits, controls, protection, and troubleshooting for wells and pumps.',
-      icon: 'water',
-      path: '/services/well-pump-electrical',
-    },
     {
       title: 'Barn & Outbuilding Wiring',
       description:
@@ -113,7 +107,7 @@ export class RanchRuralElectricianComponent implements OnInit {
       path: '/services/electrical-panel-upgrade',
     },
     {
-      title: 'Lighting Design & Installation',
+      title: 'Lighting Upgrade and Installation',
       description:
         'Practical, bright lighting for barns, yards, and work zones.',
       icon: 'lightbulb',
@@ -128,8 +122,7 @@ export class RanchRuralElectricianComponent implements OnInit {
     },
     {
       title: 'Surge Protection',
-      description:
-        'Protect motors, pumps, and electronics from lightning and power events.',
+      description: 'Protect electronics from lightning and power events.',
       icon: 'flash_on',
       path: '/services/whole-home-surge-protection',
     },
@@ -178,62 +171,190 @@ export class RanchRuralElectricianComponent implements OnInit {
   faqs: FaqItem[] = [
     {
       question:
-        'Do you work on long runs to barns, gates, and remote structures?',
+        'What ranch and rural electrical services do you handle most often?',
       answer:
-        'Yes. We plan long runs carefully using proper wire sizing, voltage-drop considerations, and protection so your equipment stays reliable.',
+        'Most ranch and rural calls include wiring for barns/shops/outbuildings, power runs to detached structures, subpanels, dedicated equipment circuits, RV hookups (30/50 amp), outdoor lighting for safety, and troubleshooting for intermittent power or breaker trips.',
     },
     {
-      question: 'Can you help with well and pump electrical issues?',
+      question:
+        'Do you run power to barns, shops, gates, and other remote structures?',
       answer:
-        'Yes. We troubleshoot pump circuits and controls, verify protection devices, and correct wiring issues that cause nuisance trips or failures.',
+        'Yes. We plan long-distance power runs with proper sizing and protection so power stays reliable at the far end—especially for shops, barns, detached garages, and remote outbuildings.',
     },
     {
-      question: 'Do you install outdoor-rated outlets, lighting, and panels?',
+      question: 'Can you trench and install conduit for outdoor power runs?',
       answer:
-        'Yes. We use weather-rated materials and proper protection so outdoor power stays safe and durable.',
+        'Yes. When needed, we can coordinate trenching and install conduit and wiring to get safe, durable power to detached structures and exterior work areas.',
+    },
+    {
+      question: 'Do you install subpanels in barns or shops?',
+      answer:
+        'Yes. Subpanels are a great way to add capacity and keep circuits organized in a barn, shop, or detached building—making troubleshooting and future expansion much easier.',
+    },
+    {
+      question:
+        'Can you add dedicated circuits for pumps, compressors, or welders?',
+      answer:
+        'Yes. We install properly sized dedicated circuits for higher-demand equipment to reduce nuisance trips, overheating, and voltage drop issues—especially common on rural properties.',
+    },
+    {
+      question: 'Do you install RV hookups and outdoor receptacles?',
+      answer:
+        'Yes. We install 30-amp and 50-amp RV hookups and properly protected outdoor receptacles, with placement planned for safe, convenient access.',
     },
     {
       question: 'What causes breakers to trip on rural properties?',
       answer:
-        'Common causes include motor start-up loads, undersized wiring, failing breakers, moisture intrusion, loose connections, or equipment faults. We diagnose and fix the root issue.',
+        'Common causes include motor start-up loads, undersized wiring for long runs, moisture intrusion, loose connections, failing breakers, or equipment faults. We diagnose the root issue and recommend the safest, most practical fix.',
     },
     {
-      question: 'Can you upgrade my service for a shop or new equipment?',
+      question: 'Do you install outdoor lighting for security and usability?',
       answer:
-        'Yes. We do panel/service upgrades, add subpanels, and install dedicated circuits sized for your current and future loads.',
+        'Yes. We install area lighting, security lighting, and LED upgrades with options like motion sensors, timers, and dusk-to-dawn controls for barns, shops, driveways, and entry points.',
     },
     {
-      question: 'Do you provide safety inspections for rural properties?',
+      question:
+        'Can you upgrade my panel or service for a shop expansion or new equipment?',
       answer:
-        'Yes. We can identify hazards, check grounding/bonding, inspect panels, and recommend corrections to improve safety and reliability.',
+        'Yes. We can upgrade panels/service equipment where appropriate, add subpanels, and plan circuits to support current needs and future expansion without constant breaker trips.',
+    },
+    {
+      question:
+        'Do you offer safety inspections for ranch and rural properties?',
+      answer:
+        'Yes. We can inspect panels, check grounding/bonding, identify common hazards, and provide a prioritized plan for corrections to improve safety and long-term reliability.',
     },
   ];
 
   services: ServiceItem[] = [
     {
-      title: 'Ranch & Rural Electrical Services',
+      title: 'Shop, Barn & Outbuilding Wiring',
       category: 'RanchAndRural',
-      icon: 'agriculture',
+      icon: 'warehouse',
       description:
-        'Dependable ranch and rural electrical services for barns, wells, shops, and acreage properties across the Texas Hill Country.',
+        'Power and wiring for barns, metal buildings, shops, and outbuildings—installed cleanly for reliability and everyday use.',
       bullets: [
-        'Barn & outbuilding wiring, lighting, and panel work',
-        'Well & pump circuits, controls, protection, and troubleshooting',
-        'Equipment circuits & receptacles for tools, compressors, and ag equipment',
-        'Outdoor power distribution and trenching for gates, driveways, and remote structures',
+        'Wiring for barns, tack rooms, storage buildings, and workshops',
+        'New circuits and device installs for practical layouts',
+        'Safe, durable installs designed for real workloads',
+        'Clear planning for expansions and future additions',
       ],
     },
     {
-      title: 'Electrical Troubleshooting & Repairs',
-      category: 'Both',
-      icon: 'troubleshoot',
+      title: 'Outdoor Power & Long-Run Circuits',
+      category: 'RanchAndRural',
+      icon: 'cable',
       description:
-        'Fast, thorough troubleshooting for electrical issues in homes, businesses, and rural properties across the Texas Hill Country.',
+        'Reliable power to detached structures with planning that accounts for distance, load, and long-term performance.',
       bullets: [
-        'Identify the cause of tripped breakers, hot spots, and nuisance shutdowns',
-        'Track down dead outlets, flickering lights, and intermittent power loss',
-        'Test and verify circuits, loads, and protective devices',
-        'Provide repair options, safety recommendations, and a clear path forward',
+        'Trenching and conduit runs to detached structures (as needed)',
+        'Voltage-drop aware planning for longer distances',
+        'Outdoor-rated protection and weather-appropriate installs',
+        'Power distribution planning across acreage properties',
+      ],
+    },
+    {
+      title: 'Subpanels for Outbuildings',
+      category: 'RanchAndRural',
+      icon: 'account_tree',
+      description:
+        'Add subpanels to barns and shops for better capacity, cleaner organization, and easier future upgrades.',
+      bullets: [
+        'Subpanels for barns, shops, and detached garages',
+        'Cleaner circuit organization for servicing and troubleshooting',
+        'Capacity expansion for added equipment and lighting',
+        'Upgrade planning to keep the system scalable',
+      ],
+    },
+    {
+      title: 'Dedicated Equipment Circuits',
+      category: 'RanchAndRural',
+      icon: 'precision_manufacturing',
+      description:
+        'Properly sized dedicated circuits for higher-demand equipment—built to reduce nuisance trips and overheating.',
+      bullets: [
+        'Circuits for compressors, and welders',
+        'Higher-demand equipment receptacles and connections',
+        'Circuit sizing and planning to reduce overloads',
+        'Safer operation for equipment that runs hard and often',
+      ],
+    },
+    {
+      title: 'RV Hookups & Outdoor Receptacles',
+      category: 'RanchAndRural',
+      icon: 'rv_hookup',
+      description:
+        'RV power and properly protected outdoor receptacles for ranch properties, guests, and seasonal use.',
+      bullets: [
+        '30-amp and 50-amp RV hookups',
+        'Outdoor receptacles with appropriate protection',
+        'Placement planning for access and convenience',
+        'Clean installs designed for dependable connections',
+      ],
+    },
+    {
+      title: 'Lighting for Safety & Usability',
+      category: 'RanchAndRural',
+      icon: 'lightbulb',
+      description:
+        'Practical lighting upgrades that improve visibility, safety, and security around shops, barns, and property access points.',
+      bullets: [
+        'Area lighting, security lighting, and LED upgrades',
+        'Motion, timer, and dusk-to-dawn control options',
+        'Barn and shop lighting for task visibility',
+        'Exterior lighting for entries, driveways, and work zones',
+      ],
+    },
+    {
+      title: 'Troubleshooting & Repairs',
+      category: 'RanchAndRural',
+      icon: 'manage_search',
+      description:
+        'Track down intermittent issues and restore reliable power across homes, shops, and outbuildings.',
+      bullets: [
+        'Intermittent power, breaker trips, and partial outages',
+        'Failed outlets/fixtures and connection issues',
+        'Testing and verification of circuits, loads, and protection',
+        'Practical repair options and safety recommendations',
+      ],
+    },
+    {
+      title: 'Surge Protection & Safety Improvements',
+      category: 'RanchAndRural',
+      icon: 'bolt',
+      description:
+        'Protect equipment and improve safety with surge protection and targeted upgrades where they matter most.',
+      bullets: [
+        'Whole-building surge protection installs',
+        'GFCI/AFCI upgrades where appropriate',
+        'Safety corrections for older/overworked circuits',
+        'Focused improvements to reduce repeat issues',
+      ],
+    },
+    {
+      title: 'Inspections & Code Compliance Guidance',
+      category: 'RanchAndRural',
+      icon: 'fact_check',
+      description:
+        'Clear, actionable inspections to identify hazards, prioritize fixes, and map a realistic upgrade plan.',
+      bullets: [
+        'Electrical safety inspections for rural properties',
+        'Hazard identification and remediation recommendations',
+        'Code-compliance guidance for upgrades and expansions',
+        'Documentation-ready findings and clear next steps',
+      ],
+    },
+    {
+      title: 'Permits & Inspections Coordination',
+      category: 'RanchAndRural',
+      icon: 'assignment_turned_in',
+      description:
+        'We handle permitting and inspection coordination when required so your project stays compliant and straightforward.',
+      bullets: [
+        'Permits pulled when required',
+        'Inspector coordination when needed',
+        'Support working with local utility/service providers as applicable',
+        'Clear scope and documentation for smoother approvals',
       ],
     },
     {
@@ -241,51 +362,25 @@ export class RanchRuralElectricianComponent implements OnInit {
       category: 'Both',
       icon: 'electrical_services',
       description:
-        'Modernize your electrical system for today’s loads and tomorrow’s needs with code-compliant panel and service upgrades.',
+        'Modernize panels and service equipment to support heavier ranch loads and improve overall reliability.',
       bullets: [
-        'Panel upgrades & replacements for added capacity and safety',
-        'New circuits & subpanels for shops, additions, and new equipment',
-        'Whole-home and whole-facility surge protection for sensitive electronics',
-        'Load calculations & capacity planning for future growth',
+        'Panel replacements and capacity upgrades',
+        'Load corrections and circuit rebalancing (as needed)',
+        'Service equipment upgrades where applicable',
+        'Clear planning for future equipment and expansion',
       ],
     },
     {
-      title: 'Lighting Design & Installation',
+      title: 'Safety Make-Safe: Sparking, Heat, or Burning Smells',
       category: 'Both',
-      icon: 'lightbulb',
+      icon: 'report',
       description:
-        'Custom interior and exterior lighting design and installation that enhances comfort, security, and energy efficiency.',
+        'If something feels unsafe—sparking, heat, or burning smells—we help make the situation safe and outline the next steps.',
       bullets: [
-        'LED upgrades, dimming solutions, and lighting controls',
-        'Landscape & architectural lighting for curb appeal',
-        'Security & motion lighting for homes, shops, and businesses',
-        'Garage, shop, barn, and outdoor work-area lighting',
-      ],
-    },
-    {
-      title: 'Safety Inspections & Code Compliance',
-      category: 'Both',
-      icon: 'verified',
-      description:
-        'Comprehensive electrical safety inspections by a licensed electrician to help protect your family, property, or business.',
-      bullets: [
-        'Pre-purchase home inspections and electrical system reviews',
-        'Code compliance assessments for residential and commercial properties',
-        'Insurance & safety reports and electrical load analysis',
-        'Thermal checks and visual inspections to identify hot spots and hazards',
-      ],
-    },
-    {
-      title: '24/7 Emergency Electrical Service',
-      category: 'Both',
-      icon: 'warning',
-      description:
-        'When something goes wrong, our emergency electricians respond quickly to make things safe and restore power.',
-      bullets: [
-        'Power loss, tripped breakers, and partial outages',
-        'Burning smells, sparking outlets, and overheated panels',
-        'Storm, flood, or lightning-related electrical damage',
-        'Make-safe repairs, temporary solutions, and follow-up service planning',
+        'Sparking outlets, burning smells, warm/buzzing panels',
+        'Repeated breaker trips that won’t reset or keep returning',
+        'Make-safe repairs and clear follow-up repair planning',
+        'Practical guidance to prevent repeat hazards',
       ],
     },
   ];
@@ -308,7 +403,7 @@ export class RanchRuralElectricianComponent implements OnInit {
       title:
         'Ranch & Rural Electrician | Texas Hill Country | ProVolt Electrical Services',
       description:
-        'Ranch and rural electrical services for barns, wells, shops, outdoor power, trenching, and upgrades across the Texas Hill Country. Licensed & insured. Call now.',
+        'Ranch and rural electrical services for barns, shops, outdoor power, trenching, and upgrades across the Texas Hill Country. Licensed & insured. Call now.',
       url: 'https://provoltelectricalservices.com/electrical-services/ranch-rural-electrician',
       type: 'website',
       robots: 'index,follow',
@@ -322,7 +417,7 @@ export class RanchRuralElectricianComponent implements OnInit {
       '@type': 'Service',
       name: 'Ranch & Rural Electrical Services',
       serviceType:
-        'Ranch and rural electrical: barns, shops, wells, gates, long‑distance feeders, and weather‑ready installs',
+        'Ranch and rural electrical: barns, shops, gates, long‑distance feeders, and weather‑ready installs',
       provider: {
         '@type': 'Electrician',
         name: 'ProVolt Electric',

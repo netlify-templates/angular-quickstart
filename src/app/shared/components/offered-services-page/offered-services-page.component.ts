@@ -75,6 +75,8 @@ export class OfferedServicesPageComponent {
   @Input() processSteps: ProcessStep[] = [];
   @Input() faqs: FaqItem[] = [];
 
+  @Input() footerText!: string;
+
   @Output() callNow = new EventEmitter<void>();
 
   onCallNow() {

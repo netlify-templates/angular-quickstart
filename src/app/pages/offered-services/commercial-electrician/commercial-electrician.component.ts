@@ -65,12 +65,13 @@ export class CommercialElectricianComponent implements OnInit {
   private readonly phoneNumber = '8309552909';
 
   serviceTitle = 'Commercial Electrical Services';
-
+  footerText =
+    'Share your location and scope — we’ll provide a clear plan and quote for your project.';
   hero = {
-    title: 'Commercial Electrical Services in the Texas Hill Country',
+    title: "ProVolt's Commercial Electrical Services in the Texas Hill Country",
     // cardTitle: 'ProVolt Commercial Electrical Services Overview',
     subtitle:
-      'Keep your business powered, safe, and code-compliant. ProVolt delivers fast response, clean workmanship, and master-level electrical solutions for offices, retail, restaurants, shops, and facilities across the Hill Country.',
+      'Need a reliable commercial electrician in Kerrville or the Texas Hill Country? We support businesses and property managers throughout Kerrville, Fredericksburg, Boerne, Bandera, Helotes, Comfort, Center Point, Ingram, and Hunt with organized, code-compliant electrical work designed to reduce downtime. From tenant build-outs and lighting upgrades to troubleshooting and equipment circuits, we keep your space powered, safe, and ready for operations.',
     trustLine:
       'Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers master-level electrical work for homes, businesses, and rural properties.',
     actionButtonText: 'Request a Licensed Electrician',
@@ -180,63 +181,100 @@ export class CommercialElectricianComponent implements OnInit {
 
   faqs: FaqItem[] = [
     {
-      question: 'Do you offer after-hours or weekend service?',
+      question: 'What commercial electrical services do you handle most often?',
       answer:
-        'Yes. For many commercial clients we can schedule after-hours work to reduce downtime and disruption.',
+        'Most commercial calls involve troubleshooting power or lighting issues, tenant build-outs/finish-outs, dedicated equipment circuits, panel/service upgrades, LED lighting upgrades, exterior/security lighting, and code-compliance guidance.',
     },
     {
-      question: 'Can you handle tenant build-outs and coordinate with a GC?',
+      question:
+        'Can you coordinate with our general contractor, property manager, or facilities team?',
       answer:
-        'Yes. We can help plan circuits and lighting, complete rough-in and trim-out, and coordinate with general contractors and inspectors.',
+        'Yes. We regularly coordinate schedules, site access, scopes, and punch lists with GCs, property managers, and facilities teams to keep work organized and minimize disruption.',
     },
     {
-      question: 'Do you pull permits and ensure code compliance?',
+      question:
+        'Do you handle tenant build-outs and finish-outs from rough-in through trim-out?',
       answer:
-        'When permits are required, we can guide the process and complete work to code so you’re protected and inspection-ready.',
+        'Yes. We can plan circuits and lighting for layout changes, complete rough-in and trim-out, and support inspection readiness with clean, code-compliant installs.',
+    },
+    {
+      question:
+        'Can you schedule work after-hours or on weekends to reduce downtime?',
+      answer:
+        'Often, yes. Many commercial projects can be scheduled outside peak business hours to limit interruptions—depending on scope and access requirements.',
     },
     {
       question: 'Why do breakers keep tripping in a commercial space?',
       answer:
-        'Common causes include overloaded circuits, failing breakers, loose connections, equipment faults, or mis-sized circuits. We diagnose and correct the root issue.',
+        'Common causes include overloaded circuits, loose connections, failing breakers, equipment faults, or circuits that were undersized for the load. We diagnose the root cause and recommend the safest, most practical fix.',
     },
     {
-      question: 'Can you upgrade us to LED and add lighting controls?',
+      question:
+        'Can you add dedicated circuits for equipment or new workstations?',
       answer:
-        'Yes. We install LED upgrades, occupancy sensors, dimming, and other controls to improve light quality and reduce energy waste.',
+        'Yes. We install properly sized dedicated circuits for commercial equipment and expansions—helping prevent nuisance trips, overheating, and productivity-impacting interruptions.',
     },
     {
-      question: 'How fast can you respond to outages or partial power loss?',
+      question: 'Do you upgrade commercial lighting to LED and add controls?',
       answer:
-        'Call us and we’ll triage urgency and availability right away—especially for safety hazards or business-impacting power loss.',
+        'Yes. We install LED lighting upgrades and control options like occupancy sensors, timers, and scheduling where appropriate to improve light quality and reduce energy waste.',
+    },
+    {
+      question: 'Do you pull permits and help with inspections when required?',
+      answer:
+        'Yes. When a permit is required for the scope of work, we can pull permits and coordinate with inspectors to keep your project compliant and moving smoothly.',
+    },
+    {
+      question: 'Can you improve exterior lighting for safety and curb appeal?',
+      answer:
+        'Yes. We install and upgrade exterior, security, architectural, and pathway lighting to improve visibility, customer safety, and the professional appearance of your property.',
+    },
+    {
+      question:
+        'How do you handle outages or partial power loss in a business?',
+      answer:
+        'Call us and we’ll triage the situation quickly. We’ll prioritize safety hazards first, then isolate the cause of the outage/partial power and outline the fastest path to restore reliable operation.',
     },
   ];
 
   services: ServiceItem[] = [
     {
-      title: 'Commercial Electrical Services',
+      title: 'Tenant Build-Outs & Finish-Out Electrical',
       category: 'Commercial',
-      icon: 'apartment',
+      icon: 'storefront',
       description:
-        'Reliable commercial electrical services to keep your shop, office, or facility running safely, efficiently, and in compliance with electrical code.',
+        'Electrical planning and installation for tenant improvements—new circuits, layout changes, and lighting updates built for code compliance and smooth inspections.',
       bullets: [
-        'Troubleshooting & diagnostics for circuits, equipment, and lighting',
-        'Tenant build-outs, improvements, and new commercial circuits',
-        'Code compliance upgrades, inspections, and violation corrections',
-        'Lighting retrofits, controls, and energy-efficient LED upgrades',
-        'Emergency & scheduled repairs to reduce business downtime',
+        'New circuits and equipment feeds for build-outs and remodels',
+        'Lighting updates and control changes to match new layouts',
+        'Code compliance coordination for commercial spaces',
+        'Clean documentation and a clear scope from rough-in to trim-out',
       ],
     },
     {
-      title: 'Electrical Troubleshooting & Repairs',
-      category: 'Both',
-      icon: 'troubleshoot',
+      title: 'Commercial Troubleshooting & Repairs',
+      category: 'Commercial',
+      icon: 'manage_search',
       description:
-        'Fast, thorough troubleshooting for electrical issues in homes, businesses, and rural properties across the Texas Hill Country.',
+        'Fast, systematic troubleshooting for power issues, lighting failures, and equipment-related electrical problems to keep operations moving.',
       bullets: [
-        'Identify the cause of tripped breakers, hot spots, and nuisance shutdowns',
-        'Track down dead outlets, flickering lights, and intermittent power loss',
-        'Test and verify circuits, loads, and protective devices',
-        'Provide repair options, safety recommendations, and a clear path forward',
+        'Power loss, intermittent outages, and nuisance breaker trips',
+        'Lighting failures, control issues, and circuit interruptions',
+        'Testing and verification of circuits, loads, and protective devices',
+        'Practical repair options and safety recommendations',
+      ],
+    },
+    {
+      title: 'Dedicated Equipment Circuits & Load Planning',
+      category: 'Commercial',
+      icon: 'precision_manufacturing',
+      description:
+        'Properly sized circuits and capacity planning for commercial loads—helping reduce downtime, trips, and overheating issues.',
+      bullets: [
+        'Dedicated circuits for critical equipment and higher-demand loads',
+        'Circuit sizing and planning to reduce overloads and nuisance trips',
+        'Capacity checks to support expansions and added equipment',
+        'Better organization for easier servicing and future upgrades',
       ],
     },
     {
@@ -244,51 +282,129 @@ export class CommercialElectricianComponent implements OnInit {
       category: 'Both',
       icon: 'electrical_services',
       description:
-        'Modernize your electrical system for today’s loads and tomorrow’s needs with code-compliant panel and service upgrades.',
+        'Modernize panels and service equipment for safer operation, better capacity, and long-term reliability in homes and commercial spaces.',
       bullets: [
-        'Panel upgrades & replacements for added capacity and safety',
-        'New circuits & subpanels for shops, additions, and new equipment',
-        'Whole-home and whole-facility surge protection for sensitive electronics',
-        'Load calculations & capacity planning for future growth',
+        'Panel replacements and capacity upgrades',
+        'Load corrections and circuit rebalancing (as needed)',
+        'Service equipment upgrades where applicable',
+        'Clear recommendations for future growth and new loads',
       ],
     },
     {
-      title: 'Lighting Design & Installation',
+      title: 'Lighting Upgrades & Installation',
       category: 'Both',
       icon: 'lightbulb',
       description:
-        'Custom interior and exterior lighting design and installation that enhances comfort, security, and energy efficiency.',
+        'Interior and exterior lighting upgrades that improve visibility, safety, and energy efficiency—planned for real-world use.',
       bullets: [
-        'LED upgrades, dimming solutions, and lighting controls',
-        'Landscape & architectural lighting for curb appeal',
-        'Security & motion lighting for homes, shops, and businesses',
-        'Garage, shop, barn, and outdoor work-area lighting',
+        'LED lighting upgrades and lighting controls',
+        'Security, motion, timer, and dusk-to-dawn lighting options',
+        'Interior lighting updates for work areas and common spaces',
+        'Exterior lighting to improve safety and curb appeal',
+      ],
+    },
+    {
+      title: 'Exterior Lighting for Safety & Curb Appeal',
+      category: 'Commercial',
+      icon: 'holiday_village',
+      description:
+        'Professional exterior lighting installs to improve safety, visibility, and the look of your business after dark.',
+      bullets: [
+        'Security lighting for entries, lots, and perimeter areas',
+        'Architectural lighting to highlight signage and features',
+        'Landscape lighting for walkways and customer areas',
+        'Controls for scheduling, sensors, and reliable operation',
       ],
     },
     {
       title: 'Safety Inspections & Code Compliance',
       category: 'Both',
-      icon: 'verified',
+      icon: 'fact_check',
       description:
-        'Comprehensive electrical safety inspections by a licensed electrician to help protect your family, property, or business.',
+        'Clear, actionable inspections and code guidance to identify hazards, prioritize fixes, and support compliant upgrades.',
       bullets: [
-        'Pre-purchase home inspections and electrical system reviews',
-        'Code compliance assessments for residential and commercial properties',
-        'Insurance & safety reports and electrical load analysis',
-        'Thermal checks and visual inspections to identify hot spots and hazards',
+        'Electrical safety inspections and system reviews',
+        'Code-compliance guidance and upgrade planning',
+        'Hazard identification with practical remediation steps',
+        'Documentation-ready findings and clear next steps',
       ],
     },
     {
-      title: '24/7 Emergency Electrical Service',
-      category: 'Both',
-      icon: 'warning',
+      title: 'Planned Maintenance & Scheduled Service',
+      category: 'Commercial',
+      icon: 'event_available',
       description:
-        'When something goes wrong, our emergency electricians respond quickly to make things safe and restore power.',
+        'Preventive electrical service to reduce downtime—addressing small issues before they become bigger interruptions.',
       bullets: [
-        'Power loss, tripped breakers, and partial outages',
-        'Burning smells, sparking outlets, and overheated panels',
-        'Storm, flood, or lightning-related electrical damage',
-        'Make-safe repairs, temporary solutions, and follow-up service planning',
+        'Planned service visits for troubleshooting and corrective work',
+        'Targeted repairs to improve reliability and reduce repeat issues',
+        'Lighting and control checks for consistent operation',
+        'Prioritized recommendations for phased upgrades',
+      ],
+    },
+    {
+      title: 'New Circuits, Subpanels & Dedicated Circuits',
+      category: 'Both',
+      icon: 'device_hub',
+      description:
+        'Add capacity and expand safely—new circuits, subpanels, and dedicated circuits for new loads and better performance.',
+      bullets: [
+        'New circuit additions for expansions and added equipment',
+        'Subpanel installations for better organization and growth',
+        'Dedicated circuits to prevent overloads and nuisance trips',
+        'Circuit planning to support future improvements',
+      ],
+    },
+    {
+      title: 'Outdoor Power & Trenching',
+      category: 'Both',
+      icon: 'yard',
+      description:
+        'Reliable outdoor power installs and power runs to detached areas—planned for durability and safe operation.',
+      bullets: [
+        'Outdoor receptacles and power to exterior work areas',
+        'Trenching and conduit runs as needed',
+        'Power to detached garages, workshops, and outbuildings',
+        'Outdoor-rated protection and weather-appropriate installs',
+      ],
+    },
+    {
+      title: 'Permits & Inspections Coordination',
+      category: 'Both',
+      icon: 'assignment_turned_in',
+      description:
+        'We handle permitting and inspection coordination when required to keep projects moving and compliant.',
+      bullets: [
+        'Permits pulled when required',
+        'Inspector coordination when needed',
+        'Support working with local utility/service providers as applicable',
+        'Clear scope and documentation for smoother approvals',
+      ],
+    },
+    {
+      title: 'Low-Voltage & Connectivity',
+      category: 'Both',
+      icon: 'router',
+      description:
+        'Structured cabling and connectivity support for cleaner installs and more reliable performance in homes and businesses.',
+      bullets: [
+        'Cat6 installs, terminations, and cable testing',
+        'Mesh Wi-Fi setup support and troubleshooting',
+        'Better coverage planning for larger buildings and detached areas',
+        'Clean routing and labeling for easier maintenance',
+      ],
+    },
+    {
+      title: 'Fire Hazards & Electrical Safety Solutions',
+      category: 'Both',
+      icon: 'report',
+      description:
+        'If you’re seeing sparking, smelling something burning, or a panel/outlet feels hot, we help make the situation safe and map the next steps.',
+      bullets: [
+        'Sparking outlets, burning smells, warm/buzzing panels',
+        'Repeated breaker trips that won’t reset or keep returning',
+        'Make-safe repairs and clear follow-up repair planning',
+        'Practical guidance to prevent repeat hazards',
       ],
     },
   ];

@@ -30,9 +30,6 @@ import {
 export class ElectricianKerrvilleTxComponent implements OnInit, OnDestroy {
   config: TownPageConfig = TOWN_CONFIGS['kerrville'];
 
-  // Prefix used to cleanup all JSON-LD from this page
-  private readonly jsonLdPrefix = 'json-ld-town-kerrville-';
-
   constructor(private seo: SeoService) {}
 
   ngOnInit(): void {
@@ -47,17 +44,6 @@ export class ElectricianKerrvilleTxComponent implements OnInit, OnDestroy {
       type: 'website',
       robots: seoConfig.robots,
     });
-
-    // Preferred: multiple scripts
-    if (seoConfig.jsonLdScripts?.length) {
-      seoConfig.jsonLdScripts.forEach((s) => this.seo.setJsonLd(s.id, s.data));
-      return;
-    }
-
-    // Back-compat: single script
-    if (seoConfig.jsonLd && seoConfig.jsonLdId) {
-      this.seo.setJsonLd(seoConfig.jsonLdId, seoConfig.jsonLd);
-    }
   }
 
   ngOnDestroy(): void {
@@ -65,7 +51,8 @@ export class ElectricianKerrvilleTxComponent implements OnInit, OnDestroy {
     // this.seo.removeJsonLdByPrefix(this.jsonLdPrefix);
 
     // Otherwise, remove known IDs explicitly:
-    this.seo.removeJsonLd('json-ld-town-kerrville-electrician');
-    this.seo.removeJsonLd('json-ld-town-kerrville-breadcrumb');
+    this.seo.removeJsonLd(this.config.seo?.jsonLdId || '');
+    // @Nathaniel add breadcrumbs to jsonLD for SEO to all town pages
+    // this.seo.removeJsonLd('json-ld-town-kerrville-breadcrumb');
   }
 }

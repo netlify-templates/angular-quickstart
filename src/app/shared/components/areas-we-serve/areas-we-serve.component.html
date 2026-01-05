@@ -5,10 +5,10 @@
         Areas We Proudly Serve
       </h2>
       <p class="areas-served__subtitle" [ngClass]="{ 'left-align': leftAlign }">
-        Based in
-        <strong>{{ headquarters.city }}, {{ headquarters.state }}</strong
-        >, ProVolt Electric provides fast, professional electrical service
-        throughout the Texas Hill Country for homes, ranches, and businesses.
+        Based in Kerrville, TX, ProVolt Electric serves homes, ranches, and
+        businesses across the Texas Hill Country—including Bandera, Boerne,
+        Center Point, Comfort, Fredericksburg, Helotes, Hunt, Ingram, and
+        surrounding areas.
       </p>
     </header>
 
@@ -16,13 +16,6 @@
       <div class="areas-served__layout">
         <!-- Left: copy / primary area -->
         <div class="areas-served__info">
-          <div class="areas-served__badge">
-            <mat-icon>bolt</mat-icon>
-            <span class="areas-served__badge-text"
-              >Local • Licensed • Insured</span
-            >
-          </div>
-
           <div class="areas-served__headquarters">
             <div class="areas-served__headquarters-icon">
               <mat-icon>place</mat-icon>
@@ -47,22 +40,36 @@
           </p>
           <p class="areas-served__cta">
             Not sure if you’re in range?
-            <span class="areas-served__cta-highlight">Call (830) 955-2909</span>
+            <a
+              class="areas-served__cta-highlight"
+              href="tel:+18309552909"
+              aria-label="Call (830) 955-2909"
+              >Call (830) 955-2909</a
+            >
             and we’ll confirm your service area right away.
           </p>
         </div>
 
         <!-- Right: list of areas -->
-        <div class="areas-served__grid" aria-label="Surrounding service areas">
+        <div>
+          <p class="areas-served__headquarters-label">Nearby service areas:</p>
           <div
-            class="areas-served__pill"
-            *ngFor="let area of surroundingAreas"
-            (click)="onTownClick(area)"
+            class="areas-served__grid"
+            aria-label="Surrounding service areas"
           >
-            <mat-icon class="areas-served__pill-icon">location_on</mat-icon>
-            <div class="areas-served__pill-text">
-              <span class="areas-served__pill-city">{{ area.city }}, </span>
-              <span class="areas-served__pill-state">{{ area.state }}</span>
+            <div
+              class="areas-served__pill"
+              *ngFor="let area of surroundingAreas"
+              (click)="onTownClick(area)"
+            >
+              <mat-icon class="areas-served__pill-icon">location_on</mat-icon>
+              <div class="areas-served__pill-text">
+                <span class="areas-served__pill-city">{{ area.city }}, </span>
+                <span class="areas-served__pill-state">{{ area.state }}</span>
+              </div>
+              <mat-icon class="areas-served__pill-arrow"
+                >arrow_forward</mat-icon
+              >
             </div>
           </div>
         </div>

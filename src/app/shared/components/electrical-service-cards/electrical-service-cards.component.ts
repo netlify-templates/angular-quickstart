@@ -64,32 +64,17 @@ export class ElectricalServiceCardsComponent {
     {
       title: 'Ranch & Rural Electrical Services',
       description:
-        'Power solutions for barns, wells, shops, and acreage properties—including trenching, outdoor power, and equipment circuits across the Hill Country.',
+        'Power solutions for barns, shops, and acreage properties—including trenching, outdoor power, and equipment circuits across the Hill Country.',
       ctaLabel: 'View Ranch & Rural Services',
       routerLink: '/electrical-services/ranch-rural-electrician',
       icon: 'agriculture',
       bullets: [
         'Barn, shop & outbuilding wiring, panels & lighting',
-        'Well & pump circuits, controls, protection & repairs',
+        'Circuits & repairs',
         'Equipment circuits & receptacles for tools and ag machinery',
         'Trenching & long-run power to gates, arenas & remote structures',
         'Yard, driveway, security & motion lighting for rural properties',
         'Ranch and rural troubleshooting, safety checks & repairs',
-      ],
-    },
-    {
-      title: 'Contact a Licensed Master Electrician',
-      description:
-        'Speak with a licensed master electrician for residential, commercial, and ranch projects—fast quotes, 24/7 emergency electrical repair, and code‑compliant service across the Texas Hill Country.',
-      ctaLabel: 'Get an Electrical Quote',
-      routerLink: '/contact',
-      icon: 'contact_mail',
-      bullets: [
-        'Fast quotes for panel upgrades, service replacements & troubleshooting',
-        '24/7 emergency electrical repair—troubleshooting breakers, circuits & outages',
-        'NEC‑compliant wiring, safety inspections & code violation corrections',
-        'Lighting design, LED retrofits, & controls',
-        'Fully licensed & insured—serving the Texas Hill Country',
       ],
     },
   ];

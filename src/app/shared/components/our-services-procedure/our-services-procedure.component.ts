@@ -21,8 +21,8 @@ interface ServiceStep {
 export class OurServicesProcedureComponent {
   steps: ServiceStep[] = [
     {
-      title: 'Request a Quote',
-      shortTitle: 'Quote',
+      title: "Let's Connect",
+      shortTitle: 'Contact',
       description:
         'Share a few details about your home, business, or ranch project and we’ll review your electrical needs and goals.',
       icon: 'phone_in_talk',

@@ -237,14 +237,14 @@ export class HomeComponent implements OnInit {
               },
               {
                 '@type': 'OfferCatalog',
-                name: 'Lighting Design',
+                name: 'Lighting Upgrades',
                 itemListElement: [
                   {
                     '@type': 'Offer',
                     itemOffered: {
                       '@type': 'Service',
-                      name: 'Lighting Installation & Upgrades',
-                      url: `${baseUrl}/services/lighting-installation-upgrades`,
+                      name: 'Lighting Upgrades & Installation',
+                      url: `${baseUrl}/services/lighting-upgrades-installation`,
                     },
                   },
                 ],
