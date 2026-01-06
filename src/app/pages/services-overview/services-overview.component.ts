@@ -70,8 +70,7 @@ export class ServicesOverviewComponent implements OnInit {
       'Residential, commercial, and ranch & rural electrical work—done safely, cleanly, and to code. From troubleshooting and repairs to panel upgrades and lighting, ProVolt helps you protect what matters and keep power reliable.',
     trustLine:
       'Licensed, insured, and Texas-Hill-Country tough—ProVolt delivers master-level electrical work for homes, businesses, and rural properties.',
-    actionButtonText:
-      'Call now for Fast, Reliable, and Licensed Electrical Service',
+    actionButtonText: 'Call For Electrical Service',
   };
 
   whoWeHelp: string[] = [

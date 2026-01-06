@@ -31,22 +31,32 @@
   color: rgba(0, 0, 0, 0.78);
 }
 
-.about__chips {
+.hero__chips {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1.25rem;
 
-  mat-chip-row {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+  .chip-text {
+    display: flex;
+    justify-content: center;
+  }
 
+  mat-icon {
+    vertical-align: middle;
+  }
+
+  ::ng-deep .mdc-evolution-chip__text-label {
+    margin-top: 4px;
     mat-icon {
-      margin-right: 0.25rem;
-      font-size: 18px;
+      margin-top: 2px;
     }
   }
+}
+
+.cta-btn {
+  background-color: var(--brand-yellow);
+  color: var(--primary-text);
 }
 
 .about__hero-text button {
@@ -60,12 +70,14 @@
 }
 
 .about__hero-icon {
-  background: #1f2933;
-  color: #ffb300;
+  // background: #1f2933;
+  background: var(--brand-yellow-02);
+  color: var(--background);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
+  margin-right: 12px;
 
   mat-icon {
     font-size: 22px;
@@ -106,8 +118,8 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 
   &__icon {
-    background: #0f172a;
-    color: #4ade80;
+    background: var(--brand-yellow-02);
+    color: var(--background);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,8 +154,8 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 
   &__icon {
-    background: #111827;
-    color: #60a5fa;
+    background: var(--brand-yellow-02);
+    color: var(--background);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,8 +186,9 @@
 }
 
 .about__owner-icon {
-  background: #0b1120;
-  color: #f97316;
+  background: var(--brand-yellow-02);
+  color: var(--background-alt);
+  margin-right: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -198,7 +211,7 @@
   li::before {
     content: "•";
     margin-right: 0.4rem;
-    color: #f97316;
+    color: var(--brand-yellow-02);
   }
 }
 

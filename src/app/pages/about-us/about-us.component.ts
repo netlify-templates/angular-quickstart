@@ -42,6 +42,7 @@ interface TimelineItem {
   styleUrls: ['./about-us.component.scss'],
 })
 export class AboutUsComponent implements OnInit {
+  phoneNumber = '(830)-955-2909';
   stats: Stat[] = [
     {
       label: 'Years Serving the Hill Country',
@@ -107,9 +108,9 @@ export class AboutUsComponent implements OnInit {
     },
     {
       year: '2016–2020',
-      title: 'Industrial & Community Projects',
+      title: 'Commercial & Community Projects',
       description:
-        'The team completes work for local churches, gas stations, and research centers, earning a reputation for safety, professionalism, and reliability.',
+        'The team completes work for local churches, gas stations, and commercial entities, earning a reputation for safety, professionalism, and reliability.',
     },
     {
       year: 'Today',
@@ -144,12 +145,12 @@ export class AboutUsComponent implements OnInit {
     const jsonLdObject = {
       '@context': 'https://schema.org',
       '@type': 'Electrician',
-      name: 'ProVolt Electric',
-      alternateName: 'ProVolt Electrical Services',
+      name: 'ProVolt Electrical Services',
+      alternateName: 'ProVolt Electric',
       url: 'https://provoltelectricalservices.com',
       description:
-        'ProVolt Electric is a local, family-owned electrical service established in 2010. We provide fast, reliable residential, commercial, and industrial electrical solutions across Kerrville, Fredericksburg, and the Texas Hill Country.',
-      telephone: '+1-830-000-0000', // TODO: replace with real number
+        'ProVolt Electrical Services is a local, family-owned electrical service established in 2010. We provide fast, reliable residential, commercial, and industrial electrical solutions across Kerrville, Fredericksburg, and the Texas Hill Country.',
+      telephone: '+1-830-955-2909', // TODO: replace with real number
       foundingDate: '2010',
       founder: {
         '@type': 'Person',
@@ -185,5 +186,9 @@ export class AboutUsComponent implements OnInit {
 
     // This will inject <script id="json-ld-about-provolt"> into <head>
     this.seo.setJsonLd('json-ld-about-provolt', jsonLdObject);
+  }
+
+  onCallNow(): void {
+    window.location.href = `tel:${this.phoneNumber}`;
   }
 }

@@ -45,6 +45,8 @@ body {
 }
 
 #body {
+  background-color: var(--background);
+
   p,
   h1 {
     color: var(--text-primary);

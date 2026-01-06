@@ -4,7 +4,6 @@
   padding-left: 0;
   padding-right: 0;
   margin: 0 auto;
-  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -13,10 +12,13 @@
 .page-title {
   font-size: 2.25rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
   margin-top: 1.5rem;
   margin-bottom: 1.75rem;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
+  max-width: 80%;
+  line-height: 1.2;
 }
 
 /* HERO */
@@ -25,9 +27,11 @@
   grid-template-columns: 1.2fr 0.8fr;
   gap: 1.25rem;
   align-items: start;
-  margin: 0 24px;
 
   padding: 1.25rem;
+  margin-left: 12px;
+  margin-right: 12px;
+
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.06);
 
@@ -66,7 +70,7 @@
     color: var(--primary-text);
   }
 
-  button {
+  a {
     border-color: var(--brand-yellow);
     border-width: 3px;
   }
@@ -85,8 +89,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: 12px;
+  padding-right: 12px;
 
   h2 {
     margin: 0;
@@ -299,7 +303,7 @@
 }
 
 /* Responsive */
-@media (max-width: 899px) {
+@media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
 
@@ -317,5 +321,9 @@
 
   .our-services {
     padding-inline: 1rem;
+  }
+
+  .hero-icon {
+    display: none;
   }
 }

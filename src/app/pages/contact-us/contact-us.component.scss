@@ -1,5 +1,4 @@
 .contact-page {
-  max-width: 1100px;
   margin: 0 auto;
   padding: 3rem 1.5rem 4rem;
 }
@@ -23,7 +22,7 @@
     margin: 0 0 0.75rem;
 
     span {
-      color: #ffb300; // accent for "electrician"
+      color: var(--brand-yellow-02);
     }
   }
 
@@ -82,7 +81,7 @@
     font-size: 1.6rem;
     width: 1.6rem;
     height: 1.6rem;
-    color: #ffb300;
+    color: var(--brand-yellow-02);
     margin-top: 0.1rem;
   }
 
@@ -179,5 +178,11 @@
     font-size: 0.78rem;
     color: #7c7c7c;
     max-width: 420px;
+  }
+}
+
+@media (max-width: 900px) {
+  .contact-info-row > mat-icon {
+    display: none;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -14,8 +14,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
-
-// ⬇️ Update this import path to wherever your SeoService lives
 import { SeoService } from 'src/app/shared/services/seo.service';
 
 @Component({
@@ -35,11 +33,15 @@ import { SeoService } from 'src/app/shared/services/seo.service';
     MatChipsModule,
   ],
 })
-export class ContactUsComponent implements OnInit {
+export class ContactUsComponent implements OnInit, OnDestroy {
   contactForm: FormGroup;
 
-  readonly phoneNumber = '(830) 555-1234';
+  readonly phoneNumber = '(830) 955-2909';
+  readonly phoneNumber02 = '+1-830-955-2909';
+  // @Nathaniel TODO: update email
   readonly emailAddress = 'service@provoltelectricalservices.com';
+
+  private readonly jsonLdId = 'json-ld-contact';
 
   constructor(private fb: FormBuilder, private seo: SeoService) {
     this.contactForm = this.fb.group({
@@ -58,10 +60,8 @@ export class ContactUsComponent implements OnInit {
       description:
         'Need a licensed electrician in the Texas Hill Country? Contact ProVolt Electrical Services for fast, reliable electrical repairs, panel upgrades, lighting, EV chargers, and more in Fredericksburg, Kerrville, Boerne, Bandera, and surrounding areas.',
       type: 'website',
-      robots: 'index,follow',
     });
-
-    this.seo.setJsonLd('json-ld-contact', {
+    this.seo.setJsonLd(this.jsonLdId, {
       '@context': 'https://schema.org',
       '@type': 'ContactPage',
       name: 'Contact ProVolt Electrical Services',
@@ -72,7 +72,7 @@ export class ContactUsComponent implements OnInit {
         '@type': 'LocalBusiness',
         '@id': '#provolt-electrical',
         name: 'ProVolt Electrical Services',
-        telephone: '+1-830-555-1234',
+        telephone: this.phoneNumber02,
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Texas Hill Country',
@@ -84,13 +84,21 @@ export class ContactUsComponent implements OnInit {
           'Kerrville TX',
           'Boerne TX',
           'Bandera TX',
+          'Comfort TX',
+          'Center Point TX',
+          'Ingram TX',
+          'Hunt TX',
+          'Helotes TX',
           'Texas Hill Country',
         ],
+        slogan:
+          'Fast, reliable electrical repairs, panel upgrades, lighting, and more in Texas Hill Country',
         url: 'https://provoltelectricalservices.com',
       },
       potentialAction: {
         '@type': 'ContactAction',
-        target: [`tel:+18305551234`, `mailto:${this.emailAddress}`],
+        // target: [`tel:+18309552909`, `mailto:${this.emailAddress}`],
+        target: [`tel:+18309552909`],
       },
     });
   }
@@ -102,15 +110,16 @@ export class ContactUsComponent implements OnInit {
       : 'https://provoltelectricalservices.com/contact';
   }
 
-  onSubmit(): void {
-    if (this.contactForm.invalid) {
-      this.contactForm.markAllAsTouched();
-      return;
-    }
+  // onSubmit(): void {
+  //   if (this.contactForm.invalid) {
+  //     this.contactForm.markAllAsTouched();
+  //     return;
+  //   }
 
-    // TODO: Wire this up to your backend / email service (HTTP POST or 3rd-party form service).
-    console.log('Contact form submitted', this.contactForm.value);
+  //   // @Nathaniel TODO: Wire this up to your backend / email service (HTTP POST or 3rd-party form service).
+  //   // console.log('Contact form submitted', this.contactForm.value);
 
-    this.contactForm.reset();
+  ngOnDestroy(): void {
+    this.seo.removeJsonLd(this.jsonLdId);
   }
 }

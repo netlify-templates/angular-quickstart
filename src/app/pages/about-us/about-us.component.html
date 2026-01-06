@@ -7,26 +7,34 @@
         ProVolt Electric is a local, family-owned electrical service established
         in 2010 and proudly serving Kerrville, Fredericksburg, and the
         surrounding Texas Hill Country. We provide fast, reliable electrical
-        solutions for residential, commercial, and industrial clients—always
+        solutions for residential, commercial, and ranch & rural clients—always
         with safety, quality, and professionalism at the center of every job.
       </p>
 
-      <div class="about__chips">
-        <mat-chip-row color="primary" selected>
-          <mat-icon>bolt</mat-icon>
-          Residential · Commercial · Industrial
-        </mat-chip-row>
-        <mat-chip-row>
-          <mat-icon>location_on</mat-icon>
-          Kerrville • Fredericksburg • Hill Country
-        </mat-chip-row>
-        <mat-chip-row>
-          <mat-icon>verified</mat-icon>
-          Licensed · Bonded · Insured
-        </mat-chip-row>
+      <div class="hero__chips">
+        <mat-chip class="chip-text">
+          <mat-icon class="chip-icon" style="font-size: 18px; margin-right: 8px"
+            >verified</mat-icon
+          >
+          Licensed · Bonded · Insured</mat-chip
+        >
+        <mat-chip class="chip-text">
+          <mat-icon class="chip-icon" style="font-size: 18px; margin-right: 8px"
+            >bolt</mat-icon
+          >
+          Residential · Commercial · Ranch & Rural</mat-chip
+        >
+        <mat-chip class="chip-text">
+          <mat-icon class="chip-icon" style="font-size: 18px; margin-right: 8px"
+            >location_on</mat-icon
+          >
+          Kerrville • Fredericksburg • Hill Country</mat-chip
+        >
       </div>
-
-      <button mat-raised-button color="primary">Request a Free Estimate</button>
+      <button mat-flat-button class="cta-btn" (click)="onCallNow()">
+        <mat-icon>call</mat-icon>
+        Request a Free Estimate
+      </button>
     </div>
 
     <mat-card class="about__hero-card">
@@ -45,9 +53,9 @@
         <p>
           From fuses and breakers to panel replacements, new circuits, lighting
           installations, equipment hookups, remodeling, maintenance, new
-          construction, LED lighting retrofits, ceiling fan installs, and EV
-          charger installations—our team handles it all with the experience and
-          care your project deserves.
+          construction, LED lighting retrofits, and ceiling fan installs - our
+          team handles it all with the experience and care your project
+          deserves.
         </p>
       </mat-card-content>
     </mat-card>
@@ -145,7 +153,7 @@
             <li>Lighting installations & LED retrofit upgrades</li>
             <li>Equipment hookups for shops, gas stations & facilities</li>
             <li>Remodeling, maintenance, and new construction wiring</li>
-            <li>Ceiling fan installation and EV charger installation</li>
+            <li>Ceiling fan installation and WIFI installation</li>
           </ul>
         </mat-card-content>
       </mat-card>
@@ -157,8 +165,8 @@
     <h2>Our Story</h2>
     <p class="about__section-intro">
       From a one-truck operation to a trusted partner for homes, churches, gas
-      stations, and research centers, ProVolt Electric has grown by doing what’s
-      right for our customers and our community.
+      stations, and various commercial clients, ProVolt Electric has grown by
+      doing what’s right for our customers and our community.
     </p>
 
     <div class="about__timeline">
@@ -186,7 +194,10 @@
           estimate.
         </p>
       </div>
-      <button mat-raised-button color="primary">Call or Request Service</button>
+      <button mat-flat-button class="cta-btn" (click)="onCallNow()">
+        <mat-icon>call</mat-icon>
+        Call or Request Service
+      </button>
     </div>
   </footer>
 </section>

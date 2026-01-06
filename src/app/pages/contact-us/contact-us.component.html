@@ -11,7 +11,8 @@
     </p>
   </section>
 
-  <section class="contact-grid">
+  <!-- <section class="contact-grid"> -->
+  <section>
     <!-- Left: Contact Info -->
     <mat-card class="contact-card contact-card--info">
       <mat-card-header>
@@ -27,13 +28,9 @@
           <mat-icon aria-hidden="true">phone</mat-icon>
           <div>
             <div class="contact-info-label">Call or text</div>
-            <!-- <a
-              class="contact-info-value"
-              [href]="'tel:' + phoneNumber.replace(/[^0-9]/g, '')"
-            > -->
-            <a>
-              {{ phoneNumber }}
-            </a>
+            <a class="contact-info-value" [href]="'tel:' + phoneNumber">
+              {{ phoneNumber }}</a
+            >
           </div>
         </div>
 
@@ -51,10 +48,7 @@
           <mat-icon aria-hidden="true">schedule</mat-icon>
           <div>
             <div class="contact-info-label">Hours</div>
-            <div class="contact-info-value">
-              Mon – Fri: 8:00 AM – 5:00 PM<br />
-              24/7 emergency service available
-            </div>
+            <div class="contact-info-value">Mon – Fri: 8:00 AM – 5:00 PM</div>
           </div>
         </div>
 
@@ -77,20 +71,22 @@
           <mat-chip-set aria-label="Service areas">
             <mat-chip>Fredericksburg</mat-chip>
             <mat-chip>Kerrville</mat-chip>
+            <mat-chip>Center Point</mat-chip>
             <mat-chip>Boerne</mat-chip>
             <mat-chip>Bandera</mat-chip>
             <mat-chip>Comfort</mat-chip>
             <mat-chip>Helotes</mat-chip>
             <mat-chip>Ingram</mat-chip>
+            <mat-chip>Hunt</mat-chip>
           </mat-chip-set>
         </div>
       </mat-card-content>
     </mat-card>
 
     <!-- Right: Contact Form -->
-    <mat-card class="contact-card contact-card--form">
+    <!-- <mat-card class="contact-card contact-card--form">
       <mat-card-header>
-        <mat-card-title>Request service or a free estimate</mat-card-title>
+        <mat-card-title>Request service or an estimate</mat-card-title>
         <mat-card-subtitle>
           Tell us about your project or electrical issue and we’ll respond as
           soon as possible.
@@ -172,6 +168,6 @@
           </div>
         </form>
       </mat-card-content>
-    </mat-card>
+    </mat-card> -->
   </section>
 </div>
