@@ -24,8 +24,12 @@
 .footer-title {
   font-size: 1.1rem;
   font-weight: 600;
-  margin: 0 0 1.5rem;
   letter-spacing: 0.04em;
+  margin-bottom: 0;
+}
+
+.footer-spacer {
+  margin: 0 0 12px;
 }
 
 .footer-contact-item {
@@ -49,9 +53,8 @@
 .links-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
-  margin-bottom: 1.5rem;
 }
 
 .social-icons {
@@ -79,12 +82,12 @@
     transition: color 0.2s ease, transform 0.15s ease;
 
     &:hover {
-      color: #f5c15b;
+      color: var(--brand-yellow-02);
       transform: translateX(2px);
     }
 
     &.active-link {
-      color: #f5c15b;
+      color: var(--brand-yellow-02);
       font-weight: 500;
     }
   }

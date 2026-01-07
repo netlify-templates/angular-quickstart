@@ -66,13 +66,13 @@
   margin-top: 0.75rem;
 
   button {
-    background-color: var(--brand-yellow);
+    background-color: var(--brand-yellow-02);
     color: var(--primary-text);
   }
 
   /* FIX: this must be a class selector */
   .outlined-button {
-    border-color: var(--brand-yellow);
+    border-color: var(--brand-yellow-02);
     color: var(--brand-black);
     background: transparent;
   }
@@ -99,7 +99,7 @@
 }
 
 .tp-hero-avatar {
-  background: var(--brand-yellow);
+  background: var(--brand-yellow-02);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -148,7 +148,7 @@
 }
 
 .tp-card-avatar {
-  background: var(--brand-yellow);
+  background: var(--brand-yellow-02);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -164,7 +164,7 @@
 }
 
 .tp-card-avatar--accent mat-icon {
-  color: #f9a825;
+  color: var(--brand-yellow-02);
 }
 
 .tp-card mat-card-title {
@@ -188,7 +188,7 @@
   align-items: center;
   gap: 0.3rem;
   font-size: 0.85rem;
-  border-color: var(--brand-yellow);
+  border-color: var(--brand-yellow-02);
   border-width: 3px;
   margin-top: 20px;
 }

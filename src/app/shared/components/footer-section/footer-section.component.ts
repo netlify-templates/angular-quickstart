@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { SiteData } from '../../configs/site-data.config';
+import { SitePaths } from '../../configs/site-urls.config';
 
 @Component({
   selector: 'app-footer-section',
@@ -12,19 +14,22 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./footer-section.component.scss'],
 })
 export class FooterSectionComponent {
+  readonly siteData = SiteData;
+  readonly sitePaths = SitePaths;
+
   contactInfo = {
-    address: '110 Main St, Fredericksburg, TX 78624',
-    phone: '830-555-0192',
-    email: 'info@provoltelectric.com',
+    address: this.siteData.businessAddress,
+    phone: this.siteData.phoneNumberFormatted,
+    email: this.siteData.email,
   };
 
   quickLinks = [
-    { label: 'Home', routerLink: '/' },
-    { label: 'About', routerLink: '/about' },
-    { label: 'Services', routerLink: '/services' },
-    { label: 'Contact', routerLink: '/contact' },
-    { label: 'Privacy Policy', routerLink: '/privacy-policy' },
-    { label: 'Terms of Service', routerLink: '/terms-of-service' },
+    { label: 'Home', routerLink: this.sitePaths.home },
+    { label: 'About', routerLink: this.sitePaths.aboutUs },
+    { label: 'Services', routerLink: this.sitePaths.electricalServices },
+    { label: 'Contact', routerLink: this.sitePaths.contactUs },
+    { label: 'Privacy Policy', routerLink: this.sitePaths.privacyPolicy },
+    { label: 'Terms of Service', routerLink: this.sitePaths.termsOfService },
   ];
 
   socialLinks = [

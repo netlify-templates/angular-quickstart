@@ -21,6 +21,7 @@ export enum SitePaths {
   kerrvilleTxElectrician = 'kerrville-tx-electrician',
   texasHillCountryElectrician = 'texas-hill-country-electrician',
   privacyPolicy = 'privacy-policy',
+  termsOfService = 'terms-of-service',
   projects = 'projects',
   testimonials = 'testimonials',
   notFound = '**',

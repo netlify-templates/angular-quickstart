@@ -20,12 +20,12 @@
   }
 
   &__primary--yellow {
-    background-color: var(--brand-yellow);
+    background-color: var(--brand-yellow-02);
     color: var(--primary-text);
   }
 
   button {
-    border-color: var(--brand-yellow);
+    border-color: var(--brand-yellow-02);
     border-width: 3px;
   }
 }
@@ -249,7 +249,7 @@
 
 .wcu-town-btn {
   font-size: 0.85rem;
-  border-color: var(--brand-yellow);
+  border-color: var(--brand-yellow-02);
   border-width: 3px;
 }
 
@@ -292,7 +292,7 @@
 }
 
 .wcu-summary-actions button {
-  background-color: var(--brand-yellow);
+  background-color: var(--brand-yellow-02);
   color: var(--primary-text);
 
   mat-icon {

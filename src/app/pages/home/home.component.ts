@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AboutSectionSmallComponent } from 'src/app/shared/components/about-section-small/about-section-small.component';
 import { AreasWeServeComponent } from 'src/app/shared/components/areas-we-serve/areas-we-serve.component';
@@ -9,6 +9,7 @@ import { StayConnectedSectionComponent } from 'src/app/shared/components/stay-co
 import { WhyChooseUsComponent } from 'src/app/shared/components/why-choose-us/why-choose-us.component';
 import { ActionBannerComponent } from 'src/app/shared/components/action-banner/action-banner.component';
 import { SeoService } from 'src/app/shared/services/seo.service';
+import { SiteData as ImportedSiteData } from 'src/app/shared/configs/site-data.config';
 
 @Component({
   selector: 'app-home',
@@ -27,12 +28,14 @@ import { SeoService } from 'src/app/shared/services/seo.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  readonly SiteData = ImportedSiteData;
   constructor(private seo: SeoService) {}
+  private readonly jsonLdId = 'json-ld-home';
 
   ngOnInit(): void {
-    const baseUrl = 'https://provoltelectricalservices.com';
-    const canonicalUrl = `${baseUrl}/`;
+    const baseUrl = this.SiteData.baseUrl;
+    const canonicalUrl = this.SiteData.canonicalUrl;
 
     // TODO: replace with your real OG image (1200x630 is ideal)
     const ogImageUrl = `${baseUrl}/assets/og/provolt-home.jpg`;
@@ -56,7 +59,7 @@ export class HomeComponent implements OnInit {
           '@type': 'WebSite',
           '@id': `${baseUrl}/#website`,
           url: baseUrl,
-          name: 'ProVolt Electrical Services',
+          name: this.SiteData.businessName,
           inLanguage: 'en-US',
         },
 
@@ -66,8 +69,7 @@ export class HomeComponent implements OnInit {
           '@id': `${baseUrl}/#business`,
           name: 'ProVolt Electrical Services',
           url: baseUrl,
-          // TODO: add your public business phone
-          telephone: 'TODO_PHONE_NUMBER',
+          telephone: this.SiteData.phoneNumber,
           // TODO: add your logo (square, clean background)
           logo: `${baseUrl}/assets/brand/provolt-logo.png`,
           image: ogImageUrl,
@@ -253,11 +255,11 @@ export class HomeComponent implements OnInit {
           },
         },
 
-        // Optional: tie the homepage to your business
+        // // Optional: tie the homepage to your business
         // {
         //   '@type': 'WebPage',
         //   '@id': `${baseUrl}/#webpage`,
-        //   url: canonicalUrl,
+        //   url: this.SiteData.canonicalUrl,
         //   name: 'ProVolt Electrical Services | Texas Hill Country Electrician',
         //   isPartOf: { '@id': `${baseUrl}/#website` },
         //   about: { '@id': `${baseUrl}/#business` },
@@ -266,6 +268,10 @@ export class HomeComponent implements OnInit {
       ],
     };
 
-    this.seo.setJsonLd('json-ld-home', jsonLd);
+    this.seo.setJsonLd(this.jsonLdId, jsonLd);
+  }
+
+  ngOnDestroy(): void {
+    this.seo.removeJsonLd(this.jsonLdId);
   }
 }

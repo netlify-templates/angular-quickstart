@@ -32,7 +32,7 @@
   margin-left: 12px;
   margin-right: 12px;
 
-  background: #fff;
+  background: var(--background-alt);
   border: 1px solid rgba(0, 0, 0, 0.06);
 
   &__subtitle {
@@ -66,12 +66,12 @@
   }
 
   &__primary--yellow {
-    background-color: var(--brand-yellow);
+    background-color: var(--brand-yellow-02);
     color: var(--primary-text);
   }
 
   a {
-    border-color: var(--brand-yellow);
+    border-color: var(--brand-yellow-02);
     border-width: 3px;
   }
 
@@ -129,7 +129,7 @@
 
   &__icon {
     background: #212121;
-    color: var(--brand-yellow, #e6c612);
+    color: var(--brand-yellow-02);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -182,7 +182,7 @@
 
   &__icon {
     background: #212121;
-    color: var(--brand-yellow, #e6c612);
+    color: var(--brand-yellow-02);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -228,7 +228,7 @@
 
   .mdc-button {
     color: var(--brand-black);
-    background-color: var(--brand-yellow, #e6c612);
+    background-color: var(--brand-yellow-02);
   }
 }
 
@@ -239,12 +239,12 @@
   gap: 0.5rem;
 
   a {
-    border-color: var(--brand-yellow);
+    border-color: var(--brand-yellow-02);
     border-width: 3px;
   }
 
   button {
-    background-color: var(--brand-yellow);
+    background-color: var(--brand-yellow-02);
   }
 }
 
