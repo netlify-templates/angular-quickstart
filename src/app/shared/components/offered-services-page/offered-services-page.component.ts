@@ -8,6 +8,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AreasWeServeComponent } from '../../../shared/components/areas-we-serve/areas-we-serve.component';
+import { SiteData } from '../../configs/site-data.config';
 
 interface ServiceItem {
   title: string;
@@ -60,6 +61,9 @@ interface HeroData {
   styleUrls: ['./offered-services-page.component.scss'],
 })
 export class OfferedServicesPageComponent {
+  readonly siteData = SiteData;
+  phoneNumber = this.siteData.phoneNumber;
+
   @Input() serviceTitle = 'Electrical Services';
   @Input() hero!: HeroData;
   @Input() whoWeHelp: string[] = [];
@@ -76,12 +80,6 @@ export class OfferedServicesPageComponent {
   @Input() faqs: FaqItem[] = [];
 
   @Input() footerText!: string;
-
-  @Output() callNow = new EventEmitter<void>();
-
-  onCallNow() {
-    this.callNow.emit();
-  }
 
   trackByTitle(_: number, item: { title: string }) {
     return item.title;

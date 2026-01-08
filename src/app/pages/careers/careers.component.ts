@@ -39,6 +39,7 @@ interface Job {
 })
 export class CareersComponent implements OnInit {
   // Page-level config
+  // @Nathaniel update this URL
   private readonly pageUrl = 'https://provoltelectricalservices.com/careers';
 
   // TODO: point to a real OG image for careers/recruiting

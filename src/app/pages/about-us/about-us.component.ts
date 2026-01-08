@@ -7,8 +7,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { SeoService } from 'src/app/shared/services/seo.service';
 
-// ⬇️ Update this import path to wherever your SeoService lives
-
 interface Stat {
   label: string;
   value: string;
@@ -42,6 +40,7 @@ interface TimelineItem {
   styleUrls: ['./about-us.component.scss'],
 })
 export class AboutUsComponent implements OnInit {
+  // @Nathaniel update this phone number
   phoneNumber = '(830)-955-2909';
   stats: Stat[] = [
     {

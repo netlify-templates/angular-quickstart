@@ -24,7 +24,6 @@ export interface ServiceItem {
   label: string;
   icon: string;
 }
-
 export interface TownSeoConfig {
   metaTitle: string;
   metaDescription: string;

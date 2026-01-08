@@ -395,10 +395,6 @@ export class ResidentialElectricianComponent implements OnInit {
     this.setupJsonLd();
   }
 
-  onCallNow(): void {
-    window.location.href = `tel:${this.phoneNumber}`;
-  }
-
   trackByTitle(_: number, item: { title: string }): string {
     return item.title;
   }

@@ -36,7 +36,6 @@
 }
 
 /* Logo area */
-
 .logo-area {
   display: flex;
   align-items: center;
@@ -56,7 +55,6 @@
 }
 
 /* Nav links */
-
 .nav-links {
   display: flex;
   align-items: center;
@@ -65,18 +63,6 @@
   justify-content: flex-end;
   // font-size: 0.78rem;
 }
-
-// .nav-link {
-//   font-size: 0.78rem;
-//   font-weight: 500;
-//   letter-spacing: 0.12em;
-//   opacity: 0.85;
-//   color: #ffffff;
-// }
-
-// ::ng-deep .mdc-list-item__primary-text {
-//   color: var(--text-primary);
-// }
 
 .nav-link:hover {
   opacity: 1;
@@ -116,21 +102,12 @@ mat-nav-list a[mat-list-item] {
     position: relative;
   }
 
-  // .logo-link {
-  //   position: absolute;
-  //   left: 50%;
-  //   top: 50%;
-  //   transform: translate(-50%, -50%);
-  //   margin-left: 0;
-  //   margin-top: 0;
-  // }
-
   .desktop-nav {
-    display: none; /* hide full nav on small screens */
+    display: none;
   }
 
   .mobile-menu-button {
-    display: inline-flex; /* show menu icon on small screens */
+    display: inline-flex;
     margin-left: 0;
   }
 }

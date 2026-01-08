@@ -60,7 +60,6 @@
 }
 
 /* Card text */
-
 .osp-card-content {
   flex: 1 1 auto;
 }
@@ -87,7 +86,6 @@
 }
 
 /* RESPONSIVE */
-
 @media (max-width: 960px) {
   .osp-cards {
     flex-wrap: wrap;
@@ -100,7 +98,7 @@
   }
 
   .osp-timeline {
-    display: none; // hide the horizontal line on small screens for simplicity
+    display: none;
   }
 
   .osp-cards {

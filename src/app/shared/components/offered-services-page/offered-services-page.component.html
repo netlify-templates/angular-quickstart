@@ -12,14 +12,14 @@
         </p>
 
         <div class="hero__cta">
-          <button
+          <a
             mat-flat-button
             class="hero__primary hero__primary--yellow"
-            (click)="onCallNow()"
+            [href]="'tel:' + phoneNumber"
           >
             <mat-icon>call</mat-icon>
             {{ hero.actionButtonText }}
-          </button>
+          </a>
         </div>
       </div>
 
@@ -54,7 +54,13 @@
         </mat-card-content>
 
         <mat-card-actions align="start" class="popular-service-card-actions">
-          <button mat-button (click)="onCallNow()">Schedule</button>
+          <a
+            mat-flat-button
+            class="hero__primary hero__primary--yellow"
+            [href]="'tel:' + phoneNumber"
+          >
+            Schedule
+          </a>
           <!-- @Nathaniel make the individual pages for each service -->
           <!-- <a mat-stroked-button [routerLink]="job.path">Learn More</a> -->
         </mat-card-actions>
@@ -98,9 +104,13 @@
         </mat-card-content>
 
         <mat-card-actions align="start" class="service-capabilities-actions">
-          <button mat-stroked-button (click)="onCallNow()">
+          <a
+            mat-flat-button
+            class="hero__primary hero__primary--yellow"
+            [href]="'tel:' + phoneNumber"
+          >
             Schedule Service
-          </button>
+          </a>
         </mat-card-actions>
       </mat-card>
     </div>

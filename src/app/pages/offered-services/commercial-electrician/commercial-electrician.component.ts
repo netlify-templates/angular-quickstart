@@ -58,10 +58,7 @@ interface FaqItem {
 export class CommercialElectricianComponent implements OnInit {
   constructor(private seo: SeoService) {}
 
-  /**
-   * NOTE: Your marketing copy elsewhere uses (830) 955-2909.
-   * If 8309285046 is NOT the business line, change it here.
-   */
+  // @Nathaniel update this phone number
   private readonly phoneNumber = '8309552909';
 
   serviceTitle = 'Commercial Electrical Services';
