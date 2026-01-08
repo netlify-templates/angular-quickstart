@@ -58,7 +58,7 @@ export class ContactUsComponent implements OnInit, OnDestroy {
       title:
         'Contact ProVolt Electrical Services | Hill Country Electrician Near You',
       description:
-        'Need a licensed electrician in the Texas Hill Country? Contact ProVolt Electrical Services for fast, reliable electrical repairs, panel upgrades, lighting, EV chargers, and more in Fredericksburg, Kerrville, Boerne, Bandera, and surrounding areas.',
+        'Need a licensed electrician in the Texas Hill Country? Contact ProVolt Electrical Services for fast, reliable electrical repairs, panel upgrades, lighting, and more in Fredericksburg, Kerrville, Boerne, Bandera, and surrounding areas.',
       type: 'website',
     });
     this.seo.setJsonLd(this.jsonLdId, {

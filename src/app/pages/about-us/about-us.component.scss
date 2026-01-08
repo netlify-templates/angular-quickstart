@@ -65,7 +65,6 @@
 
 .about__hero-card {
   align-self: stretch;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
   border-radius: 16px;
 }
 
@@ -115,7 +114,6 @@
 .stat {
   text-align: left;
   border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 
   &__icon {
     background: var(--brand-yellow-02);
@@ -151,7 +149,6 @@
 
 .value {
   border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 
   &__icon {
     background: var(--brand-yellow-02);
@@ -182,7 +179,6 @@
 .about__owner-card,
 .about__owner-services {
   border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .about__owner-icon {
@@ -255,10 +251,9 @@
   }
 
   &__card {
-    background: #f9fafb;
+    background: var(--background-alt);
     border-radius: 12px;
     padding: 0.85rem 1rem;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
 
     h3 {
       margin: 0 0 0.25rem;
@@ -284,7 +279,6 @@
   height: 10px;
   border-radius: 50%;
   background: #1d4ed8;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
 }
 
 /* FOOTER */

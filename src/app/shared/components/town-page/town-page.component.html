@@ -429,6 +429,7 @@
         <mat-accordion class="tp-accordion">
           <mat-expansion-panel
             *ngFor="let faq of townConfig.faqs; trackBy: trackByIndex"
+            class="faq-section"
           >
             <mat-expansion-panel-header>
               <mat-panel-title>{{ faq.question }}</mat-panel-title>

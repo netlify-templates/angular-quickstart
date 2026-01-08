@@ -7,18 +7,19 @@ body {
 :root {
   /* Brand Colors */
   // --brand-red: #d6262b;
-  --brand-red: #e5001d;
+  --brand-red: #bf0404;
   --brand-yellow: #e6c612;
-  // --brand-yellow-02: #d9b524;
-  --brand-yellow-02: #f6e737;
+  --brand-yellow-02: #d9b524;
   --brand-yellow-03: #e9ca4e;
   --brand-black: #1a1a1a;
   --brand-grey: #7f7e7e;
   --brand-green: #4caf50;
   --brand-chips: #e0e0e0;
 
-  --background: #f7f5f0;
-  --background-alt: #ffffff;
+  --background-alt: #f7f5f0;
+  --background: #ffffff;
+  // --background: #f7f5f0;
+  // --background-alt: #ffffff;
   --background-alt-02: #f0ede7;
 
   --text-primary: #2a2a2a;
@@ -49,8 +50,7 @@ body {
 #body {
   background-color: var(--background);
 
-  p,
-  h1 {
+  p {
     color: var(--text-primary);
   }
 
@@ -58,6 +58,11 @@ body {
     font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
+  }
+
+  mat-card {
+    background-color: var(--background-alt);
+    border-radius: 18px;
   }
 }
 

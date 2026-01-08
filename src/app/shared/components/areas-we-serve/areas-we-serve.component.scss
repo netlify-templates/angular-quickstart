@@ -62,7 +62,7 @@ $text-muted: #6b7280;
     font-size: 0.95rem;
 
     strong {
-      color: $primary; // highlight Kerrville with brand red
+      color: $primary;
       font-weight: 900;
     }
   }
@@ -72,8 +72,8 @@ $text-muted: #6b7280;
   // ===============================
   &__card {
     background: $surface-color;
-    // box-shadow: $shadow-soft;
     padding: 1.75rem 2rem;
+    border-radius: 18px;
 
     @media (max-width: 599px) {
       padding: 1.5rem 1.25rem;
@@ -148,10 +148,10 @@ $text-muted: #6b7280;
     display: flex;
     cursor: pointer;
     align-items: center;
+    background-color: var(--background);
     gap: 0.55rem;
     padding: 0.6rem 0.9rem;
     border-radius: 999px;
-    // background: #e0e0e0;
     border: 2px solid $primary; // faint red border
     transition: all 150ms ease;
 

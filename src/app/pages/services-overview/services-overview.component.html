@@ -2,7 +2,7 @@
   <!-- HERO HEADER (new) -->
   <header>
     <h1 class="page-title">{{ hero.title }}</h1>
-    <div class="hero">
+    <mat-card class="hero">
       <div class="hero__text">
         <p class="hero__subtitle">{{ hero.subtitle }}</p>
 
@@ -29,7 +29,7 @@
           <mat-chip *ngFor="let item of whoWeHelp">{{ item }}</mat-chip>
         </mat-chip-listbox>
       </div>
-    </div>
+    </mat-card>
   </header>
 
   <!-- YOUR EXISTING HERO CARDS -->
@@ -97,7 +97,7 @@
     <h2>Electrical Services FAQ</h2>
 
     <mat-accordion multi>
-      <mat-expansion-panel *ngFor="let faq of faqs">
+      <mat-expansion-panel *ngFor="let faq of faqs" class="faq-section">
         <mat-expansion-panel-header>
           <mat-panel-title>{{ faq.question }}</mat-panel-title>
         </mat-expansion-panel-header>

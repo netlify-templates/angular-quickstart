@@ -27,6 +27,7 @@
   grid-template-columns: 1.2fr 0.8fr;
   gap: 1.25rem;
   align-items: start;
+  border-radius: 18px;
 
   padding: 1.25rem;
   margin-left: 12px;
@@ -126,6 +127,7 @@
 .link-card {
   border-radius: 16px;
   overflow: hidden;
+  background-color: var(--background-alt);
 
   &__icon {
     background: #212121;
@@ -272,7 +274,7 @@
     align-items: flex-staRt;
     padding: 0.9rem 1rem;
     border-radius: 16px;
-    background: #fff;
+    background: var(--background-alt);
     border: 1px solid rgba(0, 0, 0, 0.06);
   }
 
@@ -284,7 +286,6 @@
   }
 
   &__title {
-    // font-weight: 800;
     font-size: 20px;
     margin-bottom: 0.2rem;
   }
@@ -298,8 +299,18 @@
 
 .faq-answer {
   margin: 0.75rem 0 0.25rem;
-  color: rgba(0, 0, 0, 0.78);
   line-height: 1.6;
+}
+
+.faq-section {
+  border-radius: 12px;
+  background: var(--background-alt);
+  margin-bottom: 0.85rem;
+
+  .mat-expansion-panel-header {
+    font-weight: 600;
+    font-size: 1rem;
+  }
 }
 
 /* Responsive */

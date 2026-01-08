@@ -62,7 +62,7 @@ export class ProjectsComponent implements OnInit {
         'Replaced an undersized, outdated panel with a new 200-amp service, added whole-home surge protection, and labeled all circuits for a growing Hill Country home.',
       highlights: [
         'Corrected multiple code violations',
-        'Prepared home for future EV charger and hot tub',
+        'Prepared home for future hot tub',
         'Improved safety and reduced nuisance breaker trips',
       ],
     },

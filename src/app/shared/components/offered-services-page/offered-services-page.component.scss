@@ -32,8 +32,8 @@
   margin-left: 12px;
   margin-right: 12px;
 
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  background-color: var(--background-alt);
+  border-radius: 18px;
 
   &__subtitle {
     margin: 0 0 0.85rem;
@@ -272,8 +272,8 @@
     align-items: flex-staRt;
     padding: 0.9rem 1rem;
     border-radius: 16px;
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: var(--background-alt);
+    border-radius: 18px;
   }
 
   &__icon {
@@ -300,6 +300,17 @@
   margin: 0.75rem 0 0.25rem;
   color: rgba(0, 0, 0, 0.78);
   line-height: 1.6;
+}
+
+.faq-section {
+  border-radius: 12px;
+  background: var(--background-alt);
+  margin-bottom: 0.85rem;
+
+  .mat-expansion-panel-header {
+    font-weight: 600;
+    font-size: 1rem;
+  }
 }
 
 /* Responsive */

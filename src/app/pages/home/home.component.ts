@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       title:
         'ProVolt Electrical Services | Texas Hill Country Electrician (Licensed & Insured)',
       description:
-        'Need an electrician in the Texas Hill Country? ProVolt handles electrical repairs, panel upgrades, generators, EV chargers, lighting, and wiring. Serving Kerrville, Fredericksburg, Boerne, Bandera, Comfort, Ingram, Hunt, Center Point & Helotes. Call for a quote.',
+        'Need an electrician in the Texas Hill Country? ProVolt handles electrical repairs, panel upgrades, generators, lighting, and wiring. Serving Kerrville, Fredericksburg, Boerne, Bandera, Comfort, Ingram, Hunt, Center Point & Helotes. Call for a quote.',
       url: canonicalUrl, // ✅ always pass (canonical + og:url)
       image: ogImageUrl, // ✅ include only if real; otherwise omit
     });
@@ -217,14 +217,6 @@ export class HomeComponent implements OnInit, OnDestroy {
                       '@type': 'Service',
                       name: 'Circuit Breaker Replacement',
                       url: `${baseUrl}/services/circuit-breaker-replacement`,
-                    },
-                  },
-                  {
-                    '@type': 'Offer',
-                    itemOffered: {
-                      '@type': 'Service',
-                      name: 'EV Charger Installation',
-                      url: `${baseUrl}/services/ev-charger-installation`,
                     },
                   },
                   {

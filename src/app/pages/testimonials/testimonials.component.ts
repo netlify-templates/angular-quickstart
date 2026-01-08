@@ -61,7 +61,7 @@ export class TestimonialsComponent implements OnInit {
       dateLabel: 'Completed March 2025',
       serviceTags: ['Panel upgrade', 'Surge protection'],
       isHighlighted: true,
-      body: 'ProVolt upgraded our old panel to 200 amps and walked us through every step. They were on time, cleaned up after themselves, and made our home feel much safer. We’re ready for future additions like an EV charger with no worries.',
+      body: 'ProVolt upgraded our old panel to 200 amps and walked us through every step. They were on time, cleaned up after themselves, and made our home feel much safer. We’re ready for future additions with no worries.',
     },
     {
       id: 2,

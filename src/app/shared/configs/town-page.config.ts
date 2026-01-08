@@ -1110,7 +1110,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       metaTitle:
         'Electrician in Comfort, TX | Repairs, Panels, Remodel Wiring & Lighting',
       metaDescription:
-        'Electrician in Comfort, TX for troubleshooting, panel upgrades, remodel wiring, lighting, surge protection, and EV charger circuits. ProVolt Electrical Services—licensed and insured.',
+        'Electrician in Comfort, TX for troubleshooting, panel upgrades, remodel wiring, lighting, and surge protection. ProVolt Electrical Services—licensed and insured.',
       descriptionLong:
         'ProVolt Electrical Services serves Comfort, TX with professional electrical repairs and upgrades—specializing in panel/service capacity, remodel wiring, lighting improvements, and safety upgrades for Hill Country homes and small businesses.',
       serviceType: [
@@ -1119,7 +1119,6 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Remodel wiring and code corrections',
         'Lighting installation and upgrades',
         'Surge protection',
-        'EV charger installation',
         'Commercial electrical services',
       ],
       breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
@@ -1337,7 +1336,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       metaTitle:
         'Electrician in Fredericksburg, TX | Panels, Lighting, Repairs & Safety Upgrades',
       metaDescription:
-        'Electrician in Fredericksburg, TX for troubleshooting, panel upgrades, lighting, rental safety inspections, surge protection, and EV charger circuits. ProVolt Electrical Services—licensed and insured.',
+        'Electrician in Fredericksburg, TX for troubleshooting, panel upgrades, lighting, rental safety inspections, and surge protection circuits. ProVolt Electrical Services—licensed and insured.',
       descriptionLong:
         'ProVolt Electrical Services provides Fredericksburg, TX with professional residential and small-business electrical service—focused on safe upgrades for homes and rentals, lighting improvements, panel capacity, and reliable troubleshooting in the Texas Hill Country.',
       serviceType: [
@@ -1346,7 +1345,6 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Lighting installation and upgrades',
         'Safety inspections for homes and rentals',
         'Surge protection',
-        'EV charger installation',
         'Commercial electrical services',
       ],
       breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
@@ -1375,7 +1373,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Troubleshooting, repairs, and safety inspections for homes and rentals',
         'Lighting upgrades for interiors, exteriors, and landscape areas',
         'Panel upgrades and surge protection for modern appliance loads',
-        'Dedicated circuits for HVAC, kitchens, and EV chargers',
+        'Dedicated circuits for HVAC, and kitchens',
       ],
       heroCTAText: 'Request a Licensed Electrician',
 
@@ -1554,15 +1552,14 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townName: 'Boerne',
       addressLocality: 'Boerne',
       metaTitle:
-        'Electrician in Boerne, TX | Repairs, Panels, EV Chargers & Lighting Upgrades',
+        'Electrician in Boerne, TX | Repairs, Panels & Lighting Upgrades',
       metaDescription:
-        'Electrician in Boerne, TX for troubleshooting, panel upgrades, surge protection, lighting/LED retrofits, and EV charger circuits. ProVolt Electrical Services—licensed and insured.',
+        'Electrician in Boerne, TX for troubleshooting, panel upgrades, surge protection, and lighting/LED retrofits circuits. ProVolt Electrical Services—licensed and insured.',
       descriptionLong:
-        'ProVolt Electrical Services serves Boerne, TX with residential and commercial electrical work—specializing in troubleshooting, panel/service capacity upgrades, lighting improvements, LED retrofits, and EV charger circuits for modern Hill Country living.',
+        'ProVolt Electrical Services serves Boerne, TX with residential and commercial electrical work—specializing in troubleshooting, panel/service capacity upgrades, lighting improvements, and LED retrofits circuits for modern Hill Country living.',
       serviceType: [
         'Electrical troubleshooting and repairs',
         'Electrical panel upgrades',
-        'EV charger installation',
         'Lighting installation and LED retrofits',
         'Surge protection',
         'Commercial electrical services',
@@ -1593,7 +1590,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Troubleshooting and repairs for outages, trips, and flicker',
         'Panel upgrades, surge protection, and service capacity planning',
         'Lighting upgrades and LED retrofits for homes and businesses',
-        'EV chargers and dedicated circuits for modern living',
+        'Dedicated circuits for modern living',
       ],
       heroCTAText: 'Get Service From a Licensed Electrician',
 
@@ -1705,15 +1702,15 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
 
       localProjects: [
         {
-          title: 'Example: EV Charger Circuit + Load Check',
+          title: 'Example: Circuit + Load Check',
           summary:
-            'Installed a dedicated Level 2 charger circuit with service capacity verification.',
+            'Installed a dedicated circuit with service capacity verification.',
           areaHint: 'I-10 corridor',
           bullets: [
             'Load calculation and breaker sizing',
             'Clean conduit/wiring run and labeling',
           ],
-          tags: ['EV', 'Load Calc'],
+          tags: ['Circuit', 'Load Calc'],
         },
         {
           title: 'Example: LED Retrofit for a Small Business',
@@ -1995,11 +1992,11 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townName: 'Helotes',
       addressLocality: 'Helotes',
       metaTitle:
-        'Electrician in Helotes, TX | Repairs, Panels, EV Chargers & Lighting Upgrades',
+        'Electrician in Helotes, TX | Repairs, Panels, & Lighting Upgrades',
       metaDescription:
-        'Electrician in Helotes, TX for troubleshooting, panel upgrades, surge protection, lighting/LED upgrades, and EV charger circuits. ProVolt Electrical Services—licensed and insured.',
+        'Electrician in Helotes, TX for troubleshooting, panel upgrades, surge protection, lighting/LED upgrades, and circuits. ProVolt Electrical Services—licensed and insured.',
       descriptionLong:
-        'ProVolt Electrical Services serves Helotes, TX with professional residential and small-business electrical work—focused on troubleshooting, panel/service upgrades, lighting improvements, surge protection, and EV charger circuits for modern loads.',
+        'ProVolt Electrical Services serves Helotes, TX with professional residential and small-business electrical work—focused on troubleshooting, panel/service upgrades, lighting improvements, surge protection, and circuits for modern loads.',
       serviceType: [
         'Electrical troubleshooting and repairs',
         'Electrical panel upgrades',
@@ -2034,7 +2031,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Troubleshooting and repairs for outages, trips, and flicker',
         'Panel upgrades, surge protection, and service planning',
         'Lighting upgrades and LED conversions for comfort and security',
-        'EV chargers and dedicated circuits for modern loads',
+        'Dedicated circuits for modern loads',
       ],
       heroCTAText: 'Request Service Now',
 
@@ -2137,15 +2134,15 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
 
       localProjects: [
         {
-          title: 'Example: EV Charger Install + Load Calc',
+          title: 'Example: Circuit Install + Load Calc',
           summary:
-            'Installed a Level 2 charger circuit with capacity planning for safe charging.',
+            'Installed a circuit with capacity planning for safe charging.',
           areaHint: 'Loop 1604 area',
           bullets: [
             'Load calculation and breaker sizing',
             'Clean wiring run and labeling',
           ],
-          tags: ['EV', 'Load Calc'],
+          tags: ['Circuit', 'Load Calc'],
         },
         {
           title: 'Example: Lighting Upgrade + Controls',

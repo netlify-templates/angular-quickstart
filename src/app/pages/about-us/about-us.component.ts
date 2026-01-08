@@ -96,9 +96,9 @@ export class AboutUsComponent implements OnInit {
   timeline: TimelineItem[] = [
     {
       year: '2010',
-      title: 'ProVolt Electric is Founded',
+      title: 'ProVolt Electrical Services is Founded',
       description:
-        'After years in the trade, Scott Raggo starts ProVolt Electric as a local, family-owned electrical company based in the Hill Country.',
+        'After years in the trade, Scott Raggo starts ProVolt Electrical Services as a local, family-owned electrical company based in the Hill Country.',
     },
     {
       year: '2012–2015',

@@ -2,21 +2,18 @@
   <mat-toolbar class="top-toolbar">
     <div class="toolbar-inner">
       <div class="logo-area">
-        <div class="logo-mark"></div>
-        <div class="logo-text">
-          <span class="logo-title">ProVolt</span>
-          <span class="logo-subtitle">Electrical Services</span>
-        </div>
+        <a routerLink="/" class="logo-link" aria-label="Go to home">
+          <img
+            src="assets/brand/logos/provolt-primary-logo.webp"
+            alt="ProVolt logo"
+            class="logo-img"
+          />
+        </a>
       </div>
 
       <nav class="nav-links desktop-nav">
         <ng-container *ngFor="let link of navLinks">
-          <a
-            mat-button
-            *ngIf="!link.children"
-            [routerLink]="link.path"
-            class="nav-link"
-          >
+          <a mat-button *ngIf="!link.children" [routerLink]="link.path">
             {{ link.label }}
           </a>
 

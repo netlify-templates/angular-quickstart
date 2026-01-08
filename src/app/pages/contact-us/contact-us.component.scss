@@ -49,12 +49,10 @@
 .contact-card {
   &--info {
     border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
   }
 
   &--form {
     border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   }
 
   mat-card-header {
@@ -95,7 +93,7 @@
 
   .contact-info-value {
     font-size: 0.98rem;
-    color: #2f2f2f;
+    color: var(--text-primary);
 
     &a {
       text-decoration: none;
