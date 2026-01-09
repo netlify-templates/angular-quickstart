@@ -5,7 +5,6 @@ export const serverRoutes: ServerRoute[] = [
   { path: '', renderMode: RenderMode.Prerender },
   { path: 'home', renderMode: RenderMode.Prerender },
   { path: 'about-us', renderMode: RenderMode.Prerender },
-  { path: 'careers', renderMode: RenderMode.Prerender },
   { path: 'contact-us', renderMode: RenderMode.Prerender },
 
   { path: 'electrical-services', renderMode: RenderMode.Prerender },
@@ -64,8 +63,6 @@ export const serverRoutes: ServerRoute[] = [
   },
 
   { path: 'privacy-policy', renderMode: RenderMode.Prerender },
-  { path: 'projects', renderMode: RenderMode.Prerender },
-  { path: 'testimonials', renderMode: RenderMode.Prerender },
 
   // Everything else: render a real 404 (recommended)
   { path: '**', renderMode: RenderMode.Server, status: 404 },

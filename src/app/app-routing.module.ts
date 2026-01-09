@@ -12,14 +12,14 @@ const routes: Routes = [
         (m) => m.AboutUsComponent
       ),
   },
-  {
-    path: 'careers',
-    title: 'Careers - Provolt Electrical Services',
-    loadComponent: () =>
-      import('./pages/careers/careers.component').then(
-        (m) => m.CareersComponent
-      ),
-  },
+  // {
+  //   path: 'careers',
+  //   title: 'Careers - Provolt Electrical Services',
+  //   loadComponent: () =>
+  //     import('./pages/careers/careers.component').then(
+  //       (m) => m.CareersComponent
+  //     ),
+  // },
   {
     path: 'contact-us',
     title: 'Contact Us - Provolt Electrical Services',
@@ -160,22 +160,22 @@ const routes: Routes = [
         (m) => m.PrivacyPolicyComponent
       ),
   },
-  {
-    path: 'projects',
-    title: 'Projects - Provolt Electrical Services',
-    loadComponent: () =>
-      import('./pages/projects/projects.component').then(
-        (m) => m.ProjectsComponent
-      ),
-  },
-  {
-    path: 'testimonials',
-    title: 'Testimonials - Provolt Electrical Services',
-    loadComponent: () =>
-      import('./pages/testimonials/testimonials.component').then(
-        (m) => m.TestimonialsComponent
-      ),
-  },
+  // {
+  //   path: 'projects',
+  //   title: 'Projects - Provolt Electrical Services',
+  //   loadComponent: () =>
+  //     import('./pages/projects/projects.component').then(
+  //       (m) => m.ProjectsComponent
+  //     ),
+  // },
+  // {
+  //   path: 'testimonials',
+  //   title: 'Testimonials - Provolt Electrical Services',
+  //   loadComponent: () =>
+  //     import('./pages/testimonials/testimonials.component').then(
+  //       (m) => m.TestimonialsComponent
+  //     ),
+  // },
   {
     path: '**',
     title: '404 Not Found - Provolt Electrical Services',

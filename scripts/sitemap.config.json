@@ -3,7 +3,6 @@
     "/",
     "/home",
     "/about-us",
-    "/careers",
     "/commercial",
     "/contact-us",
     "/electrical-services",
@@ -21,8 +20,6 @@
     "/service-areas/kerrville-tx-electrician",
     "/service-areas/texas-hill-country-electrician",
     "/privacy-policy",
-    "/projects",
-    "/terms-of-service",
-    "/testimonials"
+    "/terms-of-service"
   ]
 }

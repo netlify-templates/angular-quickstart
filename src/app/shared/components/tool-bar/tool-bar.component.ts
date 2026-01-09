@@ -88,10 +88,7 @@ export class ToolBarComponent {
         { label: 'Ingram, TX', path: '/service-areas/ingram-tx-electrician' },
       ],
     },
-    { label: 'Projects', path: '/projects' },
-    { label: 'Careers', path: '/careers' },
     { label: 'About Us', path: '/about-us' },
-    { label: 'Testimonials', path: '/testimonials' },
     { label: 'Contact Us', path: '/contact-us' },
   ];
 }
