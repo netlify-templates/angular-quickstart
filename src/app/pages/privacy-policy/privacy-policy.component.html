@@ -1,1 +1,79 @@
-<p>privacy-policy works!</p>
+<div class="policy">
+  <header class="hero" aria-label="Privacy Policy header">
+    <div class="hero-inner">
+      <h1 class="title">Privacy Policy</h1>
+      <p class="meta">
+        <span class="company">{{ companyName }}</span>
+        <span class="dot" aria-hidden="true">•</span>
+        <span class="date">Effective Date: {{ effectiveDate }}</span>
+      </p>
+
+      <p class="lead" *ngIf="sections[0]?.body?.length">
+        {{ sections[0].body![0] }}
+      </p>
+    </div>
+  </header>
+
+  <main class="content">
+    <aside class="toc" aria-label="Table of contents">
+      <div class="toc-card">
+        <div class="toc-title">On this page</div>
+        <ul class="toc-list">
+          <li *ngFor="let item of toc()">
+            <a
+              class="toc-link"
+              [href]="sitePaths.privacyPolicy + '#' + item.id"
+              >{{ item.title }}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <section class="sections">
+      <article
+        class="section"
+        *ngFor="let section of sections; let i = index"
+        [attr.id]="section.id"
+      >
+        <h2 class="section-title" *ngIf="section.id !== 'intro'">
+          {{ section.title }}
+        </h2>
+
+        <ng-container *ngIf="section.id !== 'intro'">
+          <p class="section-p" *ngFor="let p of section.body">{{ p }}</p>
+
+          <ul class="section-list" *ngIf="section.bullets?.length">
+            <li *ngFor="let b of section.bullets">{{ b }}</li>
+          </ul>
+
+          <!-- Contact block -->
+          <div class="contact-card" *ngIf="section.id === 'contact'">
+            <div class="contact-row">
+              <span class="label">Business:</span>
+              <span class="value">{{ companyName }}</span>
+            </div>
+            <div class="contact-row">
+              <span class="label">Phone:</span>
+              <span class="value">{{ phoneDisplay }}</span>
+            </div>
+            <div class="contact-row">
+              <span class="label">Email:</span>
+              <a class="value link" [href]="'mailto:' + emailAddress">{{
+                emailAddress
+              }}</a>
+            </div>
+            <div class="contact-row">
+              <span class="label">Service Area:</span>
+              <span class="value">{{ serviceArea }}</span>
+            </div>
+          </div>
+
+          <div class="back-top">
+            <a class="back-top-link" href="/privacy-policy">Back to top</a>
+          </div>
+        </ng-container>
+      </article>
+    </section>
+  </main>
+</div>
