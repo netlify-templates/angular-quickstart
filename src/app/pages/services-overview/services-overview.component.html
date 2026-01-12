@@ -46,10 +46,7 @@
     </p>
 
     <div class="cards-grid">
-      <mat-card
-        class="link-card"
-        *ngFor="let link of popularServices; trackBy: trackByTitle"
-      >
+      <mat-card class="link-card" *ngFor="let link of popularServices">
         <mat-card-header>
           <div mat-card-avatar class="link-card__icon">
             <mat-icon>{{ link.icon }}</mat-icon>
@@ -61,9 +58,8 @@
           <p>{{ link.description }}</p>
         </mat-card-content>
 
-        <mat-card-actions align="start" class="popular-service-card-actions">
+        <mat-card-actions class="popular-service-card-actions">
           <button mat-button (click)="onCallNow()">Call</button>
-          <!-- <a mat-stroked-button [routerLink]="link.routerLink">View</a> -->
         </mat-card-actions>
       </mat-card>
     </div>
@@ -75,10 +71,7 @@
     <h2>How We Work</h2>
 
     <div class="process">
-      <div
-        class="process__item"
-        *ngFor="let step of processSteps; trackBy: trackByTitle"
-      >
+      <div class="process__item" *ngFor="let step of processSteps">
         <div class="process__header">
           <mat-icon class="process__icon">{{ step.icon }}</mat-icon>
           <div class="process__title">{{ step.title }}</div>

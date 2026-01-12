@@ -1,9 +1,11 @@
 export enum SiteData {
-  phoneNumber = '9309552909',
+  phoneNumber = '8309552909',
+  phoneNumberE164 = '+18309552909',
   phoneNumberFormatted = '(830) 955-2909',
   baseUrl = 'https://provoltelectricalservices.com',
   canonicalUrl = 'https://provoltelectricalservices.com/',
-  email = '',
+  homepageImageUrl = 'https://provoltelectricalservices.com/assets/brand/og/provolt-primary-logo-og-c.png',
+  email = 'ProVolt240@gmail.com',
 
   businessName = 'ProVolt Electrical Services',
   businessAddress = 'Kerrville, TX 78028',

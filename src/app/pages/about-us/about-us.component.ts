@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { SeoService } from 'src/app/shared/services/seo.service';
+import { SiteData } from 'src/app/shared/configs/site-data.config';
+import { FullSitePaths } from 'src/app/shared/configs/site-urls.config';
 
 interface Stat {
   label: string;
@@ -40,8 +42,7 @@ interface TimelineItem {
   styleUrls: ['./about-us.component.scss'],
 })
 export class AboutUsComponent implements OnInit {
-  // @Nathaniel update this phone number
-  phoneNumber = '(830)-955-2909';
+  phoneNumber = SiteData.phoneNumberE164;
   stats: Stat[] = [
     {
       label: 'Years Serving the Hill Country',
@@ -129,62 +130,83 @@ export class AboutUsComponent implements OnInit {
   private setupSeo(): void {
     this.seo.setMetaTags({
       title:
-        'About ProVolt Electric | Family-Owned Electrician in Kerrville & Fredericksburg, TX',
+        'About ProVolt Electrical Services | Family-Owned Electrician in Texas Hill Country',
       description:
         'Learn about ProVolt Electric, a family-owned electrical contractor founded in 2010. Led by master electrician Scott Raggo, we provide fast, reliable residential, commercial, and industrial electrical services in Kerrville, Fredericksburg, and the Texas Hill Country.',
-      url: 'https://provoltelectricalservices.com/about',
+      canonicalUrl: FullSitePaths.aboutUs,
       type: 'website',
-      // 🔧 Optional: set a real image URL if you have a hero/OG image
-      // image: 'https://provoltelectricalservices.com/assets/og/about-provolt.jpg',
+      uniquePageImage: SiteData.homepageImageUrl,
       robots: 'index,follow',
     });
   }
 
   private setupJsonLd(): void {
-    const jsonLdObject = {
+    const baseUrl = SiteData.baseUrl;
+    const pageUrl = FullSitePaths.aboutUs;
+
+    const jsonLd = {
       '@context': 'https://schema.org',
-      '@type': 'Electrician',
-      name: 'ProVolt Electrical Services',
-      alternateName: 'ProVolt Electric',
-      url: 'https://provoltelectricalservices.com',
-      description:
-        'ProVolt Electrical Services is a local, family-owned electrical service established in 2010. We provide fast, reliable residential, commercial, and industrial electrical solutions across Kerrville, Fredericksburg, and the Texas Hill Country.',
-      telephone: '+1-830-955-2909', // TODO: replace with real number
-      foundingDate: '2010',
-      founder: {
-        '@type': 'Person',
-        name: 'Scott Raggo',
-      },
-      foundingLocation: {
-        '@type': 'Place',
-        name: 'Kerrville, Texas',
-      },
-      areaServed: [
-        'Kerrville TX',
-        'Fredericksburg TX',
-        'Boerne TX',
-        'Bandera TX',
-        'Comfort TX',
-        'Helotes TX',
-        'Ingram TX',
-        'Hunt TX',
-        'Center Point TX',
-        'Texas Hill Country',
-      ],
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Kerrville',
-        addressRegion: 'TX',
-        addressCountry: 'US',
-      },
-      sameAs: [
-        'https://www.facebook.com/provoltelectric',
-        'https://www.instagram.com/provoltelectric',
+      '@graph': [
+        {
+          '@type': 'AboutPage',
+          '@id': `${pageUrl}#webpage`,
+          url: pageUrl,
+          name: 'About ProVolt Electrical Services | Family-Owned Electrician in Texas Hill Country',
+          description:
+            'Learn about ProVolt Electrical Services, a family-owned electrical contractor founded in 2010 and based in Kerrville, TX.',
+          inLanguage: 'en-US',
+
+          isPartOf: { '@id': `${baseUrl}/#website` },
+          about: { '@id': `${baseUrl}/#business` },
+          mainEntity: { '@id': `${baseUrl}/#business` },
+
+          breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+        },
+
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${pageUrl}#breadcrumb`,
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+            { '@type': 'ListItem', position: 2, name: 'About', item: pageUrl },
+          ],
+        },
+
+        // 3) Optional: a Person node for the founder (only if you want it explicitly in-page)
+        // This does NOT redefine the business; it just adds a node you can link to.
+        {
+          '@type': 'Person',
+          '@id': `${baseUrl}/#founder-scott-raggo`,
+          name: 'Scott Raggo',
+        },
+
+        // 4) Add business facts as a lightweight "patch" node that points at your global business.
+        // This avoids duplicating the full business object, but still allows About-page-specific facts.
+        {
+          '@id': `${baseUrl}/#business`,
+          foundingDate: '2010',
+          founder: { '@id': `${baseUrl}/#founder-scott-raggo` },
+
+          // These are optional; only keep if they're accurate and consistent with global data.
+          // If your global JSON-LD already contains them, you can remove them here.
+          // telephone: this.SiteData.phoneNumberE164,
+
+          // Stats as "knowsAbout" topics (safe/neutral) or leave out if you prefer.
+          knowsAbout: [
+            'Residential electrical services',
+            'Commercial electrical services',
+            'Ranch and rural electrical services',
+            'Electrical troubleshooting and repair',
+            'Electrical panel upgrades',
+            'Lighting installation',
+            'Surge protection',
+            'Safety inspections and code compliance',
+          ],
+        },
       ],
     };
 
-    // This will inject <script id="json-ld-about-provolt"> into <head>
-    this.seo.setJsonLd('json-ld-about-provolt', jsonLdObject);
+    this.seo.setPageJsonLd(jsonLd);
   }
 
   onCallNow(): void {

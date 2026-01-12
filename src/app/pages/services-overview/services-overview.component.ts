@@ -13,6 +13,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { SeoService } from 'src/app/shared/services/seo.service';
 import { AreasWeServeComponent } from 'src/app/shared/components/areas-we-serve/areas-we-serve.component';
 import { ElectricalServiceCardsComponent } from 'src/app/shared/components/electrical-service-cards/electrical-service-cards.component';
+import { SiteData } from 'src/app/shared/configs/site-data.config';
+import {
+  HeroServiceCard,
+  HERO_SERVICE_CARDS,
+} from 'src/app/shared/configs/site-service-descriptions';
+import { FullSitePaths } from 'src/app/shared/configs/site-urls.config';
 
 interface ServiceItem {
   title: string;
@@ -62,7 +68,8 @@ interface FaqItem {
 export class ServicesOverviewComponent implements OnInit {
   constructor(private seo: SeoService) {}
 
-  private readonly phoneNumber = '8309285046';
+  private readonly phoneNumber = SiteData.phoneNumber;
+  services: HeroServiceCard[] = HERO_SERVICE_CARDS;
 
   hero = {
     title: "ProVolt's Electrical Services in the Texas Hill Country",
@@ -215,135 +222,6 @@ export class ServicesOverviewComponent implements OnInit {
     },
   ];
 
-  // Current category filter; null means show all
-  selectedCategory:
-    | 'Residential'
-    | 'Commercial'
-    | 'RanchAndRural'
-    | 'Both'
-    | null = 'Residential';
-
-  services: ServiceItem[] = [
-    {
-      title: 'Residential Electrical Services',
-      category: 'Residential',
-      icon: 'home',
-      description:
-        'Full-service residential electrical work—from panel upgrades and lighting installation to whole-home rewiring—done safely, efficiently, and up to code for Texas Hill Country homes.',
-      bullets: [
-        'Troubleshooting & diagnostics for flickering lights, tripped breakers, and dead outlets',
-        'Repairs & safety corrections by a licensed residential electrician',
-        'New construction & remodel wiring that meets current NEC standards',
-        'Ceiling fans, switches & outlets, smoke detectors, and indoor/outdoor lighting',
-      ],
-    },
-    {
-      title: 'Commercial Electrical Services',
-      category: 'Commercial',
-      icon: 'apartment',
-      description:
-        'Reliable commercial electrical services to keep your shop, office, or facility running safely, efficiently, and in compliance with electrical code.',
-      bullets: [
-        'Troubleshooting & diagnostics for circuits, equipment, and lighting',
-        'Tenant build-outs, improvements, and new commercial circuits',
-        'Code compliance upgrades, inspections, and violation corrections',
-        'Lighting retrofits, controls, and energy-efficient LED upgrades',
-        'Emergency & scheduled repairs to reduce business downtime',
-      ],
-    },
-    {
-      title: 'Smart Home & Controls',
-      category: 'Residential',
-      icon: 'devices',
-      description:
-        'Smart home electrical solutions that add comfort, convenience, and energy savings throughout your home.',
-      bullets: [
-        'Smart switches, dimmers, and scene-based lighting control',
-        'Smart thermostats, sensors, and linked comfort controls',
-        'Smart-ready wiring prep: dedicated circuits and clean power (where applicable)',
-        'Automation prep: wiring and power planning for future home upgrades',
-      ],
-    },
-    {
-      title: 'Ranch & Rural Electrical Services',
-      category: 'RanchAndRural',
-      icon: 'agriculture',
-      description:
-        'Dependable ranch and rural electrical services for barns, shops, and acreage properties across the Texas Hill Country.',
-      bullets: [
-        'Barn & outbuilding wiring, lighting, and panel work',
-        'Circuits troubleshooting',
-        'Equipment circuits & receptacles for tools, compressors, and ag equipment',
-        'Outdoor power distribution and trenching for gates, driveways, and remote structures',
-      ],
-    },
-    {
-      title: 'Electrical Troubleshooting & Repairs',
-      category: 'Both',
-      icon: 'troubleshoot',
-      description:
-        'Fast, thorough troubleshooting for electrical issues in homes, businesses, and rural properties across the Texas Hill Country.',
-      bullets: [
-        'Identify the cause of tripped breakers, overheated circuits, and nuisance shutdowns',
-        'Track down dead outlets, flickering lights, and intermittent power loss',
-        'Test and verify circuits, loads, and protective devices',
-        'Provide repair options, safety recommendations, and a clear path forward',
-      ],
-    },
-    {
-      title: 'Panel & Service Upgrades',
-      category: 'Both',
-      icon: 'electrical_services',
-      description:
-        'Modernize your electrical system for today’s loads and tomorrow’s needs with code-compliant panel and service upgrades.',
-      bullets: [
-        'Panel upgrades & replacements for added capacity and safety',
-        'New circuits & subpanels for shops, additions, and new equipment',
-        'Whole-home and whole-facility surge protection for sensitive electronics',
-        'Load calculations & capacity planning for future growth',
-      ],
-    },
-    {
-      title: 'Lighting Upgrades & Installation',
-      category: 'Both',
-      icon: 'lightbulb',
-      description:
-        'Custom interior and exterior lighting installation that enhances comfort, security, and energy efficiency.',
-      bullets: [
-        'LED upgrades, dimming solutions, and lighting controls',
-        'Landscape & architectural lighting for curb appeal',
-        'Security & motion lighting for homes, shops, and businesses',
-        'Garage, shop, barn, and outdoor lighting',
-      ],
-    },
-    {
-      title: 'Safety Inspections & Code Compliance',
-      category: 'Both',
-      icon: 'verified',
-      description:
-        'Comprehensive electrical safety inspections by a licensed electrician to help protect your family, property, or business.',
-      bullets: [
-        'Pre-purchase home inspections and electrical system reviews',
-        'Code compliance assessments for residential and commercial properties',
-        'Insurance & safety reports and electrical load analysis',
-        'Thermal checks and visual inspections to identify overheated circuits and hazards',
-      ],
-    },
-    {
-      title: '24/7 Emergency Electrical Service',
-      category: 'Both',
-      icon: 'warning',
-      description:
-        'When something goes wrong, our emergency electricians respond quickly to make things safe and restore power.',
-      bullets: [
-        'Power loss, tripped breakers, and partial outages',
-        'Burning smells, sparking outlets, and overheated panels',
-        'Storm, flood, or lightning-related electrical damage',
-        'Make-safe repairs, temporary solutions, and follow-up service planning',
-      ],
-    },
-  ];
-
   ngOnInit(): void {
     this.setupSeo();
     this.setupJsonLd();
@@ -353,124 +231,83 @@ export class ServicesOverviewComponent implements OnInit {
     window.location.href = `tel:${this.phoneNumber}`;
   }
 
-  // Derived list used by the template
-  get filteredServices(): ServiceItem[] {
-    if (!this.selectedCategory) return this.services;
-
-    if (this.selectedCategory === 'Residential') {
-      return this.services.filter(
-        (s) => s.category === 'Residential' || s.category === 'Both'
-      );
-    }
-
-    if (this.selectedCategory === 'RanchAndRural') {
-      return this.services.filter(
-        (s) => s.category === 'RanchAndRural' || s.category === 'Both'
-      );
-    }
-
-    return this.services.filter(
-      (s) => s.category === 'Commercial' || s.category === 'Both'
-    );
-  }
-
-  setCategoryFilter(
-    cat: 'Residential' | 'Commercial' | 'RanchAndRural' | 'Both'
-  ) {
-    this.selectedCategory = cat;
-  }
-
-  clearCategoryFilter() {
-    this.selectedCategory = null;
-  }
-
-  trackByTitle(_: number, item: { title: string }): string {
-    return item.title;
-  }
-
   private setupSeo(): void {
+    // @Nathaniel I need image url for seo here. Does this need to vary per page too?
     this.seo.setMetaTags({
       title: 'Electrical Services | Texas Hill Country | ProVolt Electric',
       description:
         'Explore ProVolt Electric’s residential, commercial, and ranch & rural electrical services across the Texas Hill Country—troubleshooting, repairs, panel upgrades, lighting, safety inspections, and emergency help.',
-      url: 'https://provoltelectricalservices.com/electrical-services',
+      canonicalUrl: 'https://provoltelectricalservices.com/electrical-services',
+      uniquePageImage: SiteData.homepageImageUrl,
       type: 'website',
       robots: 'index,follow',
     });
   }
 
   private setupJsonLd(): void {
-    const serviceJsonLd = {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      name: 'Electrical Services',
-      serviceType:
-        'Residential, commercial, and ranch & rural electrical services (repairs, upgrades, wiring, lighting, inspections)',
-      provider: {
-        '@type': 'Electrician',
-        name: 'ProVolt Electric',
-        url: 'https://provoltelectricalservices.com',
-      },
-      areaServed: [
-        { '@type': 'Place', name: 'Kerrville TX' },
-        { '@type': 'Place', name: 'Fredericksburg TX' },
-        { '@type': 'Place', name: 'Boerne TX' },
-        { '@type': 'Place', name: 'Bandera TX' },
-        { '@type': 'Place', name: 'Comfort TX' },
-        { '@type': 'Place', name: 'Helotes TX' },
-        { '@type': 'Place', name: 'Ingram TX' },
-        { '@type': 'Place', name: 'Hunt TX' },
-        { '@type': 'Place', name: 'Center Point TX' },
-        { '@type': 'Place', name: 'Texas Hill Country' },
-      ],
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'ProVolt Electric Services',
-        itemListElement: this.services.map((s) => ({
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: s.title,
-            description: s.description,
-          },
-        })),
-      },
-    };
+    const baseUrl = SiteData.baseUrl;
+    const pageUrl = FullSitePaths.electricalServices;
 
-    const faqJsonLd = {
+    const pageJsonLd = {
       '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: this.faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.question,
-        acceptedAnswer: { '@type': 'Answer', text: f.answer },
-      })),
-    };
-
-    const breadcrumbJsonLd = {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
+      '@graph': [
         {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: 'https://provoltelectricalservices.com',
+          '@type': 'CollectionPage',
+          '@id': `${pageUrl}#webpage`,
+          url: pageUrl,
+          name: 'Electrical Services Overview',
+          description:
+            'Explore ProVolt’s residential, commercial, and ranch & rural electrical services across the Texas Hill Country.',
+          isPartOf: { '@id': `${baseUrl}/#website` },
+          about: { '@id': `${baseUrl}/#business` },
+          breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+          mainEntity: { '@id': `${pageUrl}#catalog` },
+          inLanguage: 'en-US',
         },
+
         {
-          '@type': 'ListItem',
-          position: 2,
+          '@type': 'BreadcrumbList',
+          '@id': `${pageUrl}#breadcrumb`,
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Electrical Services',
+              item: pageUrl,
+            },
+          ],
+        },
+
+        {
+          '@type': 'OfferCatalog',
+          '@id': `${pageUrl}#catalog`,
           name: 'Electrical Services',
-          item: 'https://provoltelectricalservices.com/electrical-services',
+          provider: { '@id': `${baseUrl}/#business` },
+          itemListElement: this.services.map((s) => ({
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: s.title,
+              description: s.description,
+              provider: { '@id': `${baseUrl}/#business` },
+              url: s.routerLink ? `${baseUrl}${s.routerLink}` : undefined,
+            },
+          })),
+        },
+
+        {
+          '@type': 'FAQPage',
+          '@id': `${pageUrl}#faq`,
+          mainEntity: this.faqs.map((f) => ({
+            '@type': 'Question',
+            name: f.question,
+            acceptedAnswer: { '@type': 'Answer', text: f.answer },
+          })),
         },
       ],
     };
 
-    this.seo.setJsonLd('json-ld-services-overview-provolt', serviceJsonLd);
-    this.seo.setJsonLd('json-ld-services-overview-faq-provolt', faqJsonLd);
-    this.seo.setJsonLd(
-      'json-ld-services-overview-breadcrumb-provolt',
-      breadcrumbJsonLd
-    );
+    this.seo.setPageJsonLd(pageJsonLd);
   }
 }

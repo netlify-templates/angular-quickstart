@@ -11,6 +11,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 import { SeoService } from 'src/app/shared/services/seo.service';
 import { OfferedServicesPageComponent } from 'src/app/shared/components/offered-services-page/offered-services-page.component';
+import { SiteData } from 'src/app/shared/configs/site-data.config';
+import { FullSitePaths } from 'src/app/shared/configs/site-urls.config';
 
 interface ServiceItem {
   title: string;
@@ -59,14 +61,13 @@ export class CommercialElectricianComponent implements OnInit {
   constructor(private seo: SeoService) {}
 
   // @Nathaniel update this phone number
-  private readonly phoneNumber = '8309552909';
+  private readonly phoneNumber = SiteData.phoneNumber;
 
   serviceTitle = 'Commercial Electrical Services';
   footerText =
     'Share your location and scope — we’ll provide a clear plan and quote for your project.';
   hero = {
     title: "ProVolt's Commercial Electrical Services in the Texas Hill Country",
-    // cardTitle: 'ProVolt Commercial Electrical Services Overview',
     subtitle:
       'Need a reliable commercial electrician in Kerrville or the Texas Hill Country? We support businesses and property managers throughout Kerrville, Fredericksburg, Boerne, Bandera, Helotes, Comfort, Center Point, Ingram, and Hunt with organized, code-compliant electrical work designed to reduce downtime. From tenant build-outs and lighting upgrades to troubleshooting and equipment circuits, we keep your space powered, safe, and ready for operations.',
     trustLine:
@@ -424,93 +425,120 @@ export class CommercialElectricianComponent implements OnInit {
       title:
         'Commercial Electrician | Texas Hill Country | ProVolt Electrical Services',
       description:
-        'Code‑compliant commercial electrical: troubleshooting, panel/service upgrades, lighting, dedicated circuits, and emergency work. Serving the Hill Country.',
-      url: 'https://provoltelectricalservices.com/electrical-services/commercial-electrician',
+        'Code-compliant commercial electrical work: troubleshooting, tenant build-outs, panel/service upgrades, lighting retrofits, and dedicated equipment circuits across the Texas Hill Country.',
+      canonicalUrl: FullSitePaths.commercialElectrician,
+      uniquePageImage: SiteData.homepageImageUrl,
       type: 'website',
       robots: 'index,follow',
     });
   }
 
   private setupJsonLd(): void {
-    const serviceJsonLd = {
+    const baseUrl = SiteData.baseUrl;
+    const pageUrl = FullSitePaths.commercialElectrician;
+    const commercialServices = this.services;
+
+    const pageJsonLd = {
       '@context': 'https://schema.org',
-      '@type': 'Service',
-      name: 'Commercial Electrical Services',
-      serviceType:
-        'Commercial electrical repairs, upgrades, lighting, dedicated circuits, and emergency service',
-      provider: {
-        '@type': 'Electrician',
-        name: 'ProVolt Electric',
-        url: 'https://provoltelectricalservices.com',
-      },
-      areaServed: [
-        { '@type': 'Place', name: 'Kerrville TX' },
-        { '@type': 'Place', name: 'Fredericksburg TX' },
-        { '@type': 'Place', name: 'Boerne TX' },
-        { '@type': 'Place', name: 'Bandera TX' },
-        { '@type': 'Place', name: 'Comfort TX' },
-        { '@type': 'Place', name: 'Helotes TX' },
-        { '@type': 'Place', name: 'Ingram TX' },
-        { '@type': 'Place', name: 'Hunt TX' },
-        { '@type': 'Place', name: 'Center Point TX' },
-        { '@type': 'Place', name: 'Texas Hill Country' },
-      ],
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Commercial Electrical Services',
-        itemListElement: this.services
-          .filter((s) => s.category === 'Commercial' || s.category === 'Both')
-          .map((s) => ({
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: s.title,
-              description: s.description,
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          '@id': `${pageUrl}#webpage`,
+          url: pageUrl,
+          name: 'ProVolt Electrical Services | Commercial Electrician | Texas Hill Country',
+          description: this.hero?.subtitle,
+          inLanguage: 'en-US',
+
+          isPartOf: { '@id': `${baseUrl}/#website` },
+          about: { '@id': `${baseUrl}/#business` },
+
+          breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+          mainEntity: { '@id': `${pageUrl}#service` },
+
+          // optional: helpful links on the page (your “popularCommercialJobs”)
+          // significantLink: this.popularCommercialJobs.map(
+          //   (j) => `${baseUrl}${j.path}`
+          // ),
+        },
+
+        // Breadcrumbs
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${pageUrl}#breadcrumb`,
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Electrical Services',
+              item: `${baseUrl}/electrical-services`,
             },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: 'Commercial Electrician',
+              item: pageUrl,
+            },
+          ],
+        },
+
+        // Main service entity for the page
+        {
+          '@type': 'Service',
+          '@id': `${pageUrl}#service`,
+          name: 'Commercial Electrical Services',
+          serviceType:
+            'Commercial electrical troubleshooting, tenant build-outs/finish-outs, panel/service upgrades, lighting retrofits, dedicated equipment circuits, inspections, and code-compliant repairs',
+
+          provider: { '@id': `${baseUrl}/#business` },
+
+          areaServed: [
+            {
+              '@type': 'GeoCircle',
+              geoMidpoint: {
+                '@type': 'GeoCoordinates',
+                latitude: 30.0474,
+                longitude: -99.1403,
+              },
+              geoRadius: '60 mi',
+            },
+          ],
+
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            '@id': `${pageUrl}#catalog`,
+            name: 'Commercial Electrical Services Catalog',
+            itemListElement: commercialServices.map((s) => ({
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: s.title,
+                description: s.description,
+                provider: { '@id': `${baseUrl}/#business` },
+              },
+            })),
+          },
+
+          potentialAction: {
+            '@type': 'ContactAction',
+            target: `${baseUrl}/contact-us`,
+          },
+        },
+
+        // FAQ (OK to include; just don’t expect Google FAQ rich results for most non-gov/health sites)
+        // Google limits FAQ rich results to authoritative gov/health sites. :contentReference[oaicite:3]{index=3}
+        {
+          '@type': 'FAQPage',
+          '@id': `${pageUrl}#faq`,
+          mainEntity: this.faqs.map((f) => ({
+            '@type': 'Question',
+            name: f.question,
+            acceptedAnswer: { '@type': 'Answer', text: f.answer },
           })),
-      },
-    };
-
-    const faqJsonLd = {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: this.faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.question,
-        acceptedAnswer: { '@type': 'Answer', text: f.answer },
-      })),
-    };
-
-    const breadcrumbJsonLd = {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: 'https://provoltelectricalservices.com',
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Services',
-          item: 'https://provoltelectricalservices.com/services',
-        },
-        {
-          '@type': 'ListItem',
-          position: 3,
-          name: 'Commercial Electrician',
-          item: 'https://provoltelectricalservices.com/electrical-services/commercial-electrician',
         },
       ],
     };
 
-    this.seo.setJsonLd('json-ld-commercial-service-provolt', serviceJsonLd);
-    this.seo.setJsonLd('json-ld-commercial-faq-provolt', faqJsonLd);
-    this.seo.setJsonLd(
-      'json-ld-commercial-breadcrumb-provolt',
-      breadcrumbJsonLd
-    );
+    this.seo.setPageJsonLd(pageJsonLd);
   }
 }

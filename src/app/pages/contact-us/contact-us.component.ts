@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -15,7 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { SeoService } from 'src/app/shared/services/seo.service';
-
+import { SiteData } from 'src/app/shared/configs/site-data.config';
+import { FullSitePaths } from 'src/app/shared/configs/site-urls.config';
 @Component({
   selector: 'app-contact-us',
   standalone: true,
@@ -33,15 +34,14 @@ import { SeoService } from 'src/app/shared/services/seo.service';
     MatChipsModule,
   ],
 })
-export class ContactUsComponent implements OnInit, OnDestroy {
+export class ContactUsComponent implements OnInit {
   contactForm: FormGroup;
 
-  readonly phoneNumber = '(830) 955-2909';
-  readonly phoneNumber02 = '+1-830-955-2909';
-  // @Nathaniel TODO: update email
-  readonly emailAddress = 'service@provoltelectricalservices.com';
-
-  private readonly jsonLdId = 'json-ld-contact';
+  readonly phoneNumber = SiteData.phoneNumber;
+  readonly phoneNumber02 = SiteData.phoneNumberE164;
+  readonly baseUrl = SiteData.baseUrl; // "https://provoltelectricalservices.com"
+  readonly pageUrl = FullSitePaths.contactUs;
+  readonly emailAddress = SiteData.email;
 
   constructor(private fb: FormBuilder, private seo: SeoService) {
     this.contactForm = this.fb.group({
@@ -58,56 +58,80 @@ export class ContactUsComponent implements OnInit, OnDestroy {
       title:
         'Contact ProVolt Electrical Services | Hill Country Electrician Near You',
       description:
-        'Need a licensed electrician in the Texas Hill Country? Contact ProVolt Electrical Services for fast, reliable electrical repairs, panel upgrades, lighting, and more in Fredericksburg, Kerrville, Boerne, Bandera, and surrounding areas.',
+        'Need a licensed electrician in the Texas Hill Country? Contact ProVolt Electrical Services for organized, code-compliant electrical repairs, panel upgrades, lighting, and more in Kerrville, Fredericksburg, Boerne, Bandera, and surrounding areas.',
+      canonicalUrl: this.pageUrl,
+      uniquePageImage: SiteData.homepageImageUrl,
       type: 'website',
+      robots: 'index,follow',
     });
-    this.seo.setJsonLd(this.jsonLdId, {
-      '@context': 'https://schema.org',
-      '@type': 'ContactPage',
-      name: 'Contact ProVolt Electrical Services',
-      description:
-        'Contact page for ProVolt Electrical Services, licensed electrician serving the Texas Hill Country.',
-      url: this.getCurrentUrlSafe(),
-      about: {
-        '@type': 'LocalBusiness',
-        '@id': '#provolt-electrical',
-        name: 'ProVolt Electrical Services',
-        telephone: this.phoneNumber02,
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Texas Hill Country',
-          addressRegion: 'TX',
-          addressCountry: 'US',
-        },
-        areaServed: [
-          'Fredericksburg TX',
-          'Kerrville TX',
-          'Boerne TX',
-          'Bandera TX',
-          'Comfort TX',
-          'Center Point TX',
-          'Ingram TX',
-          'Hunt TX',
-          'Helotes TX',
-          'Texas Hill Country',
-        ],
-        slogan:
-          'Fast, reliable electrical repairs, panel upgrades, lighting, and more in Texas Hill Country',
-        url: 'https://provoltelectricalservices.com',
-      },
-      potentialAction: {
-        '@type': 'ContactAction',
-        // target: [`tel:+18309552909`, `mailto:${this.emailAddress}`],
-        target: [`tel:+18309552909`],
-      },
-    });
-  }
 
-  private getCurrentUrlSafe(): string {
-    // Guard for SSR if needed
-    return typeof window !== 'undefined'
-      ? window.location.href
-      : 'https://provoltelectricalservices.com/contact';
+    const pageJsonLd = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'ContactPage',
+          '@id': `${this.pageUrl}#webpage`,
+          url: this.pageUrl,
+          name: 'Contact ProVolt Electrical Services',
+          description:
+            'Request service, ask a question, or get a quote from ProVolt Electrical Services serving the Texas Hill Country.',
+          inLanguage: 'en-US',
+
+          isPartOf: { '@id': `${this.baseUrl}/#website` },
+          about: { '@id': `${this.baseUrl}/#business` },
+          mainEntity: { '@id': `${this.baseUrl}/#business` },
+
+          breadcrumb: { '@id': `${this.pageUrl}#breadcrumb` },
+
+          potentialAction: [
+            {
+              '@type': 'ContactAction',
+              target: `tel:${this.phoneNumber02}`,
+            },
+            {
+              '@type': 'ContactAction',
+              target: `mailto:${this.emailAddress}`,
+            },
+          ],
+        },
+
+        // 2) Breadcrumbs
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${this.pageUrl}#breadcrumb`,
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: this.baseUrl,
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Contact',
+              item: this.pageUrl,
+            },
+          ],
+        },
+
+        // 3) Optional: lightweight “contact point patch” on the global business node
+        // (This does not redefine the business; it adds/overrides contactPoint fields.)
+        {
+          '@id': `${this.baseUrl}/#business`,
+          contactPoint: [
+            {
+              '@type': 'ContactPoint',
+              contactType: 'customer service',
+              telephone: this.phoneNumber02,
+              email: this.emailAddress,
+              availableLanguage: ['en'],
+            },
+          ],
+        },
+      ],
+    };
+    this.seo.setPageJsonLd(pageJsonLd);
   }
 
   // onSubmit(): void {
@@ -118,8 +142,4 @@ export class ContactUsComponent implements OnInit, OnDestroy {
 
   //   // @Nathaniel TODO: Wire this up to your backend / email service (HTTP POST or 3rd-party form service).
   //   // console.log('Contact form submitted', this.contactForm.value);
-
-  ngOnDestroy(): void {
-    this.seo.removeJsonLd(this.jsonLdId);
-  }
 }

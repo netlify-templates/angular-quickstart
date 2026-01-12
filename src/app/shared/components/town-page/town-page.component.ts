@@ -18,7 +18,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { SeoService } from '../../services/seo.service';
 import { CtaButtonComponent } from '../cta-button/cta-button.component';
 import { TownPageConfig } from '../../configs/town-page.config';
-import { SitePaths as ImportedSitePaths } from '../../configs/site-urls.config';
+import { TownJsonLdService } from '../../services/town-jsonld.service';
+import { SiteData } from 'src/app/shared/configs/site-data.config';
+import { TOWN_GEO } from 'src/app/shared/configs/town-geo.config';
+import { TOWN_META_SEO_CONFIGS } from '../../configs/town-page-meta-seo';
+import { SitePaths } from '../../configs/site-urls.config';
 
 export interface ServiceItem {
   label: string;
@@ -52,18 +56,20 @@ export interface TownSeoConfig {
   styleUrls: ['./town-page.component.scss'],
 })
 export class TownPageComponent implements OnInit, OnChanges {
-  readonly SitePaths = ImportedSitePaths;
+  readonly SitePaths = SitePaths; // make SitePaths accessible in template
   @Input() townConfig!: TownPageConfig;
 
-  constructor(private seo: SeoService) {}
+  constructor(private seo: SeoService, private townJsonLd: TownJsonLdService) {}
 
   ngOnInit(): void {
     this.applySeo();
+    this.setupJsonLd();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['townConfig'] && !changes['townConfig'].firstChange) {
       this.applySeo();
+      this.setupJsonLd();
     }
   }
 
@@ -99,30 +105,34 @@ export class TownPageComponent implements OnInit, OnChanges {
   // ------- SEO -------
 
   private applySeo(): void {
-    if (!this.townConfig?.seo) return;
-
-    const {
-      metaTitle,
-      metaDescription,
-      pageUrl,
-      ogImage,
-      robots,
-      jsonLdId,
-      jsonLd,
-    } = this.townConfig.seo;
+    const cfg = this.townConfig;
+    const metaSeo = TOWN_META_SEO_CONFIGS[cfg.townKey];
 
     this.seo.setMetaTags({
-      title: metaTitle,
-      description: metaDescription,
-      url: pageUrl,
-      image: ogImage,
+      title: metaSeo.metaTitle,
+      description: metaSeo.metaDescription,
+      canonicalUrl: metaSeo.canonicalUrl,
+      uniquePageImage: metaSeo.uniquePageImage,
       type: 'website',
-      robots: robots ?? 'index,follow',
+      robots: 'index,follow',
+    });
+  }
+
+  // ------- JSON-LD -------
+  private setupJsonLd(): void {
+    const cfg = this.townConfig;
+
+    const jsonLd = this.townJsonLd.buildServiceAreaJsonLd({
+      baseUrl: SiteData.baseUrl,
+      cfg,
+      pageTitle: cfg.heroTitle,
+      pageDescription: cfg.heroSubtitle,
+      geo: TOWN_GEO[cfg.urlSlug],
+      serviceAreasHubPath: '/service-areas',
+      includeFaq: true,
     });
 
-    if (jsonLd && jsonLdId) {
-      this.seo.setJsonLd(jsonLdId, jsonLd);
-    }
+    this.seo.setPageJsonLd(jsonLd);
   }
 
   // ------- UX actions -------

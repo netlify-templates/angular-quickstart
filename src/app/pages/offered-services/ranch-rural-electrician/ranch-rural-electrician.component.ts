@@ -12,6 +12,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { SeoService } from 'src/app/shared/services/seo.service';
 import { AreasWeServeComponent } from 'src/app/shared/components/areas-we-serve/areas-we-serve.component';
 import { OfferedServicesPageComponent } from 'src/app/shared/components/offered-services-page/offered-services-page.component';
+import { SiteData } from 'src/app/shared/configs/site-data.config';
+import { FullSitePaths } from 'src/app/shared/configs/site-urls.config';
 
 interface ServiceItem {
   title: string;
@@ -58,8 +60,6 @@ interface FaqItem {
 })
 export class RanchRuralElectricianComponent implements OnInit {
   constructor(private seo: SeoService) {}
-
-  private readonly phoneNumber = '8309285046';
 
   serviceTitle = 'Ranch & Rural Electrical Services';
   footerText =
@@ -390,105 +390,118 @@ export class RanchRuralElectricianComponent implements OnInit {
     this.setupJsonLd();
   }
 
-  trackByTitle(_: number, item: { title: string }): string {
-    return item.title;
-  }
-
   private setupSeo(): void {
     this.seo.setMetaTags({
       title:
         'Ranch & Rural Electrician | Texas Hill Country | ProVolt Electrical Services',
       description:
         'Ranch and rural electrical services for barns, shops, outdoor power, trenching, and upgrades across the Texas Hill Country. Licensed & insured. Call now.',
-      url: 'https://provoltelectricalservices.com/electrical-services/ranch-rural-electrician',
+      canonicalUrl: FullSitePaths.ranchRuralElectrician,
+      uniquePageImage: SiteData.homepageImageUrl,
       type: 'website',
       robots: 'index,follow',
-      // @Nathaniel I will need to add these images to the assets folder
     });
   }
 
   private setupJsonLd(): void {
-    const serviceJsonLd = {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      name: 'Ranch & Rural Electrical Services',
-      serviceType:
-        'Ranch and rural electrical: barns, shops, gates, long‑distance feeders, and weather‑ready installs',
-      provider: {
-        '@type': 'Electrician',
-        name: 'ProVolt Electric',
-        url: 'https://provoltelectricalservices.com',
-      },
-      areaServed: [
-        { '@type': 'Place', name: 'Kerrville TX' },
-        { '@type': 'Place', name: 'Fredericksburg TX' },
-        { '@type': 'Place', name: 'Boerne TX' },
-        { '@type': 'Place', name: 'Bandera TX' },
-        { '@type': 'Place', name: 'Comfort TX' },
-        { '@type': 'Place', name: 'Helotes TX' },
-        { '@type': 'Place', name: 'Ingram TX' },
-        { '@type': 'Place', name: 'Hunt TX' },
-        { '@type': 'Place', name: 'Center Point TX' },
-        { '@type': 'Place', name: 'Texas Hill Country' },
-      ],
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Ranch & Rural Electrical Services',
-        itemListElement: this.services
-          .filter(
-            (s) => s.category === 'RanchAndRural' || s.category === 'Both'
-          )
-          .map((s) => ({
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: s.title,
-              description: s.description,
-            },
-          })),
-      },
-    };
+    const baseUrl = SiteData.baseUrl;
+    const pageUrl = FullSitePaths.ranchRuralElectrician;
 
-    const faqJsonLd = {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: this.faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.question,
-        acceptedAnswer: { '@type': 'Answer', text: f.answer },
-      })),
-    };
-
-    const breadcrumbJsonLd = {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: 'https://provoltelectricalservices.com',
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Electrical Services',
-          item: 'https://provoltelectricalservices.com/electrical-services',
-        },
-        {
-          '@type': 'ListItem',
-          position: 3,
-          name: 'Ranch & Rural Electrician',
-          item: 'https://provoltelectricalservices.com/electrical-services/ranch-rural-electrician',
-        },
-      ],
-    };
-
-    this.seo.setJsonLd('json-ld-ranch-rural-service-provolt', serviceJsonLd);
-    this.seo.setJsonLd('json-ld-ranch-rural-faq-provolt', faqJsonLd);
-    this.seo.setJsonLd(
-      'json-ld-ranch-rural-breadcrumb-provolt',
-      breadcrumbJsonLd
+    const ranchServices = this.services.filter(
+      (s) => s.category === 'RanchAndRural' || s.category === 'Both'
     );
+
+    // Optional: if you keep "popularRanchRuralJobs", exclude anything you DON'T actually offer.
+    // Example: if you don't offer emergency, remove that link card from the UI and from here.
+    // const significantLinks = (this.popularRanchRuralJobs || [])
+    //   .filter((j) => j.path !== '/emergency-electrician') // remove if not offered
+    //   .map((j) => `${baseUrl}${j.path}`);
+
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          '@id': `${pageUrl}#webpage`,
+          url: pageUrl,
+          name: 'ProVolt Electrical Services | Ranch & Rural Electrician | Texas Hill Country',
+          description: this.hero?.subtitle,
+          inLanguage: 'en-US',
+
+          isPartOf: { '@id': `${baseUrl}/#website` },
+          about: { '@id': `${baseUrl}/#business` },
+
+          breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+          mainEntity: { '@id': `${pageUrl}#service` },
+
+          // @Nathaniel have these be the areas served
+          // Nice-to-have: internal service links shown on the page
+          // ...(significantLinks.length
+          //   ? { significantLink: significantLinks }
+          //   : {}),
+        },
+
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${pageUrl}#breadcrumb`,
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Electrical Services',
+              item: `${baseUrl}/electrical-services`,
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: 'Ranch & Rural Electrician',
+              item: pageUrl,
+            },
+          ],
+        },
+
+        {
+          '@type': 'Service',
+          '@id': `${pageUrl}#service`,
+          name: 'Ranch & Rural Electrical Services',
+          serviceType:
+            'Ranch and rural electrical for barns, shops, outbuildings, long-run outdoor power, subpanels, dedicated equipment circuits, RV hookups, lighting, troubleshooting, surge protection, inspections, and code-compliant upgrades',
+          provider: { '@id': `${baseUrl}/#business` },
+
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            '@id': `${pageUrl}#catalog`,
+            name: 'Ranch & Rural Electrical Services Catalog',
+            itemListElement: ranchServices.map((s) => ({
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: s.title,
+                description: s.description,
+                provider: { '@id': `${baseUrl}/#business` },
+              },
+            })),
+          },
+
+          potentialAction: {
+            '@type': 'ContactAction',
+            target: `${baseUrl}/contact-us`,
+          },
+        },
+
+        {
+          '@type': 'FAQPage',
+          '@id': `${pageUrl}#faq`,
+          mainEntity: (this.faqs || []).map((f) => ({
+            '@type': 'Question',
+            name: f.question,
+            acceptedAnswer: { '@type': 'Answer', text: f.answer },
+          })),
+        },
+      ],
+    };
+
+    this.seo.setPageJsonLd(jsonLd);
   }
 }

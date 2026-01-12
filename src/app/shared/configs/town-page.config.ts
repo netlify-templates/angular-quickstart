@@ -1,3 +1,5 @@
+import { TownKey } from './town-page-meta-seo';
+
 export interface LocalProject {
   title: string;
   summary: string;
@@ -19,12 +21,6 @@ export interface FaqItem {
   answer: string;
 }
 
-export interface RelatedLink {
-  label: string;
-  routerLink: string;
-  icon?: string; // mat-icon name
-}
-
 export interface LocalContext {
   homesAndProperties?: string[]; // town-specific: housing styles / property types
   commonElectricalIssues?: string[]; // town-specific issues you actually see
@@ -35,48 +31,39 @@ export interface ServiceItem {
   icon: string;
 }
 
-export interface TownSeoConfig {
-  metaTitle: string;
-  metaDescription: string;
-  pageUrl: string;
-  ogImage?: string;
-  robots?: string;
-  jsonLdId?: string;
-  jsonLd?: unknown;
-  jsonLdScripts?: Array<{ id: string; data: unknown }>;
-}
-
 export interface TownPageConfig {
+  townKey: TownKey;
   townName: string;
   stateAbbr: string;
   regionLabel: string;
   phoneNumber: string;
-  heroTitle?: string;
-  heroSubtitle?: string;
+  heroTitle: string;
+  heroSubtitle: string;
   heroBadgeText?: string;
   heroBullets: string[];
-  heroCTAText?: string;
+  heroCTAText: string;
 
-  residentialHeading?: string;
-  residentialSubheading?: string;
-  residentialIntro?: string;
+  residentialHeading: string;
+  residentialSubheading: string;
+  residentialIntro: string;
+  // @Nathaniel I can get rid of these links
+  residentialLink: string;
   residentialServices: ServiceItem[];
 
-  ranchHeading?: string;
-  ranchSubheading?: string;
-  ranchIntro?: string;
-  ranchLink?: string;
-  ranchServices?: ServiceItem[];
+  ranchHeading: string;
+  ranchSubheading: string;
+  ranchIntro: string;
+  ranchLink: string;
+  ranchServices: ServiceItem[];
 
-  commercialHeading?: string;
-  commercialSubheading?: string;
-  commercialIntro?: string;
+  commercialHeading: string;
+  commercialSubheading: string;
+  commercialIntro: string;
   commercialLink: string;
   commercialServices: ServiceItem[];
 
   areasServed: string[];
   urlSlug: string;
-  seo?: TownSeoConfig;
 
   neighborhoods: string[];
   landmarks: string[];
@@ -90,115 +77,7 @@ export interface TownPageConfig {
 // Shared constants
 const BASE_DOMAIN = 'https://provoltelectricalservices.com';
 const PHONE_DISPLAY = '(830) 928-5046';
-const PHONE_E164 = '+18309285046';
 const DEFAULT_REGION = 'Texas Hill Country';
-const DEFAULT_OG_IMAGE = `${BASE_DOMAIN}/assets/og-default.jpg`; // TODO: replace if needed
-
-// Helpers (avoid URL drift)
-const pageUrlFromSlug = (slug: string) => `${BASE_DOMAIN}${slug}`;
-const electricianIdFromSlug = (slug: string) =>
-  `${BASE_DOMAIN}${slug}#electrician`;
-
-// SEO builders (consistent canonical/og:url/jsonld)
-function buildElectricianSeo(args: {
-  slug: string;
-  townName: string;
-  metaTitle: string;
-  metaDescription: string;
-  descriptionLong: string;
-  serviceType: string[];
-  robots?: string;
-  breadcrumb?: { serviceAreasUrl: string; serviceAreasLabel?: string };
-  addressLocality: string;
-  extra?: Partial<Record<string, unknown>>;
-  extraJsonLdScripts?: Array<{ id: string; data: unknown }>;
-}): TownSeoConfig {
-  const {
-    slug,
-    townName,
-    metaTitle,
-    metaDescription,
-    descriptionLong,
-    serviceType,
-    robots = 'index,follow',
-    breadcrumb,
-    addressLocality,
-    extra,
-    extraJsonLdScripts = [],
-  } = args;
-
-  const pageUrl = pageUrlFromSlug(slug);
-
-  const electricianSchema: any = {
-    '@context': 'https://schema.org',
-    '@type': 'Electrician',
-    '@id': electricianIdFromSlug(slug),
-    name: 'ProVolt Electrical Services',
-    url: pageUrl,
-    description: descriptionLong,
-    telephone: PHONE_E164,
-    image: DEFAULT_OG_IMAGE,
-    priceRange: '$$',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality,
-      addressRegion: 'TX',
-      addressCountry: 'US',
-    },
-    areaServed: { '@type': 'Place', name: `${townName}, TX` },
-    serviceType,
-    ...(extra ?? {}),
-  };
-
-  const scripts: Array<{ id: string; data: unknown }> = [
-    {
-      id: `json-ld-town-${slugToIdSuffix(slug)}-electrician`,
-      data: electricianSchema,
-    },
-    ...extraJsonLdScripts,
-  ];
-
-  if (breadcrumb?.serviceAreasUrl) {
-    scripts.push({
-      id: `json-ld-town-${slugToIdSuffix(slug)}-breadcrumb`,
-      data: {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Home',
-            item: `${BASE_DOMAIN}/`,
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: breadcrumb.serviceAreasLabel ?? 'Service Areas',
-            item: breadcrumb.serviceAreasUrl,
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: `${townName}, TX`,
-            item: pageUrl,
-          },
-        ],
-      },
-    });
-  }
-
-  return {
-    metaTitle,
-    metaDescription,
-    pageUrl,
-    ogImage: DEFAULT_OG_IMAGE,
-    robots,
-    jsonLdId: `json-ld-${slugToIdSuffix(slug)}`,
-    jsonLd: electricianSchema,
-    jsonLdScripts: scripts,
-  };
-}
 
 function slugToIdSuffix(slug: string): string {
   // "/service-areas/kerrville-tx-electrician" -> "service-areas-kerrville-tx-electrician"
@@ -211,37 +90,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
   kerrville: (() => {
     const slug = '/service-areas/kerrville-tx-electrician';
 
-    const seo = buildElectricianSeo({
-      slug,
-      townName: 'Kerrville',
-      addressLocality: 'Kerrville',
-      metaTitle:
-        'Electrician in Kerrville, TX | Panel Upgrades, Repairs & Lighting',
-      metaDescription:
-        'Licensed electrician in Kerrville, TX for troubleshooting, panel upgrades, surge protection, lighting, and ranch/shop wiring. Call ProVolt Electrical Services.',
-      descriptionLong:
-        'ProVolt Electrical Services provides residential, commercial, and ranch & rural electrical work in Kerrville, TX—serving Hill Country homes, small businesses, and rural properties near the Guadalupe River with clean, code-compliant workmanship.',
-      serviceType: [
-        'Electrical troubleshooting and repairs',
-        'Electrical panel upgrades',
-        'Surge protection',
-        'Lighting installation and upgrades',
-        'Ranch and rural property electrical',
-        'Commercial electrical services',
-      ],
-      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
-      extra: {
-        // More specific "areaServed" improves locality signals without keyword-stuffing.
-        areaServed: [
-          { '@type': 'City', name: 'Kerrville, TX' },
-          { '@type': 'City', name: 'Ingram, TX' },
-          { '@type': 'City', name: 'Hunt, TX' },
-          { '@type': 'City', name: 'Center Point, TX' },
-        ],
-      },
-    });
-
     return {
+      townKey: 'kerrville',
       townName: 'Kerrville',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
@@ -265,6 +115,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Safe repairs, tidy installs, and upgrades that last.',
       residentialIntro:
         'Kerrville homes often need a mix of practical fixes and smart capacity planning—whether it’s recurring breaker trips, aging panels, or new appliance loads. We troubleshoot the root cause, install cleanly, and leave everything inspection-ready and neat.',
+      residentialLink: '/electrical-services/residential-electrician',
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
@@ -310,7 +161,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Long runs, outbuildings, and equipment loads—done right.',
       ranchIntro:
         'Need dependable power across a property in Kerrville? We wire barns, shops, and outbuildings with the details that matter—proper conductor sizing, clean subpanel work, safe outdoor power, and circuits built for heavy 240V equipment.',
-      ranchLink: '/electrical-services/ranch-electrician',
+      ranchLink: '/electrical-services/ranch-rural-electrician',
       ranchServices: [
         { label: 'Barn & Shop Wiring', icon: 'warehouse' },
         {
@@ -335,7 +186,6 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Fredericksburg',
       ],
       urlSlug: slug,
-      seo,
 
       neighborhoods: [
         'Downtown Kerrville',
@@ -448,38 +298,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
   ingram: (() => {
     const slug = '/service-areas/ingram-tx-electrician';
 
-    const seo = buildElectricianSeo({
-      slug,
-      townName: 'Ingram',
-      addressLocality: 'Ingram',
-      metaTitle:
-        'Electrician in Ingram, TX | Repairs, Panels, Outdoor Power & Lighting',
-      metaDescription:
-        'Electrician in Ingram, TX for troubleshooting, panel upgrades, outdoor outlets/GFCI, lighting, dedicated circuits, and shop wiring. ProVolt Electrical Services—licensed and insured.',
-      descriptionLong:
-        'ProVolt Electrical Services serves Ingram, TX with residential and rural-property electrical work—focused on safe troubleshooting, panel capacity, outdoor power and lighting, and clean wiring for garages and workshops in the Texas Hill Country.',
-      serviceType: [
-        'Electrical troubleshooting and repairs',
-        'Electrical panel upgrades',
-        'Outdoor outlets and GFCI upgrades',
-        'Lighting installation and upgrades',
-        'Dedicated circuits for appliances and equipment',
-        'Shop and outbuilding wiring',
-        'Surge protection',
-      ],
-      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
-      extra: {
-        // More specific "areaServed" improves locality signals without keyword-stuffing.
-        areaServed: [
-          { '@type': 'City', name: 'Ingram, TX' },
-          { '@type': 'City', name: 'Kerrville, TX' },
-          { '@type': 'City', name: 'Hunt, TX' },
-          { '@type': 'City', name: 'Center Point, TX' },
-        ],
-      },
-    });
-
     return {
+      townKey: 'ingram',
       townName: 'Ingram',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
@@ -503,6 +323,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Straightforward fixes and upgrades—done clean and safe.',
       residentialIntro:
         'Ingram homeowners often need reliable troubleshooting plus practical improvements for everyday living and property use. We focus on safe protection, neat workmanship, and solutions that hold up over time.',
+      residentialLink: '/electrical-services/residential-electrician',
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         { label: 'Outlet/Switch Replacement & Updates', icon: 'toggle_on' },
@@ -541,7 +362,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Rural power built for distance, weather, and heavy use.',
       ranchIntro:
         'Ingram properties often need dependable power across multiple structures. We install outdoor circuits, subpanels, and equipment-ready 240V power with attention to safety, grounding, and clean layout.',
-      ranchLink: '/electrical-services/ranch-electrician',
+      ranchLink: '/electrical-services/ranch-rural-electrician',
       ranchServices: [
         { label: 'Shop & Outbuilding Wiring', icon: 'warehouse' },
         {
@@ -566,7 +387,6 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Fredericksburg',
       ],
       urlSlug: slug,
-      seo,
 
       neighborhoods: [
         'Ingram (in town)',
@@ -673,38 +493,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
   centerPoint: (() => {
     const slug = '/service-areas/center-point-tx-electrician';
 
-    const seo = buildElectricianSeo({
-      slug,
-      townName: 'Center Point',
-      addressLocality: 'Center Point',
-      metaTitle:
-        'Electrician in Center Point, TX | Repairs, Panels, Outdoor Power & Lighting',
-      metaDescription:
-        'Electrician in Center Point, TX for troubleshooting, panel upgrades, outdoor outlets/GFCI, lighting, dedicated circuits, and shop wiring. ProVolt Electrical Services—licensed and insured.',
-      descriptionLong:
-        'ProVolt Electrical Services serves Center Point, TX with residential and rural-property electrical work—focused on safe troubleshooting, panel capacity, outdoor power and lighting, and clean wiring for garages and workshops in the Texas Hill Country.',
-      serviceType: [
-        'Electrical troubleshooting and repairs',
-        'Electrical panel upgrades',
-        'Outdoor outlets and GFCI upgrades',
-        'Lighting installation and upgrades',
-        'Dedicated circuits for appliances and equipment',
-        'Shop and outbuilding wiring',
-        'Surge protection',
-      ],
-      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
-      extra: {
-        // More specific "areaServed" improves locality signals without keyword-stuffing.
-        areaServed: [
-          { '@type': 'City', name: 'Ingram, TX' },
-          { '@type': 'City', name: 'Kerrville, TX' },
-          { '@type': 'City', name: 'Hunt, TX' },
-          { '@type': 'City', name: 'Center Point, TX' },
-        ],
-      },
-    });
-
     return {
+      townKey: 'centerPoint',
       townName: 'Center Point',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
@@ -727,6 +517,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       residentialSubheading: 'Reliable power with modern safety protection.',
       residentialIntro:
         'Center Point homes and properties often blend indoor needs with outdoor use—shops, sheds, and added loads. We troubleshoot issues, improve safety protection, and install upgrades that stay dependable.',
+      residentialLink: '/electrical-services/residential-electrician',
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         { label: 'GFCI/AFCI Safety Upgrades', icon: 'verified' },
@@ -764,7 +555,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       ranchSubheading: 'Shops, barns, and outdoor power you can count on.',
       ranchIntro:
         'For Center Point ranch and rural properties, we build safe, organized electrical systems—subpanels, outdoor power, and equipment circuits planned for distance and reliability.',
-      ranchLink: '/electrical-services/ranch-electrician',
+      ranchLink: '/electrical-services/ranch-rural-electrician',
       ranchServices: [
         { label: 'Barn/Shop Wiring & Circuits', icon: 'warehouse' },
         {
@@ -780,7 +571,6 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
 
       areasServed: ['Comfort', 'Kerrville', 'Ingram', 'Fredericksburg'],
       urlSlug: slug,
-      seo,
 
       neighborhoods: [
         'Center Point (in town)',
@@ -883,38 +673,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
   hunt: (() => {
     const slug = '/service-areas/hunt-tx-electrician';
 
-    const seo = buildElectricianSeo({
-      slug,
-      townName: 'Hunt',
-      addressLocality: 'Hunt',
-      metaTitle:
-        'Electrician in Hunt, TX | Outdoor Power, Panels, Lighting & Rural Wiring',
-      metaDescription:
-        'Electrician in Hunt, TX for outdoor outlets/GFCI, lighting, panel upgrades, surge protection, and long-run circuits to outbuildings. ProVolt Electrical Services—licensed and insured.',
-      descriptionLong:
-        'ProVolt Electrical Services provides Hunt, TX with dependable Hill Country electrical work—specializing in outdoor power, long-run circuits for outbuildings, panel upgrades, surge protection, and troubleshooting for river-area and rural properties.',
-      serviceType: [
-        'Outdoor outlets and GFCI upgrades',
-        'Lighting installation and upgrades',
-        'Electrical panel upgrades',
-        'Surge protection',
-        'Ranch and rural property electrical',
-        'Electrical troubleshooting and repairs',
-        'Subpanels and long-run feeders',
-      ],
-      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
-      extra: {
-        // More specific "areaServed" improves locality signals without keyword-stuffing.
-        areaServed: [
-          { '@type': 'City', name: 'Hunt, TX' },
-          { '@type': 'City', name: 'Ingram, TX' },
-          { '@type': 'City', name: 'Kerrville, TX' },
-          { '@type': 'City', name: 'Mountain Home, TX' },
-        ],
-      },
-    });
-
     return {
+      townKey: 'hunt',
       townName: 'Hunt',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
@@ -938,6 +698,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Weather-ready upgrades for Hill Country properties.',
       residentialIntro:
         'Hunt homes often lean on outdoor power, exterior lighting, and reliable protection during storms and outages. We prioritize weather-rated materials, safe protection devices, and clean installs that keep your system dependable.',
+      residentialLink: '/electrical-services/residential-electrician',
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         { label: 'Outdoor Outlets (GFCI/Weather-Rated)', icon: 'verified' },
@@ -975,7 +736,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       ranchSubheading: 'Outdoor power and subpanels built for distance.',
       ranchIntro:
         'Hunt properties frequently need reliable power spread across multiple structures. We install feeder runs, subpanels, outdoor power, and equipment-ready circuits with strong grounding and clean layout.',
-      ranchLink: '/electrical-services/ranch-electrician',
+      ranchLink: '/electrical-services/ranch-rural-electrician',
       ranchServices: [
         { label: 'Shop/Barn Wiring', icon: 'warehouse' },
         { label: 'Subpanels for Outbuildings', icon: 'electrical_services' },
@@ -991,7 +752,6 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
 
       areasServed: ['Ingram', 'Kerrville', 'Fredericksburg'],
       urlSlug: slug,
-      seo,
 
       neighborhoods: [
         'Guadalupe River corridor',
@@ -1103,37 +863,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
   comfort: (() => {
     const slug = '/service-areas/comfort-tx-electrician';
 
-    const seo = buildElectricianSeo({
-      slug,
-      townName: 'Comfort',
-      addressLocality: 'Comfort',
-      metaTitle:
-        'Electrician in Comfort, TX | Repairs, Panels, Remodel Wiring & Lighting',
-      metaDescription:
-        'Electrician in Comfort, TX for troubleshooting, panel upgrades, remodel wiring, lighting, and surge protection. ProVolt Electrical Services—licensed and insured.',
-      descriptionLong:
-        'ProVolt Electrical Services serves Comfort, TX with professional electrical repairs and upgrades—specializing in panel/service capacity, remodel wiring, lighting improvements, and safety upgrades for Hill Country homes and small businesses.',
-      serviceType: [
-        'Electrical troubleshooting and repairs',
-        'Electrical panel upgrades',
-        'Remodel wiring and code corrections',
-        'Lighting installation and upgrades',
-        'Surge protection',
-        'Commercial electrical services',
-      ],
-      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
-      extra: {
-        // More specific "areaServed" improves locality signals without keyword-stuffing.
-        areaServed: [
-          { '@type': 'City', name: 'Comfort, TX' },
-          { '@type': 'City', name: 'Boerne, TX' },
-          { '@type': 'City', name: 'Kerrville, TX' },
-          { '@type': 'City', name: 'Fredericksburg, TX' },
-        ],
-      },
-    });
-
     return {
+      townKey: 'comfort',
       townName: 'Comfort',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
@@ -1157,6 +888,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Safety upgrades and clean installs for remodel-friendly work.',
       residentialIntro:
         'Comfort homes often combine older wiring realities with modern expectations. We help improve capacity and safety—panels, grounding, protection devices, and lighting—while keeping work tidy and aligned with your remodel plans.',
+      residentialLink: '/electrical-services/residential-electrician',
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
@@ -1197,7 +929,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       ranchSubheading: 'Barns, shops, and property power—organized and safe.',
       ranchIntro:
         'For Comfort ranch properties, we build clean, code-correct power distribution—subpanels, outdoor circuits, and equipment-ready 240V power—with careful grounding and durable components.',
-      ranchLink: '/electrical-services/ranch-electrician',
+      ranchLink: '/electrical-services/ranch-rural-electrician',
       ranchServices: [
         { label: 'Barn & Shop Wiring', icon: 'warehouse' },
         {
@@ -1222,7 +954,6 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Bandera',
       ],
       urlSlug: slug,
-      seo,
 
       neighborhoods: [
         'Downtown Comfort',
@@ -1329,37 +1060,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
   fredericksburg: (() => {
     const slug = '/service-areas/fredericksburg-tx-electrician';
 
-    const seo = buildElectricianSeo({
-      slug,
-      townName: 'Fredericksburg',
-      addressLocality: 'Fredericksburg',
-      metaTitle:
-        'Electrician in Fredericksburg, TX | Panels, Lighting, Repairs & Safety Upgrades',
-      metaDescription:
-        'Electrician in Fredericksburg, TX for troubleshooting, panel upgrades, lighting, rental safety inspections, and surge protection circuits. ProVolt Electrical Services—licensed and insured.',
-      descriptionLong:
-        'ProVolt Electrical Services provides Fredericksburg, TX with professional residential and small-business electrical service—focused on safe upgrades for homes and rentals, lighting improvements, panel capacity, and reliable troubleshooting in the Texas Hill Country.',
-      serviceType: [
-        'Electrical troubleshooting and repairs',
-        'Electrical panel upgrades',
-        'Lighting installation and upgrades',
-        'Safety inspections for homes and rentals',
-        'Surge protection',
-        'Commercial electrical services',
-      ],
-      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
-      extra: {
-        // More specific "areaServed" improves locality signals without keyword-stuffing.
-        areaServed: [
-          { '@type': 'City', name: 'Fredericksburg, TX' },
-          { '@type': 'City', name: 'Stonewall, TX' },
-          { '@type': 'City', name: 'Johnson City, TX' },
-          { '@type': 'City', name: 'Comfort, TX' },
-        ],
-      },
-    });
-
     return {
+      townKey: 'fredericksburg',
       townName: 'Fredericksburg',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
@@ -1383,6 +1085,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Guest-ready safety, lighting, and reliable power.',
       residentialIntro:
         'Fredericksburg properties often see frequent use—family gatherings, guest spaces, and busy weekends. We improve safety and reliability with clean panel work, protected outlets, lighting upgrades, and code-correct repairs.',
+      residentialLink: '/electrical-services/residential-electrician',
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
@@ -1424,7 +1127,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Outdoor power and subpanels planned for long-run reliability.',
       ranchIntro:
         'Fredericksburg ranch properties frequently need safe power across multiple structures. We install feeder runs, subpanels, RV hookups, and equipment-ready circuits—built with clean organization and solid grounding.',
-      ranchLink: '/electrical-services/ranch-electrician',
+      ranchLink: '/electrical-services/ranch-rural-electrician',
       ranchServices: [
         { label: 'Barn/Shop Wiring & Circuits', icon: 'warehouse' },
         { label: 'Subpanels for Outbuildings', icon: 'electrical_services' },
@@ -1440,7 +1143,6 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
 
       areasServed: ['Comfort', ' Kerrville', 'Center Point', 'Ingram', 'Hunt'],
       urlSlug: slug,
-      seo,
 
       neighborhoods: [
         'Downtown Fredericksburg',
@@ -1547,36 +1249,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
   boerne: (() => {
     const slug = '/service-areas/boerne-tx-electrician';
 
-    const seo = buildElectricianSeo({
-      slug,
-      townName: 'Boerne',
-      addressLocality: 'Boerne',
-      metaTitle:
-        'Electrician in Boerne, TX | Repairs, Panels & Lighting Upgrades',
-      metaDescription:
-        'Electrician in Boerne, TX for troubleshooting, panel upgrades, surge protection, and lighting/LED retrofits circuits. ProVolt Electrical Services—licensed and insured.',
-      descriptionLong:
-        'ProVolt Electrical Services serves Boerne, TX with residential and commercial electrical work—specializing in troubleshooting, panel/service capacity upgrades, lighting improvements, and LED retrofits circuits for modern Hill Country living.',
-      serviceType: [
-        'Electrical troubleshooting and repairs',
-        'Electrical panel upgrades',
-        'Lighting installation and LED retrofits',
-        'Surge protection',
-        'Commercial electrical services',
-        'Remodel wiring and code corrections',
-      ],
-      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
-      extra: {
-        areaServed: [
-          { '@type': 'City', name: 'Boerne, TX' },
-          { '@type': 'City', name: 'Bandera, TX' },
-          { '@type': 'City', name: 'Comfort, TX' },
-          { '@type': 'City', name: 'Helotes, TX' },
-        ],
-      },
-    });
-
     return {
+      townKey: 'boerne',
       townName: 'Boerne',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
@@ -1600,6 +1274,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Upgrades that improve safety, comfort, and reliability.',
       residentialIntro:
         'Boerne homes often grow into new electrical needs—kitchen upgrades, added appliances, and expanded living spaces. We plan capacity correctly and deliver clean installs with modern safety protection.',
+      residentialLink: '/electrical-services/residential-electrician',
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
@@ -1641,7 +1316,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Organized distribution for barns, shops, and property power.',
       ranchIntro:
         'Boerne-area rural properties need safe power distribution across multiple structures. We build clean subpanel layouts, outdoor circuits, RV hookups, and equipment-ready 240V power with durable components and strong grounding.',
-      ranchLink: '/electrical-services/ranch-electrician',
+      ranchLink: '/electrical-services/ranch-rural-electrician',
       ranchServices: [
         { label: 'Shop & Outbuilding Wiring', icon: 'warehouse' },
         {
@@ -1666,7 +1341,6 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Fredericksburg',
       ],
       urlSlug: slug,
-      seo,
 
       neighborhoods: [
         'Downtown Boerne',
@@ -1774,38 +1448,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
   bandera: (() => {
     const slug = '/service-areas/bandera-tx-electrician';
 
-    const seo = buildElectricianSeo({
-      slug,
-      townName: 'Bandera',
-      addressLocality: 'Bandera',
-      metaTitle:
-        'Electrician in Bandera, TX | Rural Wiring, Panels, Repairs & Outdoor Lighting',
-      metaDescription:
-        'Electrician in Bandera, TX for troubleshooting, panel upgrades, surge protection, outdoor power/lighting, and rural outbuilding wiring. ProVolt Electrical Services—licensed and insured.',
-      descriptionLong:
-        'ProVolt Electrical Services provides Bandera, TX with dependable Hill Country electrical work—specializing in rural wiring for outbuildings, long-run feeders, panel upgrades, outdoor lighting, surge protection, and safe troubleshooting for ranch properties.',
-      serviceType: [
-        'Ranch and rural property electrical',
-        'Subpanels and long-run feeders',
-        'Electrical panel upgrades',
-        'Outdoor lighting and outlets',
-        'Surge protection',
-        'Electrical troubleshooting and repairs',
-        'Dedicated circuits for equipment',
-      ],
-      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
-      extra: {
-        // More specific "areaServed" improves locality signals without keyword-stuffing.
-        areaServed: [
-          { '@type': 'City', name: 'Bandera, TX' },
-          { '@type': 'City', name: 'Pipe Creek, TX' },
-          { '@type': 'City', name: 'Comfort, TX' },
-          { '@type': 'City', name: 'Helotes, TX' },
-        ],
-      },
-    });
-
     return {
+      townKey: 'bandera',
       townName: 'Bandera',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
@@ -1829,6 +1473,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Safe, practical upgrades for Hill Country homes and properties.',
       residentialIntro:
         'Bandera homes and acreage properties often rely on outdoor circuits, reliable protection, and electrical systems that can handle real use. We troubleshoot issues, improve safety devices, and install upgrades with clean workmanship.',
+      residentialLink: '/electrical-services/residential-electrician',
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
@@ -1867,7 +1512,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Built for long runs, outdoor exposure, and working loads.',
       ranchIntro:
         'Bandera ranch properties often need power distributed across barns, shops, and gates with attention to distance, voltage drop, and grounding. We build safe feeder runs, subpanels, RV power, and equipment circuits designed to last.',
-      ranchLink: '/electrical-services/ranch-electrician',
+      ranchLink: '/electrical-services/ranch-rural-electrician',
       ranchServices: [
         { label: 'Barn & Shop Wiring', icon: 'warehouse' },
         { label: 'Long-Run Feeders & Subpanels', icon: 'electrical_services' },
@@ -1880,7 +1525,6 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
 
       areasServed: ['Boerne', 'Kerrville', 'Comfort', 'Helotes'],
       urlSlug: slug,
-      seo,
 
       neighborhoods: [
         'Bandera (in town)',
@@ -1987,37 +1631,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
   helotes: (() => {
     const slug = '/service-areas/helotes-tx-electrician';
 
-    const seo = buildElectricianSeo({
-      slug,
-      townName: 'Helotes',
-      addressLocality: 'Helotes',
-      metaTitle:
-        'Electrician in Helotes, TX | Repairs, Panels, & Lighting Upgrades',
-      metaDescription:
-        'Electrician in Helotes, TX for troubleshooting, panel upgrades, surge protection, lighting/LED upgrades, and circuits. ProVolt Electrical Services—licensed and insured.',
-      descriptionLong:
-        'ProVolt Electrical Services serves Helotes, TX with professional residential and small-business electrical work—focused on troubleshooting, panel/service upgrades, lighting improvements, surge protection, and circuits for modern loads.',
-      serviceType: [
-        'Electrical troubleshooting and repairs',
-        'Electrical panel upgrades',
-        'Lighting installation and LED conversions',
-        'Surge protection',
-        'Commercial electrical services',
-        'Dedicated circuits for modern loads',
-      ],
-      breadcrumb: { serviceAreasUrl: SERVICE_AREAS_PAGE },
-      extra: {
-        // More specific "areaServed" improves locality signals without keyword-stuffing.
-        areaServed: [
-          { '@type': 'City', name: 'Helotes, TX' },
-          { '@type': 'City', name: 'Boerne, TX' },
-          { '@type': 'City', name: 'Bandera, TX' },
-          { '@type': 'City', name: 'San Antonio, TX' },
-        ],
-      },
-    });
-
     return {
+      townKey: 'helotes',
       townName: 'Helotes',
       stateAbbr: 'TX',
       regionLabel: DEFAULT_REGION,
@@ -2041,6 +1656,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Clean installs and safety-first upgrades for modern living.',
       residentialIntro:
         'Helotes homeowners often want dependable upgrades that look as good as they perform—lighting updates, dedicated circuits, panel improvements, and protection devices. We keep the work tidy, the plan clear, and the results code-correct.',
+      residentialLink: '/electrical-services/residential-electrician',
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
@@ -2079,7 +1695,7 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Property power that’s organized, safe, and built for use.',
       ranchIntro:
         'Helotes-area rural properties often need clean distribution across outbuildings and equipment loads. We install subpanels, outdoor circuits, RV hookups, and equipment-ready power with durable components and strong grounding.',
-      ranchLink: '/electrical-services/ranch-electrician',
+      ranchLink: '/electrical-services/ranch-rural-electrician',
       ranchServices: [
         { label: 'Shop/Outbuilding Wiring', icon: 'warehouse' },
         {
@@ -2098,7 +1714,6 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
 
       areasServed: ['Boerne', 'Bandera', 'Comfort'],
       urlSlug: slug,
-      seo,
 
       neighborhoods: [
         'Old Town Helotes area',

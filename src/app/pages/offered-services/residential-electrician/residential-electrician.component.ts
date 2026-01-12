@@ -10,9 +10,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { SeoService } from 'src/app/shared/services/seo.service';
-import { AreasWeServeComponent } from 'src/app/shared/components/areas-we-serve/areas-we-serve.component';
-import { ElectricalServiceCardsComponent } from 'src/app/shared/components/electrical-service-cards/electrical-service-cards.component';
 import { OfferedServicesPageComponent } from 'src/app/shared/components/offered-services-page/offered-services-page.component';
+import { SiteData } from 'src/app/shared/configs/site-data.config';
+import { FullSitePaths } from 'src/app/shared/configs/site-urls.config';
 
 interface ServiceItem {
   title: string;
@@ -59,12 +59,6 @@ interface FaqItem {
 })
 export class ResidentialElectricianComponent implements OnInit {
   constructor(private seo: SeoService) {}
-
-  /**
-   * NOTE: Please standardize this across your site.
-   * Your marketing copy elsewhere uses (830) 955-2909.
-   */
-  private readonly phoneNumber = '8309285046';
 
   serviceTitle = "ProVolt's Residential Electrical Services";
   footerText =
@@ -132,9 +126,8 @@ export class ResidentialElectricianComponent implements OnInit {
       path: '/services/electrical-safety-inspection',
     },
     {
-      title: 'Smart Home & Controls',
-      description:
-        'Smart switches, dimmers, sensors, thermostats, and automation-ready wiring.',
+      title: '3 Way & 4 Way Switches, Wifi',
+      description: '3-way/4-way switches, Cat6 installs.',
       icon: 'devices',
       path: '/services/smart-home-controls',
     },
@@ -404,95 +397,110 @@ export class ResidentialElectricianComponent implements OnInit {
       title:
         'Residential Electrician | Texas Hill Country | ProVolt Electrical Services',
       description:
-        'Residential electrical repairs, panel upgrades, lighting installs, smart home work, and safety inspections across the Texas Hill Country. Licensed & insured. Call now.',
-      url: 'https://provoltelectricalservices.com/electrical-services/residential-electrician',
+        'Residential electrical repairs and upgrades across the Texas Hill Country: troubleshooting, panel upgrades, lighting and ceiling fans, dedicated circuits, surge protection, and safety inspections. Licensed & insured.',
+      canonicalUrl: FullSitePaths.residentialElectrician,
+      uniquePageImage: SiteData.homepageImageUrl,
       type: 'website',
       robots: 'index,follow',
     });
   }
 
   private setupJsonLd(): void {
-    const serviceJsonLd = {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      name: 'Residential Electrical Services',
-      serviceType:
-        'Residential electrical repairs, upgrades, lighting, panels, smart home, and inspections',
-      provider: {
-        '@type': 'Electrician',
-        name: 'ProVolt Electric',
-        url: 'https://provoltelectricalservices.com',
-      },
-      areaServed: [
-        { '@type': 'Place', name: 'Kerrville TX' },
-        { '@type': 'Place', name: 'Fredericksburg TX' },
-        { '@type': 'Place', name: 'Boerne TX' },
-        { '@type': 'Place', name: 'Bandera TX' },
-        { '@type': 'Place', name: 'Comfort TX' },
-        { '@type': 'Place', name: 'Helotes TX' },
-        { '@type': 'Place', name: 'Ingram TX' },
-        { '@type': 'Place', name: 'Hunt TX' },
-        { '@type': 'Place', name: 'Center Point TX' },
-        { '@type': 'Place', name: 'Texas Hill Country' },
-      ],
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Residential Electrical Services',
-        itemListElement: this.services
-          .filter(
-            (s) => s.category === 'RanchAndRural' || s.category === 'Both'
-          )
-          .map((s) => ({
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: s.title,
-              description: s.description,
-            },
-          })),
-      },
-    };
+    const baseUrl = SiteData.baseUrl;
+    const pageUrl = FullSitePaths.residentialElectrician;
 
-    const faqJsonLd = {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: this.faqs.map((f) => ({
-        '@type': 'Question',
-        name: f.question,
-        acceptedAnswer: { '@type': 'Answer', text: f.answer },
-      })),
-    };
-
-    const breadcrumbJsonLd = {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: 'https://provoltelectricalservices.com',
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: 'Electrical Services',
-          item: 'https://provoltelectricalservices.com/electrical-services',
-        },
-        {
-          '@type': 'ListItem',
-          position: 3,
-          name: 'Ranch & Rural Electrician',
-          item: 'https://provoltelectricalservices.com/electrical-services/residential-electrician',
-        },
-      ],
-    };
-
-    this.seo.setJsonLd('json-ld-residential-service-provolt', serviceJsonLd);
-    this.seo.setJsonLd('json-ld-residential-faq-provolt', faqJsonLd);
-    this.seo.setJsonLd(
-      'json-ld-residential-breadcrumb-provolt',
-      breadcrumbJsonLd
+    const residentialServices = this.services.filter(
+      (s) => s.category === 'Residential' || s.category === 'Both'
     );
+
+    // const significantLinks = (this.popularResidentialJobs || [])
+    //   // If you truly don't offer emergency, remove this card from UI and here.
+    //   .filter((j) => j.path !== '/emergency-electrician')
+    //   .map((j) => `${baseUrl}${j.path}`);
+
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          '@id': `${pageUrl}#webpage`,
+          url: pageUrl,
+          // @Nathaniel this name pattern should match everywhere
+          name: 'Residential Electrician in Texas Hill Country | ProVolt Electrical Services',
+          description: this.hero?.subtitle,
+          inLanguage: 'en-US',
+
+          isPartOf: { '@id': `${baseUrl}/#website` },
+          about: { '@id': `${baseUrl}/#business` },
+
+          breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+          mainEntity: { '@id': `${pageUrl}#service` },
+
+          // ...(significantLinks.length
+          //   ? { significantLink: significantLinks }
+          //   : {}),
+        },
+
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${pageUrl}#breadcrumb`,
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Electrical Services',
+              item: `${baseUrl}/electrical-services`,
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: 'Residential Electrician',
+              item: pageUrl,
+            },
+          ],
+        },
+
+        {
+          '@type': 'Service',
+          '@id': `${pageUrl}#service`,
+          name: 'Residential Electrical Services',
+          serviceType:
+            'Residential electrical troubleshooting and repairs, panel/service upgrades, new circuits and subpanels, lighting and ceiling fans, surge protection and safety upgrades, inspections, and remodel wiring',
+          provider: { '@id': `${baseUrl}/#business` },
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            '@id': `${pageUrl}#catalog`,
+            name: 'Residential Electrical Services Catalog',
+            itemListElement: residentialServices.map((s) => ({
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: s.title,
+                description: s.description,
+                provider: { '@id': `${baseUrl}/#business` },
+              },
+            })),
+          },
+
+          potentialAction: {
+            '@type': 'ContactAction',
+            target: `${baseUrl}/contact-us`,
+          },
+        },
+
+        {
+          '@type': 'FAQPage',
+          '@id': `${pageUrl}#faq`,
+          mainEntity: (this.faqs || []).map((f) => ({
+            '@type': 'Question',
+            name: f.question,
+            acceptedAnswer: { '@type': 'Answer', text: f.answer },
+          })),
+        },
+      ],
+    };
+
+    this.seo.setPageJsonLd(jsonLd);
   }
 }

@@ -4,13 +4,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
-
+import { SiteData } from 'src/app/shared/configs/site-data.config';
 import {
   TOWN_CONFIGS,
   TownPageConfig,
 } from 'src/app/shared/configs/town-page.config';
 import { SeoService } from 'src/app/shared/services/seo.service';
 import { Router, RouterModule } from '@angular/router';
+import { FullSitePaths } from 'src/app/shared/configs/site-urls.config';
 
 interface TownCard {
   key: string;
@@ -37,20 +38,17 @@ interface TownCard {
 export class TexasHillCountryComponent implements OnInit {
   regionLabel = 'Texas Hill Country';
   towns: TownCard[] = [];
-  phoneNumber = '830-000-0000'; // TODO: replace with real number
-
-  private readonly pageUrl =
-    'https://provoltelectricalservices.com/service-areas/texas-hill-country-electrician';
-
-  // TODO: point to a real OG image for this landing page
-  private readonly ogImage =
-    'https://provoltelectricalservices.com/assets/og-default.jpg';
+  phoneNumber = SiteData.phoneNumberE164;
+  readonly baseUrl = SiteData.baseUrl;
+  readonly pageUrl = FullSitePaths.texasHillCountryElectrician;
+  private readonly ogImage = SiteData.homepageImageUrl;
 
   constructor(private seo: SeoService, private router: Router) {}
 
   ngOnInit(): void {
     this.buildTownCards();
     this.setupSeo();
+    this.setupJsonLd();
   }
 
   private buildTownCards(): void {
@@ -72,66 +70,99 @@ export class TexasHillCountryComponent implements OnInit {
   }
 
   private setupSeo(): void {
-    const metaTitle = 'Texas Hill Country Electrician | ProVolt Electric';
-    const metaDescription =
-      'Licensed master electrician serving Kerrville, Fredericksburg, Boerne, Comfort, Bandera, Ingram, Hunt, Center Point & Helotes with residential, commercial & ranch electrical services.';
-
     this.seo.setMetaTags({
-      title: metaTitle,
-      description: metaDescription,
-      url: this.pageUrl,
-      image: this.ogImage,
+      title: 'Texas Hill Country Electrician | ProVolt Electrical Services',
+      description:
+        'Licensed master electrician serving Kerrville, Fredericksburg, Boerne, Comfort, Bandera, Ingram, Hunt, Center Point & Helotes with residential, commercial & ranch electrical services.',
+
+      canonicalUrl: this.pageUrl,
+      uniquePageImage: this.ogImage,
       type: 'website',
       robots: 'index,follow',
     });
+  }
 
-    // Build areaServed from config (falling back to your explicit list)
-    const areaServedPlaces = Object.values(TOWN_CONFIGS).map((cfg) => ({
-      '@type': 'Place',
-      name: `${cfg.townName}, ${cfg.stateAbbr}`,
-    })) || [
-      { '@type': 'Place', name: 'Kerrville, TX' },
-      { '@type': 'Place', name: 'Ingram, TX' },
-      { '@type': 'Place', name: 'Hunt, TX' },
-      { '@type': 'Place', name: 'Comfort, TX' },
-      { '@type': 'Place', name: 'Fredericksburg, TX' },
-      { '@type': 'Place', name: 'Boerne, TX' },
-      { '@type': 'Place', name: 'Bandera, TX' },
-      { '@type': 'Place', name: 'Center Point, TX' },
-      { '@type': 'Place', name: 'Helotes, TX' },
-    ];
+  private setupJsonLd(): void {
+    // Build ItemList from sorted towns
+    const itemListElement = this.towns
+      .filter((t) => !!t.urlSlug)
+      .map((t, index) => {
+        const absoluteUrl = t.urlSlug!.startsWith('http')
+          ? t.urlSlug!
+          : `${this.baseUrl}${t.urlSlug}`;
 
-    const jsonLd = {
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          name: `${t.name}, TX`,
+          item: absoluteUrl,
+        };
+      });
+
+    const pageJsonLd = {
       '@context': 'https://schema.org',
-      '@type': 'Electrician',
-      '@id': `${this.pageUrl}#electrician`,
-      name: 'ProVolt Electric',
-      alternateName: 'ProVolt Electrical Services',
-      url: this.pageUrl,
-      description:
-        'ProVolt Electric is a licensed master electrician providing residential, commercial, and ranch electrical work throughout the Texas Hill Country.',
-      telephone: '+1-830-000-0000', // TODO: replace with real E.164 phone
-      image: this.ogImage,
-      priceRange: '$$',
-      address: {
-        '@type': 'PostalAddress',
-        addressRegion: 'TX',
-        addressCountry: 'US',
-      },
-      areaServed: areaServedPlaces,
-      serviceType: [
-        'Residential electrical services',
-        'Commercial electrical services',
-        'Industrial and ranch property electrical',
-        'Electrical panel upgrades',
-        'Lighting installation and retrofits',
-        'Generator and backup power systems',
-        'Energy audits and efficiency upgrades',
-        'Electrical for renovations and new builds',
+      '@graph': [
+        {
+          '@type': 'CollectionPage',
+          '@id': `${this.pageUrl}#webpage`,
+          url: this.pageUrl,
+          name: 'Texas Hill Country Service Areas | ProVolt Electrical Services',
+          description:
+            'Browse ProVolt Electrical Services service areas across the Texas Hill Country, including Kerrville, Fredericksburg, Boerne, Comfort, Bandera, Ingram, Hunt, Center Point, and Helotes.',
+          inLanguage: 'en-US',
+
+          isPartOf: { '@id': `${this.baseUrl}/#website` },
+          about: { '@id': `${this.baseUrl}/#business` },
+          mainEntity: { '@id': `${this.pageUrl}#service-areas` },
+
+          // Optional image association
+          primaryImageOfPage: { '@id': `${this.pageUrl}#primaryimage` },
+
+          breadcrumb: { '@id': `${this.pageUrl}#breadcrumb` },
+          potentialAction: [
+            { '@type': 'ContactAction', target: `tel:${this.phoneNumber}` },
+          ],
+        },
+
+        // 2) Primary image node
+        {
+          '@type': 'ImageObject',
+          '@id': `${this.pageUrl}#primaryimage`,
+          url: this.ogImage,
+        },
+
+        // 3) Town list
+        {
+          '@type': 'ItemList',
+          '@id': `${this.pageUrl}#service-areas`,
+          name: 'Service Areas in the Texas Hill Country',
+          itemListOrder: 'https://schema.org/ItemListOrderAscending',
+          numberOfItems: itemListElement.length,
+          itemListElement,
+        },
+
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${this.pageUrl}#breadcrumb`,
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: this.baseUrl,
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Service Areas',
+              item: this.pageUrl,
+            },
+          ],
+        },
       ],
     };
 
-    this.seo.setJsonLd('json-ld-hill-country-service-area', jsonLd);
+    this.seo.setPageJsonLd(pageJsonLd);
   }
 
   onTownClick(town: TownCard): void {
