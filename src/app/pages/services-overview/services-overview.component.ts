@@ -232,12 +232,11 @@ export class ServicesOverviewComponent implements OnInit {
   }
 
   private setupSeo(): void {
-    // @Nathaniel I need image url for seo here. Does this need to vary per page too?
     this.seo.setMetaTags({
       title: 'Electrical Services | Texas Hill Country | ProVolt Electric',
       description:
         'Explore ProVolt Electric’s residential, commercial, and ranch & rural electrical services across the Texas Hill Country—troubleshooting, repairs, panel upgrades, lighting, safety inspections, and emergency help.',
-      canonicalUrl: 'https://provoltelectricalservices.com/electrical-services',
+      canonicalUrl: FullSitePaths.electricalServices,
       uniquePageImage: SiteData.homepageImageUrl,
       type: 'website',
       robots: 'index,follow',

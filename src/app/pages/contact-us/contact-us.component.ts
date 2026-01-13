@@ -54,6 +54,11 @@ export class ContactUsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setupSeo();
+    this.setupJsonLd();
+  }
+
+  private setupSeo(): void {
     this.seo.setMetaTags({
       title:
         'Contact ProVolt Electrical Services | Hill Country Electrician Near You',
@@ -64,7 +69,9 @@ export class ContactUsComponent implements OnInit {
       type: 'website',
       robots: 'index,follow',
     });
+  }
 
+  private setupJsonLd(): void {
     const pageJsonLd = {
       '@context': 'https://schema.org',
       '@graph': [
@@ -133,7 +140,6 @@ export class ContactUsComponent implements OnInit {
     };
     this.seo.setPageJsonLd(pageJsonLd);
   }
-
   // onSubmit(): void {
   //   if (this.contactForm.invalid) {
   //     this.contactForm.markAllAsTouched();
