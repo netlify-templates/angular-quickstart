@@ -147,6 +147,9 @@ export class ProjectsComponent implements OnInit {
         'Electrical Projects in the Texas Hill Country | ProVolt Electrical Services',
       description:
         'Explore recent electrical projects completed by ProVolt Electrical Services across Fredericksburg, Kerrville, Boerne, Bandera, and the Texas Hill Country – from panel upgrades and LED retrofits to ranch wiring and emergency repairs.',
+      canonicalUrl: 'https://provoltelectricalservices.com/projects',
+      uniquePageImage:
+        'https://provoltelectricalservices.com/assets/images/projects/projects-hero.jpg',
       type: 'website',
       robots: 'index,follow',
     });

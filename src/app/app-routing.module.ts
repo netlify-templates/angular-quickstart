@@ -190,7 +190,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      scrollPositionRestoration: 'enabled', // new nav → top; back/forward → previous position
+      scrollPositionRestoration: 'top', // new nav → top; back/forward → previous position
       anchorScrolling: 'enabled', // supports /path#id
       scrollOffset: [0, 0],
     }),

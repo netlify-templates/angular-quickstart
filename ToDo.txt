@@ -1,3 +1,12 @@
+Current State EOD Saturday
+  - I need to verify JSON-LDs on twon pages
+  - I need to setup town config file for meta data for each page
+  - I need to need to correct json and meta data across the website including URLs and images and areas served order
+  - I need to add the policy and terms of service and empty state pages
+  - I need to add attr to all images and buttons across the website
+  - I need to remove the links to all the smaller towns from the homepage
+
+
 Finish all the pages
   - add backlinks from the town pages to the service pages
   - make the corrections and suggestions made by dad

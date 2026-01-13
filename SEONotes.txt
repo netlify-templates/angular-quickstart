@@ -1,0 +1,89 @@
+    // replace with your real OG image (1200x630 is ideal)
+    const ogImageUrl = `${baseUrl}/assets/og/provolt-home.webp`;
+
+
+Use JPEG/PNG for og:image. Some scrapers don’t preview WebP reliably.
+Add og:image:width/height and og:image:secure_url.
+Fix JSON-LD phone: it shows 9309552909; use +18309552909.
+Ensure each route sets its own canonical and og:url.
+Minor: the Google Fonts URL repeats Roboto twice.
+
+
+
+My footer Name, Address, and Phone Number (NAP) needs to match the meta data.
+H1 and meta title needs to match intent
+Need to add image meta data
+Google Business Profile Intergration 
+
+        10. Google Business Profile Integration
+Add metadata alignment:
+Same business description wording
+Same service categories
+Same city references
+Your website and GBP must reinforce each other.
+
+
+
+
+Internal Linking Best Practice
+// @ Nathaniel I need to remove all the links off of my homepage.
+Homepage → Service Areas Hub
+Service Areas Hub → Individual City Pages
+City Pages → Homepage (brand reinforcement)
+
+
+
+
+
+So I have a global JSON-LD that has all my service areas listed in the meta data. 
+Then I have individual service pages for each of those cities. 
+I then have service offering summary pages for each of my 3 catergories of services. 
+How do I set up the meta data for areas served for all these?
+
+
+-> 
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json" id="json-ld-main">
+{"@context":"https://schema.org","@graph":[{"@type":"WebSite",
+"@id":"https://provoltelectricalservices.com/#website",
+"url":"https://provoltelectricalservices.com",
+"name":"ProVolt Electrical Services","inLanguage":"en-US"},
+{"@type":"Electrician","@id":"https://provoltelectricalservices.com/#business",
+"name":"ProVolt Electrical Services","url":"https://provoltelectricalservices.com",
+"telephone":"+18309552909","address":{"@type":"PostalAddress",
+"addressLocality":"Kerrville","addressRegion":"TX",
+"postalCode":"78028","addressCountry":"US"},
+"geo":{"@type":"GeoCoordinates","latitude":30.0474,"longitude":-99.1403},
+"logo":{"@type":"ImageObject",
+"url":"https://provoltelectricalservices.com/assets/brand/logos/ProVolt-Logo-meta-512-c.png","width":512,"height":512},
+"image":{"@type":"ImageObject","url":"https://provoltelectricalservices.com/assets/brand/og/provolt-primary-logo-og-c.png","width":1200,"height":630},"priceRange":"$$","areaServed":[{"@type":"GeoCircle","geoMidpoint":{"@type":"GeoCoordinates","latitude":30.0474,"longitude":-99.1403},"geoRadius":"60 mi"},
+{"@type":"City","name":"Kerrville","address":{"@type":"PostalAddress","addressRegion":"TX","addressCountry":"US"}},
+{"@type":"City","name":"Fredericksburg","address":{"@type":"PostalAddress","addressRegion":"TX","addressCountry":"US"}},
+{"@type":"City","name":"Boerne","address":{"@type":"PostalAddress","addressRegion":"TX","addressCountry":"US"}},
+{"@type":"City","name":"Bandera","address":{"@type":"PostalAddress","addressRegion":"TX","addressCountry":"US"}},
+{"@type":"City","name":"Comfort","address":{"@type":"PostalAddress","addressRegion":"TX","addressCountry":"US"}},
+{"@type":"City","name":"Ingram","address":{"@type":"PostalAddress","addressRegion":"TX","addressCountry":"US"}},
+{"@type":"City","name":"Hunt","address":{"@type":"PostalAddress","addressRegion":"TX","addressCountry":"US"}},
+{"@type":"City","name":"Center Point","address":{"@type":"PostalAddress","addressRegion":"TX","addressCountry":"US"}},
+{"@type":"City","name":"Helotes","address":{"@type":"PostalAddress","addressRegion":"TX","addressCountry":"US"}},
+{"@type":"Place","name":"Texas Hill Country"}],"contactPoint":{"@type":"ContactPoint","contactType":"customer service","telephone":"+18309552909","areaServed":"US","availableLanguage":["en"]},
+"sameAs":["https://www.yelp.com/biz/provolt-electrical-services-kerrville"],
+"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"17:00"}],
+"hasOfferCatalog":{"@type":"OfferCatalog",
+"@id":"https://provoltelectricalservices.com/#services-catalog",
+"name":"Electrical Services",
+"itemListElement":[
+{"@type":"OfferCatalog","name":"Residential Electrical Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"ProVolt's Residential Electrical Services in the Texas Hill Country","url":"https://provoltelectricalservices.com/electrical-services/residential-electrician"}}]},
+{"@type":"OfferCatalog","name":"Commercial Electrical Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Commercial Electrical Services","url":"https://provoltelectricalservices.com/electrical-services/commercial-electrician"}}]},
+{"@type":"OfferCatalog","name":"Ranch & Rural Electrical Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Ranch & Rural Electrical Services","url":"https://provoltelectricalservices.com/electrical-services/ranch-rural-electrician"}}]}]}}]}</script> 

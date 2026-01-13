@@ -164,7 +164,7 @@ export class TexasHillCountryComponent implements OnInit {
 
     this.seo.setPageJsonLd(pageJsonLd);
   }
-
+  // nathaniel here
   onTownClick(town: TownCard): void {
     if (town.urlSlug) {
       this.router.navigate([town.urlSlug]).then(() => {

@@ -5,13 +5,12 @@ body {
 }
 
 .app-sidenav-container {
-  height: 100vh;
+  min-height: 100%;
 }
 
 .app-sidenav {
   width: 300px;
   padding: 0.75rem 0.5rem 1rem;
-  position: fixed;
 }
 
 .sidenav-header {
