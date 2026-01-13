@@ -2,8 +2,6 @@
  in environment.ts / environment.prod.ts and reading environment.siteData.phoneNumber. 
  You still get dot notation, plus Angular’s file replacements. */
 
-import { S } from '@angular/material/error-options.d-CGdTZUYk';
-
 export const SiteData = {
   phoneNumber: '8309552909',
   phoneNumberE164: '+18309552909',
@@ -29,6 +27,10 @@ export type SiteDataValue = (typeof SiteData)[SiteDataKey];
 export const PrivacyPolicyData = {
   lastUpdated: 'January 1, 2026',
   effectiveDate: 'January 1, 2026',
+
+  // Use ISO-8601 if possible (e.g., "2026-01-13").
+  effectiveDateISO: '2026-01-01',
+
   companyName: SiteData.businessName,
   phoneDisplay: SiteData.phoneNumberFormatted,
   emailAddress: SiteData.email,

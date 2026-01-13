@@ -2,7 +2,7 @@
   display: block;
 }
 
-.policy {
+.terms {
   --pv-primary: var(--brand-yellow-02);
   --text: rgba(0, 0, 0, 0.82);
   --muted: rgba(0, 0, 0, 0.62);
@@ -10,6 +10,7 @@
   --card: rgba(0, 0, 0, 0.03);
 
   color: var(--text);
+  background: #fff;
 }
 
 .hero {
@@ -56,7 +57,7 @@
 
 .lead {
   margin: 14px 0 0;
-  max-width: 70ch;
+  max-width: 72ch;
   color: rgba(0, 0, 0, 0.72);
   line-height: 1.55;
 }
@@ -165,6 +166,15 @@
   li {
     margin: 8px 0;
   }
+}
+
+.note {
+  margin-top: 12px;
+  border: 1px solid rgba(230, 198, 18, 0.35);
+  background: rgba(230, 198, 18, 0.12);
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: rgba(0, 0, 0, 0.74);
 }
 
 .contact-card {

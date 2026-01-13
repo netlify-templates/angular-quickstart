@@ -27,6 +27,8 @@ export class AppComponent implements OnInit {
         '@id': `${this.baseUrl}/#website`,
         url: this.baseUrl,
         name: SiteData.businessName,
+        description:
+          'Licensed electrician serving Kerrville and the Texas Hill Country.',
         inLanguage: 'en-US',
       },
 
@@ -60,14 +62,17 @@ export class AppComponent implements OnInit {
           longitude: -99.1403,
         },
 
+        // logo is set once for website and shared through the business id
         logo: {
           '@type': 'ImageObject',
+          '@id': `${this.baseUrl}/#logo`,
           url: this.sharedLogoUrl,
           width: 512,
           height: 512,
         },
         image: {
           '@type': 'ImageObject',
+          '@id': `${this.baseUrl}/#primaryimage`,
           url: this.ogImageUrl,
           width: 1200,
           height: 630,
@@ -81,7 +86,7 @@ export class AppComponent implements OnInit {
               latitude: 30.0474,
               longitude: -99.1403,
             },
-            geoRadius: '60 mi',
+            geoRadius: 96.56, // km
           },
           {
             '@type': 'City',
@@ -172,7 +177,7 @@ export class AppComponent implements OnInit {
           contactType: 'customer service',
           telephone: SiteData.phoneNumberE164,
           areaServed: 'US',
-          availableLanguage: ['en'],
+          availableLanguage: ['en-US'],
         },
         sameAs: [
           // Add real profiles: Google Business Profile, Facebook, Instagram, Yelp, BBB, etc.

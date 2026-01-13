@@ -160,6 +160,14 @@ const routes: Routes = [
         (m) => m.PrivacyPolicyComponent
       ),
   },
+  {
+    path: 'terms-and-conditions',
+    title: 'Terms and Conditions - Provolt Electrical Services',
+    loadComponent: () =>
+      import(
+        './pages/terms-and-conditions/terms-and-conditions.component'
+      ).then((m) => m.TermsAndConditionsComponent),
+  },
   // {
   //   path: 'projects',
   //   title: 'Projects - Provolt Electrical Services',

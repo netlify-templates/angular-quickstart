@@ -1,7 +1,7 @@
-<div class="policy">
-  <header class="hero" aria-label="Privacy Policy header">
+<div class="terms">
+  <header class="hero" aria-label="Terms and Conditions header">
     <div class="hero-inner">
-      <h1 class="title">Privacy Policy</h1>
+      <h1 class="title">Terms &amp; Conditions</h1>
       <p class="meta">
         <span class="company">{{ companyName }}</span>
         <span class="dot" aria-hidden="true">•</span>
@@ -22,7 +22,7 @@
           <li *ngFor="let item of toc()">
             <a
               class="toc-link"
-              [href]="sitePaths.privacyPolicy + '#' + item.id"
+              [href]="sitePaths.termsAndConditions + '#' + item.id"
               >{{ item.title }}</a
             >
           </li>
@@ -33,7 +33,7 @@
     <section class="sections">
       <article
         class="section"
-        *ngFor="let section of sections; let i = index"
+        *ngFor="let section of sections"
         [attr.id]="section.id"
       >
         <h2 class="section-title" *ngIf="section.id !== 'intro'">
@@ -46,6 +46,8 @@
           <ul class="section-list" *ngIf="section.bullets?.length">
             <li *ngFor="let b of section.bullets">{{ b }}</li>
           </ul>
+
+          <div class="note" *ngIf="section.note">{{ section.note }}</div>
 
           <!-- Contact block -->
           <div class="contact-card" *ngIf="section.id === 'contact'">
@@ -70,7 +72,7 @@
           </div>
 
           <div class="back-top">
-            <a class="back-top-link" [href]="'/' + sitePaths.privacyPolicy"
+            <a class="back-top-link" [href]="'/' + sitePaths.termsAndConditions"
               >Back to top</a
             >
           </div>

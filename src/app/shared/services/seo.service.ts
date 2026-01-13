@@ -69,6 +69,10 @@ export class SeoService {
       { property: 'og:site_name', content: 'ProVolt Electrical Services' },
       'property="og:site_name"'
     );
+    this.meta.updateTag(
+      { property: 'og:image:alt', content: title },
+      'property="og:image:alt"'
+    );
 
     // Canonical + OG URL (only if provided)
     if (canonicalUrl) {
@@ -130,8 +134,13 @@ export class SeoService {
         { name: 'twitter:image', content: uniquePageImage },
         'name="twitter:image"'
       );
+      this.meta.updateTag(
+        { name: 'twitter:image:alt', content: title },
+        'name="twitter:image:alt"'
+      );
     } else {
       this.meta.removeTag('name="twitter:image"');
+      this.meta.removeTag('name="twitter:image:alt"');
     }
   }
 
@@ -158,14 +167,32 @@ export class SeoService {
   // JSON-LD CORE (existing, slightly hardened)
   // ----------------------------
   setJsonLd(id: string, jsonLdObject: unknown): void {
-    const existing = this.document.getElementById(id);
+    const nextJson = this.safeJsonLdStringify(jsonLdObject);
+
+    const existing = this.document.getElementById(
+      id
+    ) as HTMLScriptElement | null;
+
+    // If it already exists and content is identical, do nothing (helps SSR/hydration + avoids churn)
+    if (existing && (existing.textContent ?? '') === nextJson) return;
+
     if (existing?.parentNode) existing.parentNode.removeChild(existing);
 
     const script = this.document.createElement('script');
     script.type = 'application/ld+json';
     script.id = id;
-    script.textContent = JSON.stringify(jsonLdObject);
-    this.document.head.appendChild(script);
+    script.textContent = nextJson;
+
+    // Head should exist, but fallback just in case
+    (this.document.head ?? this.document.documentElement).appendChild(script);
+  }
+
+  private safeJsonLdStringify(obj: unknown): string {
+    // Prevent HTML parsing edge-cases in <script> content
+    return JSON.stringify(obj)
+      .replace(/</g, '\\u003c')
+      .replace(/>/g, '\\u003e')
+      .replace(/&/g, '\\u0026');
   }
 
   removeJsonLd(id: string): void {

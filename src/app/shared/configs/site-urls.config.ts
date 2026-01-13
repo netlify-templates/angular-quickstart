@@ -27,7 +27,7 @@ export const SitePaths = {
   texasHillCountryElectrician: 'texas-hill-country-electrician',
 
   privacyPolicy: 'privacy-policy',
-  termsOfService: 'terms-of-service',
+  termsAndConditions: 'terms-and-conditions',
   projects: 'projects',
   testimonials: 'testimonials',
 
@@ -125,7 +125,7 @@ export const FullSitePaths = Object.freeze({
     SiteData.canonicalUrl + SitePaths.texasHillCountryElectrician,
 
   privacyPolicy: SiteData.canonicalUrl + SitePaths.privacyPolicy,
-  termsOfService: SiteData.canonicalUrl + SitePaths.termsOfService,
+  termsAndConditions: SiteData.canonicalUrl + SitePaths.termsAndConditions,
   projects: SiteData.canonicalUrl + SitePaths.projects,
   testimonials: SiteData.canonicalUrl + SitePaths.testimonials,
 

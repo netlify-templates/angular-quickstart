@@ -29,7 +29,10 @@ export class FooterSectionComponent {
     { label: 'Services', routerLink: this.sitePaths.electricalServices },
     { label: 'Contact', routerLink: this.sitePaths.contactUs },
     { label: 'Privacy Policy', routerLink: this.sitePaths.privacyPolicy },
-    { label: 'Terms of Service', routerLink: this.sitePaths.termsOfService },
+    {
+      label: 'Terms and Conditions',
+      routerLink: this.sitePaths.termsAndConditions,
+    },
   ];
 
   socialLinks = [

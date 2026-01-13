@@ -61,8 +61,8 @@ export const serverRoutes: ServerRoute[] = [
     path: 'service-areas/texas-hill-country-electrician',
     renderMode: RenderMode.Prerender,
   },
-
   { path: 'privacy-policy', renderMode: RenderMode.Prerender },
+  { path: 'terms-and-conditions', renderMode: RenderMode.Prerender },
 
   // Everything else: render a real 404 (recommended)
   { path: '**', renderMode: RenderMode.Server, status: 404 },

@@ -1,2 +1,35 @@
-<!-- @Nathaniel add a not found page -->
-<p>not-found works!</p>
+<div class="nf">
+  <div class="card" role="main" aria-label="Page not found">
+    <div class="badge" aria-hidden="true">404</div>
+
+    <h1 class="title">Page Not Found</h1>
+    <p class="subtitle">{{ subtitle }}</p>
+
+    <div class="actions" aria-label="Page not found actions">
+      <a class="btn primary" [routerLink]="'/' + homePath">Go to Home</a>
+      <a class="btn ghost" [routerLink]="'/' + contactPath">Contact Us</a>
+
+      <a *ngIf="phoneDisplay && phoneHref" class="btn ghost" [href]="phoneHref">
+        Call {{ phoneDisplay }}
+      </a>
+    </div>
+
+    <div class="divider" role="separator" aria-hidden="true"></div>
+
+    <h2 class="section-title">Popular links</h2>
+    <ul class="links" *ngIf="quickLinks.length">
+      <li class="link-item" *ngFor="let link of quickLinks">
+        <a class="link" [routerLink]="'/' + link.path">
+          <span class="link-label">{{ link.label }}</span>
+          <span class="link-path">{{ link.path }}</span>
+        </a>
+        <p class="link-desc" *ngIf="link.description">{{ link.description }}</p>
+      </li>
+    </ul>
+
+    <p class="fineprint">
+      If you typed the address, double-check the spelling. Otherwise, head back
+      to the homepage to find what you need.
+    </p>
+  </div>
+</div>

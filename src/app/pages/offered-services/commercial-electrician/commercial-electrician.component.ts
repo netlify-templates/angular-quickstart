@@ -425,9 +425,9 @@ export class CommercialElectricianComponent implements OnInit {
       title:
         'Commercial Electrician | Texas Hill Country | ProVolt Electrical Services',
       description:
-        'Code-compliant commercial electrical work: troubleshooting, tenant build-outs, panel/service upgrades, lighting retrofits, and dedicated equipment circuits across the Texas Hill Country.',
+        'Licensed commercial electrician serving the Texas Hill Country: tenant build-outs, service/panel upgrades, lighting retrofits, dedicated equipment circuits, and troubleshooting—code-compliant work.',
       canonicalUrl: FullSitePaths.commercialElectrician,
-      uniquePageImage: SiteData.homepageImageUrl,
+      uniquePageImage: SiteData.homepageImageUrl, // swap to a page-specific OG image if you add one
       type: 'website',
       robots: 'index,follow',
     });
@@ -436,29 +436,44 @@ export class CommercialElectricianComponent implements OnInit {
   private setupJsonLd(): void {
     const baseUrl = SiteData.baseUrl;
     const pageUrl = FullSitePaths.commercialElectrician;
-    const commercialServices = this.services;
+    const commercialServices = this.services ?? [];
+
+    const pageName = `Commercial Electrician | Texas Hill Country | ${
+      SiteData.businessName ?? 'ProVolt'
+    }`;
+
+    const pageDescription =
+      this.hero?.subtitle ??
+      'Code-compliant commercial electrical work across the Texas Hill Country: troubleshooting, tenant build-outs, service/panel upgrades, lighting retrofits, and dedicated equipment circuits.';
+
+    // 60 miles ≈ 96,560 meters
+    const serviceRadiusMeters = 96560;
 
     const pageJsonLd = {
       '@context': 'https://schema.org',
       '@graph': [
+        // WebPage (primary focus: Service overview)
         {
           '@type': 'WebPage',
           '@id': `${pageUrl}#webpage`,
           url: pageUrl,
-          name: 'ProVolt Electrical Services | Commercial Electrician | Texas Hill Country',
-          description: this.hero?.subtitle,
+          name: pageName,
+          description: pageDescription,
           inLanguage: 'en-US',
 
           isPartOf: { '@id': `${baseUrl}/#website` },
           about: { '@id': `${baseUrl}/#business` },
+          publisher: { '@id': `${baseUrl}/#business` },
 
           breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+
+          // ✅ Main entity is the Service (because this is a service overview page)
           mainEntity: { '@id': `${pageUrl}#service` },
 
-          // optional: helpful links on the page (your “popularCommercialJobs”)
-          // significantLink: this.popularCommercialJobs.map(
-          //   (j) => `${baseUrl}${j.path}`
-          // ),
+          // ✅ FAQ is a supporting section (small focus)
+          ...(this.faqs?.length
+            ? { hasPart: { '@id': `${pageUrl}#faq` } }
+            : {}),
         },
 
         // Breadcrumbs
@@ -486,6 +501,7 @@ export class CommercialElectricianComponent implements OnInit {
         {
           '@type': 'Service',
           '@id': `${pageUrl}#service`,
+          url: pageUrl,
           name: 'Commercial Electrical Services',
           serviceType:
             'Commercial electrical troubleshooting, tenant build-outs/finish-outs, panel/service upgrades, lighting retrofits, dedicated equipment circuits, inspections, and code-compliant repairs',
@@ -500,7 +516,7 @@ export class CommercialElectricianComponent implements OnInit {
                 latitude: 30.0474,
                 longitude: -99.1403,
               },
-              geoRadius: '60 mi',
+              geoRadius: serviceRadiusMeters, // meters
             },
           ],
 
@@ -525,17 +541,21 @@ export class CommercialElectricianComponent implements OnInit {
           },
         },
 
-        // FAQ (OK to include; just don’t expect Google FAQ rich results for most non-gov/health sites)
-        // Google limits FAQ rich results to authoritative gov/health sites. :contentReference[oaicite:3]{index=3}
-        {
-          '@type': 'FAQPage',
-          '@id': `${pageUrl}#faq`,
-          mainEntity: this.faqs.map((f) => ({
-            '@type': 'Question',
-            name: f.question,
-            acceptedAnswer: { '@type': 'Answer', text: f.answer },
-          })),
-        },
+        // FAQ (supporting section)
+        ...(this.faqs?.length
+          ? [
+              {
+                '@type': 'FAQPage',
+                '@id': `${pageUrl}#faq`,
+                isPartOf: { '@id': `${pageUrl}#webpage` },
+                mainEntity: this.faqs.map((f) => ({
+                  '@type': 'Question',
+                  name: f.question,
+                  acceptedAnswer: { '@type': 'Answer', text: f.answer },
+                })),
+              },
+            ]
+          : []),
       ],
     };
 

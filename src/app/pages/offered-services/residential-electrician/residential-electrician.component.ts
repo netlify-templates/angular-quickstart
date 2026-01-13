@@ -126,10 +126,11 @@ export class ResidentialElectricianComponent implements OnInit {
       path: '/services/electrical-safety-inspection',
     },
     {
-      title: '3 Way & 4 Way Switches, Wifi',
-      description: '3-way/4-way switches, Cat6 installs.',
+      title: 'Low-Voltage & Data Wiring (Cat6)',
+      description:
+        'Structured Cat6 wiring, terminations, and testing—plus Wi‑Fi/mesh placement and data-drop installs for reliable coverage.',
       icon: 'devices',
-      path: '/services/smart-home-controls',
+      path: '/services/wifi',
     },
     {
       title: 'Emergency Electrician',
@@ -395,9 +396,9 @@ export class ResidentialElectricianComponent implements OnInit {
   private setupSeo(): void {
     this.seo.setMetaTags({
       title:
-        'Residential Electrician | Texas Hill Country | ProVolt Electrical Services',
+        'Residential Electrician | Kerrville & Texas Hill Country | ProVolt',
       description:
-        'Residential electrical repairs and upgrades across the Texas Hill Country: troubleshooting, panel upgrades, lighting and ceiling fans, dedicated circuits, surge protection, and safety inspections. Licensed & insured.',
+        'Residential electrician serving Kerrville and the Texas Hill Country: troubleshooting (flickering lights, dead outlets, breaker trips), panel/service upgrades, new & dedicated circuits, lighting and ceiling fans, surge protection, GFCI/AFCI safety upgrades, inspections, and remodel wiring—code-compliant work.',
       canonicalUrl: FullSitePaths.residentialElectrician,
       uniquePageImage: SiteData.homepageImageUrl,
       type: 'website',
@@ -409,38 +410,61 @@ export class ResidentialElectricianComponent implements OnInit {
     const baseUrl = SiteData.baseUrl;
     const pageUrl = FullSitePaths.residentialElectrician;
 
-    const residentialServices = this.services.filter(
+    const residentialServices = (this.services ?? []).filter(
       (s) => s.category === 'Residential' || s.category === 'Both'
     );
 
-    // const significantLinks = (this.popularResidentialJobs || [])
-    //   // If you truly don't offer emergency, remove this card from UI and here.
+    // 60 miles ≈ 96,560 meters
+    const serviceRadiusMeters = 96560;
+
+    const pageName = `Residential Electrician | Kerrville & Texas Hill Country | ${
+      SiteData.businessName ?? 'ProVolt'
+    }`;
+
+    const pageDescription =
+      this.hero?.subtitle ??
+      'Residential electrical repairs and upgrades across Kerrville and the Texas Hill Country: troubleshooting, panel upgrades, circuits, lighting, surge protection, safety inspections, and remodel wiring.';
+
+    // Optional internal links shown on the page — exclude services you don't offer.
+    // You said: no emergency services, no smart homes.
+    // const significantLinks = (this.popularResidentialJobs ?? [])
     //   .filter((j) => j.path !== '/emergency-electrician')
+    //   .filter((j) => j.path !== '/services/smart-home-controls')
     //   .map((j) => `${baseUrl}${j.path}`);
 
     const jsonLd = {
       '@context': 'https://schema.org',
       '@graph': [
+        // WebPage (primary focus: Service overview)
         {
           '@type': 'WebPage',
           '@id': `${pageUrl}#webpage`,
           url: pageUrl,
-          // @Nathaniel this name pattern should match everywhere
-          name: 'Residential Electrician in Texas Hill Country | ProVolt Electrical Services',
-          description: this.hero?.subtitle,
+          name: pageName,
+          description: pageDescription,
           inLanguage: 'en-US',
 
           isPartOf: { '@id': `${baseUrl}/#website` },
           about: { '@id': `${baseUrl}/#business` },
+          publisher: { '@id': `${baseUrl}/#business` },
 
           breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+
+          // ✅ Main entity is the Service
           mainEntity: { '@id': `${pageUrl}#service` },
 
+          // ✅ FAQ is a supporting section
+          ...(this.faqs?.length
+            ? { hasPart: { '@id': `${pageUrl}#faq` } }
+            : {}),
+
+          // ✅ Optional internal links shown on the page
           // ...(significantLinks.length
           //   ? { significantLink: significantLinks }
           //   : {}),
         },
 
+        // Breadcrumbs
         {
           '@type': 'BreadcrumbList',
           '@id': `${pageUrl}#breadcrumb`,
@@ -461,13 +485,28 @@ export class ResidentialElectricianComponent implements OnInit {
           ],
         },
 
+        // Main service entity
         {
           '@type': 'Service',
           '@id': `${pageUrl}#service`,
+          url: pageUrl,
           name: 'Residential Electrical Services',
           serviceType:
-            'Residential electrical troubleshooting and repairs, panel/service upgrades, new circuits and subpanels, lighting and ceiling fans, surge protection and safety upgrades, inspections, and remodel wiring',
+            'Residential electrician services including troubleshooting and electrical repairs (flickering lights, dead outlets, breaker trips), panel and service upgrades, new and dedicated circuits, subpanels, lighting and ceiling fans, surge protection, GFCI/AFCI safety upgrades, inspections, outdoor power, and remodel wiring',
           provider: { '@id': `${baseUrl}/#business` },
+
+          areaServed: [
+            {
+              '@type': 'GeoCircle',
+              geoMidpoint: {
+                '@type': 'GeoCoordinates',
+                latitude: 30.0474,
+                longitude: -99.1403,
+              },
+              geoRadius: serviceRadiusMeters, // meters
+            },
+          ],
+
           hasOfferCatalog: {
             '@type': 'OfferCatalog',
             '@id': `${pageUrl}#catalog`,
@@ -489,15 +528,21 @@ export class ResidentialElectricianComponent implements OnInit {
           },
         },
 
-        {
-          '@type': 'FAQPage',
-          '@id': `${pageUrl}#faq`,
-          mainEntity: (this.faqs || []).map((f) => ({
-            '@type': 'Question',
-            name: f.question,
-            acceptedAnswer: { '@type': 'Answer', text: f.answer },
-          })),
-        },
+        // FAQ (supporting section)
+        ...(this.faqs?.length
+          ? [
+              {
+                '@type': 'FAQPage',
+                '@id': `${pageUrl}#faq`,
+                isPartOf: { '@id': `${pageUrl}#webpage` },
+                mainEntity: this.faqs.map((f) => ({
+                  '@type': 'Question',
+                  name: f.question,
+                  acceptedAnswer: { '@type': 'Answer', text: f.answer },
+                })),
+              },
+            ]
+          : []),
       ],
     };
 

@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   PrivacyPolicyData,
   SiteData,
 } from 'src/app/shared/configs/site-data.config';
-import { SitePaths } from 'src/app/shared/configs/site-urls.config';
+import {
+  FullSitePaths,
+  SitePaths,
+} from 'src/app/shared/configs/site-urls.config';
+import { SeoService } from 'src/app/shared/services/seo.service';
 
 type PolicySection = {
   id: string;
@@ -20,11 +24,14 @@ type PolicySection = {
   templateUrl: './privacy-policy.component.html',
   styleUrls: ['./privacy-policy.component.scss'],
 })
-export class PrivacyPolicyComponent {
+export class PrivacyPolicyComponent implements OnInit {
+  constructor(private seo: SeoService) {}
+
   readonly sitePaths = SitePaths;
   readonly privacyPolicyData = PrivacyPolicyData;
   companyName = PrivacyPolicyData.companyName;
   effectiveDate = PrivacyPolicyData.effectiveDate;
+  effectiveDateISO = PrivacyPolicyData.effectiveDateISO;
   phoneDisplay = PrivacyPolicyData.phoneDisplay;
   emailAddress = PrivacyPolicyData.emailAddress;
   serviceArea = PrivacyPolicyData.serviceArea;
@@ -166,5 +173,93 @@ export class PrivacyPolicyComponent {
     return this.companyName.includes(' ')
       ? this.companyName.split(' ')[0]
       : this.companyName;
+  }
+
+  ngOnInit(): void {
+    this.setupSeo();
+    this.setupJsonLd();
+  }
+
+  private setupSeo(): void {
+    this.seo.setMetaTags({
+      title: `Privacy Policy | ${this.companyName} | Texas Hill Country`,
+      description: `Read the Privacy Policy for ${this.companyName} serving the Texas Hill Country. Covers information collected, how it’s used, sharing, cookies/analytics, security, retention, privacy choices, children’s privacy, third-party links, updates, and contact details.`,
+      canonicalUrl: FullSitePaths.privacyPolicy,
+      uniquePageImage: SiteData.homepageImageUrl,
+      type: 'website',
+      // Legal pages usually don't need to rank; keeps link equity flowing.
+      // If you WANT it indexed, change to: 'index,follow'
+      robots: 'noindex,follow',
+    });
+  }
+  private setupJsonLd(): void {
+    const baseUrl = SiteData.baseUrl;
+    const pageUrl = FullSitePaths.privacyPolicy;
+
+    const pageName = `Privacy Policy | ${this.companyName}`;
+    const pageDescription = `Privacy Policy governing use of the ${this.companyName} website and service requests across the Texas Hill Country.`;
+
+    const pageJsonLd = {
+      '@context': 'https://schema.org',
+      '@graph': [
+        // WebPage
+        {
+          '@type': 'WebPage',
+          '@id': `${pageUrl}#webpage`,
+          url: pageUrl,
+          name: pageName,
+          description: pageDescription,
+          inLanguage: 'en-US',
+
+          isPartOf: { '@id': `${baseUrl}/#website` },
+          about: { '@id': `${baseUrl}/#business` },
+          publisher: { '@id': `${baseUrl}/#business` },
+
+          breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+          // primaryImageOfPage: { '@id': `${pageUrl}#primaryimage` },
+          //           primaryImageOfPage: {
+          //   '@type': 'ImageObject',
+          //   url: imageUrl,
+          // },
+
+          // Privacy page main entity should be the privacy policy document
+          mainEntity: { '@id': `${pageUrl}#privacy-policy` },
+
+          // Prefer ISO-8601 (you already have effectiveDateISO)
+          datePublished: this.effectiveDateISO,
+          dateModified: this.effectiveDateISO,
+        },
+
+        // The Privacy Policy document itself
+        {
+          '@type': 'DigitalDocument',
+          '@id': `${pageUrl}#privacy-policy`,
+          url: pageUrl,
+          name: 'Privacy Policy',
+          description: pageDescription,
+          inLanguage: 'en-US',
+          publisher: { '@id': `${baseUrl}/#business` },
+          datePublished: this.effectiveDateISO,
+          dateModified: this.effectiveDateISO,
+        },
+
+        // Breadcrumbs
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${pageUrl}#breadcrumb`,
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Privacy Policy',
+              item: pageUrl,
+            },
+          ],
+        },
+      ],
+    };
+
+    this.seo.setPageJsonLd(pageJsonLd);
   }
 }

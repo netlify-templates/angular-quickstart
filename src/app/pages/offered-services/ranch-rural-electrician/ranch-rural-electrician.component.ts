@@ -393,54 +393,72 @@ export class RanchRuralElectricianComponent implements OnInit {
   private setupSeo(): void {
     this.seo.setMetaTags({
       title:
-        'Ranch & Rural Electrician | Texas Hill Country | ProVolt Electrical Services',
+        'Ranch & Rural Electrician | Kerrville & Texas Hill Country | ProVolt',
       description:
-        'Ranch and rural electrical services for barns, shops, outdoor power, trenching, and upgrades across the Texas Hill Country. Licensed & insured. Call now.',
+        'Ranch & rural electrician serving Kerrville and the Texas Hill Country: barn/shop/outbuilding wiring, long-run outdoor power and trenching, subpanels, dedicated equipment circuits, RV hookups (30/50 amp), outdoor lighting, troubleshooting, surge protection, and safety inspections—code-compliant work.',
       canonicalUrl: FullSitePaths.ranchRuralElectrician,
-      uniquePageImage: SiteData.homepageImageUrl,
+      uniquePageImage: SiteData.homepageImageUrl, // default site image is fine
       type: 'website',
       robots: 'index,follow',
     });
   }
-
   private setupJsonLd(): void {
     const baseUrl = SiteData.baseUrl;
     const pageUrl = FullSitePaths.ranchRuralElectrician;
 
-    const ranchServices = this.services.filter(
+    const ranchServices = (this.services ?? []).filter(
       (s) => s.category === 'RanchAndRural' || s.category === 'Both'
     );
 
-    // Optional: if you keep "popularRanchRuralJobs", exclude anything you DON'T actually offer.
-    // Example: if you don't offer emergency, remove that link card from the UI and from here.
-    // const significantLinks = (this.popularRanchRuralJobs || [])
-    //   .filter((j) => j.path !== '/emergency-electrician') // remove if not offered
+    const pageName = `Ranch & Rural Electrician | Kerrville & Texas Hill Country | ${
+      SiteData.businessName ?? 'ProVolt'
+    }`;
+
+    const pageDescription =
+      this.hero?.subtitle ??
+      'Ranch and rural electrical services across Kerrville and the Texas Hill Country for barns, shops, outbuildings, long-run power, subpanels, equipment circuits, RV hookups, lighting, troubleshooting, surge protection, and safety inspections.';
+
+    // 60 miles ≈ 96,560 meters
+    const serviceRadiusMeters = 96560;
+
+    // Optional: internal service links shown on the page (only include real pages + services you actually offer)
+    // const significantLinks = (this.popularRanchRuralJobs ?? [])
+    //   .filter((j) => j.path !== '/emergency-electrician')
     //   .map((j) => `${baseUrl}${j.path}`);
 
     const jsonLd = {
       '@context': 'https://schema.org',
       '@graph': [
+        // WebPage (primary focus: Service overview)
         {
           '@type': 'WebPage',
           '@id': `${pageUrl}#webpage`,
           url: pageUrl,
-          name: 'ProVolt Electrical Services | Ranch & Rural Electrician | Texas Hill Country',
-          description: this.hero?.subtitle,
+          name: pageName,
+          description: pageDescription,
           inLanguage: 'en-US',
 
           isPartOf: { '@id': `${baseUrl}/#website` },
           about: { '@id': `${baseUrl}/#business` },
+          publisher: { '@id': `${baseUrl}/#business` },
 
           breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+
+          // ✅ Main entity is the Service (because this is a service overview page)
           mainEntity: { '@id': `${pageUrl}#service` },
 
-          // @Nathaniel have these be the areas served
-          // Nice-to-have: internal service links shown on the page
+          // ✅ FAQ is a supporting section
+          ...(this.faqs?.length
+            ? { hasPart: { '@id': `${pageUrl}#faq` } }
+            : {}),
+
+          // ✅ Optional internal links shown on the page
           // ...(significantLinks.length
           //   ? { significantLink: significantLinks }
           //   : {}),
         },
 
+        // Breadcrumbs
         {
           '@type': 'BreadcrumbList',
           '@id': `${pageUrl}#breadcrumb`,
@@ -461,13 +479,27 @@ export class RanchRuralElectricianComponent implements OnInit {
           ],
         },
 
+        // Main service entity
         {
           '@type': 'Service',
           '@id': `${pageUrl}#service`,
+          url: pageUrl,
           name: 'Ranch & Rural Electrical Services',
           serviceType:
-            'Ranch and rural electrical for barns, shops, outbuildings, long-run outdoor power, subpanels, dedicated equipment circuits, RV hookups, lighting, troubleshooting, surge protection, inspections, and code-compliant upgrades',
+            'Ranch and rural electrician services including barn/shop/outbuilding wiring, long-run outdoor power and trenching, subpanels, dedicated equipment circuits, RV hookups (30/50 amp), outdoor lighting, troubleshooting, surge protection, safety inspections, and code-compliant upgrades',
           provider: { '@id': `${baseUrl}/#business` },
+
+          areaServed: [
+            {
+              '@type': 'GeoCircle',
+              geoMidpoint: {
+                '@type': 'GeoCoordinates',
+                latitude: 30.0474,
+                longitude: -99.1403,
+              },
+              geoRadius: serviceRadiusMeters, // meters
+            },
+          ],
 
           hasOfferCatalog: {
             '@type': 'OfferCatalog',
@@ -490,15 +522,21 @@ export class RanchRuralElectricianComponent implements OnInit {
           },
         },
 
-        {
-          '@type': 'FAQPage',
-          '@id': `${pageUrl}#faq`,
-          mainEntity: (this.faqs || []).map((f) => ({
-            '@type': 'Question',
-            name: f.question,
-            acceptedAnswer: { '@type': 'Answer', text: f.answer },
-          })),
-        },
+        // FAQ (supporting section)
+        ...(this.faqs?.length
+          ? [
+              {
+                '@type': 'FAQPage',
+                '@id': `${pageUrl}#faq`,
+                isPartOf: { '@id': `${pageUrl}#webpage` },
+                mainEntity: this.faqs.map((f) => ({
+                  '@type': 'Question',
+                  name: f.question,
+                  acceptedAnswer: { '@type': 'Answer', text: f.answer },
+                })),
+              },
+            ]
+          : []),
       ],
     };
 
