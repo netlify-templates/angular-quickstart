@@ -1,17 +1,6 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Inject,
-  OnInit,
-  PLATFORM_ID,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SeoService } from './shared/services/seo.service';
 import { SiteData } from 'src/app/shared/configs/site-data.config';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -19,60 +8,9 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./app.component.scss'],
   standalone: false,
 })
-export class AppComponent implements OnInit, AfterViewInit {
-  @ViewChild('scrollHost', { read: ElementRef })
-  scrollHost!: ElementRef<HTMLElement>;
-
-  constructor(
-    private seo: SeoService,
-    private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+export class AppComponent implements OnInit {
+  constructor(private seo: SeoService) {}
   title = 'PROVOLT';
-
-  ngAfterViewInit(): void {
-    // this.router.events
-    //   .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
-    //   .subscribe(() => {
-    //     if (!isPlatformBrowser(this.platformId)) return;
-    //     const tree = this.router.parseUrl(this.router.url);
-    //     const fragment = tree.fragment;
-    //     const host = this.scrollHost?.nativeElement as
-    //       | (HTMLElement & { scrollTo?: (options: ScrollToOptions) => void })
-    //       | undefined;
-    //     if (!host) return;
-    //     // If there's a fragment (#about-us-section), scroll to that target instead of top.
-    //     if (fragment) {
-    //       // Wait a tick in case the target element is rendered after navigation.
-    //       setTimeout(() => {
-    //         const safe = (window as any).CSS?.escape
-    //           ? (window as any).CSS.escape(fragment)
-    //           : fragment;
-    //         const target =
-    //           host.querySelector<HTMLElement>(`#${safe}`) ??
-    //           document.getElementById(fragment); // fallback if element isn't inside host
-    //         if (!target) return;
-    //         // Scroll the container so the target is visible.
-    //         const top = target.offsetTop; // works when target is within the scrolling content flow
-    //         if (typeof host.scrollTo === 'function') {
-    //           host.scrollTo({ top, left: 0, behavior: 'auto' });
-    //         } else {
-    //           host.scrollTop = top;
-    //         }
-    //       });
-    //       return;
-    //     }
-    //     // No fragment: reset to top (your existing behavior).
-    //     if (typeof host.scrollTo === 'function') {
-    //       host.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-    //     } else {
-    //       host.scrollTop = 0;
-    //       host.scrollLeft = 0;
-    //     }
-    //     // Only keep this if something still scrolls the window in your app:
-    //     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-    //   });
-  }
 
   baseUrl = SiteData.baseUrl;
   canonicalUrl = SiteData.canonicalUrl;
