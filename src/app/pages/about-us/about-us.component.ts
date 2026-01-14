@@ -129,6 +129,7 @@ export class AboutUsComponent implements OnInit {
 
   private setupSeo(): void {
     this.seo.setMetaTags({
+      // @ Nathaniel consider updating the title to pull from siteData.businessName
       title:
         'About ProVolt Electrical Services | Family-Owned Electrician in Texas Hill Country',
       description:

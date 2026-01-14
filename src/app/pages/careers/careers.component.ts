@@ -143,8 +143,8 @@ export class CareersComponent implements OnInit {
         'Careers at ProVolt Electric | Electrician Jobs in the Texas Hill Country',
       description:
         'Join ProVolt Electric, a family-owned electrical contractor serving Kerrville, Fredericksburg, and the Texas Hill Country. Explore careers for journeyman electricians, apprentices, and office staff with competitive pay, training, and a safety-first culture.',
-      url: this.pageUrl,
-      image: this.ogImage,
+      canonicalUrl: this.pageUrl,
+      uniquePageImage: this.ogImage,
       type: 'website',
       robots: 'index,follow',
     });

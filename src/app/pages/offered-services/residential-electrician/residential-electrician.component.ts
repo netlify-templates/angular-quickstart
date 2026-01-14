@@ -63,6 +63,7 @@ export class ResidentialElectricianComponent implements OnInit {
   serviceTitle = "ProVolt's Residential Electrical Services";
   footerText =
     'Tell us what’s going on and where you’re located — we’ll recommend the safest, most cost-effective next step.';
+
   hero = {
     title:
       "ProVolt's Residential Electrical Services in the Texas Hill Country",
@@ -393,13 +394,26 @@ export class ResidentialElectricianComponent implements OnInit {
     return item.title;
   }
 
+  private getAbsoluteUrl(maybePathOrUrl: string): string {
+    if (!maybePathOrUrl) return SiteData.baseUrl;
+    if (maybePathOrUrl.startsWith('http')) return maybePathOrUrl;
+    const path = maybePathOrUrl.startsWith('/')
+      ? maybePathOrUrl
+      : `/${maybePathOrUrl}`;
+    return `${SiteData.baseUrl}${path}`;
+  }
+
   private setupSeo(): void {
+    const canonicalUrl = this.getAbsoluteUrl(
+      FullSitePaths.residentialElectrician
+    );
+
     this.seo.setMetaTags({
       title:
-        'Residential Electrician | Kerrville & Texas Hill Country | ProVolt',
+        'Residential Electrician in the Texas Hill Country | ProVolt Electrical Services',
       description:
         'Residential electrician serving Kerrville and the Texas Hill Country: troubleshooting (flickering lights, dead outlets, breaker trips), panel/service upgrades, new & dedicated circuits, lighting and ceiling fans, surge protection, GFCI/AFCI safety upgrades, inspections, and remodel wiring—code-compliant work.',
-      canonicalUrl: FullSitePaths.residentialElectrician,
+      canonicalUrl,
       uniquePageImage: SiteData.homepageImageUrl,
       type: 'website',
       robots: 'index,follow',
@@ -408,34 +422,57 @@ export class ResidentialElectricianComponent implements OnInit {
 
   private setupJsonLd(): void {
     const baseUrl = SiteData.baseUrl;
-    const pageUrl = FullSitePaths.residentialElectrician;
+    const pageUrl = this.getAbsoluteUrl(FullSitePaths.residentialElectrician);
 
     const residentialServices = (this.services ?? []).filter(
       (s) => s.category === 'Residential' || s.category === 'Both'
     );
 
-    // 60 miles ≈ 96,560 meters
-    const serviceRadiusMeters = 96560;
-
-    const pageName = `Residential Electrician | Kerrville & Texas Hill Country | ${
-      SiteData.businessName ?? 'ProVolt'
+    const pageName = `Residential Electrician | Texas Hill Country | ${
+      SiteData.businessName ?? 'ProVolt Electrical Services'
     }`;
 
     const pageDescription =
       this.hero?.subtitle ??
-      'Residential electrical repairs and upgrades across Kerrville and the Texas Hill Country: troubleshooting, panel upgrades, circuits, lighting, surge protection, safety inspections, and remodel wiring.';
+      'Residential electrical repairs and upgrades across the Texas Hill Country: troubleshooting, panel upgrades, circuits, lighting, surge protection, safety inspections, and remodel wiring.';
 
-    // Optional internal links shown on the page — exclude services you don't offer.
-    // You said: no emergency services, no smart homes.
-    // const significantLinks = (this.popularResidentialJobs ?? [])
-    //   .filter((j) => j.path !== '/emergency-electrician')
-    //   .filter((j) => j.path !== '/services/smart-home-controls')
-    //   .map((j) => `${baseUrl}${j.path}`);
+    // Hard-coded list of the towns visibly shown on THIS page (plus the hub CTA pill)
+    // Keep this aligned with what your AreasWeServe component renders on this page.
+    const nearbyServiceAreas = [
+      {
+        name: 'Boerne, TX',
+        url: `${baseUrl}/service-areas/boerne-tx-electrician`,
+      },
+      {
+        name: 'Comfort, TX',
+        url: `${baseUrl}/service-areas/comfort-tx-electrician`,
+      },
+      {
+        name: 'Fredericksburg, TX',
+        url: `${baseUrl}/service-areas/fredericksburg-tx-electrician`,
+      },
+      {
+        name: 'Helotes, TX',
+        url: `${baseUrl}/service-areas/helotes-tx-electrician`,
+      },
+      {
+        name: 'Ingram, TX',
+        url: `${baseUrl}/service-areas/ingram-tx-electrician`,
+      },
+      {
+        name: 'Kerrville, TX',
+        url: `${baseUrl}/service-areas/kerrville-tx-electrician`,
+      },
+      {
+        name: 'View all Texas Hill Country service areas (9)',
+        url: `${baseUrl}/service-areas/texas-hill-country-electrician`,
+      },
+    ];
 
     const jsonLd = {
       '@context': 'https://schema.org',
       '@graph': [
-        // WebPage (primary focus: Service overview)
+        // 1) WebPage node
         {
           '@type': 'WebPage',
           '@id': `${pageUrl}#webpage`,
@@ -448,23 +485,24 @@ export class ResidentialElectricianComponent implements OnInit {
           about: { '@id': `${baseUrl}/#business` },
           publisher: { '@id': `${baseUrl}/#business` },
 
+          primaryImageOfPage: { '@id': `${baseUrl}/#primaryimage` }, // reuse global
           breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
 
-          // ✅ Main entity is the Service
+          // Main entity is the Service represented by this page
           mainEntity: { '@id': `${pageUrl}#service` },
 
-          // ✅ FAQ is a supporting section
+          significantLink: [
+            this.getAbsoluteUrl(FullSitePaths.electricalServices),
+            `${baseUrl}/service-areas/texas-hill-country-electrician`,
+            `${baseUrl}/contact-us`,
+          ],
+
           ...(this.faqs?.length
             ? { hasPart: { '@id': `${pageUrl}#faq` } }
             : {}),
-
-          // ✅ Optional internal links shown on the page
-          // ...(significantLinks.length
-          //   ? { significantLink: significantLinks }
-          //   : {}),
         },
 
-        // Breadcrumbs
+        // 2) Breadcrumbs
         {
           '@type': 'BreadcrumbList',
           '@id': `${pageUrl}#breadcrumb`,
@@ -474,7 +512,7 @@ export class ResidentialElectricianComponent implements OnInit {
               '@type': 'ListItem',
               position: 2,
               name: 'Electrical Services',
-              item: `${baseUrl}/electrical-services`,
+              item: this.getAbsoluteUrl(FullSitePaths.electricalServices),
             },
             {
               '@type': 'ListItem',
@@ -485,7 +523,22 @@ export class ResidentialElectricianComponent implements OnInit {
           ],
         },
 
-        // Main service entity
+        // 3) Nearby service areas list (matches visible UI on this page)
+        {
+          '@type': 'ItemList',
+          '@id': `${pageUrl}#nearby-service-areas`,
+          name: 'Nearby Service Areas',
+          itemListOrder: 'https://schema.org/ItemListOrderAscending',
+          numberOfItems: nearbyServiceAreas.length,
+          itemListElement: nearbyServiceAreas.map((a, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: a.name,
+            item: a.url,
+          })),
+        },
+
+        // 4) Main service entity
         {
           '@type': 'Service',
           '@id': `${pageUrl}#service`,
@@ -495,7 +548,9 @@ export class ResidentialElectricianComponent implements OnInit {
             'Residential electrician services including troubleshooting and electrical repairs (flickering lights, dead outlets, breaker trips), panel and service upgrades, new and dedicated circuits, subpanels, lighting and ceiling fans, surge protection, GFCI/AFCI safety upgrades, inspections, outdoor power, and remodel wiring',
           provider: { '@id': `${baseUrl}/#business` },
 
+          // Keep coverage broad on service pages; detailed town list lives on the hub page.
           areaServed: [
+            { '@type': 'AdministrativeArea', name: 'Texas Hill Country' },
             {
               '@type': 'GeoCircle',
               geoMidpoint: {
@@ -503,7 +558,7 @@ export class ResidentialElectricianComponent implements OnInit {
                 latitude: 30.0474,
                 longitude: -99.1403,
               },
-              geoRadius: serviceRadiusMeters, // meters
+              geoRadius: 96560, // meters (~60 miles)
             },
           ],
 
@@ -528,7 +583,7 @@ export class ResidentialElectricianComponent implements OnInit {
           },
         },
 
-        // FAQ (supporting section)
+        // 5) FAQ (supporting section)
         ...(this.faqs?.length
           ? [
               {

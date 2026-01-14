@@ -10,7 +10,6 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { SeoService } from 'src/app/shared/services/seo.service';
-import { AreasWeServeComponent } from 'src/app/shared/components/areas-we-serve/areas-we-serve.component';
 import { OfferedServicesPageComponent } from 'src/app/shared/components/offered-services-page/offered-services-page.component';
 import { SiteData } from 'src/app/shared/configs/site-data.config';
 import { FullSitePaths } from 'src/app/shared/configs/site-urls.config';
@@ -391,17 +390,20 @@ export class RanchRuralElectricianComponent implements OnInit {
   }
 
   private setupSeo(): void {
+    const canonicalUrl = FullSitePaths.ranchRuralElectrician;
+
     this.seo.setMetaTags({
       title:
-        'Ranch & Rural Electrician | Kerrville & Texas Hill Country | ProVolt',
+        'Ranch & Rural Electrician in the Texas Hill Country | ProVolt Electrical Services',
       description:
         'Ranch & rural electrician serving Kerrville and the Texas Hill Country: barn/shop/outbuilding wiring, long-run outdoor power and trenching, subpanels, dedicated equipment circuits, RV hookups (30/50 amp), outdoor lighting, troubleshooting, surge protection, and safety inspections—code-compliant work.',
-      canonicalUrl: FullSitePaths.ranchRuralElectrician,
-      uniquePageImage: SiteData.homepageImageUrl, // default site image is fine
+      canonicalUrl,
+      uniquePageImage: SiteData.homepageImageUrl,
       type: 'website',
       robots: 'index,follow',
     });
   }
+
   private setupJsonLd(): void {
     const baseUrl = SiteData.baseUrl;
     const pageUrl = FullSitePaths.ranchRuralElectrician;
@@ -410,26 +412,51 @@ export class RanchRuralElectricianComponent implements OnInit {
       (s) => s.category === 'RanchAndRural' || s.category === 'Both'
     );
 
-    const pageName = `Ranch & Rural Electrician | Kerrville & Texas Hill Country | ${
-      SiteData.businessName ?? 'ProVolt'
+    const pageName = `Ranch & Rural Electrician | Texas Hill Country | ${
+      SiteData.businessName ?? 'ProVolt Electrical Services'
     }`;
 
     const pageDescription =
       this.hero?.subtitle ??
-      'Ranch and rural electrical services across Kerrville and the Texas Hill Country for barns, shops, outbuildings, long-run power, subpanels, equipment circuits, RV hookups, lighting, troubleshooting, surge protection, and safety inspections.';
+      'Ranch and rural electrical services across the Texas Hill Country for barns, shops, outbuildings, long-run power, subpanels, equipment circuits, RV hookups, lighting, troubleshooting, surge protection, and safety inspections.';
 
-    // 60 miles ≈ 96,560 meters
-    const serviceRadiusMeters = 96560;
-
-    // Optional: internal service links shown on the page (only include real pages + services you actually offer)
-    // const significantLinks = (this.popularRanchRuralJobs ?? [])
-    //   .filter((j) => j.path !== '/emergency-electrician')
-    //   .map((j) => `${baseUrl}${j.path}`);
+    // Hard-coded list of the towns visibly shown on THIS page (plus the hub CTA pill)
+    // Keep this aligned with what your AreasWeServe component actually renders here.
+    const nearbyServiceAreas = [
+      {
+        name: 'Boerne, TX',
+        url: `${baseUrl}/service-areas/boerne-tx-electrician`,
+      },
+      {
+        name: 'Comfort, TX',
+        url: `${baseUrl}/service-areas/comfort-tx-electrician`,
+      },
+      {
+        name: 'Fredericksburg, TX',
+        url: `${baseUrl}/service-areas/fredericksburg-tx-electrician`,
+      },
+      {
+        name: 'Helotes, TX',
+        url: `${baseUrl}/service-areas/helotes-tx-electrician`,
+      },
+      {
+        name: 'Ingram, TX',
+        url: `${baseUrl}/service-areas/ingram-tx-electrician`,
+      },
+      {
+        name: 'Kerrville, TX',
+        url: `${baseUrl}/service-areas/kerrville-tx-electrician`,
+      },
+      {
+        name: 'View all Texas Hill Country service areas (9)',
+        url: `${baseUrl}/service-areas/texas-hill-country-electrician`,
+      },
+    ];
 
     const jsonLd = {
       '@context': 'https://schema.org',
       '@graph': [
-        // WebPage (primary focus: Service overview)
+        // 1) WebPage node
         {
           '@type': 'WebPage',
           '@id': `${pageUrl}#webpage`,
@@ -437,28 +464,27 @@ export class RanchRuralElectricianComponent implements OnInit {
           name: pageName,
           description: pageDescription,
           inLanguage: 'en-US',
-
           isPartOf: { '@id': `${baseUrl}/#website` },
           about: { '@id': `${baseUrl}/#business` },
           publisher: { '@id': `${baseUrl}/#business` },
-
+          primaryImageOfPage: { '@id': `${baseUrl}/#primaryimage` }, // reuse global
           breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
 
-          // ✅ Main entity is the Service (because this is a service overview page)
+          // Main entity is the Service represented by this page
           mainEntity: { '@id': `${pageUrl}#service` },
 
-          // ✅ FAQ is a supporting section
+          significantLink: [
+            FullSitePaths.electricalServices,
+            `${baseUrl}/service-areas/texas-hill-country-electrician`,
+            `${baseUrl}/contact-us`,
+          ],
+
           ...(this.faqs?.length
             ? { hasPart: { '@id': `${pageUrl}#faq` } }
             : {}),
-
-          // ✅ Optional internal links shown on the page
-          // ...(significantLinks.length
-          //   ? { significantLink: significantLinks }
-          //   : {}),
         },
 
-        // Breadcrumbs
+        // 2) Breadcrumbs
         {
           '@type': 'BreadcrumbList',
           '@id': `${pageUrl}#breadcrumb`,
@@ -468,7 +494,7 @@ export class RanchRuralElectricianComponent implements OnInit {
               '@type': 'ListItem',
               position: 2,
               name: 'Electrical Services',
-              item: `${baseUrl}/electrical-services`,
+              item: FullSitePaths.electricalServices,
             },
             {
               '@type': 'ListItem',
@@ -479,7 +505,22 @@ export class RanchRuralElectricianComponent implements OnInit {
           ],
         },
 
-        // Main service entity
+        // 3) Nearby service areas list (matches visible UI on this page)
+        {
+          '@type': 'ItemList',
+          '@id': `${pageUrl}#nearby-service-areas`,
+          name: 'Nearby Service Areas',
+          itemListOrder: 'https://schema.org/ItemListOrderAscending',
+          numberOfItems: nearbyServiceAreas.length,
+          itemListElement: nearbyServiceAreas.map((a, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: a.name,
+            item: a.url,
+          })),
+        },
+
+        // 4) Main service entity
         {
           '@type': 'Service',
           '@id': `${pageUrl}#service`,
@@ -489,7 +530,9 @@ export class RanchRuralElectricianComponent implements OnInit {
             'Ranch and rural electrician services including barn/shop/outbuilding wiring, long-run outdoor power and trenching, subpanels, dedicated equipment circuits, RV hookups (30/50 amp), outdoor lighting, troubleshooting, surge protection, safety inspections, and code-compliant upgrades',
           provider: { '@id': `${baseUrl}/#business` },
 
+          // Keep coverage broad on service pages; detailed town list lives on the hub page.
           areaServed: [
+            { '@type': 'AdministrativeArea', name: 'Texas Hill Country' },
             {
               '@type': 'GeoCircle',
               geoMidpoint: {
@@ -497,7 +540,7 @@ export class RanchRuralElectricianComponent implements OnInit {
                 latitude: 30.0474,
                 longitude: -99.1403,
               },
-              geoRadius: serviceRadiusMeters, // meters
+              geoRadius: 96560, // meters (~60 miles)
             },
           ],
 
@@ -522,7 +565,7 @@ export class RanchRuralElectricianComponent implements OnInit {
           },
         },
 
-        // FAQ (supporting section)
+        // 5) FAQ (supporting section)
         ...(this.faqs?.length
           ? [
               {

@@ -42,11 +42,38 @@
           >
           <!-- // @Nathaniel fix this to add links to the surrounding areas -->
           <mat-card-subtitle>
-            {{
-              townConfig.areasServed.slice(0, 4).join(" • ")
-                ? townConfig.areasServed.slice(0, 4).join(" • ") + " • View All"
-                : "View All"
-            }}
+            <ng-container
+              *ngIf="townConfig.areasServed?.length; else viewAllOnly"
+            >
+              Serving: {{ townConfig.areasServed.slice(0, 4).join(" • ") }}
+              <span *ngIf="townConfig.areasServed.length > 4"> • </span>
+              <a
+                class="tp-areas-view-all"
+                [routerLink]="[
+                  '/',
+                  SitePaths.serviceAreas,
+                  SitePaths.texasHillCountryElectrician
+                ]"
+                aria-label="View all service areas"
+              >
+                <!-- {{
+                  9 - townConfig.areasServed.length > 0
+                    ? "+" + (9 - townConfig.areasServed.length + 1) + " more"
+                    : " • "
+                }} -->
+                (View all 9 service areas)
+              </a>
+            </ng-container>
+
+            <ng-template #viewAllOnly>
+              <a
+                class="tp-areas-view-all"
+                [routerLink]="['/texas-hill-country-electrician']"
+                aria-label="View all service areas"
+              >
+                View All
+              </a>
+            </ng-template>
           </mat-card-subtitle>
         </mat-card-header>
 

@@ -20,14 +20,6 @@ import {
 } from 'src/app/shared/configs/site-service-descriptions';
 import { FullSitePaths } from 'src/app/shared/configs/site-urls.config';
 
-interface ServiceItem {
-  title: string;
-  category: 'Residential' | 'Commercial' | 'RanchAndRural' | 'Both';
-  icon: string;
-  description: string;
-  bullets: string[];
-}
-
 interface PopularLink {
   title: string;
   description: string;
@@ -90,6 +82,8 @@ export class ServicesOverviewComponent implements OnInit {
   ];
 
   popularServices: PopularLink[] = [
+    // @Nathaniel NOTE: If you truly do NOT offer emergency services, remove this card + router.
+    // Keeping it here since it exists in your current code.
     {
       title: 'Emergency Electrical Repairs',
       description:
@@ -192,7 +186,7 @@ export class ServicesOverviewComponent implements OnInit {
     {
       question: 'What areas do you serve?',
       answer:
-        'We serve Kerrville, Fredericksburg, Boerne, Bandera, Comfort, Helotes, Ingram, Hunt, Center Point, and surrounding Texas Hill Country communities.',
+        'We serve Kerrville and nearby Texas Hill Country communities. See all service areas on our Service Areas page.',
     },
     {
       question:
@@ -232,11 +226,14 @@ export class ServicesOverviewComponent implements OnInit {
   }
 
   private setupSeo(): void {
+    const canonicalUrl = FullSitePaths.electricalServices;
+
     this.seo.setMetaTags({
-      title: 'Electrical Services | Texas Hill Country | ProVolt Electric',
+      title:
+        'Electrical Services in the Texas Hill Country | ProVolt Electrical Services',
       description:
-        'Explore ProVolt Electric’s residential, commercial, and ranch & rural electrical services across the Texas Hill Country—troubleshooting, repairs, panel upgrades, lighting, safety inspections, and emergency help.',
-      canonicalUrl: FullSitePaths.electricalServices,
+        'Explore ProVolt’s residential, commercial, and ranch & rural electrical services across the Texas Hill Country—troubleshooting, repairs, panel upgrades, lighting, and safety-focused electrical upgrades.',
+      canonicalUrl,
       uniquePageImage: SiteData.homepageImageUrl,
       type: 'website',
       robots: 'index,follow',
@@ -247,23 +244,70 @@ export class ServicesOverviewComponent implements OnInit {
     const baseUrl = SiteData.baseUrl;
     const pageUrl = FullSitePaths.electricalServices;
 
+    // These 6 towns (plus the hub CTA) are the ones visibly shown on this page.
+    // Hard-coded intentionally (per your homepage approach).
+    const nearbyServiceAreas = [
+      {
+        name: 'Boerne, TX',
+        url: `${baseUrl}/service-areas/boerne-tx-electrician`,
+      },
+      {
+        name: 'Comfort, TX',
+        url: `${baseUrl}/service-areas/comfort-tx-electrician`,
+      },
+      {
+        name: 'Fredericksburg, TX',
+        url: `${baseUrl}/service-areas/fredericksburg-tx-electrician`,
+      },
+      {
+        name: 'Helotes, TX',
+        url: `${baseUrl}/service-areas/helotes-tx-electrician`,
+      },
+      {
+        name: 'Ingram, TX',
+        url: `${baseUrl}/service-areas/ingram-tx-electrician`,
+      },
+      {
+        name: 'Kerrville, TX',
+        url: `${baseUrl}/service-areas/kerrville-tx-electrician`,
+      },
+      {
+        name: 'View all Texas Hill Country service areas (9)',
+        url: `${baseUrl}/service-areas/texas-hill-country-electrician`,
+      },
+    ];
+
     const pageJsonLd = {
       '@context': 'https://schema.org',
       '@graph': [
+        // Page node
         {
           '@type': 'CollectionPage',
           '@id': `${pageUrl}#webpage`,
           url: pageUrl,
-          name: 'Electrical Services Overview',
+          name: 'Electrical Services in the Texas Hill Country',
           description:
-            'Explore ProVolt’s residential, commercial, and ranch & rural electrical services across the Texas Hill Country.',
+            'Overview of ProVolt Electrical Services including residential, commercial, and ranch & rural electrical work across the Texas Hill Country.',
+          inLanguage: 'en-US',
           isPartOf: { '@id': `${baseUrl}/#website` },
           about: { '@id': `${baseUrl}/#business` },
+          publisher: { '@id': `${baseUrl}/#business` },
+          primaryImageOfPage: { '@id': `${baseUrl}/#primaryimage` }, // reuse global
           breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+
+          // Main content on this page is the services catalog
           mainEntity: { '@id': `${pageUrl}#catalog` },
-          inLanguage: 'en-US',
+
+          significantLink: [
+            `${baseUrl}/electrical-services/residential-electrician`,
+            `${baseUrl}/electrical-services/commercial-electrician`,
+            `${baseUrl}/electrical-services/ranch-rural-electrician`,
+            `${baseUrl}/service-areas/texas-hill-country-electrician`,
+            `${baseUrl}/contact-us`,
+          ],
         },
 
+        // Breadcrumbs
         {
           '@type': 'BreadcrumbList',
           '@id': `${pageUrl}#breadcrumb`,
@@ -278,6 +322,7 @@ export class ServicesOverviewComponent implements OnInit {
           ],
         },
 
+        // Services catalog
         {
           '@type': 'OfferCatalog',
           '@id': `${pageUrl}#catalog`,
@@ -295,6 +340,22 @@ export class ServicesOverviewComponent implements OnInit {
           })),
         },
 
+        // Nearby service areas list (matches visible UI)
+        {
+          '@type': 'ItemList',
+          '@id': `${pageUrl}#nearby-service-areas`,
+          name: 'Nearby Service Areas',
+          itemListOrder: 'https://schema.org/ItemListOrderAscending',
+          numberOfItems: nearbyServiceAreas.length,
+          itemListElement: nearbyServiceAreas.map((a, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: a.name,
+            item: a.url,
+          })),
+        },
+
+        // FAQs
         {
           '@type': 'FAQPage',
           '@id': `${pageUrl}#faq`,

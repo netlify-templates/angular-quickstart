@@ -60,7 +60,6 @@ interface FaqItem {
 export class CommercialElectricianComponent implements OnInit {
   constructor(private seo: SeoService) {}
 
-  // @Nathaniel update this phone number
   private readonly phoneNumber = SiteData.phoneNumber;
 
   serviceTitle = 'Commercial Electrical Services';
@@ -85,6 +84,7 @@ export class CommercialElectricianComponent implements OnInit {
     'Ranch operations, barns, and shops',
   ];
 
+  // @ Nathaniel eventually add these individual service pages
   popularCommercialJobs: LinkCard[] = [
     {
       title: 'Electrical Troubleshooting & Repairs',
@@ -421,12 +421,13 @@ export class CommercialElectricianComponent implements OnInit {
   }
 
   private setupSeo(): void {
+    const canonicalUrl = FullSitePaths.commercialElectrician;
     this.seo.setMetaTags({
       title:
-        'Commercial Electrician | Texas Hill Country | ProVolt Electrical Services',
+        'Commercial Electrician in the Texas Hill Country | ProVolt Electrical Services',
       description:
-        'Licensed commercial electrician serving the Texas Hill Country: tenant build-outs, service/panel upgrades, lighting retrofits, dedicated equipment circuits, and troubleshooting—code-compliant work.',
-      canonicalUrl: FullSitePaths.commercialElectrician,
+        'Licensed commercial electrician serving the Texas Hill Country. Tenant build-outs/finish-outs, troubleshooting & repairs, panel/service upgrades, LED lighting retrofits, dedicated equipment circuits, and code-compliant work.',
+      canonicalUrl,
       uniquePageImage: SiteData.homepageImageUrl, // swap to a page-specific OG image if you add one
       type: 'website',
       robots: 'index,follow',
@@ -436,23 +437,53 @@ export class CommercialElectricianComponent implements OnInit {
   private setupJsonLd(): void {
     const baseUrl = SiteData.baseUrl;
     const pageUrl = FullSitePaths.commercialElectrician;
-    const commercialServices = this.services ?? [];
 
     const pageName = `Commercial Electrician | Texas Hill Country | ${
-      SiteData.businessName ?? 'ProVolt'
+      SiteData.businessName ?? 'ProVolt Electrical Services'
     }`;
 
     const pageDescription =
       this.hero?.subtitle ??
       'Code-compliant commercial electrical work across the Texas Hill Country: troubleshooting, tenant build-outs, service/panel upgrades, lighting retrofits, and dedicated equipment circuits.';
 
-    // 60 miles ≈ 96,560 meters
-    const serviceRadiusMeters = 96560;
+    // Hard-coded list of the towns visibly shown on this page (plus the hub CTA pill)
+    const nearbyServiceAreas = [
+      {
+        name: 'Boerne, TX',
+        url: `${baseUrl}/service-areas/boerne-tx-electrician`,
+      },
+      {
+        name: 'Comfort, TX',
+        url: `${baseUrl}/service-areas/comfort-tx-electrician`,
+      },
+      {
+        name: 'Fredericksburg, TX',
+        url: `${baseUrl}/service-areas/fredericksburg-tx-electrician`,
+      },
+      {
+        name: 'Helotes, TX',
+        url: `${baseUrl}/service-areas/helotes-tx-electrician`,
+      },
+      {
+        name: 'Ingram, TX',
+        url: `${baseUrl}/service-areas/ingram-tx-electrician`,
+      },
+      {
+        name: 'Kerrville, TX',
+        url: `${baseUrl}/service-areas/kerrville-tx-electrician`,
+      },
+      {
+        name: 'View all Texas Hill Country service areas (9)',
+        url: `${baseUrl}/service-areas/texas-hill-country-electrician`,
+      },
+    ];
+
+    const commercialServices = this.services ?? [];
 
     const pageJsonLd = {
       '@context': 'https://schema.org',
       '@graph': [
-        // WebPage (primary focus: Service overview)
+        // 1) WebPage node
         {
           '@type': 'WebPage',
           '@id': `${pageUrl}#webpage`,
@@ -460,23 +491,26 @@ export class CommercialElectricianComponent implements OnInit {
           name: pageName,
           description: pageDescription,
           inLanguage: 'en-US',
-
           isPartOf: { '@id': `${baseUrl}/#website` },
           about: { '@id': `${baseUrl}/#business` },
           publisher: { '@id': `${baseUrl}/#business` },
-
+          primaryImageOfPage: { '@id': `${baseUrl}/#primaryimage` }, // reuse global
           breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
 
-          // ✅ Main entity is the Service (because this is a service overview page)
+          // Main entity is the service represented by this page
           mainEntity: { '@id': `${pageUrl}#service` },
 
-          // ✅ FAQ is a supporting section (small focus)
+          significantLink: [
+            `${baseUrl}/electrical-services`,
+            `${baseUrl}/service-areas/texas-hill-country-electrician`,
+            `${baseUrl}/contact-us`,
+          ],
           ...(this.faqs?.length
             ? { hasPart: { '@id': `${pageUrl}#faq` } }
             : {}),
         },
 
-        // Breadcrumbs
+        // 2) Breadcrumbs
         {
           '@type': 'BreadcrumbList',
           '@id': `${pageUrl}#breadcrumb`,
@@ -486,7 +520,7 @@ export class CommercialElectricianComponent implements OnInit {
               '@type': 'ListItem',
               position: 2,
               name: 'Electrical Services',
-              item: `${baseUrl}/electrical-services`,
+              item: FullSitePaths.electricalServices,
             },
             {
               '@type': 'ListItem',
@@ -497,18 +531,34 @@ export class CommercialElectricianComponent implements OnInit {
           ],
         },
 
-        // Main service entity for the page
+        // 3) Nearby service areas list (matches visible UI on this page)
+        {
+          '@type': 'ItemList',
+          '@id': `${pageUrl}#nearby-service-areas`,
+          name: 'Nearby Service Areas',
+          itemListOrder: 'https://schema.org/ItemListOrderAscending',
+          numberOfItems: nearbyServiceAreas.length,
+          itemListElement: nearbyServiceAreas.map((a, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: a.name,
+            item: a.url,
+          })),
+        },
+
+        // 4) Main service entity
         {
           '@type': 'Service',
           '@id': `${pageUrl}#service`,
           url: pageUrl,
           name: 'Commercial Electrical Services',
           serviceType:
-            'Commercial electrical troubleshooting, tenant build-outs/finish-outs, panel/service upgrades, lighting retrofits, dedicated equipment circuits, inspections, and code-compliant repairs',
-
+            'Commercial electrical troubleshooting, tenant build-outs/finish-outs, panel and service upgrades, LED lighting retrofits, dedicated equipment circuits, inspections, and code-compliant repairs',
           provider: { '@id': `${baseUrl}/#business` },
 
+          // Keep coverage broad on service pages; detailed town list lives on the hub page.
           areaServed: [
+            { '@type': 'AdministrativeArea', name: 'Texas Hill Country' },
             {
               '@type': 'GeoCircle',
               geoMidpoint: {
@@ -516,7 +566,7 @@ export class CommercialElectricianComponent implements OnInit {
                 latitude: 30.0474,
                 longitude: -99.1403,
               },
-              geoRadius: serviceRadiusMeters, // meters
+              geoRadius: 96560, // meters (~60 miles)
             },
           ],
 
@@ -541,7 +591,7 @@ export class CommercialElectricianComponent implements OnInit {
           },
         },
 
-        // FAQ (supporting section)
+        // 5) FAQ (supporting)
         ...(this.faqs?.length
           ? [
               {

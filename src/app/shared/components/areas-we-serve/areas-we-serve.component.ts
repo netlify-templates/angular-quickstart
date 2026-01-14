@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { Router, RouterModule } from '@angular/router';
+import { SitePaths } from '../../configs/site-urls.config';
 
 interface HillCountryArea {
   city: string;
@@ -36,45 +37,39 @@ export class AreasWeServeComponent {
   };
   surroundingAreas: HillCountryArea[] = [
     {
-      city: 'Bandera',
-      state: 'TX',
-      path: '/service-areas/bandera-tx-electrician',
-    },
-    {
       city: 'Boerne',
       state: 'TX',
-      path: '/service-areas/boerne-tx-electrician',
-    },
-    {
-      city: 'Center Point',
-      state: 'TX',
-      path: '/service-areas/center-point-tx-electrician',
+      path: `${SitePaths.serviceAreas}/${SitePaths.boerneTxElectrician}`,
     },
     {
       city: 'Comfort',
       state: 'TX',
-      path: '/service-areas/comfort-tx-electrician',
+      path: `${SitePaths.serviceAreas}/${SitePaths.comfortTxElectrician}`,
     },
     {
       city: 'Fredericksburg',
       state: 'TX',
-      path: '/service-areas/fredericksburg-tx-electrician',
+      path: `${SitePaths.serviceAreas}/${SitePaths.fredericksburgTxElectrician}`,
     },
     {
       city: 'Helotes',
       state: 'TX',
-      path: '/service-areas/helotes-tx-electrician',
+      path: `${SitePaths.serviceAreas}/${SitePaths.helotesTxElectrician}`,
     },
-    { city: 'Hunt', state: 'TX', path: '/service-areas/hunt-tx-electrician' },
     {
       city: 'Ingram',
       state: 'TX',
-      path: '/service-areas/ingram-tx-electrician',
+      path: `${SitePaths.serviceAreas}/${SitePaths.ingramTxElectrician}`,
     },
     {
       city: 'Kerrville',
       state: 'TX',
-      path: '/service-areas/kerrville-tx-electrician',
+      path: `${SitePaths.serviceAreas}/${SitePaths.kerrvilleTxElectrician}`,
+    },
+    {
+      city: '+3 more (View all 9) ',
+      state: '',
+      path: `${SitePaths.serviceAreas}/${SitePaths.texasHillCountryElectrician}`,
     },
   ];
 

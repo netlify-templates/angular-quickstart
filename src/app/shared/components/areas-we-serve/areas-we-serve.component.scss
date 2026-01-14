@@ -1,8 +1,5 @@
 $primary: var(--brand-yellow-02);
-$primary-soft: rgba(230, 198, 18, 0.15);
-
-$secondary: #d6262b; // warm Hill Country yellow
-$secondary-soft: rgba(214, 38, 43, 0.12);
+// $primary-soft: rgba(230, 198, 18, 0.15);
 
 $surface-color: var(--background-alt);
 $background-color: var(--background);
@@ -17,8 +14,8 @@ $text-muted: #6b7280;
 }
 
 .areas-served {
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 12px;
+  padding-right: 12px;
   background: var(--background);
 
   &__container {
@@ -47,7 +44,6 @@ $text-muted: #6b7280;
 
   .left-align {
     text-align: left;
-    padding-left: 24px;
   }
 
   &__title {
@@ -102,11 +98,11 @@ $text-muted: #6b7280;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: $primary-soft;
+    background: $primary;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $primary;
+    color: var(--background);
   }
 
   &__headquarters-city {
@@ -119,21 +115,14 @@ $text-muted: #6b7280;
     text-transform: uppercase;
     font-size: 0.75rem;
     letter-spacing: 0.12em;
-    color: $secondary; // nice yellow accent
     font-weight: 600;
   }
 
-  // ===============================
-  // MAIN BODY COPY
-  // ===============================
   &__cta-highlight {
     color: $primary;
     font-weight: 700;
   }
 
-  // ===============================
-  // GRID OF LOCATIONS
-  // ===============================
   &__grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

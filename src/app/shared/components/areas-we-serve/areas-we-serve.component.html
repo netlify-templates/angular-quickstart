@@ -64,7 +64,9 @@
             >
               <mat-icon class="areas-served__pill-icon">location_on</mat-icon>
               <div class="areas-served__pill-text">
-                <span class="areas-served__pill-city">{{ area.city }}, </span>
+                <span class="areas-served__pill-city"
+                  >{{ area.city }}{{ area.state ? ", " : "" }}</span
+                >
                 <span class="areas-served__pill-state">{{ area.state }}</span>
               </div>
               <mat-icon class="areas-served__pill-arrow"
