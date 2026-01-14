@@ -1,3 +1,5 @@
+import { SiteData } from './site-data.config';
+import { SitePaths } from './site-urls.config';
 import { TownKey } from './town-page-meta-seo';
 
 export interface LocalProject {
@@ -74,18 +76,6 @@ export interface TownPageConfig {
   faqs: FaqItem[];
 }
 
-// Shared constants
-const BASE_DOMAIN = 'https://provoltelectricalservices.com';
-const PHONE_DISPLAY = '(830) 928-5046';
-const DEFAULT_REGION = 'Texas Hill Country';
-
-function slugToIdSuffix(slug: string): string {
-  // "/service-areas/kerrville-tx-electrician" -> "service-areas-kerrville-tx-electrician"
-  return slug.replace(/^\//, '').replace(/\//g, '-');
-}
-
-const SERVICE_AREAS_PAGE = `${BASE_DOMAIN}/service-areas/texas-hill-country-electrician`;
-
 export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
   kerrville: (() => {
     const slug = '/service-areas/kerrville-tx-electrician';
@@ -94,8 +84,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townKey: 'kerrville',
       townName: 'Kerrville',
       stateAbbr: 'TX',
-      regionLabel: DEFAULT_REGION,
-      phoneNumber: PHONE_DISPLAY,
+      regionLabel: SiteData.businessRegion,
+      phoneNumber: SiteData.phoneNumberFormatted,
 
       heroTitle: 'Master Electrician in Kerrville, TX',
       heroSubtitle:
@@ -115,7 +105,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Safe repairs, tidy installs, and upgrades that last.',
       residentialIntro:
         'Kerrville homes often need a mix of practical fixes and smart capacity planning—whether it’s recurring breaker trips, aging panels, or new appliance loads. We troubleshoot the root cause, install cleanly, and leave everything inspection-ready and neat.',
-      residentialLink: '/electrical-services/residential-electrician',
+      residentialLink:
+        SitePaths.electricalServices + '/' + SitePaths.residentialElectrician,
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
@@ -135,7 +126,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       commercialSubheading: 'Power and lighting built for daily operations.',
       commercialIntro:
         'From small storefronts to workshops, we help Kerrville businesses stay powered and compliant. Expect clear communication, clean installs, and circuits sized correctly for equipment, lighting, and real-world use.',
-      commercialLink: '/electrical-services/commercial-electrician',
+      commercialLink:
+        SitePaths.electricalServices + '/' + SitePaths.commercialElectrician,
       commercialServices: [
         { label: 'Commercial Troubleshooting & Repairs', icon: 'build' },
         { label: 'Tenant Build-Outs & Service Additions', icon: 'storefront' },
@@ -161,7 +153,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Long runs, outbuildings, and equipment loads—done right.',
       ranchIntro:
         'Need dependable power across a property in Kerrville? We wire barns, shops, and outbuildings with the details that matter—proper conductor sizing, clean subpanel work, safe outdoor power, and circuits built for heavy 240V equipment.',
-      ranchLink: '/electrical-services/ranch-rural-electrician',
+      ranchLink:
+        SitePaths.electricalServices + '/' + SitePaths.ranchRuralElectrician,
       ranchServices: [
         { label: 'Barn & Shop Wiring', icon: 'warehouse' },
         {
@@ -302,8 +295,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townKey: 'ingram',
       townName: 'Ingram',
       stateAbbr: 'TX',
-      regionLabel: DEFAULT_REGION,
-      phoneNumber: PHONE_DISPLAY,
+      regionLabel: SiteData.businessRegion,
+      phoneNumber: SiteData.phoneNumberFormatted,
 
       heroTitle: 'Master Electrician in Ingram, TX',
       heroSubtitle:
@@ -323,7 +316,9 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Straightforward fixes and upgrades—done clean and safe.',
       residentialIntro:
         'Ingram homeowners often need reliable troubleshooting plus practical improvements for everyday living and property use. We focus on safe protection, neat workmanship, and solutions that hold up over time.',
-      residentialLink: '/electrical-services/residential-electrician',
+      // residentialLink: SitePaths.electricalServices + '/' + SitePaths.residentialElectrician,
+      residentialLink:
+        SitePaths.electricalServices + '/' + SitePaths.residentialElectrician,
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         { label: 'Outlet/Switch Replacement & Updates', icon: 'toggle_on' },
@@ -340,7 +335,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Support for shops, small offices, and service calls.',
       commercialIntro:
         'For small commercial spaces in Ingram, we handle repairs, upgrades, and electrical additions that keep operations moving. Expect code-aware work and circuits sized for real loads.',
-      commercialLink: '/electrical-services/commercial-electrician',
+      commercialLink:
+        SitePaths.electricalServices + '/' + SitePaths.commercialElectrician,
       commercialServices: [
         { label: 'Electrical Repairs & Diagnostics', icon: 'build' },
         { label: 'Lighting Upgrades & Retrofits', icon: 'emoji_objects' },
@@ -362,7 +358,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Rural power built for distance, weather, and heavy use.',
       ranchIntro:
         'Ingram properties often need dependable power across multiple structures. We install outdoor circuits, subpanels, and equipment-ready 240V power with attention to safety, grounding, and clean layout.',
-      ranchLink: '/electrical-services/ranch-rural-electrician',
+      ranchLink:
+        SitePaths.electricalServices + '/' + SitePaths.ranchRuralElectrician,
       ranchServices: [
         { label: 'Shop & Outbuilding Wiring', icon: 'warehouse' },
         {
@@ -497,8 +494,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townKey: 'centerPoint',
       townName: 'Center Point',
       stateAbbr: 'TX',
-      regionLabel: DEFAULT_REGION,
-      phoneNumber: PHONE_DISPLAY,
+      regionLabel: SiteData.businessRegion,
+      phoneNumber: SiteData.phoneNumberFormatted,
 
       heroTitle: 'Master Electrician in Center Point, TX',
       heroSubtitle:
@@ -517,7 +514,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       residentialSubheading: 'Reliable power with modern safety protection.',
       residentialIntro:
         'Center Point homes and properties often blend indoor needs with outdoor use—shops, sheds, and added loads. We troubleshoot issues, improve safety protection, and install upgrades that stay dependable.',
-      residentialLink: '/electrical-services/residential-electrician',
+      residentialLink:
+        SitePaths.electricalServices + '/' + SitePaths.residentialElectrician,
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         { label: 'GFCI/AFCI Safety Upgrades', icon: 'verified' },
@@ -537,7 +535,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Practical electrical support for small businesses.',
       commercialIntro:
         'We help Center Point commercial spaces with repairs, lighting, and service additions—so your power is safe, stable, and ready for daily use.',
-      commercialLink: '/electrical-services/commercial-electrician',
+      commercialLink:
+        SitePaths.electricalServices + '/' + SitePaths.commercialElectrician,
       commercialServices: [
         { label: 'Service Calls & Troubleshooting', icon: 'build' },
         { label: 'Lighting Upgrades & LED Conversions', icon: 'emoji_objects' },
@@ -555,7 +554,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       ranchSubheading: 'Shops, barns, and outdoor power you can count on.',
       ranchIntro:
         'For Center Point ranch and rural properties, we build safe, organized electrical systems—subpanels, outdoor power, and equipment circuits planned for distance and reliability.',
-      ranchLink: '/electrical-services/ranch-rural-electrician',
+      ranchLink:
+        SitePaths.electricalServices + '/' + SitePaths.ranchRuralElectrician,
       ranchServices: [
         { label: 'Barn/Shop Wiring & Circuits', icon: 'warehouse' },
         {
@@ -677,8 +677,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townKey: 'hunt',
       townName: 'Hunt',
       stateAbbr: 'TX',
-      regionLabel: DEFAULT_REGION,
-      phoneNumber: PHONE_DISPLAY,
+      regionLabel: SiteData.businessRegion,
+      phoneNumber: SiteData.phoneNumberFormatted,
 
       heroTitle: 'Master Electrician in Hunt, TX',
       heroSubtitle:
@@ -698,7 +698,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Weather-ready upgrades for Hill Country properties.',
       residentialIntro:
         'Hunt homes often lean on outdoor power, exterior lighting, and reliable protection during storms and outages. We prioritize weather-rated materials, safe protection devices, and clean installs that keep your system dependable.',
-      residentialLink: '/electrical-services/residential-electrician',
+      residentialLink:
+        SitePaths.electricalServices + '/' + SitePaths.residentialElectrician,
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         { label: 'Outdoor Outlets (GFCI/Weather-Rated)', icon: 'verified' },
@@ -718,7 +719,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Lighting, circuits, and upgrades with minimal disruption.',
       commercialIntro:
         'We support Hunt businesses with practical repairs, lighting improvements, and electrical additions. The goal is simple: safe power, clear communication, and work that holds up.',
-      commercialLink: '/electrical-services/commercial-electrician',
+      commercialLink:
+        SitePaths.electricalServices + '/' + SitePaths.commercialElectrician,
       commercialServices: [
         { label: 'Troubleshooting & Repair for Businesses', icon: 'build' },
         { label: 'Lighting Retrofits & Upgrades', icon: 'emoji_objects' },
@@ -736,7 +738,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       ranchSubheading: 'Outdoor power and subpanels built for distance.',
       ranchIntro:
         'Hunt properties frequently need reliable power spread across multiple structures. We install feeder runs, subpanels, outdoor power, and equipment-ready circuits with strong grounding and clean layout.',
-      ranchLink: '/electrical-services/ranch-rural-electrician',
+      ranchLink:
+        SitePaths.electricalServices + '/' + SitePaths.ranchRuralElectrician,
       ranchServices: [
         { label: 'Shop/Barn Wiring', icon: 'warehouse' },
         { label: 'Subpanels for Outbuildings', icon: 'electrical_services' },
@@ -867,8 +870,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townKey: 'comfort',
       townName: 'Comfort',
       stateAbbr: 'TX',
-      regionLabel: DEFAULT_REGION,
-      phoneNumber: PHONE_DISPLAY,
+      regionLabel: SiteData.businessRegion,
+      phoneNumber: SiteData.phoneNumberFormatted,
 
       heroTitle: 'Master Electrician in Comfort, TX',
       heroSubtitle:
@@ -888,7 +891,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Safety upgrades and clean installs for remodel-friendly work.',
       residentialIntro:
         'Comfort homes often combine older wiring realities with modern expectations. We help improve capacity and safety—panels, grounding, protection devices, and lighting—while keeping work tidy and aligned with your remodel plans.',
-      residentialLink: '/electrical-services/residential-electrician',
+      residentialLink:
+        SitePaths.electricalServices + '/' + SitePaths.residentialElectrician,
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
@@ -908,7 +912,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Service calls, lighting, and electrical additions done right.',
       commercialIntro:
         'We help Comfort businesses with electrical repairs, lighting upgrades, and code-correct improvements that keep your space safe for staff and customers.',
-      commercialLink: '/electrical-services/commercial-electrician',
+      commercialLink:
+        SitePaths.electricalServices + '/' + SitePaths.commercialElectrician,
       commercialServices: [
         { label: 'Commercial Service Calls & Repairs', icon: 'build' },
         { label: 'Code Compliance Corrections', icon: 'fact_check' },
@@ -929,7 +934,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       ranchSubheading: 'Barns, shops, and property power—organized and safe.',
       ranchIntro:
         'For Comfort ranch properties, we build clean, code-correct power distribution—subpanels, outdoor circuits, and equipment-ready 240V power—with careful grounding and durable components.',
-      ranchLink: '/electrical-services/ranch-rural-electrician',
+      ranchLink:
+        SitePaths.electricalServices + '/' + SitePaths.ranchRuralElectrician,
       ranchServices: [
         { label: 'Barn & Shop Wiring', icon: 'warehouse' },
         {
@@ -1064,8 +1070,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townKey: 'fredericksburg',
       townName: 'Fredericksburg',
       stateAbbr: 'TX',
-      regionLabel: DEFAULT_REGION,
-      phoneNumber: PHONE_DISPLAY,
+      regionLabel: SiteData.businessRegion,
+      phoneNumber: SiteData.phoneNumberFormatted,
 
       heroTitle: 'Master Electrician in Fredericksburg, TX',
       heroSubtitle:
@@ -1085,7 +1091,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Guest-ready safety, lighting, and reliable power.',
       residentialIntro:
         'Fredericksburg properties often see frequent use—family gatherings, guest spaces, and busy weekends. We improve safety and reliability with clean panel work, protected outlets, lighting upgrades, and code-correct repairs.',
-      residentialLink: '/electrical-services/residential-electrician',
+      residentialLink:
+        SitePaths.electricalServices + '/' + SitePaths.residentialElectrician,
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
@@ -1105,7 +1112,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Lighting, circuits, and compliance support for business spaces.',
       commercialIntro:
         'We help Fredericksburg businesses with practical electrical upgrades—lighting retrofits, equipment circuits, and code-correct fixes—so your space stays safe and dependable for staff and customers.',
-      commercialLink: '/electrical-services/commercial-electrician',
+      commercialLink:
+        SitePaths.electricalServices + '/' + SitePaths.commercialElectrician,
       commercialServices: [
         { label: 'Troubleshooting & Electrical Repairs', icon: 'build' },
         { label: 'Lighting Retrofits & LED Upgrades', icon: 'emoji_objects' },
@@ -1127,7 +1135,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Outdoor power and subpanels planned for long-run reliability.',
       ranchIntro:
         'Fredericksburg ranch properties frequently need safe power across multiple structures. We install feeder runs, subpanels, RV hookups, and equipment-ready circuits—built with clean organization and solid grounding.',
-      ranchLink: '/electrical-services/ranch-rural-electrician',
+      ranchLink:
+        SitePaths.electricalServices + '/' + SitePaths.ranchRuralElectrician,
       ranchServices: [
         { label: 'Barn/Shop Wiring & Circuits', icon: 'warehouse' },
         { label: 'Subpanels for Outbuildings', icon: 'electrical_services' },
@@ -1253,8 +1262,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townKey: 'boerne',
       townName: 'Boerne',
       stateAbbr: 'TX',
-      regionLabel: DEFAULT_REGION,
-      phoneNumber: PHONE_DISPLAY,
+      regionLabel: SiteData.businessRegion,
+      phoneNumber: SiteData.phoneNumberFormatted,
 
       heroTitle: 'Master Electrician in Boerne, TX',
       heroSubtitle:
@@ -1274,7 +1283,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Upgrades that improve safety, comfort, and reliability.',
       residentialIntro:
         'Boerne homes often grow into new electrical needs—kitchen upgrades, added appliances, and expanded living spaces. We plan capacity correctly and deliver clean installs with modern safety protection.',
-      residentialLink: '/electrical-services/residential-electrician',
+      residentialLink:
+        SitePaths.electricalServices + '/' + SitePaths.residentialElectrician,
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
@@ -1294,7 +1304,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Tenant improvements, lighting, and service upgrades.',
       commercialIntro:
         'We support Boerne commercial spaces with build-out wiring, lighting improvements, and code-correct upgrades—focused on keeping your operation safe and minimizing disruption.',
-      commercialLink: '/electrical-services/commercial-electrician',
+      commercialLink:
+        SitePaths.electricalServices + '/' + SitePaths.commercialElectrician,
       commercialServices: [
         { label: 'Tenant Build-Outs & Additions', icon: 'storefront' },
         { label: 'Lighting Retrofits & LED Upgrades', icon: 'emoji_objects' },
@@ -1316,7 +1327,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Organized distribution for barns, shops, and property power.',
       ranchIntro:
         'Boerne-area rural properties need safe power distribution across multiple structures. We build clean subpanel layouts, outdoor circuits, RV hookups, and equipment-ready 240V power with durable components and strong grounding.',
-      ranchLink: '/electrical-services/ranch-rural-electrician',
+      ranchLink:
+        SitePaths.electricalServices + '/' + SitePaths.ranchRuralElectrician,
       ranchServices: [
         { label: 'Shop & Outbuilding Wiring', icon: 'warehouse' },
         {
@@ -1452,8 +1464,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townKey: 'bandera',
       townName: 'Bandera',
       stateAbbr: 'TX',
-      regionLabel: DEFAULT_REGION,
-      phoneNumber: PHONE_DISPLAY,
+      regionLabel: SiteData.businessRegion,
+      phoneNumber: SiteData.phoneNumberFormatted,
 
       heroTitle: 'Master Electrician in Bandera, TX',
       heroSubtitle:
@@ -1473,7 +1485,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Safe, practical upgrades for Hill Country homes and properties.',
       residentialIntro:
         'Bandera homes and acreage properties often rely on outdoor circuits, reliable protection, and electrical systems that can handle real use. We troubleshoot issues, improve safety devices, and install upgrades with clean workmanship.',
-      residentialLink: '/electrical-services/residential-electrician',
+      residentialLink:
+        SitePaths.electricalServices + '/' + SitePaths.residentialElectrician,
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
@@ -1493,7 +1506,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Service calls, lighting, and electrical additions for business spaces.',
       commercialIntro:
         'We help Bandera businesses with troubleshooting, lighting upgrades, and electrical additions that keep your space safe and functional—without the messy installs.',
-      commercialLink: '/electrical-services/commercial-electrician',
+      commercialLink:
+        SitePaths.electricalServices + '/' + SitePaths.commercialElectrician,
       commercialServices: [
         { label: 'Commercial Repairs & Troubleshooting', icon: 'build' },
         { label: 'Lighting Upgrades & Retrofits', icon: 'emoji_objects' },
@@ -1512,7 +1526,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Built for long runs, outdoor exposure, and working loads.',
       ranchIntro:
         'Bandera ranch properties often need power distributed across barns, shops, and gates with attention to distance, voltage drop, and grounding. We build safe feeder runs, subpanels, RV power, and equipment circuits designed to last.',
-      ranchLink: '/electrical-services/ranch-rural-electrician',
+      ranchLink:
+        SitePaths.electricalServices + '/' + SitePaths.ranchRuralElectrician,
       ranchServices: [
         { label: 'Barn & Shop Wiring', icon: 'warehouse' },
         { label: 'Long-Run Feeders & Subpanels', icon: 'electrical_services' },
@@ -1635,8 +1650,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
       townKey: 'helotes',
       townName: 'Helotes',
       stateAbbr: 'TX',
-      regionLabel: DEFAULT_REGION,
-      phoneNumber: PHONE_DISPLAY,
+      regionLabel: SiteData.businessRegion,
+      phoneNumber: SiteData.phoneNumberFormatted,
 
       heroTitle: 'Master Electrician in Helotes, TX',
       heroSubtitle:
@@ -1656,7 +1671,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Clean installs and safety-first upgrades for modern living.',
       residentialIntro:
         'Helotes homeowners often want dependable upgrades that look as good as they perform—lighting updates, dedicated circuits, panel improvements, and protection devices. We keep the work tidy, the plan clear, and the results code-correct.',
-      residentialLink: '/electrical-services/residential-electrician',
+      residentialLink:
+        SitePaths.electricalServices + '/' + SitePaths.residentialElectrician,
       residentialServices: [
         { label: 'Electrical Troubleshooting & Repair', icon: 'bolt' },
         {
@@ -1676,7 +1692,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Service calls, lighting, and upgrades with minimal downtime.',
       commercialIntro:
         'We support Helotes businesses with troubleshooting, lighting improvements, and electrical additions—focused on safe work, clean installs, and clear timelines.',
-      commercialLink: '/electrical-services/commercial-electrician',
+      commercialLink:
+        SitePaths.electricalServices + '/' + SitePaths.commercialElectrician,
       commercialServices: [
         { label: 'Service Calls & Troubleshooting', icon: 'build' },
         { label: 'Lighting Retrofits & LED Upgrades', icon: 'emoji_objects' },
@@ -1695,7 +1712,8 @@ export const TOWN_CONFIGS: Record<string, TownPageConfig> = {
         'Property power that’s organized, safe, and built for use.',
       ranchIntro:
         'Helotes-area rural properties often need clean distribution across outbuildings and equipment loads. We install subpanels, outdoor circuits, RV hookups, and equipment-ready power with durable components and strong grounding.',
-      ranchLink: '/electrical-services/ranch-rural-electrician',
+      ranchLink:
+        SitePaths.electricalServices + '/' + SitePaths.ranchRuralElectrician,
       ranchServices: [
         { label: 'Shop/Outbuilding Wiring', icon: 'warehouse' },
         {

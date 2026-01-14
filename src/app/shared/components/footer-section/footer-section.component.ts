@@ -26,7 +26,17 @@ export class FooterSectionComponent {
   quickLinks = [
     { label: 'Home', routerLink: this.sitePaths.home },
     { label: 'About', routerLink: this.sitePaths.aboutUs },
-    { label: 'Services', routerLink: this.sitePaths.electricalServices },
+    {
+      label: 'Electrical Services Overview',
+      routerLink: this.sitePaths.electricalServices,
+    },
+    {
+      label: 'All Service Areas',
+      routerLink:
+        this.sitePaths.serviceAreas +
+        '/' +
+        SitePaths.texasHillCountryElectrician,
+    },
     { label: 'Contact', routerLink: this.sitePaths.contactUs },
     { label: 'Privacy Policy', routerLink: this.sitePaths.privacyPolicy },
     {

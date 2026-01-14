@@ -15,8 +15,7 @@ export class AppComponent implements OnInit {
   baseUrl = SiteData.baseUrl;
   canonicalUrl = SiteData.canonicalUrl;
   ogImageUrl = SiteData.homepageImageUrl;
-  // @Nathaniel this has the correct split URls now
-  sharedLogoUrl = `${this.baseUrl}/assets/brand/logos/ProVolt-Logo-meta-512-c.png`;
+  sharedLogoUrl = SiteData.textMessageSharedLogoUrl;
 
   globalJsonLd = {
     '@context': 'https://schema.org',
@@ -40,7 +39,7 @@ export class AppComponent implements OnInit {
         url: this.baseUrl,
         telephone: SiteData.phoneNumberE164,
 
-        // HQ (recommended for LocalBusiness)
+        // HQ address
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Kerrville',
@@ -49,20 +48,14 @@ export class AppComponent implements OnInit {
           addressCountry: 'US',
         },
 
-        // How to represent “Texas Hill Country” service coverage
-        // Keep geo as your base point, and add a service area field:
-
-        // Use areaServed with a list of cities/counties you cover, or
-        // Use a GeoCircle (radius around your base), or
-        // Use a GeoShape (polygon) if you have clear boundaries.
-
+        // Base point for service coverage
         geo: {
           '@type': 'GeoCoordinates',
           latitude: 30.0474,
           longitude: -99.1403,
         },
 
-        // logo is set once for website and shared through the business id
+        // Shared logo and primary image
         logo: {
           '@type': 'ImageObject',
           '@id': `${this.baseUrl}/#logo`,
@@ -77,7 +70,10 @@ export class AppComponent implements OnInit {
           width: 1200,
           height: 630,
         },
+
         priceRange: '$$',
+
+        // ✅ Broad coverage only (sitewide): GeoCircle + AdministrativeArea
         areaServed: [
           {
             '@type': 'GeoCircle',
@@ -89,87 +85,14 @@ export class AppComponent implements OnInit {
             geoRadius: 96.56, // km
           },
           {
-            '@type': 'City',
-            name: 'Kerrville',
+            '@type': 'AdministrativeArea',
+            name: 'Texas Hill Country',
             address: {
               '@type': 'PostalAddress',
               addressRegion: 'TX',
               addressCountry: 'US',
             },
           },
-          {
-            '@type': 'City',
-            name: 'Fredericksburg',
-            address: {
-              '@type': 'PostalAddress',
-              addressRegion: 'TX',
-              addressCountry: 'US',
-            },
-          },
-          {
-            '@type': 'City',
-            name: 'Boerne',
-            address: {
-              '@type': 'PostalAddress',
-              addressRegion: 'TX',
-              addressCountry: 'US',
-            },
-          },
-          {
-            '@type': 'City',
-            name: 'Bandera',
-            address: {
-              '@type': 'PostalAddress',
-              addressRegion: 'TX',
-              addressCountry: 'US',
-            },
-          },
-          {
-            '@type': 'City',
-            name: 'Comfort',
-            address: {
-              '@type': 'PostalAddress',
-              addressRegion: 'TX',
-              addressCountry: 'US',
-            },
-          },
-          {
-            '@type': 'City',
-            name: 'Ingram',
-            address: {
-              '@type': 'PostalAddress',
-              addressRegion: 'TX',
-              addressCountry: 'US',
-            },
-          },
-          {
-            '@type': 'City',
-            name: 'Hunt',
-            address: {
-              '@type': 'PostalAddress',
-              addressRegion: 'TX',
-              addressCountry: 'US',
-            },
-          },
-          {
-            '@type': 'City',
-            name: 'Center Point',
-            address: {
-              '@type': 'PostalAddress',
-              addressRegion: 'TX',
-              addressCountry: 'US',
-            },
-          },
-          {
-            '@type': 'City',
-            name: 'Helotes',
-            address: {
-              '@type': 'PostalAddress',
-              addressRegion: 'TX',
-              addressCountry: 'US',
-            },
-          },
-          { '@type': 'Place', name: 'Texas Hill Country' },
         ],
 
         contactPoint: {
@@ -179,6 +102,7 @@ export class AppComponent implements OnInit {
           areaServed: 'US',
           availableLanguage: ['en-US'],
         },
+
         sameAs: [
           // Add real profiles: Google Business Profile, Facebook, Instagram, Yelp, BBB, etc.
           // 'https://g.page/r/your-google-profile',

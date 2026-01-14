@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // Base URL used for building absolute links and JSON-LD on the client/server.
+  // Do NOT include a trailing slash; callers append paths like `${baseUrl}${path}`
+  baseUrl: 'http://localhost:4200',
 };
 
 /*

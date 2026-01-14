@@ -39,6 +39,7 @@ export class TexasHillCountryComponent implements OnInit {
   regionLabel = 'Texas Hill Country';
   towns: TownCard[] = [];
   phoneNumber = SiteData.phoneNumberE164;
+
   readonly baseUrl = SiteData.baseUrl;
   readonly pageUrl = FullSitePaths.texasHillCountryElectrician;
   private readonly ogImage = SiteData.homepageImageUrl;
@@ -73,8 +74,7 @@ export class TexasHillCountryComponent implements OnInit {
     this.seo.setMetaTags({
       title: 'Texas Hill Country Electrician | ProVolt Electrical Services',
       description:
-        'Licensed master electrician serving Kerrville, Fredericksburg, Boerne, Comfort, Bandera, Ingram, Hunt, Center Point & Helotes with residential, commercial & ranch electrical services.',
-
+        'See all ProVolt Electrical Services coverage areas across the Texas Hill Country, including Kerrville, Fredericksburg, Boerne, Comfort, Bandera, Ingram, Hunt, Center Point, and Helotes.',
       canonicalUrl: this.pageUrl,
       uniquePageImage: this.ogImage,
       type: 'website',
@@ -83,7 +83,6 @@ export class TexasHillCountryComponent implements OnInit {
   }
 
   private setupJsonLd(): void {
-    // Build ItemList from sorted towns
     const itemListElement = this.towns
       .filter((t) => !!t.urlSlug)
       .map((t, index) => {
@@ -108,15 +107,14 @@ export class TexasHillCountryComponent implements OnInit {
           url: this.pageUrl,
           name: 'Texas Hill Country Service Areas | ProVolt Electrical Services',
           description:
-            'Browse ProVolt Electrical Services service areas across the Texas Hill Country, including Kerrville, Fredericksburg, Boerne, Comfort, Bandera, Ingram, Hunt, Center Point, and Helotes.',
+            'Browse ProVolt Electrical Services service areas across the Texas Hill Country.',
           inLanguage: 'en-US',
-
           isPartOf: { '@id': `${this.baseUrl}/#website` },
           about: { '@id': `${this.baseUrl}/#business` },
           mainEntity: { '@id': `${this.pageUrl}#service-areas` },
 
-          // Optional image association
-          primaryImageOfPage: { '@id': `${this.pageUrl}#primaryimage` },
+          // ✅ Reuse the global image entity instead of defining a new one
+          primaryImageOfPage: { '@id': `${this.baseUrl}/#primaryimage` },
 
           breadcrumb: { '@id': `${this.pageUrl}#breadcrumb` },
           potentialAction: [
@@ -124,14 +122,6 @@ export class TexasHillCountryComponent implements OnInit {
           ],
         },
 
-        // 2) Primary image node
-        {
-          '@type': 'ImageObject',
-          '@id': `${this.pageUrl}#primaryimage`,
-          url: this.ogImage,
-        },
-
-        // 3) Town list
         {
           '@type': 'ItemList',
           '@id': `${this.pageUrl}#service-areas`,

@@ -128,8 +128,6 @@ export class TownPageComponent implements OnInit, OnChanges {
       pageTitle: cfg.heroTitle,
       pageDescription: cfg.heroSubtitle,
       geo: TOWN_GEO[cfg.urlSlug],
-      serviceAreasHubPath: '/service-areas',
-      includeFaq: true,
     });
 
     this.seo.setPageJsonLd(jsonLd);

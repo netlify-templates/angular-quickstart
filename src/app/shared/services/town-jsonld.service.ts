@@ -9,7 +9,6 @@ export interface TownServiceAreaJsonLdInput {
   cfg: TownPageConfig;
   pageTitle: string;
   pageDescription: string;
-
   /** Optional. If you don’t have accurate coordinates per town, omit this. */
   geo?: LatLng;
 
@@ -30,7 +29,6 @@ export class TownJsonLdService {
       pageDescription,
       geo,
       // @ nathaniel validate this path in the view source code
-      // serviceAreasHubPath = '/service-areas/texas-hill-country-electrician',
       serviceAreasHubPath = '/' +
         SitePaths.serviceAreas +
         '/' +
@@ -56,7 +54,6 @@ export class TownJsonLdService {
     const graph: any[] = [
       // 1) Service-area page node
       {
-        // @Nathaniel I think this should be ServicePage not ItemPage
         '@type': 'ServicePage',
         '@id': `${pageUrl}#webpage`,
         url: pageUrl,
