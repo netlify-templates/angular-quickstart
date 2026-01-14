@@ -66,7 +66,7 @@ export class ToolBarComponent {
       path: '/service-areas/texas-hill-country-electrician',
       children: [
         {
-          label: 'All Service Areas (Texas Hill Country)',
+          label: 'All Service Areas',
           path: '/service-areas/texas-hill-country-electrician',
         },
         { label: 'Bandera, TX', path: '/service-areas/bandera-tx-electrician' },
