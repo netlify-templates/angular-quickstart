@@ -1,6 +1,14 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
 .contact-page {
   margin: 0 auto;
   padding: 24px 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .contact-hero {
@@ -39,11 +47,23 @@
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.1fr);
   gap: 1.75rem;
-  align-items: flex-start;
+  align-items: stretch;
+  /* allow grid to grow when parent space expands */
+  flex: 1 1 auto;
 
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
   }
+}
+
+/* Make the row cards stretch to fill available vertical space */
+.contact-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-card > mat-card-content {
+  flex: 1 1 auto;
 }
 
 .contact-card {

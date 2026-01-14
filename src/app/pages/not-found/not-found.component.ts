@@ -45,7 +45,7 @@ export class NotFoundComponent implements OnInit {
       description: 'Explore residential, commercial, and ranch services.',
     },
     {
-      label: 'Areas We Serve',
+      label: 'Service Areas',
       path: `${SitePaths.serviceAreas}/${SitePaths.texasHillCountryElectrician}`,
       description: 'See our Texas Hill Country service areas.',
     },

@@ -72,7 +72,7 @@ export class TexasHillCountryComponent implements OnInit {
 
   private setupSeo(): void {
     this.seo.setMetaTags({
-      title: 'Texas Hill Country Electrician | ProVolt Electrical Services',
+      title: 'Texas Hill Country Service Areas | ProVolt Electrical Services',
       description:
         'See all ProVolt Electrical Services coverage areas across the Texas Hill Country, including Kerrville, Fredericksburg, Boerne, Comfort, Bandera, Ingram, Hunt, Center Point, and Helotes.',
       canonicalUrl: this.pageUrl,

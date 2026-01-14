@@ -35,14 +35,15 @@ interface NavLink {
 export class ToolBarComponent {
   @Input() sidenav?: MatSidenav;
 
+  // @Nathaniel make these paths consistent with SitePaths config later
   navLinks: NavLink[] = [
     { label: 'Home', path: '/home' },
     {
-      label: 'Services',
+      label: 'Electrical Services',
       path: '/electrical-services',
       children: [
         {
-          label: 'Services Overview',
+          label: 'All Electrical Services',
           path: '/electrical-services',
         },
         {
@@ -61,16 +62,12 @@ export class ToolBarComponent {
       ],
     },
     {
-      label: 'Areas We Serve',
+      label: 'Service Areas',
       path: '/service-areas/texas-hill-country-electrician',
       children: [
         {
-          label: 'Texas Hill Country',
+          label: 'All Service Areas (Texas Hill Country)',
           path: '/service-areas/texas-hill-country-electrician',
-        },
-        {
-          label: 'Kerrville, TX',
-          path: '/service-areas/kerrville-tx-electrician',
         },
         { label: 'Bandera, TX', path: '/service-areas/bandera-tx-electrician' },
         { label: 'Boerne, TX', path: '/service-areas/boerne-tx-electrician' },
@@ -86,6 +83,10 @@ export class ToolBarComponent {
         { label: 'Helotes, TX', path: '/service-areas/helotes-tx-electrician' },
         { label: 'Hunt, TX', path: '/service-areas/hunt-tx-electrician' },
         { label: 'Ingram, TX', path: '/service-areas/ingram-tx-electrician' },
+        {
+          label: 'Kerrville, TX',
+          path: '/service-areas/kerrville-tx-electrician',
+        },
       ],
     },
     { label: 'About Us', path: '/about-us' },
